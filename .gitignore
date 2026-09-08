@@ -1,0 +1,28 @@
+# ---------------------------------------------------------------------
+# O QUE NUNCA SOBE PARA ESTE REPOSITÓRIO
+# ---------------------------------------------------------------------
+
+# Token de publicação do GitHub. Fica só no computador.
+scripts/.token
+
+# Apostila da T2 Educação e cadernos: material de TERCEIROS, com direitos
+# autorais. Republicar seria errado. O projeto usa como fonte de consulta
+# local; os scripts que dependem dela avisam e seguem sem ela.
+referencia/
+
+# Gerado pelo build a partir de src/ — 1,5 MB que se reconstrói com um
+# comando. O index.html compilado sobe porque é o que o GitHub Pages serve.
+app/projeto-cpa-completo.jsx
+
+node_modules/
+
+# Arquivos intermediários da conversão (PENDENTE-*, PRONTO-*, FIX-*):
+# rascunho de uma migração já concluída. Os GUIAS ficam, porque explicam
+# o método; os despejos não, porque só engordam o repositório.
+conversao/PENDENTE-*
+conversao/PRONTO-*
+conversao/FIX-*
+conversao/sobra/
+conversao/sobra2/
+conversao/vazamento/
+conversao/_*.js
