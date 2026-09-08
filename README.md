@@ -70,16 +70,76 @@ Todo número do exame mora nessa constante, e **cada um carrega a sua origem**:
 - `pedagogica` — escolha nossa, declarada como tal na tela;
 - `naoConfirmado` — consta em fonte secundária e ainda não foi reconferido.
 
-Confirmado em **07/09/2026** na página oficial da CPA (anbimaedu.com.br):
-2h30 · 40 múltipla escolha contextualizada · 10 questões de árvore de decisão ·
-dificuldade 25% fácil / 50% médio / 25% difícil.
-O **corte de 70% não está nessa página** — está marcado `naoConfirmado` e
-aparece assim na interface. Se for confirmar no edital, atualize a origem
-E a data. Nunca troque um número aqui sem trocar a fonte junto.
+Confirmado em **08/09/2026** no **Edital dos Exames de Certificação Anbima
+v1.4 (28/05/2026)** e na página oficial da CPA:
+
+| Regra | Valor | Onde está |
+|---|---|---|
+| Duração | 2h30 | edital 13.5.a |
+| Total de questões | 50 | edital 3.2 e 13.5.a |
+| Múltipla escolha contextualizada | 40 | página oficial da CPA |
+| Árvore de decisão | 10 | página oficial da CPA (edital 13.4: "árvore de diálogo") |
+| **Aprovação** | **35 acertos** | edital 3.2, tabela "Mínimo de acertos para aprovação" |
+| Dificuldade | 25% / 50% / 25% | página oficial da CPA |
+| Questão anulada | creditada a todos | edital 16.1 |
+| Fecha sozinha no prazo | sim | edital 13.6 |
+
+Dois pontos que a rodada anterior tinha errado, e o edital corrigiu:
+
+1. **O corte é um NÚMERO, não um percentual.** O edital diz 35 acertos em 50.
+   Dá 70%, mas quem decide é o 35 — por isso `corrigir()` compara acertos,
+   não porcentagem. Antes estava `naoConfirmado`; agora é `oficial`.
+2. **Questão anulada NÃO sai do denominador.** O edital 16.1 diz que ela é
+   "atribuída a todas as pessoas candidatas": vira acerto para todo mundo e
+   a prova continua valendo 50. Tirar do total, como estava, facilitaria a
+   aprovação e não é o que a banca faz.
+
+Nunca troque um número aqui sem trocar a fonte e a data junto.
 
 Atenção ao que a ANBIMA de fato diz: são **10 questões relacionadas a árvore**,
 não 10 árvores. O sorteio pega atendimentos inteiros desde a primeira fala e
 corta no décimo item — a conversa nunca começa no meio.
+
+### Dificuldade: a proporção é da ANBIMA, a classificação é nossa
+
+A página oficial publica **25% fácil / 50% médio / 25% difícil**. Para o
+sorteio respeitar isso, cada questão precisa de um rótulo. A tentação é
+treinar um classificador nos 39 exemplos rotulados do caderno oficial.
+**Medimos antes de fazer** — correlação entre o rótulo da banca e as features
+de texto:
+
+```
+comprimento do contexto        r = 0,067
+comprimento das alternativas   r = 0,071
+quantidade de números          r = 0,014
+números nas alternativas       r = 0,044
+exige cálculo                  r = 0,186   <- a mais forte, e ainda é ruído
+```
+
+O rótulo da ANBIMA **não é previsível pelo texto**. Um classificador ajustado
+ali seria adivinhação com aparência de método, então não foi feito.
+
+O que `scripts/rotular-dificuldade.js` faz: ordena por uma **régua declarada**
+(o quanto as quatro alternativas se parecem entre si — a mais pesada —, mais
+densidade de siglas, carga de leitura, presença de cálculo, condição no
+gabarito) e corta nos percentis 25/75 **dentro de cada módulo**. Corte global
+não serviria: o M2 levaria quase todos os "difícil" e o sorteio ponderado não
+fecharia a distribuição.
+
+Resultado: 25/50/25 exatos em todos os quatro módulos, com 611 valores de
+carga distintos (sem empate arbitrário na fronteira). O app diz na tela que a
+ordenação é nossa e a proporção é da banca.
+
+### Fora do sorteio do exame
+
+Questão cujo conteúdo não tem lastro em nenhuma fonte declarada recebe
+`foraDoExame: true` e um `motivoFora`. Ela **continua no estudo**, com o aviso
+na tela, e **não entra no exame** — avaliação não cobra o que não dá para
+justificar. Hoje são 2 (as de DAO). `scripts/marcar-fora-do-exame.js` mantém
+a lista; a tela do exame mostra quantas ficaram de fora e por quê.
+
+Apagar seria pior: esconde o problema e some com conteúdo que talvez esteja
+certo.
 
 ### Árvores: a posição não pode entregar a resposta
 
@@ -100,15 +160,39 @@ escolha 3 vezes, e os quatro graus apareceram.
 ## Auditoria: dois scripts, propósitos diferentes
 
 ```
-node build.js              # monta o .jsx e gera o app/index.html
-node scripts/verificar.js  # audita ESTRUTURA e DADOS (~60 checagens)
-node scripts/testar.js     # EXECUTA as funções com entradas hostis (75 testes)
+node build.js                      # monta o .jsx e gera o app/index.html
+node scripts/verificar.js          # ESTRUTURA e DADOS (~70 checagens)
+node scripts/testar.js             # EXECUTA o código (102 testes)
+node scripts/conferir-contraste.js # ACESSIBILIDADE (WCAG 2.1)
+node scripts/conferir-numeros.js   # CONTEÚDO contra fonte primária
 ```
 
-Os dois têm de passar antes de publicar. O `testar.js` extrai as funções puras
-do arquivo montado e as roda de verdade: embaralhamento (4.000 sorteios),
-correção (12 casos, incluindo o 10/40 e o 69,5% que não pode aprovar),
-cronômetro, migração, validação de backup, sincronia e sorteio da sessão.
+Os quatro têm de passar antes de publicar.
+
+**`verificar.js`** olha o dado parado: contagens, IDs, gabaritos válidos,
+viés de comprimento, vazamento, eliminação por exaustão, distribuição de
+dificuldade, lacre do exame.
+
+**`testar.js`** roda o código com entradas escolhidas para quebrá-lo.
+Começa por um **teste de fumaça**: as constantes de topo são de fato
+avaliadas numa VM. Isso existe por causa de um bug real — `ELEGIVEIS_EXAME`
+usava `TODAS_CHAVES` uma linha antes da declaração. A sintaxe estava perfeita,
+`verificar.js` disse "TUDO CERTO", o build passou, e o app abria em tela
+branca, porque `const` não sobe. **Analisar sintaxe não é executar.**
+Depois vêm embaralhamento (4.000 sorteios), correção (15 casos), cronômetro,
+migração, backup, sincronia e sorteio.
+
+**`conferir-contraste.js`** lê a paleta do arquivo montado e mede as 21
+combinações de texto pela fórmula da WCAG. Reprova abaixo de 4,5:1.
+Na primeira medição, 11 pares estavam abaixo — o pior era o dourado do
+cronômetro, em 2,15:1.
+
+**`conferir-numeros.js`** é a auditoria conceitual em escala. Confere os
+gabaritos contra uma tabela de fatos verificados em fonte primária (FGC,
+tabelas regressivas, PGBL, come-cotas, IOF, LCI/LCA/LCD, debênture
+incentivada, COE, Selic Over, suitability) e checa se todo número afirmado
+tem lastro na apostila — descontando resultado de conta, número de lei e
+dado fornecido pelo próprio enunciado.
 
 ---
 
@@ -487,3 +571,58 @@ automático dos pontos fracos (níveis abaixo de 70% de precisão).
   caderno oficial. Ainda abaixo do padrão da banca.
 - **DAO** — sem lastro na apostila nem no caderno oficial. Continua no banco,
   aguardando conferência contra o Programa Detalhado completo.
+
+---
+
+## Rodada de 08/09/2026 — fechando as lacunas da revisão anterior
+
+A revisão de 07/09 terminou em 7,8 com cinco lacunas nomeadas. Esta rodada
+atacou as cinco.
+
+| Lacuna de 07/09 | O que foi feito |
+|---|---|
+| Corte de 70% sem fonte primária | Confirmado no **edital 3.2**: 35 acertos de 50. Passou a `oficial`, e a correção agora decide por número de acertos |
+| Sem rótulo de dificuldade | 872 questões rotuladas por régua declarada, 25/50/25 exato em cada módulo, sorteio do exame respeitando a distribuição |
+| Rastro de origem só no README | `fonte`, `auditadoEm` e `revisadoEm` gravados em cada um dos 170 níveis |
+| Revisão conceitual em ~4% do banco | `conferir-numeros.js` cobre 100% do banco contra 15 fatos de fonte primária e checa lastro de todo número afirmado |
+| Contraste não medido | 21 pares medidos pela WCAG; 11 estavam abaixo de 4,5:1 e foram corrigidos |
+
+Achados novos desta rodada:
+
+- **Regra de anulação estava errada.** Eu tirava a questão anulada do
+  denominador. O edital 16.1 diz que ela é atribuída a todas as pessoas
+  candidatas — vira acerto e o total continua 50. Corrigido, com 3 testes.
+- **Zona morta temporal em `ELEGIVEIS_EXAME`.** App em tela branca em
+  produção, com todos os portões verdes. Fechado com o teste de fumaça,
+  e a demonstração está no README: com o bug reintroduzido, `verificar.js`
+  diz "TUDO CERTO" e `testar.js` reprova.
+- **Contraste do cronômetro em 2,15:1.** O elemento mais importante da tela
+  do exame era o menos legível.
+- **Backup só existia como texto para copiar.** Agora baixa arquivo.
+- **O histórico cortava a 30ª prova em silêncio.** Agora avisa qual saiu.
+
+### O projeto saiu do computador
+
+O repositório passou a receber as **fontes**, não só o app compilado:
+`src/`, `scripts/`, `build.js`, `sync/`, os guias e a documentação.
+Qualquer máquina clona e continua:
+
+```
+git clone https://github.com/paulohtai/projeto-cpa.git
+cd projeto-cpa && npm install
+node build.js && node scripts/verificar.js && node scripts/testar.js
+```
+
+Continuam **fora** do repositório, pelo `.gitignore`:
+
+- `referencia/` — apostila da T2 Educação e cadernos. Material de terceiros
+  com direitos autorais; republicar seria errado. Os scripts que dependem
+  dela avisam e seguem sem ela.
+- `scripts/.token` — o token de publicação.
+- `app/projeto-cpa-completo.jsx` — 1,5 MB que o build reconstrói.
+
+O raciocínio que mudou em relação à regra antiga ("o repo recebe só o
+index.html"): as 872 questões **já eram públicas**, porque o `index.html`
+compilado as contém em texto puro e sempre esteve no ar. Subir `src/` não
+expõe nada de novo. O que precisa continuar fora é o material de terceiros
+e o token — e continua.
