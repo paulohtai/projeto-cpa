@@ -46,6 +46,48 @@ const migrar = extrai("migrar", "\n};");
 const decidirSync = extrai("decidirSync", "\n};");
 
 // ================================================================
+secao("0. FUMAÇA — o arquivo EXECUTA, não só compila");
+// Este bloco existe por causa de um bug real: `ELEGIVEIS_EXAME` usava
+// `TODAS_CHAVES` uma linha antes de ela ser declarada. A sintaxe estava
+// perfeita, o verificar.js passou, o build passou — e o app abria em tela
+// branca, porque `const` não sobe. Analisar sintaxe não é executar.
+// Aqui as constantes de topo são de fato AVALIADAS, na ordem em que estão.
+{
+  let erroTopo = null, ctx = null;
+  try {
+    const jsx = s.indexOf("export default function ProjetoCPA");
+    // há JSX em ajudantes antes do componente principal (Topo, por exemplo),
+    // então passa por Babel — o mesmo que o build usa para gerar o site
+    const bruto = s.slice(0, jsx).replace(/^import[^\n]*\n/gm, "").replace(/^export default /gm, "");
+    const topo = require("@babel/core").transformSync(bruto, {
+      presets: [[require("@babel/preset-react"), { runtime: "classic" }]],
+      configFile: false, babelrc: false,
+    }).code;
+    const vm = require("node:vm");
+    ctx = vm.createContext({
+      window: { addEventListener() {}, removeEventListener() {}, storage: { get: async () => null, set: async () => {} } },
+      document: { addEventListener() {}, createElement: () => ({ style: {} }) },
+      navigator: {}, fetch: async () => ({ ok: true, json: async () => ({}) }),
+      setTimeout, clearTimeout, setInterval, clearInterval,
+      console: { log() {}, warn() {}, error() {} },
+      Blob: function () {}, URL: { createObjectURL: () => "", revokeObjectURL() {} },
+      AudioContext: function () { return { createGain: () => ({ connect() {}, gain: { value: 0, setValueAtTime() {} } }), destination: {}, currentTime: 0, state: "running" }; },
+    });
+    vm.runInContext(topo + "\n;globalThis.__ok = { chaves: TODAS_CHAVES.length, elegiveis: ELEGIVEIS_EXAME.length, fora: FORA_DO_EXAME.length, niveis: TOTAL_NIVEIS, regras: REGRAS_EXAME.minimoAcertos.valor, dif: Object.keys(CHAVES_POR_MODULO_DIF).length };", ctx, { timeout: 20000 });
+  } catch (e) { erroTopo = e.message; }
+  t("as constantes de topo executam sem erro de ordem (zona morta temporal)", !erroTopo, erroTopo);
+  const g = ctx && ctx.__ok;
+  if (g) {
+    t(`o índice montou ${g.chaves} questões`, g.chaves === 872, String(g.chaves));
+    t(`${g.elegiveis} elegíveis + ${g.fora} fora do exame = ${g.chaves}`, g.elegiveis + g.fora === g.chaves);
+    t("há questões fora do exame, e elas estão declaradas", g.fora > 0);
+    t(`${g.niveis} níveis indexados`, g.niveis === 170, String(g.niveis));
+    t("as regras do exame carregam o mínimo de acertos", g.regras === 35);
+    t("o índice por dificuldade cobre os 4 módulos", g.dif === 4, String(g.dif));
+  }
+}
+
+// ================================================================
 secao("1. EMBARALHAMENTO NÃO ALTERA O GABARITO");
 {
   let erros = 0, posGab = [0, 0, 0, 0];

@@ -22,11 +22,6 @@ MODULOS.forEach((m) => {
 });
 const CHAVES_POR_MODULO = {};
 MODULOS.forEach((m) => (CHAVES_POR_MODULO[m.id] = Object.keys(IDX_Q).filter((k) => IDX_Q[k].mId === m.id)));
-// Questões cujo conteúdo não tem lastro em nenhuma das fontes declaradas
-// ficam FORA do sorteio do exame — avaliação não cobra o que não dá para
-// justificar. Continuam disponíveis no estudo, com o aviso na tela.
-const ELEGIVEIS_EXAME = TODAS_CHAVES.filter((k) => !IDX_Q[k].foraDoExame);
-const FORA_DO_EXAME = TODAS_CHAVES.filter((k) => IDX_Q[k].foraDoExame);
 // mesmo índice, agora quebrado por dificuldade (1 fácil · 2 médio · 3 difícil)
 // para o exame conseguir montar os 25% / 50% / 25% que a ANBIMA publica.
 const CHAVES_POR_MODULO_DIF = {};
@@ -38,6 +33,13 @@ MODULOS.forEach((m) => {
   });
 });
 const TODAS_CHAVES = Object.keys(IDX_Q);
+// Questões cujo conteúdo não tem lastro em nenhuma das fontes declaradas
+// ficam FORA do sorteio do exame — avaliação não cobra o que não dá para
+// justificar. Continuam disponíveis no estudo, com o aviso na tela.
+// (Precisa vir DEPOIS de TODAS_CHAVES: `const` não sobe, e usar antes
+//  derruba o app inteiro na carga. Já aconteceu; o teste de fumaça pega.)
+const ELEGIVEIS_EXAME = TODAS_CHAVES.filter((k) => !IDX_Q[k].foraDoExame);
+const FORA_DO_EXAME = TODAS_CHAVES.filter((k) => IDX_Q[k].foraDoExame);
 const TODOS_NIVEIS = Object.values(IDX_NIVEL);
 const TOTAL_NIVEIS = TODOS_NIVEIS.length;
 const TOTAL_QUESTOES = TODAS_CHAVES.length;
