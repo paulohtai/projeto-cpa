@@ -774,3 +774,53 @@ mesmo item, com as respostas intactas.
 
 Nada, no exame. Progresso de estudo, histórico de provas e prova pausada
 sincronizam. Só a **prova rodando** fica no aparelho até você pausar.
+
+---
+
+## Camada visual (09/09/2026) — `src/55-visual.jsx`
+
+Profundidade, revelação por scroll, luz que segue o cursor, cabeçalho que
+condensa, aurora de fundo e contador de XP. Só `transform` e `opacity`
+animam; um único listener de ponteiro e um de scroll para o app inteiro,
+ambos passivos.
+
+### A regra que nasceu de um erro
+
+**Decoração nunca esconde conteúdo.**
+
+A primeira versão fazia o óbvio: `.rv { opacity: 0 }` e o JS revelava. A home
+abriu **em branco** em produção. Duas causas somadas:
+
+1. `useRef` não estava importado — o app quebrava na renderização. O teste
+   de fumaça não pegou porque ele executa o TOPO do módulo, não o render.
+2. Mesmo com isso corrigido, o efeito de revelação rodava **antes de o
+   conteúdo existir** (o app ainda lia o disco), encontrava zero alvos,
+   **desarmava** e nunca mais voltava — a dependência era só a tela.
+
+Agora o estado escondido só existe sob `<html data-rv="1">`, e o JS só liga
+essa marca **depois** de confirmar que consegue revelar. Sem
+IntersectionObserver, com `prefers-reduced-motion`, com o script falhando ou
+com o conteúdo ainda não montado: o app fica sem animação, e **legível**.
+Há ainda uma rede que revela tudo em 1,2 s de qualquer jeito.
+
+A revelação usa `data-on`, não classe: o React reescreve `className` num
+re-render e apagaria o efeito. Atributo que ele não gerencia, ele não toca.
+
+### Dois portões novos
+
+- **Hooks importados.** Varre `use[A-Z]` no arquivo montado e confere contra
+  a linha de importação do React. Comprovado: revertendo o `useRef`, o teste
+  reprova com "faltando: useRef".
+- **Orçamento de movimento.** Nenhum `@keyframes` pode animar `width`,
+  `height`, `top`, `left`, `margin` ou `padding` — só o que a GPU resolve
+  sem recalcular layout.
+
+Mais 16 testes cobrem o desligamento no exame, o `prefers-reduced-motion`,
+os listeners passivos e a rede de segurança. 295 no total.
+
+### O que NÃO brilha, de propósito
+
+A tela da prova (`.cx-lacrado`) desliga a camada inteira: sem aurora, sem
+luz de cursor, sem revelação, sem lift, sem varredura no título. Efeito ali
+disputa atenção com a questão e pode sugerir estado que não existe. As
+outras 16 telas recebem `<Aurora />`; a da prova, não.
