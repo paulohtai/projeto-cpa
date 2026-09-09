@@ -720,6 +720,60 @@ secao("6f. FERRAMENTAS — planilha, fórmulas e o lacre do exame");
 }
 
 // ================================================================
+secao("6g. CAMADA VISUAL — decoração não pode esconder conteúdo");
+{
+  const css = s.slice(s.indexOf("const VISUAL_CSS = `"), s.indexOf("`;", s.indexOf("const VISUAL_CSS = `")));
+  // A primeira versão escondia por padrão e a home abriu EM BRANCO em
+  // produção. O estado escondido agora só existe sob <html data-rv="1">,
+  // que o JS só liga depois de confirmar que consegue revelar.
+  t("o estado escondido depende da marca que o JS liga",
+    /\[data-rv="1"\] \.rv\{opacity:0/.test(css));
+  t("não existe regra que esconda .rv sem essa marca",
+    !/(^|[^\]])\.rv\{opacity:0/.test(css.replace(/\[data-rv="1"\] \.rv\{opacity:0/g, "")));
+  t("o JS marca a raiz só depois de medir os alvos",
+    /raiz\.setAttribute\("data-rv", "1"\);\s*\/\/ agora sim/.test(s));
+  t("sem IntersectionObserver, a marca é removida e tudo fica visível",
+    /if \(!podeAnimar\) \{ raiz\.removeAttribute\("data-rv"\); return; \}/.test(s));
+  t("com movimento reduzido, nem arma o modo escondido",
+    /const podeAnimar = typeof IntersectionObserver !== "undefined" &&/.test(s) &&
+    /prefers-reduced-motion: reduce"\)\.matches\)/.test(s) &&
+    /if \(!podeAnimar\)/.test(s));
+  t("há rede de segurança que revela tudo depois de 1,2 s",
+    /document\.querySelectorAll\("\.rv:not\(\[data-on\]\)"\)\.forEach\(revelar\);\s*\n\s*\}, 1200\)/.test(s));
+  t("o que já está na dobra é revelado sem esperar o observador",
+    /requestAnimationFrame\(\(\) => daDobra\.forEach\(revelar\)\)/.test(s));
+  // usar data-attribute em vez de className: o React não apaga o que não gerencia
+  t("a revelação usa data-on, não classe (o React reescreveria a classe)",
+    /el\.setAttribute\("data-on", "1"\)/.test(s) && !/classList\.add\("on"\)/.test(s));
+
+  // o exame continua austero
+  t("o exame desliga aurora, luz e revelação", /\.cx-lacrado \.cx-aurora\{display:none\}/.test(css) &&
+    /\.cx-lacrado \[data-luz\]::before\{display:none\}/.test(css) &&
+    /\.cx-lacrado \.rv\{opacity:1!important/.test(css));
+  t("o exame não tem lift nem brilho no título",
+    /\.cx-lacrado \.cx-alt:hover:not\(:disabled\)\{transform:none/.test(css) &&
+    /\.cx-lacrado \.cx-h1\{animation:none/.test(css));
+  // e a preferência do sistema desliga tudo
+  t("prefers-reduced-motion desliga aurora, revelação e varredura",
+    /@media \(prefers-reduced-motion:reduce\)\{[\s\S]{0,400}\.cx-aurora\{display:none\}/.test(css));
+  // só transform e opacity animam: nada que force recálculo de layout
+  {
+    const keyframes = css.match(/@keyframes[^{]*\{[\s\S]*?\}\s*\}/g) || [];
+    const proibidas = /\b(width|height|top|left|right|bottom|margin|padding)\s*:/;
+    const ruins = keyframes.filter((k) => proibidas.test(k.replace(/background-position[^;]*;?/g, "")));
+    t(`as ${keyframes.length} animações mexem só em transform/opacity/cor`, ruins.length === 0,
+      ruins.slice(0, 1).join("").slice(0, 120));
+  }
+  t("um listener de ponteiro para o app inteiro, e passivo",
+    /window\.addEventListener\("pointermove", aoMover, \{ passive: true \}\)/.test(s));
+  t("o scroll também é passivo e só escreve variável CSS",
+    /window\.addEventListener\("scroll", aoRolar, \{ passive: true \}\)/.test(s));
+  t("o ponteiro é limitado a um quadro por vez (requestAnimationFrame)",
+    /if \(pedido\) return;\s*\n\s*pedido = requestAnimationFrame/.test(s));
+  t("sem cursor, o listener de ponteiro nem é instalado", /if \(!semCursor\) window\.addEventListener\("pointermove"/.test(s));
+}
+
+// ================================================================
 secao("7. SORTEIO DA SESSÃO DE EXAME");
 {
   const PESOS = { "1": 20, "2": 40, "3": 30, "4": 10 };

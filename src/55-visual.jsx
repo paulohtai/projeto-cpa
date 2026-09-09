@@ -32,23 +32,29 @@ const VISUAL_CSS = `
 /* ---------- aurora: o fundo respira, muito devagar ----------
    28s por volta. Rápido o suficiente para não parecer parado, lento o
    bastante para nunca puxar o olho de um texto que está sendo lido. */
-.cx-aurora{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;opacity:.55}
-.cx-aurora i{position:absolute;display:block;border-radius:50%;filter:blur(60px);opacity:.5}
-.cx-aurora i:nth-child(1){width:52vw;height:52vw;left:-14vw;top:-18vw;background:var(--azul);animation:auroraA 28s ease-in-out infinite}
-.cx-aurora i:nth-child(2){width:44vw;height:44vw;right:-12vw;top:6vh;background:var(--verde);animation:auroraB 34s ease-in-out infinite}
-.cx-aurora i:nth-child(3){width:38vw;height:38vw;left:22vw;top:38vh;background:var(--roxo);animation:auroraC 40s ease-in-out infinite}
+.cx-aurora{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;opacity:.30}
+.cx-aurora i{position:absolute;display:block;border-radius:50%;filter:blur(90px);opacity:.34}
+.cx-aurora i:nth-child(1){width:40vw;height:40vw;left:-16vw;top:-20vw;background:var(--azul);animation:auroraA 28s ease-in-out infinite}
+.cx-aurora i:nth-child(2){width:34vw;height:34vw;right:-14vw;top:4vh;background:var(--verde);animation:auroraB 34s ease-in-out infinite}
+.cx-aurora i:nth-child(3){width:30vw;height:30vw;left:26vw;top:52vh;background:var(--roxo);animation:auroraC 40s ease-in-out infinite}
 @keyframes auroraA{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(6vw,4vh,0) scale(1.12)}}
 @keyframes auroraB{0%,100%{transform:translate3d(0,0,0) scale(1.05)}50%{transform:translate3d(-5vw,6vh,0) scale(.94)}}
 @keyframes auroraC{0%,100%{transform:translate3d(0,0,0) scale(.95)}50%{transform:translate3d(4vw,-5vh,0) scale(1.1)}}
 .cx-wrap{position:relative;z-index:1}
 
 /* ---------- revelação: o conteúdo sobe ao entrar na tela ----------
-   O atraso escalonado dá ritmo à leitura de cima para baixo. */
-.rv{opacity:0;transform:translate3d(0,18px,0);
+   REGRA DE OURO, aprendida quebrando: decoração NUNCA esconde conteúdo.
+   Por padrão o texto está visível. O estado escondido só existe quando o
+   JS confirma que consegue revelar — ele marca <html data-rv="1">. Se o
+   IntersectionObserver faltar, se o script falhar, se a marcação não
+   chegar: o app fica sem animação, e legível. Na primeira versão era o
+   contrário e a home abriu em branco. */
+[data-rv="1"] .rv{opacity:0;transform:translate3d(0,18px,0);
   transition:opacity 520ms var(--mola), transform 520ms var(--mola)}
-.rv.on{opacity:1;transform:none}
-.rv-1{transition-delay:40ms}.rv-2{transition-delay:90ms}.rv-3{transition-delay:140ms}
-.rv-4{transition-delay:190ms}.rv-5{transition-delay:240ms}.rv-6{transition-delay:290ms}
+[data-rv="1"] .rv[data-on]{opacity:1;transform:none}
+[data-rv="1"] .rv-1{transition-delay:40ms}[data-rv="1"] .rv-2{transition-delay:90ms}
+[data-rv="1"] .rv-3{transition-delay:140ms}[data-rv="1"] .rv-4{transition-delay:190ms}
+[data-rv="1"] .rv-5{transition-delay:240ms}[data-rv="1"] .rv-6{transition-delay:290ms}
 
 /* ---------- luz que segue o cursor ----------
    --mx/--my são preenchidas por um único listener global. Sem cursor
@@ -117,7 +123,7 @@ const VISUAL_CSS = `
 /* 1. O EXAME. Austero de propósito: nada de aurora, luz, revelação ou
       lift. Efeito na prova disputa atenção e pode sugerir estado. */
 .cx-lacrado .cx-aurora{display:none}
-.cx-lacrado .rv{opacity:1;transform:none;transition:none}
+.cx-lacrado .rv{opacity:1!important;transform:none!important;transition:none!important}
 .cx-lacrado [data-luz]::before{display:none}
 .cx-lacrado .cx-alt:hover:not(:disabled){transform:none;box-shadow:none}
 .cx-lacrado .cx-btn:hover:not(:disabled){transform:none;filter:none}
@@ -155,24 +161,45 @@ const VISUAL_CSS = `
 // ---------------------------------------------------------------------
 const useRevelar = (dep) => {
   useEffect(() => {
-    if (typeof IntersectionObserver === "undefined") return;
-    // com movimento reduzido nem observamos: o CSS já deixou tudo visível
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const alvos = document.querySelectorAll(".rv:not(.on)");
-    if (!alvos.length) return;
-    const obs = new IntersectionObserver((entradas) => {
-      entradas.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("on"); obs.unobserve(e.target); } });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
-    alvos.forEach((a) => obs.observe(a));
-    // rede: o que já nasce visível é revelado no quadro seguinte, para o
-    // caso de a tela abrir com tudo acima da dobra
+    const raiz = document.documentElement;
+    const podeAnimar = typeof IntersectionObserver !== "undefined" &&
+      !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    // sem condições de animar, o modo escondido nem chega a ser armado
+    if (!podeAnimar) { raiz.removeAttribute("data-rv"); return; }
+
+    // `data-on` em vez de classe: o React não gerencia esse atributo, então
+    // não o apaga num re-render. Mexer no className de um nó controlado pelo
+    // React é briga que a decoração perde.
+    const revelar = (el) => el.setAttribute("data-on", "1");
+    const alvos = [...document.querySelectorAll(".rv:not([data-on])")];
+    if (!alvos.length) { raiz.removeAttribute("data-rv"); return; }
+
+    // o que JÁ está na tela é revelado de imediato, sem esperar o observador
+    const daDobra = [], abaixo = [];
+    alvos.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      (r.top < window.innerHeight * 0.95 && r.bottom > 0 ? daDobra : abaixo).push(el);
+    });
+
+    raiz.setAttribute("data-rv", "1");     // agora sim: esconder é seguro
+    requestAnimationFrame(() => daDobra.forEach(revelar));
+
+    let obs = null;
+    if (abaixo.length) {
+      obs = new IntersectionObserver((entradas) => {
+        entradas.forEach((e) => { if (e.isIntersecting) { revelar(e.target); obs.unobserve(e.target); } });
+      }, { rootMargin: "0px 0px -6% 0px", threshold: 0.05 });
+      abaixo.forEach((a) => obs.observe(a));
+    }
+
+    // Rede de segurança final: 1,2 s depois, o que ainda estiver escondido
+    // é revelado de qualquer jeito. Melhor um efeito perdido do que uma
+    // linha de conteúdo que o usuário nunca vê.
     const t = setTimeout(() => {
-      document.querySelectorAll(".rv:not(.on)").forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add("on");
-      });
-    }, 60);
-    return () => { obs.disconnect(); clearTimeout(t); };
+      document.querySelectorAll(".rv:not([data-on])").forEach(revelar);
+    }, 1200);
+
+    return () => { if (obs) obs.disconnect(); clearTimeout(t); };
   }, [dep]);
 };
 
