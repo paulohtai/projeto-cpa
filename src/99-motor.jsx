@@ -2523,7 +2523,7 @@ export default function ProjetoCPA() {
     const porMod = {};
     h.itens.forEach((it) => {
       if (it.anulado) return;
-      const m = it.mId || "?";
+      const m = it.mId || (IDX_Q[it.chave] && IDX_Q[it.chave].mId) || (it.tipo === "arvore" ? "3" : "?");
       const acertou = it.tipo === "arvore" ? it.grauEscolhido === 3 : it.resposta === it.gabarito;
       porMod[m] = { r: (porMod[m]?.r || 0) + (acertou ? 1 : 0), t: (porMod[m]?.t || 0) + 1 };
     });
@@ -2618,7 +2618,11 @@ export default function ProjetoCPA() {
                     <b>{i + 1}</b>
                     <span>{branco ? "Em branco" : acertou ? "Acertou" : "Errou"}</span>
                     <span style={{ marginLeft: "auto", color: "var(--mut)", fontSize: 11.5 }}>
-                      {it.tipo === "arvore" ? `Árvore ${it.arvId}` : `M${it.mId} · ${it.nId}`}
+                      {/* rótulo com rede: tentativas gravadas antes da correção
+                          do empacotamento não têm mId/nId, e mostravam
+                          "Mundefined · undefined". Aqui o banco preenche. */}
+                      {it.tipo === "arvore" ? `Árvore ${it.arvId}`
+                        : `M${it.mId || (q && q.mId) || "?"} · ${it.nId || (q && q.nId) || it.chave}`}
                     </span>
                   </div>
                   {it.tipo === "arvore" ? (

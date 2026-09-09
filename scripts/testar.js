@@ -348,6 +348,10 @@ secao("6c. HISTÓRICO DE PROVAS ENTRE APARELHOS");
     v.mId !== undefined && v.nId !== undefined, `mId=${v.mId} nId=${v.nId}`);
   t("chave desconhecida não vira undefined na tela",
     (() => { const d = unpackItem("9.9.9|0;0123;1;1;"); return d.mId === "?" && d.nId === "9.9.9"; })());
+  t("a tela da revisão tem rede para registros antigos sem mId/nId",
+    /M\$\{it\.mId \|\| \(q && q\.mId\) \|\| "\?"\}/.test(s));
+  t("o por-módulo também busca o módulo no banco quando falta",
+    /const m = it\.mId \|\| \(IDX_Q\[it\.chave\] && IDX_Q\[it\.chave\]\.mId\)/.test(s));
   t("o rótulo é rederivado, o gabarito não",
     /mId: q \? q\.mId : "\?"/.test(s) && /gabarito: Number\(terceiro\)/.test(s));
 
