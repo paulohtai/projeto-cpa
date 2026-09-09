@@ -626,3 +626,73 @@ index.html"): as 872 questões **já eram públicas**, porque o `index.html`
 compilado as contém em texto puro e sempre esteve no ar. Subir `src/` não
 expõe nada de novo. O que precisa continuar fora é o material de terceiros
 e o token — e continua.
+
+---
+
+## O defeito da sincronia (diagnosticado em 08/09/2026)
+
+Sintoma relatado: o progresso do computador não batia com o do celular, e o
+do celular era o correto.
+
+### O que foi medido
+
+Lendo o `localStorage` do Chrome do usuário e a chave do Worker no mesmo
+instante:
+
+| | Computador | Nuvem |
+|---|---|---|
+| XP | 9.720 | 9.720 |
+| Tópicos com precisão | 165 | 165 |
+| Pílulas vencidas | 143 | 143 |
+| Fila de erros | 68 | 68 |
+| `quando` | 08/09 18:39:09 | 08/09 18:39:09 |
+
+**Idênticos, ao milissegundo.** Então a sincronia não estava falhando em
+enviar — o que estava na nuvem era exatamente o computador. O que faltava era
+o celular ter chegado lá.
+
+### As duas causas
+
+**1. O envio era um `setTimeout` de 4 segundos, sem despejo ao sair.**
+
+```js
+temporizadorNuvem = setTimeout(() => nuvemEnviar(...), 4000);
+```
+
+No iPhone basta **bloquear a tela ou trocar de app** para o Safari congelar
+ou encerrar a página. O timer nunca dispara. O `localStorage` já gravou — por
+isso o celular mostrava o progresso certo — mas a nuvem nunca soube. Não
+havia nenhum `pagehide` nem `visibilitychange` no código: confirmado por
+busca antes de mexer.
+
+**2. A regra de conflito era cega.** `decidirSync` compara um carimbo de
+tempo e substitui o estado inteiro. Quem gravou por último leva tudo. Com o
+celular preso na causa 1, qualquer gravação posterior no computador virava
+"a verdade", e na próxima abertura o celular **puxaria e apagaria o próprio
+progresso**.
+
+### As correções
+
+**Despejo ao esconder e ao fechar.** `pendenteNuvem` guarda o que ainda não
+subiu; `pagehide` e `visibilitychange → hidden` mandam na hora, com
+`fetch(..., { keepalive: true })`, que o navegador conclui mesmo depois de a
+aba morrer. O estado tem ~10 KB, bem abaixo do limite de 64 KB do keepalive.
+`sendBeacon` não serve: só faz POST, e o Worker só aceita PUT. O atraso do
+envio normal caiu de 4 s para 1,5 s. Se o despejo falhar, o pendente volta
+para a fila em vez de sumir.
+
+**Puxar deixou de ser silencioso.** `conflitoDeSync(local, nuvem)` mede
+respostas dadas, pílulas vencidas e XP dos dois lados. Se este aparelho tem
+alguma coisa que a nuvem não tem, o app **para e pergunta**, dizendo
+exatamente o que se perderia, e não grava nada até a escolha. Continua
+last-write-wins no caso comum; o que mudou é que o caso perigoso virou
+decisão do usuário, não do relógio.
+
+11 testes cobrem `conflitoDeSync` e 8 cobrem o despejo.
+
+### O que continua sendo por design
+
+O **histórico de provas** e a **prova em andamento** não sincronizam: são
+pesados para o limite de 300 KB do Worker. Por isso as tentativas encerradas
+que aparecem num aparelho não aparecem no outro. Para levá-las, use o botão
+**Baixar arquivo** na Cópia de segurança.
