@@ -1139,6 +1139,29 @@ export default function ProjetoCPA() {
     }
   };
 
+  // Abas do MESMO navegador compartilham o disco, mas não a memória. Sem
+  // isto, pausar numa aba não parava o cronômetro da outra — e a aba que
+  // ficou para trás, com o `fimEm` antigo, encerrava a prova sozinha ao
+  // vencer o prazo. Foi exatamente o que aconteceu com a prova de 08/09:
+  // pausada às 23:37 numa aba e encerrada às 01:16 por outra.
+  // O evento `storage` só dispara nas OUTRAS abas, que é o que queremos.
+  useEffect(() => {
+    const aoMudarDisco = (ev) => {
+      if (ev.key !== PROVA_KEY) return;
+      try {
+        const nova = ev.newValue ? JSON.parse(ev.newValue) : null;
+        setProva((atual) => {
+          if (!nova) return null;                       // encerrada em outra aba
+          if (!atual || nova.id !== atual.id) return nova;
+          // fica a versão mexida mais recentemente
+          return (nova.atualizadoEm || 0) >= (atual.atualizadoEm || 0) ? nova : atual;
+        });
+      } catch (e) {}
+    };
+    window.addEventListener("storage", aoMudarDisco);
+    return () => window.removeEventListener("storage", aoMudarDisco);
+  }, []);
+
   // Fecha a janela em que o progresso ficava preso no aparelho: quando a
   // página é escondida ou descarregada, o que estiver pendente vai AGORA,
   // com keepalive, sem esperar o temporizador.
@@ -1229,7 +1252,18 @@ export default function ProjetoCPA() {
   useEffect(() => {
     // pausada, o relógio não corre — e portanto não encerra sozinha
     if (!prova || prova.entregue || prova.pausada) return;
-    if (agora >= prova.fimEm) encerrarProva("tempo");
+    if (agora < prova.fimEm) return;
+    // Antes de encerrar, confere o DISCO. Se outra aba pausou, esta cópia em
+    // memória está velha e encerrar seria destruir a pausa da outra aba.
+    (async () => {
+      try {
+        const r = await window.storage.get(PROVA_KEY);
+        const noDisco = r && r.value ? JSON.parse(r.value) : null;
+        if (noDisco && noDisco.id === prova.id && noDisco.pausada) { setProva(noDisco); return; }
+        if (!noDisco) { setProva(null); return; }     // já encerrada em outra aba
+      } catch (e) {}
+      encerrarProva("tempo");
+    })();
   }, [agora, prova]);
 
   useEffect(() => {

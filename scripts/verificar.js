@@ -527,7 +527,9 @@ colisao === 0 ? ok("nenhum exemplo repete enunciado de questão (não entrega ga
 {
   /fimEm: inicio \+ REGRAS_EXAME\.duracaoSeg\.valor \* 1000/.test(s)
     ? ok("prazo da prova é um instante absoluto gravado no disco") : erro("o prazo da prova não é absoluto — recarregar devolveria tempo");
-  /agora >= prova\.fimEm/.test(s) ? ok("encerra sozinha ao vencer o prazo") : erro("a prova não encerra sozinha no prazo");
+  /if \(agora < prova\.fimEm\) return;/.test(s) && /encerrarProva\("tempo"\);/.test(s)
+    ? ok("encerra sozinha ao vencer o prazo (conferindo o disco antes, por causa de outras abas)")
+    : erro("a prova não encerra sozinha no prazo");
   /window\.storage\.set\(PROVA_KEY/.test(s) ? ok("tentativa em andamento é gravada em chave própria") : erro("a prova não é persistida");
   /if \(!prova \|\| prova\.entregue \|\| prova\.pausada \|\| Date\.now\(\) >= prova\.fimEm\) return;/.test(s)
     ? ok("não aceita resposta depois de entregue, pausada nem depois do prazo") : erro("dá para responder depois do fim");

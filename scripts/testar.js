@@ -484,6 +484,16 @@ secao("6d. PAUSAR E RETOMAR A PROVA");
   t("o aviso diz que pausar não reproduz a condição de prova",
     /no exame de verdade não existe pausa/.test(s));
   t("a tela explica que as respostas sobem AO PAUSAR", /As respostas sobem para a nuvem <b>ao pausar<\/b>/.test(s));
+  // BUG REAL: pausar numa aba não parava o cronômetro da outra aba aberta,
+  // e a aba atrasada encerrava a prova sozinha ao vencer o prazo antigo.
+  t("abas do mesmo navegador se avisam pelo evento storage",
+    /window\.addEventListener\("storage", aoMudarDisco\)/.test(s) && /ev\.key !== PROVA_KEY/.test(s));
+  t("a aba que recebe o aviso fica com a versão mexida mais recentemente",
+    /\(nova\.atualizadoEm \|\| 0\) >= \(atual\.atualizadoEm \|\| 0\) \? nova : atual/.test(s));
+  t("encerrar por tempo confere o disco antes, para não matar a pausa de outra aba",
+    /if \(noDisco && noDisco\.id === prova\.id && noDisco\.pausada\) \{ setProva\(noDisco\); return; \}/.test(s));
+  t("se a prova já sumiu do disco, a aba atrasada não a encerra de novo",
+    /if \(!noDisco\) \{ setProva\(null\); return; \}/.test(s));
 }
 
 // ================================================================
