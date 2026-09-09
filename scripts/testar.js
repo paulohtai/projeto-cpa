@@ -78,6 +78,23 @@ secao("0. FUMAÇA — o arquivo EXECUTA, não só compila");
     vm.runInContext(topo + "\n;globalThis.__ok = { chaves: TODAS_CHAVES.length, elegiveis: ELEGIVEIS_EXAME.length, fora: FORA_DO_EXAME.length, niveis: TOTAL_NIVEIS, regras: REGRAS_EXAME.minimoAcertos.valor, dif: Object.keys(CHAVES_POR_MODULO_DIF).length };", ctx, { timeout: 20000 });
   } catch (e) { erroTopo = e.message; }
   t("as constantes de topo executam sem erro de ordem (zona morta temporal)", !erroTopo, erroTopo);
+
+  // O teste acima executa o TOPO do módulo, não a renderização. Um hook do
+  // React usado sem estar importado só quebra na hora de renderizar — foi
+  // assim que `useRef` derrubou o app inteiro em produção, com todos os
+  // portões verdes. Aqui a checagem é estática e cobre esse buraco.
+  {
+    const usados = [...new Set((s.match(/\buse[A-Z][A-Za-z]*/g) || []))]
+      .filter((h) => ["useState", "useEffect", "useRef", "useMemo", "useCallback",
+        "useReducer", "useContext", "useLayoutEffect", "useId", "useTransition",
+        "useDeferredValue", "useSyncExternalStore", "useImperativeHandle", "useDebugValue"].includes(h));
+    const linha = (s.match(/const \{([^}]*)\} = React;/) || s.match(/import \{([^}]*)\} from "react"/) || [])[1] || "";
+    const importados = linha.split(",").map((x) => x.trim()).filter(Boolean);
+    const faltando = usados.filter((h) => !importados.includes(h));
+    t(`todo hook do React usado está importado (${usados.length} em uso)`,
+      faltando.length === 0, "faltando: " + faltando.join(", "));
+    t("a lista de importação não está vazia", importados.length > 0, linha);
+  }
   const g = ctx && ctx.__ok;
   if (g) {
     t(`o índice montou ${g.chaves} questões`, g.chaves === 872, String(g.chaves));

@@ -20,7 +20,7 @@ const jsx = fs.readFileSync(path.join(raiz, "app", "projeto-cpa-completo.jsx"), 
 
 // adapta o módulo do artifact para script de navegador
 let fonte = jsx
-  .replace('import { useState, useEffect } from "react";', "const { useState, useEffect } = React;")
+  .replace('import { useState, useEffect, useRef } from "react";', "const { useState, useEffect, useRef } = React;")
   .replace("export default function ProjetoCPA", "function ProjetoCPA");
 
 const { code } = babel.transformSync(fonte, {

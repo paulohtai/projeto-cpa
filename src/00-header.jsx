@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // =====================================================================
 // PROJETO CPA — APP ÚNICO · Módulos 1 a 4
