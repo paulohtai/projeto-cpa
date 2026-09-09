@@ -578,7 +578,7 @@
                 "dif": 3
               },
               {
-                "q": "Patrícia comparou um CDB que paga 105% do CDI com uma LCI que paga 92% do CDI e concluiu que o CDB seria a melhor escolha. Ela procurou o profissional CPA Thiago, que pediu para ela considerar o efeito do imposto de renda antes de decidir. Thiago lembrou que o CDB sofre a incidência da tabela regressiva, com alíquota que varia de 22,5% a 15% conforme o prazo, e que as letras de crédito recebem tratamento tributário distinto quando o investidor é pessoa física, justamente como contrapartida do prazo mínimo de carência exigido. Sobre a tributação da LCI, da LCA e da LCD para pessoa física, Thiago deve informar que elas são:",
+                "q": "Patrícia comparou um CDB que paga 105% do CDI com uma LCI que paga 92% do CDI e concluiu que o CDB seria a melhor escolha. Ela procurou o profissional CPA Thiago, que pediu para ela considerar o efeito do imposto de renda antes de decidir. Thiago lembrou que o CDB sofre a incidência da tabela regressiva, com alíquota que varia de 22,5% a 15% conforme o prazo, e pediu que ela verificasse a regra aplicável às letras de crédito para a pessoa física antes de comparar os percentuais do CDI. Sobre a tributação da LCI, da LCA e da LCD para pessoa física, Thiago deve informar que elas são:",
                 "alts": [
                   "tributadas pela tabela regressiva, com alíquotas que variam de 22,5% a 15% conforme o prazo da aplicação.",
                   "isentas de imposto de renda, benefício que compensa a carência mínima exigida para o resgate.",
@@ -678,10 +678,10 @@
             "pegadinha": "Duas armadilhas: confundir quirografária (igualdade com os demais credores) com subordinada (atrás de todos), e trocar conversível por permutável. E lembre: a incentivada é 15% para PJ, não isenta.",
             "questoes": [
               {
-                "q": "Renan analisa a escritura de emissão de uma debênture e leu que a companhia oferece em garantia bens do seu ativo, com a faculdade de substituí-los por outros ao longo da vigência do contrato. Ele procurou a profissional CPA Simone para entender em que espécie o papel se enquadra. Simone lembrou que existe uma espécie em que o bem dado em garantia fica vinculado até a quitação, sem possibilidade de troca, e outra em que o credor tem privilégio geral sobre o ativo da companhia, com bens que podem ser substituídos ao longo do tempo. Nessas condições, a debênture de Renan é classificada como:",
+                "q": "Renan analisa a escritura de emissão de uma debênture e leu que a companhia oferece em garantia bens do seu ativo, com a faculdade de substituí-los por outros ao longo da vigência do contrato. Ele procurou a profissional CPA Simone para entender em que espécie o papel se enquadra. Simone pediu que ele olhasse um único detalhe da escritura — a faculdade de trocar os bens dados em garantia —, porque é ele que separa as duas espécies garantidas. Nessas condições, a debênture de Renan é classificada como:",
                 "alts": [
                   "real, pois o bem dado em garantia fica vinculado à emissão até a quitação, sem possibilidade de troca.",
-                  "flutuante, pois há privilégio geral sobre o ativo, com bens que podem ser substituídos pela emissora.",
+                  "flutuante, pois o credor tem privilégio geral e a emissora conserva a livre disposição dos bens.",
                   "quirografária, pois o titular concorre em igualdade com os demais credores, sem qualquer preferência.",
                   "subordinada, pois o titular recebe depois dos demais credores, com preferência apenas sobre acionistas."
                 ],
@@ -786,7 +786,7 @@
                 "dif": 1
               },
               {
-                "q": "REDENÇÃO: Amanda comparou um CDB que paga 110% do CDI com um CRA de prazo semelhante e concluiu que o CDB entregaria o maior retorno. O profissional CPA Gilberto pediu que ela considerasse o efeito do imposto de renda antes de tomar a decisão. Ele lembrou que o CDB sofre a incidência da tabela regressiva, com alíquotas que variam conforme o prazo, e que o CRI e o CRA receberam tratamento tributário diferenciado para a pessoa física, como incentivo para atrair recursos ao financiamento dos setores imobiliário e do agronegócio. Sobre a tributação do CRI e do CRA para pessoa física, Gilberto deve informar que esses papéis são:",
+                "q": "REDENÇÃO: Amanda comparou um CDB que paga 110% do CDI com um CRA de prazo semelhante e concluiu que o CDB entregaria o maior retorno. O profissional CPA Gilberto pediu que ela considerasse o efeito do imposto de renda antes de tomar a decisão. Ele lembrou que o CDB sofre a incidência da tabela regressiva, com alíquotas que variam conforme o prazo, e pediu que ela conferisse qual regra alcança os certificados de recebíveis quando o investidor é pessoa física. Sobre a tributação do CRI e do CRA para pessoa física, Gilberto deve informar que esses papéis são:",
                 "alts": [
                   "tributados pela tabela regressiva, com alíquotas de 22,5% a 15% conforme o prazo da aplicação.",
                   "isentos de imposto de renda, incentivo criado para atrair recursos aos setores imobiliário e agrícola.",
@@ -2367,10 +2367,10 @@
               {
                 "q": "Rodrigo Tavares, empresário, notou no extrato que o fundo em que aplica tem um CNPJ próprio, diferente do CNPJ do banco onde ele mantém conta e também do CNPJ da gestora responsável pela carteira. Ele perguntou ao profissional CPA que o atende se aquilo era apenas uma formalidade cadastral ou se tinha algum efeito prático sobre o dinheiro aplicado, sobretudo em um cenário de dificuldade financeira da instituição. O profissional respondeu que o registro próprio produz um efeito jurídico relevante. Esse efeito consiste em:",
                 "alts": [
-                  "Ele fica autorizado a emitir ações no mercado de capitais, captando recursos junto a investidores como uma companhia.",
-                  "Ele fica dispensado do registro junto à CVM, bastando a inscrição cadastral para iniciar a distribuição das cotas ao público.",
-                  "Ele passa a recolher imposto de renda como pessoa jurídica, apurando lucro tributável ao fim de cada exercício social.",
-                  "O patrimônio do fundo fica separado do patrimônio da gestora e do banco, e não responde por dívidas dessas instituições."
+                  "O fundo fica autorizado a emitir ações no mercado de capitais, captando recursos junto a investidores como uma companhia.",
+                  "O fundo fica dispensado do registro junto à CVM, bastando a inscrição cadastral para o banco iniciar a distribuição das cotas.",
+                  "O fundo passa a recolher imposto de renda como pessoa jurídica, apurando com a gestora o lucro tributável do exercício.",
+                  "O patrimônio da carteira não se comunica com o de seus prestadores de serviço e não responde por dívidas deles."
                 ],
                 "c": 3,
                 "exp": "Segregação patrimonial: o CNPJ próprio separa o patrimônio do fundo do patrimônio dos prestadores. Se a gestora quebrar, o dinheiro dos cotistas não é alcançado.",
@@ -2519,7 +2519,7 @@
                 "dif": 2
               },
               {
-                "q": "REDENÇÃO: Um cliente comparou o desempenho de seu fundo de ações com o CDI e concluiu que a gestão havia falhado, já que em um ano de bolsa fraca o CDI rendeu mais. O profissional CPA Gustavo Andrade explicou que o índice de referência de uma classe existe para permitir avaliar a gestão dentro do mesmo universo de risco, e que comparar uma carteira de ações com um indicador de juros de curto prazo distorce a leitura do resultado obtido. Sobre a escolha do índice de referência de uma classe, o profissional deve explicar que ele deve:",
+                "q": "REDENÇÃO: Um cliente comparou o desempenho de seu fundo de ações com o CDI e concluiu que a gestão havia falhado, já que em um ano de bolsa fraca o CDI rendeu mais. O profissional CPA Gustavo Andrade explicou que a conclusão do cliente nasceu de uma comparação que a própria escolha do índice de referência deveria ter impedido. Sobre a escolha do índice de referência de uma classe, o profissional deve explicar que ele deve:",
                 "alts": [
                   "corresponder ao CDI em qualquer classe, por ser o indicador de juros mais acompanhado pelo mercado brasileiro.",
                   "refletir o universo de ativos em que a classe efetivamente investe, permitindo avaliação coerente da gestão.",
@@ -2590,7 +2590,7 @@
                 "dif": 2
               },
               {
-                "q": "REDENÇÃO: Durante uma visita técnica, um cliente institucional perguntou quem define o valor pelo qual cada ativo entra no cálculo da cota divulgada diariamente. Ele imaginava que fosse o mesmo profissional que decide as compras e as vendas da carteira. O profissional CPA Sérgio Vilela explicou que existe separação de funções: quem negocia os ativos não é quem os precifica, justamente para evitar conflito de interesse na marcação e na divulgação do valor da cota aos cotistas. A responsabilidade pelo apreçamento dos ativos da carteira é:",
+                "q": "REDENÇÃO: Durante uma visita técnica, um cliente institucional perguntou quem define o valor pelo qual cada ativo entra no cálculo da cota divulgada diariamente. Ele imaginava que fosse o mesmo profissional que decide as compras e as vendas da carteira. O profissional CPA Sérgio Vilela explicou que a regulação distribui essas funções entre prestadores diferentes justamente para evitar conflito de interesse na marcação. A responsabilidade pelo apreçamento dos ativos da carteira é:",
                 "alts": [
                   "do gestor, que decide as compras e vendas e, por conhecer os ativos, define o preço usado no cálculo da cota.",
                   "do administrador, a quem cabe precificar os ativos da carteira e divulgar o valor da cota aos cotistas.",
@@ -2626,7 +2626,7 @@
                 "q": "O fundo em que Cláudia Nogueira investe cobrou taxa de performance quando o valor da cota chegou a R$ 12,00. Em seguida, o mercado recuou e a cota caiu para R$ 11,00. Nos meses seguintes houve recuperação e a cota voltou a R$ 11,90, ainda abaixo do pico anterior. Cláudia perguntou ao profissional CPA se essa nova alta gera cobrança de taxa de performance, já que houve valorização no período. Considerando a regra da linha d'água, a resposta correta é:",
                 "alts": [
                   "a cobrança dependerá apenas do índice de referência, sem considerar o valor de cota alcançado anteriormente.",
-                  "haverá cobrança sobre a valorização de R$ 11,00 para R$ 11,90, pois o período apresentou rentabilidade positiva.",
+                  "haverá cobrança sobre a valorização de R$ 11,00 para R$ 11,90, pois a linha d'água é redefinida a cada período de apuração.",
                   "não haverá cobrança, pois a cota ainda não superou a linha d'água de R$ 12,00 usada na última cobrança.",
                   "haverá cobrança em dobro sobre o ganho apurado, de modo a compensar o resultado negativo do período anterior."
                 ],
@@ -2820,12 +2820,12 @@
             "pegadinha": "A banca confunde o curto prazo da CVM (60 dias de prazo médio, título até 375 dias) com o da Receita Federal (prazo médio até 365 dias). São critérios DIFERENTES para finalidades diferentes.",
             "questoes": [
               {
-                "q": "Ao comparar as subcategorias de renda fixa, o estagiário Vitor Camargo notou que uma delas dispensa a assinatura do termo de adesão pelo investidor, exceção rara no mercado de fundos. O profissional CPA que o orienta explicou que essa dispensa se justifica pelo perfil ultraconservador da carteira, concentrada em títulos públicos federais pós-fixados ou em ativos de emissores com risco de crédito equivalente ao do governo, com percentual mínimo elevado. A subcategoria de renda fixa que dispensa a assinatura do termo de adesão é a:",
+                "q": "Ao comparar as subcategorias de renda fixa, o estagiário Vitor Camargo notou que uma delas dispensa a assinatura do termo de adesão pelo investidor, exceção rara no mercado de fundos. O profissional CPA que o orienta explicou que a dispensa se justifica pelo perfil ultraconservador exigido daquela carteira, cuja composição mínima é fixada em norma. A subcategoria de renda fixa que dispensa a assinatura do termo de adesão é a:",
                 "alts": [
                   "simples, cuja carteira concentra ao menos 95% em LFT ou em emissores com risco equivalente ao do governo.",
-                  "dívida externa, voltada a títulos da dívida soberana negociados fora do país, com assinatura do termo exigida.",
-                  "curto prazo, cuja carteira observa prazo médio reduzido, mas exige a assinatura do termo pelo investidor.",
-                  "referenciada, que acompanha um indexador com percentual mínimo elevado, sem dispensa da assinatura do termo."
+                  "dívida externa, voltada a títulos representativos da dívida soberana brasileira negociados fora do país.",
+                  "curto prazo, cuja carteira observa prazo médio ponderado reduzido, definido na norma da CVM.",
+                  "referenciada, que persegue a variação de um indicador declarado no regulamento da classe."
                 ],
                 "c": 0,
                 "exp": "O fundo Simples, pela carteira ultraconservadora (95% em LFT ou emissores com crédito igual ou melhor que o do governo), dispensa a assinatura.",
@@ -3766,7 +3766,7 @@
                 "q": "REDENÇÃO: Após 25 anos de contribuições, o professor aposentado Jairo Belchior converteu seu plano em renda mensal e passou a receber os pagamentos da seguradora. Alguns meses depois, procurou o profissional CPA com três dúvidas: se poderia retomar as contribuições, se conseguiria sacar uma quantia extra em dezembro para uma viagem e se ainda seria possível levar o plano para outra instituição. O profissional descreveu as características da fase de benefícios. Sobre essa fase, ele deve afirmar que:",
                 "alts": [
                   "as contribuições seguem flexíveis, permitindo aportes extras para elevar o valor da renda mensal.",
-                  "há recebimento da renda contratada, sem possibilidade de resgatar o saldo já convertido.",
+                  "o benefício contratado torna-se irreversível, e o saldo que o lastreia deixa de ser resgatável.",
                   "a portabilidade do saldo para outra instituição continua disponível a qualquer momento.",
                   "fica vedada a indicação de beneficiários em qualquer modalidade de renda oferecida pela seguradora."
                 ],
@@ -4005,7 +4005,7 @@
             "pegadinha": "A banca permite portabilidade de PGBL para VGBL. Proibido. E sugere incidência de IR na transferência: não há, porque não existe resgate.",
             "questoes": [
               {
-                "q": "Depois de mudar de emprego e passar a declarar pelo modelo simplificado, o cliente Diógenes Farias procurou o profissional CPA pedindo a transferência do saldo do seu PGBL para um VGBL de outra seguradora, alegando que o novo formato de declaração torna o PGBL menos vantajoso para ele. O profissional explicou que a portabilidade tem regras próprias e que os dois produtos recebem tratamentos fiscais distintos no momento do resgate. Diante do pedido, o profissional deve informar que a operação é:",
+                "q": "Depois de mudar de emprego e passar a declarar pelo modelo simplificado, o cliente Diógenes Farias procurou o profissional CPA pedindo a transferência do saldo do seu PGBL para um VGBL de outra seguradora, alegando que o novo formato de declaração torna o PGBL menos vantajoso para ele. O profissional explicou que a portabilidade tem regras próprias, que não mudam conforme o modelo de declaração escolhido pelo cliente. Diante do pedido, o profissional deve informar que a operação é:",
                 "alts": [
                   "permitida, desde que respeitada a carência mínima de 60 dias contada do último aporte feito.",
                   "vedada, pois a portabilidade ocorre entre planos do mesmo tipo, dado o tratamento fiscal distinto.",
@@ -4266,7 +4266,7 @@
                 "dif": 3
               },
               {
-                "q": "Durante um treinamento da mesa de crédito, a estagiária Rafaela perguntou a Diego, profissional CPA, quais elementos o comitê observa antes de aprovar uma operação. Diego explicou que a análise segue um roteiro clássico de cinco itens, que reúne a situação patrimonial do tomador, a renda disponível para honrar as parcelas, a garantia vinculada ao contrato, o cenário econômico do setor em que ele atua e o histórico de honrar compromissos assumidos. Cada item recebe peso próprio conforme a modalidade contratada. Os cinco Cs do crédito citados por Diego são:",
+                "q": "Durante um treinamento da mesa de crédito, a estagiária Rafaela perguntou a Diego, profissional CPA, quais elementos o comitê observa antes de aprovar uma operação. Diego explicou que a análise segue um roteiro clássico de cinco itens, todos começados pela mesma letra, e que cada um recebe peso próprio conforme a modalidade contratada. Os cinco Cs do crédito citados por Diego são:",
                 "alts": [
                   "crédito, cobrança, cadastro, custo e contrato, que reúnem as etapas operacionais da concessão dentro da instituição.",
                   "capacidade, cobrança, condições, colateral e crédito, que reúnem a régua de recuperação aplicada ao inadimplente.",
@@ -4310,7 +4310,7 @@
             "pegadinha": "A banca troca o teto do rotativo por outro percentual, ou apresenta rotativo e refinanciamento como sinônimos. Rotativo é automático; refinanciamento é uma renegociação com nova taxa e prazo.",
             "questoes": [
               {
-                "q": "Tiago pagou apenas parte da fatura do cartão e, no mês seguinte, assustou-se com o valor cobrado. Procurou Helena, profissional CPA, dizendo ter ouvido de um colega que o rotativo do cartão não tem limite algum de encargo e que o emissor pode cobrar o quanto quiser. Helena explicou que existe regra específica para essa modalidade, que limita o montante de juros e encargos acumulados em relação ao valor original da dívida, e que esse limite não se confunde com o teto mensal aplicável ao cheque especial. Sobre o teto legal dos juros do crédito rotativo, Helena deve informar que ele corresponde a:",
+                "q": "Tiago pagou apenas parte da fatura do cartão e, no mês seguinte, assustou-se com o valor cobrado. Procurou Helena, profissional CPA, dizendo ter ouvido de um colega que o rotativo do cartão não tem limite algum de encargo e que o emissor pode cobrar o quanto quiser. Helena explicou que existe, sim, regra específica para essa modalidade, editada pelo Conselho Monetário Nacional depois da escalada dos encargos observada no mercado. Sobre o teto legal dos juros do crédito rotativo, Helena deve informar que ele corresponde a:",
                 "alts": [
                   "50% do valor total da dívida, percentual aplicável quando o cliente paga o mínimo da fatura no vencimento.",
                   "100% do valor original da dívida, montante máximo que os juros e encargos podem alcançar no rotativo.",
@@ -5019,7 +5019,7 @@
                 "dif": 1
               },
               {
-                "q": "REDENÇÃO: Durante um treinamento interno, o estagiário Tiago perguntou a Aline, profissional CPA, por que a fintech em que ele recebe seus pagamentos oferece apenas conta de pagamento, e não conta corrente. Aline explicou que a conta corrente depende de autorização específica e está ligada à captação de depósitos à vista, atividade sujeita a recolhimento compulsório e amparada pelo Fundo Garantidor de Créditos. Já a conta de pagamento é o instrumento típico das instituições de pagamento. Nesse contexto, as instituições autorizadas a manter conta corrente são:",
+                "q": "REDENÇÃO: Durante um treinamento interno, o estagiário Tiago perguntou a Aline, profissional CPA, por que a fintech em que ele recebe seus pagamentos oferece apenas conta de pagamento, e não conta corrente. Aline explicou que manter conta corrente depende de uma autorização específica do Banco Central, que não é concedida a toda instituição por ele supervisionada. Nesse contexto, as instituições autorizadas a manter conta corrente são:",
                 "alts": [
                   "as instituições de pagamento e as fintechs de crédito, por serem supervisionadas diretamente pelo Banco Central.",
                   "os bancos comerciais e as cooperativas de crédito, autorizados a captar depósitos à vista do público.",
@@ -5670,7 +5670,7 @@
                 "dif": 1
               },
               {
-                "q": "Márcia vai custear por quatro anos a faculdade do filho e quer garantir que, se algo lhe acontecer nesse intervalo, a família tenha recursos para concluir o curso. Depois desse período, ela pretende reavaliar a necessidade de proteção, porque o filho já estará formado. O profissional CPA Ivan indica a modalidade de seguro de vida com prazo de vigência definido em contrato, ao fim do qual cabe ao segurado decidir sobre a renovação. A modalidade indicada por Ivan é o seguro de vida:",
+                "q": "Márcia vai custear por quatro anos a faculdade do filho e quer garantir que, se algo lhe acontecer nesse intervalo, a família tenha recursos para concluir o curso. Depois desse período, ela pretende reavaliar a necessidade de proteção, porque o filho já estará formado. O profissional CPA Ivan indica a modalidade cujo desenho acompanha exatamente esse horizonte e que, por isso, custa menos que as demais para a mesma importância segurada. A modalidade indicada por Ivan é o seguro de vida:",
                 "alts": [
                   "tradicional, com vigência mantida enquanto o prêmio mensal for pago pelo segurado.",
                   "vida inteira, cuja cobertura permanece em vigor até o falecimento do segurado.",

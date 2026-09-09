@@ -214,8 +214,18 @@ por construção.
 
 - `index.html` de 1,4 MB com todo o banco embutido: ~2s na primeira visita,
   offline depois. Pesado para rede móvel na estreia.
-- Quatro portões antes de publicar, cada um com um alvo diferente:
-  estrutura, execução, acessibilidade e conteúdo.
+- Seis portões antes de publicar, cada um com um alvo diferente: estrutura,
+  execução, acessibilidade, conteúdo, vazamento de resposta e matemática
+  financeira.
+- **O portão de vazamento nasceu de um erro meu, e o registro fica.** A
+  checagem antiga media a MÉDIA do banco e imprimia "dentro da régua do
+  caderno oficial" — com 36 questões entregando a resposta, uma delas com
+  "R$ 200 mil" no enunciado e no gabarito. O Paulo achou em dois minutos o
+  que a auditoria de 872 questões chamou de limpo. O `conferir-vazamento.js`
+  julga questão por questão, conta números de qualquer tamanho, casa por
+  radical, e calibra o corte nas 41 questões oficiais da ANBIMA. A lição de
+  método é a mesma do teste de fumaça: **medir a média não é inspecionar o
+  caso.** Quem responde uma questão por vez não responde a média.
 - **O teste de fumaça fechou um buraco de método**, com demonstração: com o
   bug de zona morta reintroduzido, `verificar.js` imprime "TUDO CERTO" e o
   app abre em branco; `testar.js` reprova com a mensagem exata. Analisar

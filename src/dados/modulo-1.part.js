@@ -772,7 +772,7 @@
             "pegadinha": "A banca chama o redesconto de linha de crédito comum entre bancos. Não: é do BANCO CENTRAL para o banco, e só em emergência.",
             "questoes": [
               {
-                "q": "Um banco de médio porte enfrentou saques inesperados após um boato nas redes sociais e viu seu caixa apertar no fim do dia. A tesouraria tentou captar recursos com outras instituições no mercado interbancário, mas não conseguiu fechar o volume necessário para honrar as liquidações. Sem alternativa entre os pares, a instituição recorreu à autoridade monetária, que atua como emprestadora de última instância e concede crédito de curtíssimo prazo para cobrir necessidades emergenciais de caixa. O instrumento acionado pelo banco nessa situação é:",
+                "q": "Um banco de médio porte enfrentou saques inesperados após um boato nas redes sociais e viu seu caixa apertar no fim do dia. A tesouraria tentou captar recursos com outras instituições no mercado interbancário, mas não conseguiu fechar o volume necessário para honrar as liquidações. Sem alternativa entre os pares, a instituição recorreu diretamente à autoridade monetária, antes do fechamento do sistema de liquidação. O instrumento acionado pelo banco nessa situação é:",
                 "alts": [
                   "o redesconto, crédito de última instância que o Banco Central concede ao banco sem liquidez.",
                   "o open market, mecanismo de compra e venda de títulos públicos conduzido pelo Banco Central com os dealers.",
@@ -1035,7 +1035,7 @@
             "dif": 3
           },
           {
-            "q": "Ao montar um informativo para clientes, a analista Luciana precisou creditar corretamente a fonte de cada indicador citado no texto. Ela lembrou que o índice oficial de inflação do país, usado no sistema de metas, é apurado pelo instituto federal de estatística, que o índice geral de preços de mercado é calculado por uma fundação privada de pesquisa econômica, e que a taxa média dos depósitos interfinanceiros é divulgada pela bolsa brasileira. Calculam, respectivamente, o IPCA, o IGP-M e a Taxa DI:",
+            "q": "Ao montar um informativo para clientes, a analista Luciana precisou creditar corretamente a fonte de cada indicador citado no texto. Ela sabia que creditar um indicador à instituição errada comprometeria a credibilidade do informativo inteiro, e conferiu a autoria de cada um antes de publicar. Calculam, respectivamente, o IPCA, o IGP-M e a Taxa DI:",
             "alts": [
               "o IBGE, a FGV e a B3, cada um responsável pela apuração e divulgação do seu indicador.",
               "a FGV, o IBGE e o Banco Central, que consolida as taxas do mercado interfinanceiro diariamente.",
@@ -1087,7 +1087,7 @@
             "dif": 2
           },
           {
-            "q": "Preparando um quadro-resumo para a equipe, o supervisor Otávio listou os instrumentos de política monetária ao lado das respectivas definições e pediu que a estagiária Lívia apontasse a associação correta. Ele lembrou que o compulsório é a parcela dos depósitos retida no Banco Central, que o redesconto é o socorro de liquidez de última instância, que o open market envolve leilões de títulos públicos com os dealers e que a Selic Over é apurada no mercado, enquanto o Copom define a Selic Meta. A associação correta é:",
+            "q": "Preparando um quadro-resumo para a equipe, o supervisor Otávio listou os instrumentos de política monetária ao lado das respectivas definições e pediu que a estagiária Lívia apontasse a associação correta. Ele avisou que havia trocado de propósito o nome de alguns instrumentos pela definição de outros, e que só uma das linhas do quadro sobreviveria à conferência. A associação correta é:",
             "alts": [
               "redesconto: parcela dos depósitos captados que permanece retida junto ao Banco Central do Brasil.",
               "compulsório: crédito emergencial de última instância concedido às instituições sem liquidez.",
@@ -1323,7 +1323,7 @@
                 "dif": 2
               },
               {
-                "q": "Ao explicar o combate à inflação para o cliente Nelson, o gerente Otacílio, profissional CPA, ouviu que o Banco Central seria o dono do processo do início ao fim: escolheria o alvo de inflação e depois trabalharia para alcançá-lo. Otacílio esclareceu que o Banco Central conduz a política monetária, guarda as reservas oficiais e administra os sistemas de pagamentos, mas que a definição do alvo numérico cabe ao colegiado normativo do sistema. Entre as competências a seguir, aquela que pertence ao CMN é:",
+                "q": "Ao explicar o combate à inflação para o cliente Nelson, o gerente Otacílio, profissional CPA, ouviu que o Banco Central seria o dono do processo do início ao fim: escolheria o alvo de inflação e depois trabalharia para alcançá-lo. Otacílio esclareceu que a divisão de tarefas no sistema separa quem fixa as diretrizes de quem as executa no dia a dia, e que o erro do cliente estava em juntar as duas pontas. Entre as competências a seguir, aquela que pertence ao CMN é:",
                 "alts": [
                   "autorizar o funcionamento das instituições financeiras e cassar essa autorização quando for o caso.",
                   "ser depositário das reservas oficiais de ouro e de moeda estrangeira mantidas pelo país no exterior.",
@@ -1588,7 +1588,7 @@
                 "dif": 1
               },
               {
-                "q": "Ao comparar duas plataformas de investimento, o cliente Gilberto notou que uma se chama corretora de títulos e valores mobiliários e a outra, distribuidora. Ele perguntou a Solange, profissional CPA, se a segunda estaria impedida de executar uma ordem de compra de ações na bolsa. Solange explicou que a distinção existia no passado, quando a atuação das distribuidoras era mais restrita, mas que decisão conjunta do Banco Central e da CVM equiparou as duas figuras quanto à intermediação. Sobre CTVM e DTVM, Solange deve explicar que:",
+                "q": "Ao comparar duas plataformas de investimento, o cliente Gilberto notou que uma se chama corretora de títulos e valores mobiliários e a outra, distribuidora. Ele perguntou a Solange, profissional CPA, se a segunda estaria impedida de executar uma ordem de compra de ações na bolsa. Solange explicou que a resposta depende de uma decisão conjunta do Banco Central e da CVM sobre o alcance da atuação das distribuidoras, tomada anos depois de a distinção original ter sido criada. Sobre CTVM e DTVM, Solange deve explicar que:",
                 "alts": [
                   "a CTVM opera no ambiente de bolsa e a DTVM fica restrita ao mercado de balcão não organizado do país.",
                   "as duas figuras foram equiparadas e hoje atuam da mesma forma na intermediação de valores.",
@@ -1601,7 +1601,7 @@
                 "dif": 2
               },
               {
-                "q": "REDENÇÃO: Convidado por um colega a abrir conta em uma cooperativa de crédito, o cliente Jair procurou Mariana, profissional CPA, para entender a diferença em relação ao banco em que já era correntista. Mariana explicou que na cooperativa o cliente se torna associado, integraliza cotas de capital, vota nas assembleias e participa das sobras apuradas no exercício, e que o atendimento é dirigido a esse quadro social. Nessas condições, a cooperativa de crédito caracteriza-se como:",
+                "q": "REDENÇÃO: Convidado por um colega a abrir conta em uma cooperativa de crédito, o cliente Jair procurou Mariana, profissional CPA, para entender a diferença em relação ao banco em que já era correntista. Mariana explicou que na cooperativa o cliente se torna associado, integraliza cotas de capital, vota nas assembleias e participa das sobras apuradas no exercício. Nessas condições, a cooperativa de crédito caracteriza-se como:",
                 "alts": [
                   "instituição sem fins lucrativos, cujas operações são dirigidas ao seu quadro de associados.",
                   "sociedade anônima com fins lucrativos, aberta ao público em geral e com ações negociadas em bolsa.",
@@ -2696,11 +2696,11 @@
                 "dif": 2
               },
               {
-                "q": "Em um exercício de sala, o instrutor Ronaldo, profissional CPA, apresentou um título com prazo de 6 semestres, cupons semestrais de R$ 48,81, preço de R$ 725,85 e taxa de 11,44% ao semestre. Ele pediu que os participantes trouxessem cada fluxo a valor presente, ponderassem esses valores pelo período em que ocorrem e dividissem a soma obtida pelo preço do título. Um participante respondeu que o resultado seria igual ao prazo de vencimento. Ronaldo refez a conta no quadro. Nesse exemplo, a duration encontrada foi de:",
+                "q": "Em um exercício de sala, o instrutor Ronaldo, profissional CPA, apresentou um título com prazo de 6 semestres, cupons semestrais de R$ 48,81, preço de R$ 725,85 e taxa de 11,44% ao semestre. Ele pediu que os participantes trouxessem cada fluxo a valor presente, ponderassem esses valores pelo período em que ocorrem e dividissem a soma obtida pelo preço do título. Ronaldo pediu que cada um fechasse a própria conta antes de olhar as opções. Nesse exemplo, a duration encontrada foi de:",
                 "alts": [
                   "6,00 semestres, prazo que corresponde exatamente à data de vencimento do papel apresentado.",
                   "3,00 semestres, metade do prazo do título, proporção adotada quando existem cupons no fluxo.",
-                  "5,21 semestres, prazo médio dos fluxos ponderado pelos valores presentes de cada período.",
+                  "5,21 semestres, abaixo do vencimento porque os cupons devolvem parte do capital antes do fim.",
                   "11,44 semestres, número que apenas reproduz a taxa semestral usada no desconto dos fluxos."
                 ],
                 "c": 2,
@@ -2987,7 +2987,7 @@
             "pegadinha": "Título público do Tesouro Direto NÃO é liquidado no SELIC, e sim na clearing da B3.",
             "questoes": [
               {
-                "q": "Aposentado, o cliente Ubirajara comprou títulos públicos pelo Tesouro Direto usando o aplicativo do banco e ficou em dúvida sobre onde ficam guardados os papéis que adquiriu. O gerente Élcio, profissional CPA, explicou que os títulos são escriturais e que a guarda depende do ambiente de negociação: as operações do mercado institucional, entre bancos e fundos, ficam em um sistema mantido pelo Banco Central, enquanto as compras feitas por pessoas físicas na plataforma do Tesouro têm custódia e liquidação em outra estrutura. No caso de Ubirajara, a custódia e a liquidação ocorrem:",
+                "q": "Aposentado, o cliente Ubirajara comprou títulos públicos pelo Tesouro Direto usando o aplicativo do banco e ficou em dúvida sobre onde ficam guardados os papéis que adquiriu. O gerente Élcio, profissional CPA, explicou que os títulos são escriturais e que a guarda depende do ambiente em que a compra foi feita, e não do papel adquirido. No caso de Ubirajara, a custódia e a liquidação ocorrem:",
                 "alts": [
                   "no Selic, sistema do Banco Central que registra os títulos públicos do mercado institucional.",
                   "na clearing da B3, estrutura que atende as operações realizadas pelo Tesouro Direto.",
@@ -3080,7 +3080,7 @@
                 "dif": 2
               },
               {
-                "q": "REDENÇÃO: Ao comentar a quebra de um banco estrangeiro noticiada pela imprensa, o cliente Anselmo perguntou ao gerente Sidney, profissional CPA, por que autoridades de vários países se mobilizaram tão rapidamente. Sidney explicou que a preocupação não era a perda de um investidor específico nem a oscilação de um título, mas a possibilidade de a dificuldade de uma instituição relevante contaminar as demais, em efeito dominó capaz de travar o crédito e os pagamentos. O risco sistêmico pode ser definido como:",
+                "q": "REDENÇÃO: Ao comentar a quebra de um banco estrangeiro noticiada pela imprensa, o cliente Anselmo perguntou ao gerente Sidney, profissional CPA, por que autoridades de vários países se mobilizaram tão rapidamente. Sidney explicou que o que tirava o sono das autoridades não era o tamanho da perda de quem tinha dinheiro naquele banco, e sim o que viria depois dela. O risco sistêmico pode ser definido como:",
                 "alts": [
                   "o risco de o investidor perder dinheiro em uma aplicação financeira específica da carteira.",
                   "o risco de variação da taxa de juros afetar o preço de um título de renda fixa prefixado no mercado.",
@@ -3278,7 +3278,7 @@
             "dif": 2
           },
           {
-            "q": "Durante uma revisão, o instrutor Emerson pediu à turma que separasse as ferramentas de estabilidade do sistema daquelas que reparam o prejuízo de um investidor específico. Lembrou que o compulsório, as linhas financeiras de liquidez e o acordo de Basileia atuam sobre o conjunto do sistema financeiro, enquanto existe um mecanismo mantido pela bolsa que ressarce, em até R$ 200 mil, o cliente prejudicado por ação ou omissão de um participante na intermediação. O mecanismo que protege o investidor individual é:",
+            "q": "Durante uma revisão, o instrutor Emerson pediu à turma que separasse as ferramentas de estabilidade do sistema daquelas que socorrem um cliente específico, um de cada vez. Um aluno perguntou qual delas ele poderia acionar em nome próprio, sozinho, caso uma corretora deixasse de repassar o dinheiro de uma venda que ele havia ordenado. A ferramenta que atende esse pedido é:",
             "alts": [
               "o depósito compulsório, parcela dos depósitos retida pelo Banco Central para conter a liquidez.",
               "as linhas financeiras de liquidez, LLI e LLT, oferecidas pelo Banco Central às instituições.",

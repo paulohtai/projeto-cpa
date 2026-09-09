@@ -411,7 +411,7 @@
                 "dif": 1
               },
               {
-                "q": "REDENÇÃO: Ao expor em uma palestra as seis etapas do processo de organização das finanças pessoais, o profissional CPA Alberto foi interrompido por um ouvinte que queria saber qual instituição do país adota essa metodologia e concede a certificação identificada pela sigla CFP, muito pedida nos anúncios de vaga. Alberto respondeu de pronto, lembrando que o selo nasceu de um padrão internacional e que, no Brasil, quem o concede é uma associação criada pelos próprios profissionais da área. A certificação CFP é concedida por:",
+                "q": "REDENÇÃO: Ao expor em uma palestra as seis etapas do processo de organização das finanças pessoais, o profissional CPA Alberto foi interrompido por um ouvinte que queria saber qual instituição do país adota essa metodologia e concede a certificação identificada pela sigla CFP, muito pedida nos anúncios de vaga. Alberto respondeu de pronto, lembrando que o selo nasceu de um padrão internacional e que cada país tem uma única entidade licenciada para concedê-lo. A certificação CFP é concedida por:",
                 "alts": [
                   "a ANBIMA, entidade que elabora e concede as certificações CPA-10, CPA-20 e CEA no mercado nacional.",
                   "a PLANEJAR, Associação Brasileira de Planejamento Financeiro, responsável pelo CFP.",
@@ -643,7 +643,7 @@
             "dif": 2
           },
           {
-            "q": "Aos 62 anos e recém-aposentado, o cliente Arnaldo procurou a gerente Sueli, profissional CPA, para organizar saques mensais a partir da carteira acumulada ao longo da vida e, na mesma conversa, tratar da destinação dos bens aos herdeiros. Sueli lembrou que o ciclo de vida do investidor prevê uma etapa final, na qual o patrimônio deixa de ser formado e passa a custear o padrão de vida da pessoa, com a organização da herança ganhando peso na conversa. Nessa classificação, Arnaldo está na fase de:",
+            "q": "Aos 62 anos e recém-aposentado, o cliente Arnaldo procurou a gerente Sueli, profissional CPA, para organizar saques mensais a partir da carteira acumulada ao longo da vida e, na mesma conversa, tratar da destinação dos bens aos herdeiros. Sueli lembrou que o ciclo de vida do investidor tem quatro etapas e que a posição de Arnaldo em uma delas orienta tanto a carteira quanto a conversa sobre herança. Nessa classificação, Arnaldo está na fase de:",
             "alts": [
               "distribuição, fase de conversão do patrimônio em renda mensal para o custeio da vida.",
               "preservação, fase de proteção do patrimônio na aproximação da data prevista de aposentadoria.",
@@ -925,7 +925,7 @@
             "dif": 2
           },
           {
-            "q": "Em uma reunião de atualização, o supervisor Nelson, profissional CPA, ouviu de dois gerentes respostas diferentes sobre qual norma fixa o dever de verificar a adequação dos produtos e também define quem é investidor qualificado e quem é investidor profissional. Um deles citou a norma dos fundos de investimento; o outro citou a lei que trata dos crimes contra o mercado de capitais. Nelson esclareceu que ambas cuidam de outros assuntos. A norma que regula esses dois temas é a:",
+            "q": "Em uma reunião de atualização, o supervisor Nelson, profissional CPA, ouviu de dois gerentes respostas diferentes sobre qual norma fixa o dever de verificar a adequação dos produtos e também define quem é investidor qualificado e quem é investidor profissional. Nelson pediu que os dois conferissem a resposta no texto da norma antes da reunião seguinte, adiantando que os dois temas estão no mesmo diploma. A norma que regula esses dois temas é a:",
             "alts": [
               "Resolução CVM 175, que consolida as regras de constituição e funcionamento dos fundos de investimento.",
               "Lei 6.385/76, que criou a CVM e tipificou os crimes praticados contra o mercado de capitais.",
@@ -1240,9 +1240,9 @@
                 "dif": 1
               },
               {
-                "q": "REDENÇÃO: Ao negociar uma LCI no mercado secundário, o cliente Anselmo percebeu que a instituição comprou o papel por um preço e o revendeu a ele por outro, ficando com a diferença apurada. Ele perguntou à assessora Tatiane, profissional CPA, se esse ganho corresponde à devolução de parte da taxa de administração feita pelo gestor ao distribuidor. Tatiane explicou que se trata de outro mecanismo, comum na renda fixa. Esse ganho do distribuidor é o:",
+                "q": "REDENÇÃO: Ao negociar uma LCI no mercado secundário, o cliente Anselmo percebeu que a instituição comprou o papel por um preço e o revendeu a ele por outro, ficando com a diferença apurada. Ele perguntou à assessora Tatiane, profissional CPA, qual é o nome dessa remuneração e por que ela não aparece destacada em nenhuma linha do extrato. Esse ganho do distribuidor é o:",
                 "alts": [
-                  "spread, diferença entre o preço de compra e o preço de venda do ativo negociado.",
+                  "spread, remuneração embutida no próprio preço do papel, e não cobrada em rubrica separada.",
                   "rebate, parcela da taxa de administração devolvida pelo gestor ao canal de distribuição do fundo.",
                   "extrato trimestral, documento que informa ao cliente a remuneração obtida no período apurado.",
                   "custo efetivo total, indicador que reúne os encargos e os tributos incidentes sobre a operação."
@@ -1669,10 +1669,10 @@
                 "dif": 3
               },
               {
-                "q": "REDENÇÃO: Ao mapear clientes pessoa jurídica sujeitos a diligência reforçada, a analista Vanderleia, profissional CPA, listou joalherias, empresários de artistas e atletas de grande expressão e transportadoras de valores, por movimentarem ativos de alto valor ou numerário em espécie. Um colega sugeriu incluir uma rede de escolas de ensino básico atendida pela agência, por ter faturamento elevado. Vanderleia consultou o rol legal de pessoas obrigadas. O segmento que permanece fora desse rol é o de:",
+                "q": "REDENÇÃO: Ao mapear clientes pessoa jurídica sujeitos a diligência reforçada, a analista Vanderleia, profissional CPA, recebeu de um colega uma lista com quatro segmentos atendidos pela agência, todos de faturamento elevado, para conferir um a um contra o rol legal de pessoas obrigadas. O segmento que permanece fora desse rol é o de:",
                 "alts": [
                   "empresas que comercializam joias, pedras preciosas e metais, por lidarem com ativos de alto valor.",
-                  "escolas de ensino básico, cuja atividade educacional está fora da lista legal de obrigados.",
+                  "escolas de ensino básico, que não constam do rol de pessoas obrigadas da lei de lavagem.",
                   "empresários de artistas e atletas de grande expressão, que movimentam contratos de valor elevado.",
                   "empresas de transporte de valores, pela circulação física de numerário que realizam no país."
                 ],
@@ -2055,11 +2055,11 @@
             "pegadinha": "Spoofing e layering são trocados o tempo todo. E lembre: o repasse de informação privilegiada é ilícito mesmo que quem repassou não tenha lucrado nada.",
             "questoes": [
               {
-                "q": "Ao acompanhar o livro de ofertas de uma ação de liquidez média, o supervisor de mesa Anderson, profissional CPA, notou que um mesmo participante inseriu ordens escalonadas em vários níveis de preço, em pequenos lotes, simulando a presença de diversos investidores interessados, e cancelou o conjunto assim que o preço reagiu. Anderson observou que uma única ordem falsa de grande volume caracterizaria outra prática. A conduta descrita é de:",
+                "q": "Ao acompanhar o livro de ofertas de uma ação de liquidez média, o supervisor de mesa Anderson, profissional CPA, notou que um mesmo participante inseriu ordens escalonadas em vários níveis de preço, em pequenos lotes, simulando a presença de diversos investidores interessados, e cancelou o conjunto assim que o preço reagiu. Anderson pediu à equipe que classificasse a conduta antes de acionar o compliance. A conduta descrita é de:",
                 "alts": [
                   "spoofing, caracterizado pela inserção de uma única ordem falsa de grande volume no livro de ofertas.",
                   "churning, caracterizado pelo giro excessivo da carteira do cliente em benefício da corretagem.",
-                  "layering, pela criação de camadas de ordens em vários preços para simular interesse no papel.",
+                  "layering, modalidade de manipulação do livro de ofertas vedada pela regulação da CVM.",
                   "money pass, transferência de recursos entre investidores por meio de operações previamente combinadas."
                 ],
                 "c": 2,
@@ -2094,7 +2094,7 @@
                 "dif": 1
               },
               {
-                "q": "REDENÇÃO: Após identificar tratamento desigual entre clientes na alocação de ordens, o comitê de conduta pediu à analista Cristina, profissional CPA, um levantamento das sanções administrativas aplicáveis à prática não equitativa. Um diretor citou o teto de R$ 20 milhões, que pertence às sanções de prevenção à lavagem de dinheiro. Cristina explicou que aqui a multa parte do dobro do valor da operação irregular. O teto dessa multa é de:",
+                "q": "REDENÇÃO: Após identificar tratamento desigual entre clientes na alocação de ordens, o comitê de conduta pediu à analista Cristina, profissional CPA, um levantamento das sanções administrativas aplicáveis à prática não equitativa. Um diretor disse de memória um valor que Cristina não conseguiu confirmar, e o levantamento foi refeito a partir do texto da lei. O teto dessa multa é de:",
                 "alts": [
                   "R$ 20 milhões, mesmo teto adotado nas sanções administrativas de prevenção à lavagem de dinheiro.",
                   "R$ 50 milhões, calculado a partir do dobro do valor da operação irregular praticada.",
@@ -2596,7 +2596,7 @@
                 "dif": 2
               },
               {
-                "q": "REDENÇÃO: Durante a revisão do conteúdo, o candidato Alisson confundiu quatro normas: uma trata do sigilo das operações financeiras, outra da autonomia do Banco Central, uma terceira da liberdade econômica e a última disciplina a gestão fiscal dos entes públicos, com limites de pessoal e de dívida. A instrutora Marlene, profissional CPA, pediu que ele apontasse qual delas disciplina a gestão fiscal dos entes públicos. A Lei de Responsabilidade Fiscal corresponde à:",
+                "q": "REDENÇÃO: Durante a revisão do conteúdo, o candidato Alisson confundiu quatro normas: uma trata do sigilo das operações financeiras, outra da autonomia do Banco Central, uma terceira da liberdade econômica e a última disciplina a gestão fiscal dos entes públicos. A instrutora Marlene, profissional CPA, pediu que ele identificasse o número e o ano da norma fiscal. A Lei de Responsabilidade Fiscal corresponde à:",
                 "alts": [
                   "Lei Complementar 105/2001, que disciplina o sigilo das operações das instituições financeiras.",
                   "Lei 13.874/2019, que trata da liberdade econômica e da presunção de boa-fé do particular na atividade.",
@@ -2924,7 +2924,7 @@
                 "dif": 2
               },
               {
-                "q": "Um fundo estruturado com duas classes de cotas precisa deliberar sobre alteração da política de investimento que atinge apenas os cotistas de uma delas, sem qualquer efeito sobre a outra classe. O administrador consultou a analista Rosana, profissional CPA, sobre o tipo de assembleia adequado. Ela lembrou que assuntos restritos a uma classe ou subclasse de cotas são tratados em reunião própria daqueles cotistas. Essa reunião é a:",
+                "q": "Um fundo estruturado com duas classes de cotas precisa deliberar sobre alteração da política de investimento que atinge apenas os cotistas de uma delas, sem qualquer efeito sobre a outra classe. O administrador consultou a analista Rosana, profissional CPA, sobre o tipo de assembleia adequado. Ela lembrou que a Resolução CVM 175 prevê mais de um tipo de assembleia e que o critério de escolha é o alcance da matéria posta em deliberação. Essa reunião é a:",
                 "alts": [
                   "assembleia geral ordinária, realizada anualmente para deliberar sobre as demonstrações contábeis.",
                   "assembleia especial de cotistas, que reúne apenas os cotistas da classe atingida.",
@@ -3038,7 +3038,7 @@
             "alts": [
               "crédito, pela eventual inadimplência dos inquilinos que ocupam os imóveis da carteira do fundo.",
               "mercado, pela oscilação do preço de referência divulgado para as cotas negociadas em bolsa.",
-              "liquidez, pela falta de contraparte disposta a comprar as cotas colocadas à venda.",
+              "liquidez, o risco de não converter o ativo em dinheiro no prazo e no preço desejados.",
               "contraparte, pela ausência de câmara que assegure a liquidação financeira das operações fechadas."
             ],
             "c": 2,

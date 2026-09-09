@@ -165,9 +165,11 @@ node scripts/verificar.js          # ESTRUTURA e DADOS (~70 checagens)
 node scripts/testar.js             # EXECUTA o código (102 testes)
 node scripts/conferir-contraste.js # ACESSIBILIDADE (WCAG 2.1)
 node scripts/conferir-numeros.js   # CONTEÚDO contra fonte primária
+node scripts/conferir-vazamento.js # a questão entrega a própria resposta?
+node scripts/testar-tvm.js         # matemática financeira das ferramentas
 ```
 
-Os quatro têm de passar antes de publicar.
+Os seis têm de passar antes de publicar.
 
 **`verificar.js`** olha o dado parado: contagens, IDs, gabaritos válidos,
 viés de comprimento, vazamento, eliminação por exaustão, distribuição de
@@ -193,6 +195,114 @@ tabelas regressivas, PGBL, come-cotas, IOF, LCI/LCA/LCD, debênture
 incentivada, COE, Selic Over, suitability) e checa se todo número afirmado
 tem lastro na apostila — descontando resultado de conta, número de lei e
 dado fornecido pelo próprio enunciado.
+
+**`conferir-vazamento.js`** pergunta, questão por questão, se dá para acertar
+sem saber a matéria. Ver a seção abaixo: ele existe porque a versão anterior
+desta checagem deu o banco por limpo e o Paulo achou o contra-exemplo em dois
+minutos.
+
+---
+
+## O detector de vazamento, e por que o primeiro não servia
+
+`verificar.js` já trazia uma checagem de vazamento desde o começo. Ela mede a
+**média do banco**: em quantos por cento das questões o gabarito é a
+alternativa que mais repete palavras do enunciado. Nas 872, deu 9% contra 34%
+do caderno oficial, e o veredito impresso era *"vazamento de resposta dentro
+da régua do caderno oficial"*.
+
+Em 09/09/2026 o Paulo abriu uma questão e escreveu: *"está muito fácil, a
+resposta está literalmente na pergunta"*. Era esta:
+
+> …existe um mecanismo mantido pela bolsa que **ressarce**, em até **R$ 200
+> mil**, o cliente **prejudicado** por ação ou omissão de um participante.
+> O mecanismo que protege o investidor individual é:
+>
+> ✔ o Mecanismo de **Ressarcimento** de **Prejuízos**, que cobre até **R$ 200
+> mil** por investidor lesado.
+
+Ele estava certo, e a auditoria automática de 872 questões tinha chamado isso
+de limpo. Três motivos concretos:
+
+1. **O regex de token era `/[a-z]{4,}/`.** Não casa dígito. O `200` — o dado
+   mais entregador da questão inteira — não existia para o detector. E `mil`
+   tem três letras, abaixo do corte.
+2. **Não havia radical.** `ressarce` e `Ressarcimento` eram palavras
+   diferentes. `prejudicado` e `Prejuízos` também.
+3. **Ele só olhava a média.** Uma questão podre entre 872 boas não move média
+   nenhuma. Média serve para achar viés sistemático e é péssima para achar a
+   questão individual quebrada. Eram duas perguntas diferentes, e eu só tinha
+   respondido uma.
+
+### O que o v2 faz
+
+Três regras, aplicadas **uma questão por vez**:
+
+| | regra | por quê |
+|---|---|---|
+| R1 | **palavra distintiva** — radical que aparece no enunciado, no gabarito e em **nenhum** distrator | é o que o aluno usa: procura a palavra rara e marca quem a repete. Se o radical também está nos distratores, ele não distingue nada |
+| R2 | **número distintivo** — mesmo teste, com valores de qualquer tamanho (peso 2) | pior que a palavra: não exige nem ler a frase, só bater o algarismo |
+| R3 | **sobreposição relativa** — fração do gabarito que veio do enunciado, menos a média dos distratores | pega o caso difuso, em que nenhum termo é exclusivo mas o gabarito inteiro é paráfrase da cena |
+
+O radical é o prefixo de 5 letras (`preju` = `preju`, `ressa` = `ressa`).
+É grosseiro e produz falso positivo — `constituição` e `constante` viram
+`const`. Isso é aceitável porque o erro é **simétrico**: infla gabarito e
+distratores igualmente, e as três regras são comparativas.
+
+### O corte não foi escolhido, foi medido
+
+O script parseia as **41 questões do caderno oficial da ANBIMA** e roda nelas
+exatamente as mesmas três regras. O corte é o **percentil 90 do oficial**:
+o que reprova é o que entrega mais resposta do que a própria banca entrega
+nos seus 10% piores. Sem isso, qualquer corte seria chute — toda questão bem
+escrita repete algum termo do enunciado no gabarito.
+
+Vale registrar o que a medição do oficial mostrou, porque é a resposta à
+pergunta que o Paulo fez (*"há questões desse nível no exame?"*): **sim, a
+banca também faz isso.** Quatro das 41 ficam acima do próprio p90. A pior
+(carga 10,57) descreve as parcelas e o CET das propostas e o gabarito
+devolve os mesmos números. Duas outras são paráfrase quase literal da cena.
+Ou seja: existe questão fácil no exame — o edital prevê 25% de fáceis — e
+existe questão da banca com o defeito. O que não dá é usar isso como teto.
+
+### Resultado
+
+| | antes | depois |
+|---|---|---|
+| acima do corte | 39 de 872 (4,5%) | 4 de 872 (0,5%) |
+| dessas, vazamento real | 36 | **0** |
+| dessas, questão de cálculo | 3 | 4 |
+| carga média | 1,17 | 1,02 |
+| carga máxima | 8,19 | 7,03 |
+
+As "questões de cálculo" não são varridas para debaixo do tapete: são as em
+que o enunciado **precisa** dar os números e o gabarito **precisa** usá-los
+(payback, juros simples, PIB pela ótica da demanda). O script as separa e as
+conta em linha própria, em vez de escondê-las do relatório.
+
+### Como as 36 foram corrigidas
+
+`scripts/corrigir-vazamento-v2.js`, com **48 trocas de texto**, todas
+declaradas no próprio arquivo com o motivo. **Nenhuma muda qual alternativa é
+a correta** — o índice `c` não é tocado em nenhuma questão, porque o Paulo já
+tem tentativas de exame gravadas e mexer no gabarito reescreveria prova
+antiga. Dois padrões:
+
+- **P1 · o enunciado explicava demais.** O personagem "lembrava" a definição
+  do conceito que a pergunta pedia em seguida. Cortada a definição, mantida a
+  cena. Foi o caso da maioria.
+- **P2 · o gabarito ecoava o enunciado.** A justificativa depois da vírgula
+  era paráfrase da última frase da cena. Reescrita para **acrescentar**
+  informação — um limite, uma norma, uma consequência — em vez de repetir.
+
+Em oito questões apareceu junto o defeito de **eliminação por exaustão**: o
+enunciado descartava explicitamente um ou dois distratores (*"um diretor
+citou o teto de R$ 20 milhões, que pertence às sanções de lavagem"*). Esses
+trechos saíram também.
+
+O `verificar.js` ganhou um comentário no bloco antigo dizendo o que ele mede
+e o que ele **não** mede, para que ninguém volte a ler "dentro da régua" como
+"o banco está limpo".
 
 ---
 

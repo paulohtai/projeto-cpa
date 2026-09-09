@@ -293,7 +293,22 @@ colisao === 0 ? ok("nenhum exemplo repete enunciado de questão (não entrega ga
   }
 }
 
-// 6g2. VAZAMENTO DE RESPOSTA: o enunciado não pode entregar o gabarito.
+// 6g2. VAZAMENTO DE RESPOSTA — MÉDIA DO BANCO.
+//
+// ATENÇÃO, e isto custou caro: o que este bloco mede é a MÉDIA. Ele responde
+// "o banco inteiro tende a entregar a resposta?" e não "existe alguma questão
+// que entrega?". São perguntas diferentes, e a segunda é a que importa para
+// quem está respondendo uma questão por vez.
+//
+// Em 09/09/2026 este bloco disse "dentro da régua do caderno oficial" com 36
+// questões podres no banco — inclusive uma cujo enunciado trazia "ressarce,
+// em até R$ 200 mil, o cliente prejudicado" e cujo gabarito era "Mecanismo de
+// Ressarcimento de Prejuízos, que cobre até R$ 200 mil". Ele não viu porque
+// seu regex de token é /[a-z]{4,}/: não casa dígito nenhum, e não tem radical.
+//
+// A média continua valendo (pega viés sistemático, que a inspeção caso a caso
+// não pega). Mas quem responde por questão individual é o
+// scripts/conferir-vazamento.js. Rode os dois.
 // Régua medida nas 41 questões do caderho oficial: lá o gabarito é a
 // alternativa que mais repete palavras do enunciado em 34% dos casos, com
 // diferença média de sobreposição de +0,038. Acima disso, a questão vira

@@ -186,7 +186,7 @@
                 "dif": 2
               },
               {
-                "q": "Ao assumir a área de compliance de uma financeira, Tarcísio, profissional CPA, encontrou duas exigências distintas do regulador bancário que a equipe tratava como se fossem a mesma coisa. A primeira é o documento aprovado pela alta administração que registra as diretrizes que a instituição observa, nos negócios e na relação com terceiros, quanto ao meio ambiente, às pessoas e ao clima. A segunda é o relatório de riscos, de formato uniforme e periodicidade fixa. Tarcísio explicou que a sigla PRSAC designa a primeira delas, isto é, a:",
+                "q": "Ao assumir a área de compliance de uma financeira, Tarcísio, profissional CPA, encontrou duas exigências distintas do regulador bancário que a equipe tratava como se fossem a mesma coisa. A primeira é o documento aprovado pela alta administração que registra as diretrizes de conduta socioambiental observadas nos negócios e na relação com terceiros. A segunda é o relatório de riscos, de formato uniforme e periodicidade fixa. Tarcísio explicou que a sigla PRSAC designa a primeira delas, isto é, a:",
                 "alts": [
                   "Política de Responsabilidade Social, Ambiental e Climática, exigida pelo CMN dos regulados.",
                   "Prestação de Relatórios Setoriais de Ativos Certificados, entregue à CVM ao fim de cada exercício.",
