@@ -172,7 +172,11 @@ const useRevelar = (dep) => {
     // React é briga que a decoração perde.
     const revelar = (el) => el.setAttribute("data-on", "1");
     const alvos = [...document.querySelectorAll(".rv:not([data-on])")];
-    if (!alvos.length) { raiz.removeAttribute("data-rv"); return; }
+    // Sem alvos, apenas sai — NÃO desarma. Na primeira versão o efeito
+    // rodava antes de o conteúdo existir (o app ainda carregava do disco),
+    // encontrava zero alvos, removia a marca e nunca mais voltava, porque a
+    // dependência era só a tela. Resultado: nenhuma revelação, nunca.
+    if (!alvos.length) return;
 
     // o que JÁ está na tela é revelado de imediato, sem esperar o observador
     const daDobra = [], abaixo = [];

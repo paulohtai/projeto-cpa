@@ -403,7 +403,11 @@ const useRevelar=dep=>{useEffect(()=>{const raiz=document.documentElement;const 
 if(!podeAnimar){raiz.removeAttribute("data-rv");return;}// `data-on` em vez de classe: o React não gerencia esse atributo, então
 // não o apaga num re-render. Mexer no className de um nó controlado pelo
 // React é briga que a decoração perde.
-const revelar=el=>el.setAttribute("data-on","1");const alvos=[...document.querySelectorAll(".rv:not([data-on])")];if(!alvos.length){raiz.removeAttribute("data-rv");return;}// o que JÁ está na tela é revelado de imediato, sem esperar o observador
+const revelar=el=>el.setAttribute("data-on","1");const alvos=[...document.querySelectorAll(".rv:not([data-on])")];// Sem alvos, apenas sai — NÃO desarma. Na primeira versão o efeito
+// rodava antes de o conteúdo existir (o app ainda carregava do disco),
+// encontrava zero alvos, removia a marca e nunca mais voltava, porque a
+// dependência era só a tela. Resultado: nenhuma revelação, nunca.
+if(!alvos.length)return;// o que JÁ está na tela é revelado de imediato, sem esperar o observador
 const daDobra=[],abaixo=[];alvos.forEach(el=>{const r=el.getBoundingClientRect();(r.top<window.innerHeight*0.95&&r.bottom>0?daDobra:abaixo).push(el);});raiz.setAttribute("data-rv","1");// agora sim: esconder é seguro
 requestAnimationFrame(()=>daDobra.forEach(revelar));let obs=null;if(abaixo.length){obs=new IntersectionObserver(entradas=>{entradas.forEach(e=>{if(e.isIntersecting){revelar(e.target);obs.unobserve(e.target);}});},{rootMargin:"0px 0px -6% 0px",threshold:0.05});abaixo.forEach(a=>obs.observe(a));}// Rede de segurança final: 1,2 s depois, o que ainda estiver escondido
 // é revelado de qualquer jeito. Melhor um efeito perdido do que uma
@@ -929,7 +933,9 @@ const[confirmando,setConfirmando]=useState(false);const[mapaAberto,setMapaAberto
 // `useRevelar(tela)` reobserva a cada troca de tela, porque o conteúdo
 // muda inteiro. `useAmbiente()` instala UM listener de ponteiro e UM de
 // scroll para o app todo, os dois passivos.
-useRevelar(tela);useAmbiente();const xpMostrado=useContador(xp);// no exame não há aurora nem revelação: a tela é austera de propósito
+// a chave inclui `loaded`: antes disso a tela ainda não tem conteúdo,
+// e o efeito precisa rodar de novo quando ele aparece
+useRevelar(tela+"|"+loaded);useAmbiente();const xpMostrado=useContador(xp);// no exame não há aurora nem revelação: a tela é austera de propósito
 const noExameAgora=tela==="prova";// aplica um estado inteiro (vindo do disco ou da nuvem) na tela
 const aplicarEstado0=s=>{if(!s)return;setXp(s.xp||0);setCombo(s.combo||0);setStats(s.stats||{});setFeitos(s.feitos||{});setBossBest(s.bossBest||{});setErrados(s.errados||[]);setFavs(s.favs||[]);setPressao(!!s.pressao);setSom(s.som!==false);setRev(s.rev||{});if(s.ferr)setFerr(s.ferr);if(s.syncUrl!==undefined)setSyncUrl(s.syncUrl||"");if(s.syncCod!==undefined)setSyncCod(s.syncCod||"");};const aplicarEstado=s=>aplicarEstado0(migrar(s));useEffect(()=>{(async()=>{let local=null;try{const r=await window.storage.get(SAVE_KEY);if(r&&r.value){local=migrar(JSON.parse(r.value));aplicarEstado(local);}}catch(e){// dado ilegível não é apagado: o app segue vazio e avisa, para que o
 // backup possa ser restaurado por cima em vez de sumir em silêncio.

@@ -1026,7 +1026,9 @@ export default function ProjetoCPA() {
   // `useRevelar(tela)` reobserva a cada troca de tela, porque o conteúdo
   // muda inteiro. `useAmbiente()` instala UM listener de ponteiro e UM de
   // scroll para o app todo, os dois passivos.
-  useRevelar(tela);
+  // a chave inclui `loaded`: antes disso a tela ainda não tem conteúdo,
+  // e o efeito precisa rodar de novo quando ele aparece
+  useRevelar(tela + "|" + loaded);
   useAmbiente();
   const xpMostrado = useContador(xp);
   // no exame não há aurora nem revelação: a tela é austera de propósito

@@ -736,12 +736,18 @@ secao("6g. CAMADA VISUAL — decoração não pode esconder conteúdo");
     /if \(!podeAnimar\) \{ raiz\.removeAttribute\("data-rv"\); return; \}/.test(s));
   t("com movimento reduzido, nem arma o modo escondido",
     /const podeAnimar = typeof IntersectionObserver !== "undefined" &&/.test(s) &&
-    /prefers-reduced-motion: reduce"\)\.matches\)/.test(s) &&
+    /!\(window\.matchMedia && window\.matchMedia\("\(prefers-reduced-motion: reduce\)"\)\.matches\)/.test(s) &&
     /if \(!podeAnimar\)/.test(s));
   t("há rede de segurança que revela tudo depois de 1,2 s",
     /document\.querySelectorAll\("\.rv:not\(\[data-on\]\)"\)\.forEach\(revelar\);\s*\n\s*\}, 1200\)/.test(s));
   t("o que já está na dobra é revelado sem esperar o observador",
     /requestAnimationFrame\(\(\) => daDobra\.forEach\(revelar\)\)/.test(s));
+  // BUG REAL: o efeito rodava antes de o conteúdo existir, achava zero
+  // alvos, DESARMAVA a marca e nunca mais voltava — nenhuma revelação.
+  t("sem alvos o efeito apenas sai, não desarma a marca",
+    /if \(!alvos\.length\) return;/.test(s) && !/if \(!alvos\.length\) \{ raiz\.removeAttribute/.test(s));
+  t("a revelação roda de novo quando o conteúdo carrega",
+    /useRevelar\(tela \+ "\|" \+ loaded\)/.test(s));
   // usar data-attribute em vez de className: o React não apaga o que não gerencia
   t("a revelação usa data-on, não classe (o React reescreveria a classe)",
     /el\.setAttribute\("data-on", "1"\)/.test(s) && !/classList\.add\("on"\)/.test(s));
