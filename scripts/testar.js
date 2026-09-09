@@ -487,6 +487,165 @@ secao("6d. PAUSAR E RETOMAR A PROVA");
 }
 
 // ================================================================
+secao("6e. FERRAMENTAS — HP-12C (RPN e financeiras)");
+{
+  const hpNovo = extrai("hpNovo", "\n});");
+  global.hpX = extrai("hpX", ");\n");
+  global.hpLift = extrai("hpLift", "});\n");
+  global.hpDrop = extrai("hpDrop", "});\n");
+  global.hpFecharEntrada = extrai("hpFecharEntrada", ");\n");
+  global.hpFecharEntradaSeNecessario = extrai("hpFecharEntradaSeNecessario", ";\n");
+  const hpDigito = global.hpDigito = extrai("hpDigito", "\n};");
+  const hpEnter = global.hpEnter = extrai("hpEnter", "\n};");
+  const hpBinaria = global.hpBinaria = extrai("hpBinaria", "\n};");
+  const hpUnaria = global.hpUnaria = extrai("hpUnaria", "\n};");
+  const hpPorcento = global.hpPorcento = extrai("hpPorcento", "\n};");
+  global.tvmFator = extrai("tvmFator", "\n};");
+  const tvmResolver = global.tvmResolver = extrai("tvmResolver", "\n};");
+  const hpFin = extrai("hpFin", "\n};");
+  const hpLimpar = extrai("hpLimpar", "\n};");
+  const hpVisor = extrai("hpVisor", "\n};");
+
+  // teclar uma sequência, como numa máquina de verdade
+  const teclar = (seq) => {
+    let m = hpNovo();
+    seq.split(" ").forEach((k) => {
+      if (/^[0-9.]+$/.test(k)) k.split("").forEach((d) => { m = hpDigito(m, d); });
+      else if (k === "E") m = hpEnter(m);
+      else if ("+-*/^".includes(k)) m = hpBinaria(m, k);
+      else if (k === "%") m = hpPorcento(m, "%");
+      else if (k === "d%") m = hpPorcento(m, "d%");
+      else if (k === "chs") m = hpUnaria(m, "chs");
+      else if (["n", "i", "pv", "pmt", "fv"].includes(k)) m = hpFin(m, k);
+      else m = hpUnaria(m, k);
+    });
+    return m;
+  };
+  const val = (seq) => { const m = teclar(seq); return m.digitando ? parseFloat(m.entrada) : m.x; };
+  const perto = (nome, seq, esp, tol) => t(`${nome}  [${seq}]`, Math.abs(val(seq) - esp) <= (tol || 1e-6), String(val(seq)));
+
+  perto("soma em RPN", "12 E 5 +", 17);
+  perto("subtração respeita a ordem y−x", "12 E 5 -", 7);
+  perto("divisão respeita a ordem y÷x", "12 E 5 /", 2.4);
+  perto("encadeia sem parênteses: (2+3)×4", "2 E 3 + 4 *", 20);
+  perto("potência", "2 E 10 ^", 1024);
+  perto("raiz", "144 sqrt", 12);
+  perto("inverso", "4 1/x", 0.25);
+  perto("troca de sinal", "50 chs", -50);
+  // BUG REAL: CHS fechava a entrada, e a tecla financeira seguinte tentava
+  // RESOLVER em vez de GRAVAR. "1000 CHS PV" é o gesto mais comum da HP.
+  t("CHS no meio da digitação não encerra a entrada",
+    hpDigito(hpDigito(hpDigito(hpNovo(), "5"), "0"), "0") && hpUnaria(hpDigito(hpNovo(), "5"), "chs").digitando === true);
+  t("CHS duas vezes volta ao positivo",
+    hpUnaria(hpUnaria(hpDigito(hpNovo(), "7"), "chs"), "chs").entrada === "7");
+  // o clássico da HP: a pilha NÃO cai depois do %, então dá para subtrair
+  perto("1000 menos 10%", "1000 E 10 % -", 900);
+  perto("a tecla % devolve a PARCELA, não o total", "1000 E 10 %", 100);
+  perto("variação percentual Δ%", "200 E 250 d%", 25);
+  // ENTER desliga o lift: o próximo número substitui X
+  {
+    const m = teclar("5 E 3");
+    t("depois de ENTER, o número digitado não empurra a pilha", m.y === 5, `y=${m.y}`);
+  }
+  {
+    const m = teclar("1 E 2 E 3 E 4");
+    t("a pilha tem só 4 níveis: o mais antigo cai fora", m.t === 2 || m.z === 2, `z=${m.z} t=${m.t}`);
+  }
+  t("dividir por zero dá erro, não Infinity", teclar("5 E 0 /").erro === "Error 0");
+  t("raiz de negativo dá erro", teclar("9 chs sqrt").erro === "Error 0");
+  t("erro não vira número silencioso", hpVisor(teclar("5 E 0 /")) === "Error 0");
+
+  // financeiras pelo teclado
+  {
+    const m = teclar("360 n 1 i 100000 pv pmt");
+    t("360 n · 1 i · 100000 PV · PMT → −1.028,61", Math.abs(m.x - (-1028.6125)) < 0.01, String(m.x));
+    t("o registrador PMT ficou gravado", Math.abs(m.fin.pmt - m.x) < 1e-9);
+  }
+  {
+    const m = teclar("12 n 1 i 1000 chs pv fv");
+    t("12 n · 1 i · −1000 PV · FV → 1.126,83", Math.abs(m.x - 1126.825) < 0.01, String(m.x));
+  }
+  t("CLEAR FIN zera só as financeiras", (() => {
+    const m = hpLimpar(teclar("360 n 1 i 100000 pv"), "fin");
+    return m.fin.n === 0 && m.fin.i === 0 && m.fin.pv === 0;
+  })());
+  t("o visor formata com as casas escolhidas", hpVisor({ ...hpNovo(), x: 1234.5678, casas: 2 }) === "1.234,57", hpVisor({ ...hpNovo(), x: 1234.5678, casas: 2 }));
+  t("o visor usa vírgula decimal, como no Brasil", /,/.test(hpVisor({ ...hpNovo(), x: 0.5, casas: 2 })));
+
+  // BEGIN muda o resultado, e o app expõe isso
+  t("modo BEGIN rende um período a mais",
+    Math.abs(tvmResolver({ n: 12, i: 1, pv: 0, pmt: -100, fv: 0 }, "fv", true) /
+             tvmResolver({ n: 12, i: 1, pv: 0, pmt: -100, fv: 0 }, "fv", false) - 1.01) < 1e-9);
+}
+
+// ================================================================
+secao("6f. FERRAMENTAS — planilha, fórmulas e o lacre do exame");
+{
+  global.PLAN_COLS = eval(s.slice(s.indexOf("const PLAN_COLS = ") + 18, s.indexOf("];", s.indexOf("const PLAN_COLS = ")) + 1));
+  global.planTokenizar = extrai("planTokenizar", "\n};");
+  global.planCelulasDoIntervalo = extrai("planCelulasDoIntervalo", "\n};");
+  const planAvaliar = global.planAvaliar = extrai("planAvaliar", "\n};");
+  const planMostrar = extrai("planMostrar", "\n};");
+
+  const c = { A1: "10", A2: "20", A3: "30", B1: "=A1*2", B2: "=SOMA(A1:A3)", C1: "texto" };
+  const av = (f, cel) => planAvaliar(f, cel || c, new Set());
+  t("aritmética simples", av("2+3*4").v === 14);
+  t("parênteses mudam a ordem", av("(2+3)*4").v === 20);
+  t("potência", av("2^10").v === 1024);
+  t("menos unário", av("-5+2").v === -3);
+  t("vírgula é o separador decimal", av("1,5*2").v === 3);
+  t("referência a célula", av("A1+A2").v === 30);
+  t("referência a fórmula de outra célula", av("B1+1").v === 21);
+  t("SOMA com intervalo", av("SOMA(A1:A3)").v === 60);
+  t("MÉDIA com intervalo", av("MÉDIA(A1:A3)").v === 20);
+  t("MÁXIMO e MÍNIMO", av("MÁXIMO(A1:A3)").v === 30 && av("MÍNIMO(A1:A3)").v === 10);
+  t("CONT conta as células do intervalo", av("CONT(A1:A3)").v === 3);
+  t("funções compõem", av("SOMA(A1:A3)/CONT(A1:A3)").v === 20);
+  t("ARRED com casas", av("ARRED(1,23456;2)").erro === "#SINTAXE" || Math.abs(av("ARRED(1,23456,2)").v - 1.23) < 1e-9);
+  t("célula com texto conta como zero, não quebra", av("C1+5").v === 5);
+  t("célula vazia é zero", av("Z9+5").erro === "#SINTAXE" || av("F9+5").v === 5);
+  t("divisão por zero vira #DIV/0", av("1/0").erro === "#DIV/0");
+  t("função inexistente vira #NOME", av("FOO(1)").erro === "#NOME");
+  t("sintaxe quebrada vira #SINTAXE", av("2+").erro === "#SINTAXE" && av("((2)").erro === "#SINTAXE");
+  t("caractere estranho não passa", av("2 & 3").erro === "#SINTAXE");
+  // o perigo real de um avaliador: referência circular travando o app
+  {
+    const ciclo = { A1: "=A2", A2: "=A1" };
+    const r = planMostrar("A1", ciclo);
+    t("referência circular vira #CICLO em vez de travar", r === "#CICLO", r);
+  }
+  {
+    const longo = { A1: "=A2", A2: "=A3", A3: "=A1" };
+    t("ciclo de três células também é pego", planMostrar("A1", longo) === "#CICLO");
+  }
+  t("nada de eval() no avaliador da planilha",
+    !/eval\(/.test(s.slice(s.indexOf("const planAvaliar"), s.indexOf("const planMostrar"))));
+  t("planMostrar devolve o texto cru quando não é fórmula", planMostrar("C1", c) === "texto");
+  t("intervalo cobre as duas pontas", global.planCelulasDoIntervalo("A1", "B2").length === 4);
+
+  // ---- fórmulas
+  const iF = s.indexOf("const FORMULAS = [");
+  const FORMULAS = eval(s.slice(iF + "const FORMULAS = ".length, s.indexOf("\n];", iF) + 2));
+  t(`${FORMULAS.length} fórmulas na folha`, FORMULAS.length >= 20);
+  t("toda fórmula tem grupo, nome e equação", FORMULAS.every((f) => f.g && f.f && f.e));
+  t("a folha admite que não é a oficial da ANBIMA",
+    /reconstrução nossa/.test(s) && /não publica/.test(s));
+  t("tem a taxa real de Fisher, que a banca adora", FORMULAS.some((f) => /Fisher/.test(f.f)));
+  t("tem taxa equivalente composta", FORMULAS.some((f) => /equivalente/.test(f.f)));
+
+  // ---- o lacre: o que aparece DENTRO da prova
+  t("as ferramentas abrem dentro da prova", /setFerrAberta\(true\)/.test(s));
+  t("dentro da prova, a HP-12C fica de fora (noExame)",
+    /<Ferramentas estado=\{ferr\} setEstado=\{setFerr\} noExame=\{true\} \/>/.test(s));
+  t("a lista de abas filtra pelo que existe no exame", /\.filter\(\(a\) => !noExame \|\| a\.exame\)/.test(s));
+  t("a HP-12C está marcada como não-exame", /\{ k: "hp", r: "HP-12C", exame: false \}/.test(s));
+  t("o app avisa que a HP-12C não estará no exame", /Isto NÃO estará no seu exame/.test(s));
+  t("o aviso cita o item do edital", /edital 13\.11/.test(s));
+  t("rascunho e planilha são guardados; teclas da calculadora não",
+    /ferr: \{ notas: ferr\.notas \|\| "", plan: ferr\.plan \|\| \{\} \}/.test(s));
+}
+
+// ================================================================
 secao("7. SORTEIO DA SESSÃO DE EXAME");
 {
   const PESOS = { "1": 20, "2": 40, "3": 30, "4": 10 };

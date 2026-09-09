@@ -982,6 +982,8 @@ export default function ProjetoCPA() {
   const [agora, setAgora] = useState(Date.now());  // relógio de parede da prova
   const [conflitoSync, setConflitoSync] = useState(null); // nuvem x aparelho
   const [apagarId, setApagarId] = useState(null);  // prova aguardando confirmação
+  const [ferr, setFerr] = useState({});            // calculadora, planilha, rascunho
+  const [ferrAberta, setFerrAberta] = useState(false); // painel sobre a prova
   const [confirmando, setConfirmando] = useState(false);
   const [mapaAberto, setMapaAberto] = useState(false);
   const [avisoDados, setAvisoDados] = useState("");
@@ -993,6 +995,7 @@ export default function ProjetoCPA() {
     setFeitos(s.feitos || {}); setBossBest(s.bossBest || {});
     setErrados(s.errados || []); setFavs(s.favs || []); setPressao(!!s.pressao);
     setSom(s.som !== false); setRev(s.rev || {});
+    if (s.ferr) setFerr(s.ferr);
     if (s.syncUrl !== undefined) setSyncUrl(s.syncUrl || "");
     if (s.syncCod !== undefined) setSyncCod(s.syncCod || "");
   };
@@ -1110,7 +1113,10 @@ export default function ProjetoCPA() {
     // `histAgora` e `apagadosAgora` permitem gravar já com o valor novo,
     // sem esperar o React reprocessar o estado.
     const { histAgora, apagadosAgora, ...resto } = patch || {};
+    // só o que faz sentido guardar: rascunho e planilha. Estado de tecla
+    // da calculadora não é progresso.
     const st = { esquema: ESQUEMA, xp, combo, stats, feitos, bossBest, errados, favs, pressao, som, rev,
+      ferr: { notas: ferr.notas || "", plan: ferr.plan || {} },
       syncUrl, syncCod,
       hist: (histAgora || historico).map(packTentativa),
       apagados: apagadosAgora || apagados,
@@ -1606,6 +1612,7 @@ export default function ProjetoCPA() {
   // O que trafega. `hist` vai compactado (ver packTentativa) e `apagados`
   // leva as lápides, para apagar num aparelho valer em todos.
   const estadoAtual = (extra) => ({ xp, combo, stats, feitos, bossBest, errados, favs, pressao, som, rev,
+    ferr: { notas: ferr.notas || "", plan: ferr.plan || {} },
     syncUrl, syncCod, hist: historico.map(packTentativa), apagados,
     // a prova em andamento vai junto para não ser apagada da nuvem por um
     // envio de rotina; quem chama passa `prova: null` de propósito ao encerrar
@@ -1851,6 +1858,7 @@ export default function ProjetoCPA() {
             <button className="cx-chip" onClick={() => setTela("musicas")}>🎵 Cantigas da prova</button>
             <button className="cx-chip" onClick={() => setTela("confrontos")}>⚖️ Fichas de confronto</button>
             <button className="cx-chip" onClick={() => setTela("tabelao")}>🔢 Tabelão da prova</button>
+            <button className="cx-chip" onClick={() => setTela("ferramentas")}>🧮 Ferramentas da prova</button>
             <button className="cx-chip" onClick={() => { setBuscaGl(""); setTela("glossario"); }}>📖 Glossário</button>
             <button className="cx-chip" onClick={() => jogarSimulado(60)}>🎯 Simulado autoral (60)</button>
             <button className="cx-chip" onClick={() => setTela("provaHome")}>🎓 Exame · {TOTAL_ITENS_PROVA} itens · 2h30{prova ? " (em andamento)" : ""}</button>
@@ -2360,6 +2368,26 @@ export default function ProjetoCPA() {
     );
   }
 
+  // ---------------- FERRAMENTAS ----------------
+  if (tela === "ferramentas") {
+    return (
+      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+        <Topo voltar={() => setTela("home")} />
+        <div className="cx-wrap">
+          <h1 className="cx-h1" style={{ fontSize: 27 }}>Ferramentas da prova</h1>
+          <p className="cx-p">
+            As mesmas quatro que a plataforma da ANBIMA dá durante o exame — calculadora,
+            planilha, rascunho e fórmulas (edital 13.8, 13.10 e 13.11). Elas também abrem
+            <b> dentro da prova</b>, pelo botão 🧮.
+          </p>
+          <div style={{ marginTop: 16 }}>
+            <Ferramentas estado={ferr} setEstado={setFerr} noExame={false} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // ---------------- EXAME · abertura ----------------
   if (tela === "provaHome") {
     const R = REGRAS_EXAME;
@@ -2537,6 +2565,7 @@ export default function ProjetoCPA() {
           <div className="cx-provasub">
             {respondidos} respondidos · {pendentes} em branco
             <button className="cx-linkbt" onClick={() => setMapaAberto(true)}>ver o mapa</button>
+            <button className="cx-linkbt" onClick={() => setFerrAberta(true)}>🧮 ferramentas</button>
           </div>
 
           {it.tipo === "arvore" ? (
@@ -2596,6 +2625,20 @@ export default function ProjetoCPA() {
               Sair sem entregar (o relógio continua correndo)
             </button>
           </div>
+
+          {ferrAberta && (
+            <div className="cx-modal" role="dialog" aria-modal="true" aria-label="Ferramentas da prova">
+              <div className="cx-modalcx" style={{ maxWidth: 560 }}>
+                <div className="cx-lb">Ferramentas</div>
+                <p style={{ color: "var(--mut)", fontSize: 12, fontWeight: 700, marginBottom: 10 }}>
+                  As mesmas da plataforma da ANBIMA. O relógio da prova continua correndo.
+                </p>
+                {/* noExame esconde a HP-12C: ela não existe no exame de verdade */}
+                <Ferramentas estado={ferr} setEstado={setFerr} noExame={true} />
+                <button className="cx-btn sec" style={{ marginTop: 14 }} onClick={() => setFerrAberta(false)}>Voltar à prova</button>
+              </div>
+            </div>
+          )}
 
           {mapaAberto && (
             <div className="cx-modal" role="dialog" aria-modal="true" aria-label="Mapa da prova">
