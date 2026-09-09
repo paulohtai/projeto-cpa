@@ -730,7 +730,47 @@ Mac…), e a lista mostra isso.
 plantada na nuvem apareceu no computador com a revisão correta; prova apagada
 reinjetada no disco **não** ressuscitou.
 
+### Pausar e retomar (08/09/2026)
+
+A frase acima dizia que a prova em andamento não sincronizava, "porque um
+cronômetro só não faria sentido entre aparelhos". Estava errado pelo motivo
+certo: o problema não é o cronômetro, é **não haver como parar o cronômetro**.
+Com pausa explícita, os dois aparelhos passam a fazer sentido.
+
+**O contrato, e ele está escrito na tela:**
+
+| | Rodando | Pausada |
+|---|---|---|
+| relógio | `fimEm` absoluto — recarregar não devolve tempo | parado em `restanteSeg` |
+| encerra sozinha no prazo | sim | **não** — o relógio não corre |
+| aceita resposta | sim | não |
+| vai para a nuvem | fica no aparelho | **sobe na hora** |
+
+**As respostas sobem AO PAUSAR, não a cada questão.** Retomar em outro
+aparelho retoma do ponto em que foi pausado. Sincronizar a cada toque seria
+conversa constante com o servidor por um ganho que ninguém pediu — e a
+semântica ficaria confusa ("de que momento eu retomo?").
+
+Ao retomar, o prazo renasce: `fimEm = agora + restanteSeg × 1000`. Testado
+com um dia de pausa: devolve exatamente o tempo que sobrou, nem um segundo a
+mais.
+
+**Qual prova vale** quando os dois lados têm uma: `escolherProva` fica com a
+mexida mais recentemente (`atualizadoEm`), e descarta qualquer uma cujo id já
+esteja no histórico — prova encerrada não ressuscita.
+
+**Honestidade no resultado.** Cada pausa incrementa `pausas` e soma em
+`tempoPausadoMs`. O resultado e a lista do histórico mostram
+"pausada N× · M min fora do relógio", com a frase: *a nota vale; a condição
+de prova, não — no exame de verdade não existe pausa*. Sem isso, dava para
+pausar antes de cada questão difícil e o histórico não contaria a diferença.
+
+38 testes cobrem o relógio, o codec, a escolha entre aparelhos e os avisos.
+Verificado no ar: pausa congelou o relógio por 12 s reais e subiu as 50
+questões com 36 respostas (12,8 KB); retomada devolveu 8.998 s de 8.998 s, no
+mesmo item, com as respostas intactas.
+
 ### O que continua sendo por aparelho
 
-A **prova em andamento** não sincroniza — começar no celular e terminar no
-computador não faria sentido com um cronômetro só. Ela fica onde começou.
+Nada, no exame. Progresso de estudo, histórico de provas e prova pausada
+sincronizam. Só a **prova rodando** fica no aparelho até você pausar.
