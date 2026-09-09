@@ -690,9 +690,47 @@ decisão do usuário, não do relógio.
 
 11 testes cobrem `conflitoDeSync` e 8 cobrem o despejo.
 
-### O que continua sendo por design
+### O histórico passou a sincronizar (08/09/2026)
 
-O **histórico de provas** e a **prova em andamento** não sincronizam: são
-pesados para o limite de 300 KB do Worker. Por isso as tentativas encerradas
-que aparecem num aparelho não aparecem no outro. Para levá-las, use o botão
-**Baixar arquivo** na Cópia de segurança.
+A versão anterior deixava as provas encerradas presas em cada aparelho, com o
+argumento do limite de 300 KB do Worker. **O argumento estava certo, a
+conclusão não.** Medindo: uma tentativa crua ocupa 6,6 KB, e trinta dariam
+199 KB — folga pequena demais. Mas a gordura era o nome dos campos repetido
+50 vezes por prova.
+
+**Compactar em vez de truncar.** Cada item virou uma linha
+`chave;ordem;gabarito;resposta;marcada`. A tentativa caiu para **1,3 KB**
+(5× menor) e trinta cabem em **40 KB**. O que trafega é a prova inteira, então
+a **revisão item a item funciona em qualquer aparelho** — não só naquele em
+que a prova foi feita.
+
+Três decisões que sustentam isso:
+
+1. **O `gabarito` viaja junto; o rótulo do módulo, não.** Uma correção feita
+   no banco depois não pode reescrever o que aquela prova mostrou na tela.
+   Já `mId`/`nId` são só rótulos e se rederivam do banco atual. (Eu tinha
+   removido os dois no primeiro corte, e a revisão de uma prova vinda de
+   outro aparelho apareceu como `Mundefined · undefined`. Pego no teste de
+   interface.)
+
+2. **O histórico é UNIDO por id, nunca substituído.** XP e precisão seguem a
+   regra do carimbo mais recente, porque são o mesmo dado evoluindo. Provas
+   encerradas não: cada uma é um fato próprio, e uma feita no celular não
+   pode apagar a que foi feita no computador. Por isso a união roda **sempre**,
+   inclusive quando a decisão de sincronia foi "nada".
+
+3. **Apagar precisa de lápide.** Sem registrar o id apagado, a próxima união
+   traria a prova de volta — o outro aparelho ainda a tem e não teria como
+   saber. `apagados` viaja junto e a exclusão vale em todos os aparelhos.
+
+Cada tentativa também grava **em que aparelho foi feita** (iPhone, Computador,
+Mac…), e a lista mostra isso.
+
+30 testes cobrem o codec, a união e as lápides. Verificado no ar: prova
+plantada na nuvem apareceu no computador com a revisão correta; prova apagada
+reinjetada no disco **não** ressuscitou.
+
+### O que continua sendo por aparelho
+
+A **prova em andamento** não sincroniza — começar no celular e terminar no
+computador não faria sentido com um cronômetro só. Ela fica onde começou.
