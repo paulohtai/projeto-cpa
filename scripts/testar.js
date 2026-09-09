@@ -44,6 +44,8 @@ const ordemAlts = extrai("ordemAlts", "));");
 const corrigir = extrai("corrigir", "\n};");
 const migrar = extrai("migrar", "\n};");
 const decidirSync = extrai("decidirSync", "\n};");
+const LIMITE_HIST_ESPERADO = Number((s.match(/const LIMITE_HIST = (\d+)/) || [])[1]);
+global.LIMITE_HIST = LIMITE_HIST_ESPERADO;
 
 // ================================================================
 secao("0. FUMAÇA — o arquivo EXECUTA, não só compila");
@@ -305,6 +307,89 @@ secao("6b. O PROGRESSO NÃO PODE FICAR PRESO NO APARELHO");
     /\.catch\(\(\) => \{ pendenteNuvem = alvo; \}\)/.test(s));
   const atraso = (s.match(/\}, (\d+)\);\s*\n\s*\}\;\s*\n\s*\n\s*\/\/ Fecha a janela/) || [])[1];
   t(`o atraso do envio encolheu para 1,5s (era 4s)`, /\}, 1500\);/.test(s));
+}
+
+// ================================================================
+secao("6c. HISTÓRICO DE PROVAS ENTRE APARELHOS");
+{
+  const packItem = global.packItem = extrai("packItem", "].join(\";\");");
+  const unpackItem = global.unpackItem = extrai("unpackItem", "\n};");
+  const packTentativa = extrai("packTentativa", "\n});");
+  const unpackTentativa = extrai("unpackTentativa", "\n});");
+  const mesclarHistorico = extrai("mesclarHistorico", "\n};");
+  const mesclarApagados = extrai("mesclarApagados", ".slice(-200);");
+
+  // ---- ida e volta do empacotamento: nada pode se perder no caminho
+  const mc = { tipo: "mc", chave: "2.4.12.1|0", mId: "2", nId: "2.4.12.1",
+    ordem: [1, 3, 0, 2], gabarito: 0, resposta: 2, marcada: true };
+  const v = unpackItem(packItem(mc));
+  t("item de múltipla escolha volta igual do empacotamento",
+    v.chave === mc.chave && JSON.stringify(v.ordem) === JSON.stringify(mc.ordem) &&
+    v.gabarito === 0 && v.resposta === 2 && v.marcada === true,
+    JSON.stringify(v));
+  const branco = unpackItem(packItem({ ...mc, resposta: null, marcada: false }));
+  t("resposta em branco continua em branco (null, não 0)", branco.resposta === null && branco.marcada === false, JSON.stringify(branco));
+  const zero = unpackItem(packItem({ ...mc, resposta: 0 }));
+  t("resposta 0 não vira branco — o ?? protege o zero", zero.resposta === 0, JSON.stringify(zero));
+  const arv = unpackItem(packItem({ tipo: "arvore", chave: "A.3|2", arvId: "A.3", passo: 2,
+    ordem: [2, 0, 3, 1], escolha: 3, grauEscolhido: 0, marcada: false }));
+  t("item de árvore volta com árvore, passo, escolha e grau",
+    arv.tipo === "arvore" && arv.arvId === "A.3" && arv.passo === 2 && arv.escolha === 3 && arv.grauEscolhido === 0,
+    JSON.stringify(arv));
+  const arvBranco = unpackItem(packItem({ tipo: "arvore", chave: "A.1|0", arvId: "A.1", passo: 0,
+    ordem: [0, 1, 2, 3], escolha: null, grauEscolhido: null, marcada: false }));
+  t("árvore em branco não vira grau 0", arvBranco.escolha === null && arvBranco.grauEscolhido === null);
+  const anul = unpackItem(packItem({ ...mc, anulado: true, motivoAnulacao: "gabarito duplo" }));
+  t("anulação e motivo sobrevivem ao empacotamento", anul.anulado === true && anul.motivoAnulacao === "gabarito duplo");
+
+  // ---- tamanho: o motivo de existir este codec
+  const tent = { id: 1, entregueEm: 2, motivoFim: "manual", versaoGabarito: "2026-09-08",
+    aparelho: "iPhone", resultado: { acertos: 35, total: 50, pct: 70, aprovado: true },
+    itens: [...Array(50)].map(() => mc) };
+  const cru = JSON.stringify(tent).length, packed = JSON.stringify(packTentativa(tent)).length;
+  t(`a tentativa encolhe ao menos 4x (${cru} → ${packed} bytes)`, packed * 4 < cru, `${cru} → ${packed}`);
+  t(`30 tentativas cabem com folga no teto de 300 KB (${Math.round(packed * 30 / 1024)} KB)`, packed * 30 < 120000);
+  const volta = unpackTentativa(packTentativa(tent));
+  t("a nota da tentativa NÃO é recalculada na volta — vem do que foi gravado",
+    volta.resultado.acertos === 35 && volta.resultado.pct === 70 && volta.resultado.aprovado === true);
+  t("o gabarito de cada item viaja junto, e não sai do banco atual",
+    volta.itens[0].gabarito === 0 && volta.itens.length === 50);
+  t("o aparelho de origem é preservado", volta.aparelho === "iPhone");
+
+  // ---- união entre aparelhos
+  const T = (id, itens) => ({ id, itens: itens || [], resultado: {} });
+  const pc = [T(300), T(100)];      // computador
+  const cel = [T(200), T(100)];     // celular, com uma em comum
+  const u = mesclarHistorico(pc, cel, []);
+  t("a união junta as provas dos dois aparelhos", u.length === 3, String(u.length));
+  t("a prova que está nos dois lados não duplica", u.filter((x) => x.id === 100).length === 1);
+  t("a lista sai da mais nova para a mais velha", u[0].id === 300 && u[2].id === 100);
+  const comItens = mesclarHistorico([T(100)], [T(100, [1, 2, 3])], []);
+  t("entre duas cópias da mesma prova, fica a que tem os itens", comItens[0].itens.length === 3);
+  t("união com lado vazio não perde nada", mesclarHistorico([], cel, []).length === 2);
+  t("união de dois vazios não quebra", mesclarHistorico(null, undefined, null).length === 0);
+  t("entradas sem id são descartadas", mesclarHistorico([{ itens: [] }, T(5)], [], []).length === 1);
+  t(`a união respeita o teto de ${LIMITE_HIST_ESPERADO} tentativas`,
+    mesclarHistorico([...Array(40)].map((_, i) => T(i + 1)), [], []).length === LIMITE_HIST_ESPERADO);
+
+  // ---- lápides: apagar num aparelho precisa valer no outro
+  const semApagada = mesclarHistorico(pc, cel, [100]);
+  t("prova apagada não volta pela união", semApagada.length === 2 && !semApagada.some((x) => x.id === 100));
+  t("a lápide funciona mesmo vindo como texto", mesclarHistorico(pc, cel, ["100"]).length === 2);
+  t("lápides dos dois lados se somam", mesclarApagados([1, 2], [2, 3]).length === 3);
+  t("lápide não guarda duplicata", mesclarApagados([7, 7, 7], [7]).length === 1);
+  t("lápide ignora valores vazios", mesclarApagados([0, null, undefined, 5], []).length === 1);
+
+  // ---- o app precisa mesmo usar tudo isso
+  t("o histórico sobe compactado para a nuvem", /hist: historico\.map\(packTentativa\)/.test(s));
+  t("as lápides sobem junto", /apagados: apagadosAgora \|\| apagados,/.test(s));
+  t("a sincronia UNE o histórico em vez de substituir", /const unido = mesclarHistorico\(histLocal, daNuvem, mortos\);/.test(s));
+  t("a união roda mesmo quando a decisão de sync foi \"nada\"",
+    /Por isso este trecho roda SEMPRE, mesmo/.test(s));
+  t("apagar cria lápide antes de gravar", /const mortos = mesclarApagados\(apagados, \[id\]\);/.test(s));
+  t("apagar avisa a nuvem na hora", /const apagarTentativa[\s\S]{0,900}nuvemEnviar\(syncUrl, syncCod, estadoAtual\(/.test(s));
+  t("apagar pede confirmação", /Apagar esta prova\?/.test(s) && /setApagarId\(h\.id\)/.test(s));
+  t("a prova registra em que aparelho foi feita", /aparelho: nomeDoAparelho\(\)/.test(s));
 }
 
 // ================================================================

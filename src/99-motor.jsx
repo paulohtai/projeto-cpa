@@ -220,6 +220,86 @@ const decidirSync = (qLocal, qNuvem) => {
   if (l > n) return "empurrar";
   return "nada";
 };
+// =====================================================================
+// HISTÓRICO DE PROVAS NA NUVEM
+//
+// A tentativa crua ocupa 6,6 KB (50 itens com nome de campo repetido 50
+// vezes). Trinta delas dariam 199 KB e o serviço aceita 300 KB — folga
+// pequena demais, e o progresso de estudo ainda cresce por dentro.
+//
+// Em vez de mandar só um resumo, COMPACTAMOS: cada item vira uma linha
+// "chave;ordem;gabarito;resposta;marcada". Some o nome dos campos e a
+// tentativa cai para ~1,3 KB. Trinta cabem em ~39 KB — e o que trafega é
+// a prova INTEIRA, então a revisão item a item funciona em qualquer
+// aparelho, não só naquele em que a prova foi feita.
+//
+// O `gabarito` vai junto de propósito, em vez de ser recalculado a partir
+// do banco atual: uma correção feita no banco depois não pode reescrever
+// o que aquela prova mostrou na tela.
+// =====================================================================
+const LIMITE_HIST = 30;
+const packItem = (it) => [
+  it.tipo === "arvore" ? "@" + it.arvId + "|" + it.passo : it.chave,
+  (it.ordem || []).join(""),
+  it.tipo === "arvore" ? (it.grauEscolhido === null || it.grauEscolhido === undefined ? "" : it.grauEscolhido) : it.gabarito,
+  (it.tipo === "arvore" ? it.escolha : it.resposta) ?? "",
+  (it.marcada ? "m" : "") + (it.anulado ? "a" : ""),
+  it.anulado ? (it.motivoAnulacao || "") : "",
+].join(";");
+const unpackItem = (linha) => {
+  const [ref, ordem, terceiro, resp, flags, motivo] = String(linha).split(";");
+  const marcada = (flags || "").includes("m");
+  const anulado = (flags || "").includes("a");
+  const base = { ordem: (ordem || "").split("").map(Number), marcada };
+  if (anulado) { base.anulado = true; base.motivoAnulacao = motivo || ""; }
+  if (ref.startsWith("@")) {
+    const [arvId, passo] = ref.slice(1).split("|");
+    return { ...base, tipo: "arvore", chave: ref.slice(1), arvId, passo: Number(passo), mId: "3",
+      escolha: resp === "" ? null : Number(resp),
+      grauEscolhido: terceiro === "" ? null : Number(terceiro) };
+  }
+  return { ...base, tipo: "mc", chave: ref, gabarito: Number(terceiro),
+    resposta: resp === "" ? null : Number(resp) };
+};
+const packTentativa = (t) => ({
+  i: t.id, e: t.entregueEm, m: t.motivoFim, v: t.versaoGabarito,
+  n: t.aparelho || "", r: t.resultado, g: t.regras,
+  x: (t.itens || []).map(packItem),
+});
+const unpackTentativa = (p) => ({
+  id: p.i, inicio: p.i, entregue: true, entregueEm: p.e, motivoFim: p.m,
+  versaoGabarito: p.v, aparelho: p.n || "", resultado: p.r, regras: p.g,
+  itens: (p.x || []).map(unpackItem),
+});
+// União por id, com lápides. Sem isto, a regra do "carimbo mais recente"
+// apagaria as provas do outro aparelho a cada sincronização — e apagar uma
+// prova num aparelho não pegaria no outro, porque a união a traria de volta.
+const mesclarHistorico = (a, b, apagados) => {
+  const mortos = new Set((apagados || []).map(Number));
+  const porId = new Map();
+  [...(a || []), ...(b || [])].forEach((t) => {
+    if (!t || !t.id || mortos.has(Number(t.id))) return;
+    const anterior = porId.get(t.id);
+    // se a mesma prova vier dos dois lados, fica a que tem os itens
+    const melhor = !anterior || ((t.itens || []).length > (anterior.itens || []).length) ? t : anterior;
+    porId.set(t.id, melhor);
+  });
+  return [...porId.values()].sort((x, y) => y.id - x.id).slice(0, LIMITE_HIST);
+};
+const mesclarApagados = (a, b) =>
+  [...new Set([...(a || []), ...(b || [])].map(Number).filter(Boolean))].slice(-200);
+
+// Nome curto do aparelho, para a lista dizer onde cada prova foi feita.
+const nomeDoAparelho = () => {
+  const ua = (typeof navigator !== "undefined" && navigator.userAgent) || "";
+  if (/iPhone/i.test(ua)) return "iPhone";
+  if (/iPad/i.test(ua)) return "iPad";
+  if (/Android/i.test(ua)) return "Android";
+  if (/Macintosh/i.test(ua)) return "Mac";
+  if (/Windows/i.test(ua)) return "Computador";
+  return "Aparelho";
+};
+
 // Quanto trabalho um estado carrega. Serve para uma pergunta só: puxar a
 // nuvem por cima deste aparelho DESTRUIRIA alguma coisa?
 const trabalhoDe = (s) => {
@@ -643,6 +723,11 @@ const CSS = `
 .cx-selo.oficial{background:var(--verde-l);color:var(--ok)}
 .cx-selo.pedagogica{background:var(--roxo-l);color:var(--roxo)}
 .cx-selo.naoConfirmado{background:#FFF4E0;color:#B45309}
+/* linha do histórico: o corpo abre a revisão, a lixeira é alvo separado */
+.cx-histbt{flex:1;min-width:0;text-align:left;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}
+.cx-apagar{flex:0 0 44px;min-height:44px;border:1.5px solid var(--line);border-radius:11px;background:var(--card);
+  font-size:16px;cursor:pointer;color:var(--ink2);margin-left:8px}
+.cx-apagar:hover{border-color:var(--no);color:var(--no)}
 /* aviso de questão que está fora do sorteio do exame */
 .cx-fora{margin-top:10px;padding:10px 12px;border-radius:10px;background:#FFF4E0;
   border:1px solid #F0C980;color:#8A5A08;font-size:12.5px;line-height:1.5;font-weight:600}
@@ -844,9 +929,11 @@ export default function ProjetoCPA() {
   // EXAME — vive à parte do progresso de estudo, em outra chave de disco.
   const [prova, setProva] = useState(null);        // tentativa em andamento
   const [historico, setHistorico] = useState([]);  // tentativas encerradas
+  const [apagados, setApagados] = useState([]);    // lápides: provas apagadas de propósito
   const [provaVista, setProvaVista] = useState(null); // tentativa aberta na revisão
   const [agora, setAgora] = useState(Date.now());  // relógio de parede da prova
   const [conflitoSync, setConflitoSync] = useState(null); // nuvem x aparelho
+  const [apagarId, setApagarId] = useState(null);  // prova aguardando confirmação
   const [confirmando, setConfirmando] = useState(false);
   const [mapaAberto, setMapaAberto] = useState(false);
   const [avisoDados, setAvisoDados] = useState("");
@@ -883,9 +970,16 @@ export default function ProjetoCPA() {
           if (p && Array.isArray(p.itens) && !p.entregue) setProva(p);
         }
       } catch (e) { setAvisoDados((a) => a || "A prova em andamento não pôde ser lida e foi descartada. O histórico e o progresso de estudo estão intactos."); }
+      let histLocal = [], apagadosLocal = [];
       try {
         const rh = await window.storage.get(HIST_KEY);
-        if (rh && rh.value) { const h = JSON.parse(rh.value); if (Array.isArray(h)) setHistorico(h); }
+        if (rh && rh.value) {
+          const g = JSON.parse(rh.value);
+          // v1 gravava um array puro; v2 guarda { h, apagados }
+          if (Array.isArray(g)) histLocal = g;
+          else if (g && typeof g === "object") { histLocal = g.h || []; apagadosLocal = g.apagados || []; }
+          setHistorico(histLocal); setApagados(apagadosLocal);
+        }
       } catch (e) { setAvisoDados((a) => a || "O histórico de provas não pôde ser lido. Nada foi apagado."); }
       setLoaded(true);
       // Sincronia automática ao abrir, nos DOIS sentidos:
@@ -916,14 +1010,47 @@ export default function ProjetoCPA() {
             setMsgSync(qNuvem ? "Este aparelho estava à frente: enviei o progresso para a nuvem."
                               : "Primeiro envio feito: a nuvem agora tem o seu progresso.");
           }
+
+          // ---- HISTÓRICO DE PROVAS: sempre UNIÃO, nunca substituição ----
+          // O XP e a precisão seguem a regra do carimbo mais recente, porque
+          // são o mesmo dado evoluindo. As provas encerradas não: cada uma é
+          // um fato próprio, e uma feita no celular não pode apagar a que foi
+          // feita no computador. Por isso este trecho roda SEMPRE, mesmo
+          // quando a decisão acima foi "nada".
+          try {
+            const mortos = mesclarApagados(apagadosLocal, nuvem.apagados);
+            const daNuvem = (nuvem.hist || []).map(unpackTentativa);
+            const unido = mesclarHistorico(histLocal, daNuvem, mortos);
+            const mudouAqui = unido.length !== histLocal.length || mortos.length !== apagadosLocal.length;
+            const faltaNaNuvem = unido.length !== daNuvem.length || mortos.length !== (nuvem.apagados || []).length;
+            if (mudouAqui) {
+              setHistorico(unido); setApagados(mortos);
+              await window.storage.set(HIST_KEY, JSON.stringify({ h: unido, apagados: mortos }));
+            }
+            if (faltaNaNuvem) {
+              await nuvemEnviar(local.syncUrl, local.syncCod, {
+                ...(acao === "puxar" ? nuvem : local),
+                hist: unido.map(packTentativa), apagados: mortos, quando: Date.now(),
+              });
+            }
+            if (mudouAqui && unido.length > histLocal.length) {
+              setMsgSync(`Trouxe ${unido.length - histLocal.length} prova(s) feita(s) em outro aparelho.`);
+            }
+          } catch (e) {}
         } catch (e) { setMsgSync("Sem conexão com a nuvem agora — seguindo com o progresso local."); }
       }
     })();
   }, []);
 
   const salvar = (patch) => {
+    // `histAgora` e `apagadosAgora` permitem gravar já com o valor novo,
+    // sem esperar o React reprocessar o estado.
+    const { histAgora, apagadosAgora, ...resto } = patch || {};
     const st = { esquema: ESQUEMA, xp, combo, stats, feitos, bossBest, errados, favs, pressao, som, rev,
-      syncUrl, syncCod, ...patch, quando: Date.now() };
+      syncUrl, syncCod,
+      hist: (histAgora || historico).map(packTentativa),
+      apagados: apagadosAgora || apagados,
+      ...resto, quando: Date.now() };
     (async () => { try { await window.storage.set(SAVE_KEY, JSON.stringify(st)); } catch (e) {} })();
     // sobe para a nuvem pouco depois da última mexida. O atraso é curto de
     // propósito: cada segundo aqui é uma janela em que fechar o app deixa o
@@ -1160,6 +1287,23 @@ export default function ProjetoCPA() {
     };
   };
 
+  // Apagar uma prova é ato deliberado: além de sair da lista, o id entra na
+  // lápide. Sem isso, a próxima união com a nuvem traria a prova de volta —
+  // o outro aparelho ainda a tem e não teria como saber que ela foi apagada.
+  const apagarTentativa = async (id) => {
+    const novo = historico.filter((h) => h.id !== id);
+    const mortos = mesclarApagados(apagados, [id]);
+    setHistorico(novo); setApagados(mortos);
+    if (provaVista && provaVista.id === id) { setProvaVista(null); setTela("provaHome"); }
+    try { await window.storage.set(HIST_KEY, JSON.stringify({ h: novo, apagados: mortos })); } catch (e) {}
+    // manda a exclusão para a nuvem na hora, não daqui a pouco
+    if (syncUrl && syncCod) {
+      try { await nuvemEnviar(syncUrl, syncCod, estadoAtual({ hist: novo.map(packTentativa), apagados: mortos })); }
+      catch (e) { setMsgSync("Apaguei aqui, mas não consegui avisar a nuvem. Ela some dos outros aparelhos quando houver internet."); }
+    }
+    salvar({ histAgora: novo, apagadosAgora: mortos });
+  };
+
   const iniciarProva = () => { setConfirmando(false); setMapaAberto(false); salvarProva(montarProva()); setTela("prova"); };
 
   // grava uma resposta. Tocar de novo na MESMA alternativa não faz nada;
@@ -1191,19 +1335,20 @@ export default function ProjetoCPA() {
   const encerrarProva = (motivo) => {
     if (!prova || prova.entregue) return;
     const fechada = { ...prova, entregue: true, entregueEm: Date.now(), motivoFim: motivo,
-      resultado: corrigir(prova) };
+      aparelho: nomeDoAparelho(), resultado: corrigir(prova) };
     // O histórico guarda as 30 mais recentes. Passou disso, a mais antiga
     // sai — e o usuário fica sabendo, em vez de a prova sumir em silêncio.
     const juntado = [fechada, ...historico];
-    const novo = juntado.slice(0, 30);
+    const novo = juntado.slice(0, LIMITE_HIST);
     if (juntado.length > 30) {
       const velha = juntado[30];
-      setAvisoDados(`O histórico guarda as 30 provas mais recentes. Para abrir espaço para esta, a de ${new Date(velha.id).toLocaleDateString("pt-BR")} saiu da lista. Se quiser guardar as antigas, baixe o arquivo de backup em Ajustes antes de fazer a próxima.`);
+      setAvisoDados(`O histórico guarda as ${LIMITE_HIST} provas mais recentes. Para abrir espaço para esta, a de ${new Date(velha.id).toLocaleDateString("pt-BR")} saiu da lista. Se quiser guardar as antigas, baixe o arquivo de backup em Ajustes antes de fazer a próxima.`);
     }
     setHistorico(novo); setProva(null); setProvaVista(fechada);
+    salvar({ histAgora: novo });
     setConfirmando(false); setMapaAberto(false);
     (async () => {
-      try { await window.storage.set(HIST_KEY, JSON.stringify(novo)); } catch (e) {}
+      try { await window.storage.set(HIST_KEY, JSON.stringify({ h: novo, apagados })); } catch (e) {}
       try { await window.storage.set(PROVA_KEY, ""); } catch (e) {}
     })();
     setTela("provaFim");
@@ -1354,8 +1499,11 @@ export default function ProjetoCPA() {
     } catch (e) { setMsgBk("Não consegui baixar o arquivo. Use o botão de copiar."); }
   };
   // ---- sincronia manual ----
-  const estadoAtual = () => ({ xp, combo, stats, feitos, bossBest, errados, favs, pressao, som, rev,
-    syncUrl, syncCod, quando: Date.now() });
+  // O que trafega. `hist` vai compactado (ver packTentativa) e `apagados`
+  // leva as lápides, para apagar num aparelho valer em todos.
+  const estadoAtual = (extra) => ({ xp, combo, stats, feitos, bossBest, errados, favs, pressao, som, rev,
+    syncUrl, syncCod, hist: historico.map(packTentativa), apagados,
+    ...extra, quando: Date.now() });
   const enviarNuvem = async () => {
     if (!syncUrl || !syncCod) { setMsgSync("Cole o endereço e gere um código primeiro."); return; }
     setSincronizando(true); setMsgSync("");
@@ -2184,25 +2332,46 @@ export default function ProjetoCPA() {
           {historico.length > 0 && (
             <div style={{ marginTop: 22 }}>
               <div className="cx-lb">Tentativas encerradas</div>
+              <p style={{ color: "var(--mut)", fontSize: 12, fontWeight: 700, marginBottom: 10 }}>
+                As provas encerradas sobem para a nuvem e aparecem em todos os seus aparelhos,
+                com a revisão item a item. Apagar aqui apaga em todos.
+              </p>
               {historico.map((h) => {
                 const r = h.resultado || corrigir(h);
                 return (
-                  <button key={h.id} className="cx-mod" style={{ marginBottom: 9 }} onClick={() => { setProvaVista(h); setTela("provaFim"); }}>
+                  <div key={h.id} className="cx-mod" style={{ marginBottom: 9, cursor: "default" }}>
                     <span className="faixa" style={{ background: r.aprovado ? "var(--ok)" : "var(--no)" }} />
                     <div className="cab">
-                      <div style={{ flex: 1, minWidth: 0 }}>
+                      <button className="cx-histbt" onClick={() => { setProvaVista(h); setTela("provaFim"); }}>
                         <div className="cx-eye" style={{ color: r.aprovado ? "var(--ok)" : "var(--no)" }}>{r.acertos}/{r.total} · {r.pct}%</div>
                         <div className="cx-mtt" style={{ marginTop: 2 }}>{new Date(h.id).toLocaleString("pt-BR")}</div>
                         <div className="cx-mst">
                           {h.motivoFim === "tempo" ? "encerrada pelo tempo" : "entregue por você"}
-                          {r.pendentes ? ` · ${r.pendentes} em branco` : ""} · gabarito {h.versaoGabarito || "?"}
+                          {r.pendentes ? ` · ${r.pendentes} em branco` : ""}
+                          {h.aparelho ? ` · ${h.aparelho}` : ""} · gabarito {h.versaoGabarito || "?"}
                         </div>
-                      </div>
-                      <span style={{ fontSize: 20, color: "var(--mut)" }}>›</span>
+                      </button>
+                      <button className="cx-apagar" aria-label={`Apagar a prova de ${new Date(h.id).toLocaleString("pt-BR")}`}
+                        onClick={() => setApagarId(h.id)}>🗑</button>
                     </div>
-                  </button>
+                  </div>
                 );
               })}
+              {apagarId && (
+                <div className="cx-modal" role="dialog" aria-modal="true" aria-label="Apagar prova">
+                  <div className="cx-modalcx">
+                    <div className="cx-lb">Apagar esta prova?</div>
+                    <p style={{ color: "var(--ink2)" }}>
+                      A tentativa de <b>{new Date(apagarId).toLocaleString("pt-BR")}</b> sai da lista
+                      <b> em todos os seus aparelhos</b> e não volta. O progresso de estudo não é afetado.
+                    </p>
+                    <div style={{ display: "grid", gap: 9, marginTop: 14 }}>
+                      <button className="cx-btn" onClick={() => { const id = apagarId; setApagarId(null); apagarTentativa(id); }}>Sim, apagar</button>
+                      <button className="cx-btn sec" onClick={() => setApagarId(null)}>Cancelar</button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
