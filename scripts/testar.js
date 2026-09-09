@@ -223,6 +223,12 @@ secao("5. MIGRAÇÃO E BACKUP");
   const hi = s.indexOf("const historicoValido = (h) =>");
   const historicoValido = eval("(" + s.slice(hi + "const historicoValido = ".length, s.indexOf("\n  );", hi) + 4).trim() + ")");
   t("histórico filtra tentativas não entregues", historicoValido([{ id: 1, itens: [], entregue: true }, { id: 2, itens: [], entregue: false }]).length === 1);
+  // MESMO BUG, terceiro lugar: a importação "somar" pulava o id já existente
+  // e, com isso, descartava a versão melhor vinda do outro aparelho.
+  t("importar por código também usa a união, não o 'pula se já existe'",
+    /nhist = mesclarHistorico\(nhist, historicoValido\(d\.historico\), apagados\);/.test(s));
+  t("o 'pula se já existe' foi removido da importação",
+    !/if \(!nhist\.some\(\(x\) => x\.id === t\.id\)\) nhist\.push\(t\)/.test(s));
   t("histórico filtra objetos sem itens", historicoValido([{ id: 3, entregue: true }]).length === 0);
   t("histórico aceita entrada não-lista sem quebrar", historicoValido("lixo").length === 0);
   t("dá para baixar o backup como arquivo, não só copiar", /const baixarBackup = \(\) => \{/.test(s) && /a\.download = `projeto-cpa-backup-/.test(s));

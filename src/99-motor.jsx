@@ -1777,9 +1777,12 @@ export default function ProjetoCPA() {
       try {
         const d = JSON.parse(decodeURIComponent(escape(atob(txt))));
         if (!backupValido(d)) { ruins++; return; }
-        // tentativas encerradas não se somam nem se recalculam: só entram as
-        // que este aparelho ainda não tem, identificadas pelo instante de início
-        historicoValido(d.historico).forEach((t) => { if (!nhist.some((x) => x.id === t.id)) nhist.push(t); });
+        // Tentativas encerradas não se somam nem se recalculam. Mas o "só
+        // entra o que ainda não tenho" estava errado: a MESMA prova pode ter
+        // sido encerrada em dois aparelhos, e pular o id que já existe
+        // descartava justamente a versão boa. Agora passa por mesclarHistorico,
+        // que fica com a que tem mais questões respondidas.
+        nhist = mesclarHistorico(nhist, historicoValido(d.historico), apagados);
         nxp += d.xp || 0;
         Object.entries(d.stats || {}).forEach(([k, v]) => {
           ns[k] = { r: (ns[k]?.r || 0) + (v.r || 0), w: (ns[k]?.w || 0) + (v.w || 0) };
