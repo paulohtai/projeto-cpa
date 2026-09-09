@@ -416,6 +416,21 @@ secao("8. HONESTIDADE E RASTREABILIDADE");
   t("a tentativa guarda a versão do gabarito", /versaoGabarito: VERSAO_GABARITO/.test(s));
   t("a nota da árvore é declarada como leitura nossa", /não é a regra da banca/.test(s));
   t("a prova diz que as questões são autorais", /As questões são <b>autorais<\/b>/.test(s));
+  t('a regra de "apenas uma alternativa correta" está declarada com o item do edital',
+    /umaCorreta: \{ valor: "sim", origem: "oficial"/.test(s) && /sendo apenas uma das alternativas correta/.test(s));
+  t("a divergência entre edital e guia sobre a árvore está admitida, não escondida",
+    /Os dois documentos não combinam nesse ponto/.test(s));
+  {
+    // nenhuma questão do banco pode ter mais de um gabarito: `c` é um índice
+    const mods = [1, 2, 3, 4].map((i) => eval("[" + fs.readFileSync(path.join(__dirname, "..", "src", "dados", `modulo-${i}.part.js`), "utf8") + "][0]"));
+    let ruins = 0, n = 0;
+    mods.forEach((m) => (m.blocos || []).forEach((b) => {
+      const ver = (q) => { n++; if (!Number.isInteger(q.c) || q.c < 0 || q.c >= q.alts.length || Array.isArray(q.c)) ruins++; };
+      (b.niveis || []).forEach((nv) => (nv.questoes || []).forEach(ver));
+      (b.boss || []).forEach(ver);
+    }));
+    t(`as ${n} questões têm UM gabarito só (índice inteiro, nunca lista)`, ruins === 0, ruins + " fora do padrão");
+  }
 }
 
 console.log(`\n${total - falhas}/${total} testes passaram.` + (falhas ? `  ${falhas} FALHA(S).\n` : "  Nenhuma falha.\n"));
