@@ -195,6 +195,23 @@ const novoCodigo = () => {
   return s.slice(0, 5) + "-" + s.slice(5, 10) + "-" + s.slice(10, 15) + "-" + s.slice(15);
 };
 let temporizadorNuvem = null; // envio com atraso, para não subir a cada questão
+// Último estado que AINDA NÃO chegou à nuvem. Existe por causa de um defeito
+// real: o envio era um setTimeout de 4 segundos, e no iPhone basta bloquear a
+// tela ou trocar de app para o Safari congelar a página — o timer nunca
+// dispara. O progresso ficava salvo no aparelho e invisível para os outros.
+let pendenteNuvem = null;
+// Envio que sobrevive ao fechamento da página. `keepalive` faz o navegador
+// concluir a requisição mesmo depois de a aba morrer (limite de 64 KB; o
+// nosso estado tem ~10 KB). sendBeacon não serve aqui porque só faz POST e
+// o serviço só aceita PUT.
+const nuvemEnviarAgora = (url, cod, estado) => {
+  try {
+    return fetch(url.replace(/\/+$/, "") + "?c=" + encodeURIComponent(cod), {
+      method: "PUT", headers: { "content-type": "application/json" },
+      body: JSON.stringify(estado), keepalive: true,
+    });
+  } catch (e) { return Promise.reject(e); }
+};
 // Decide o que fazer ao abrir (e ao reconectar). Função pura, para poder
 // ser testada sem navegador: "puxar" | "empurrar" | "nada".
 const decidirSync = (qLocal, qNuvem) => {
@@ -202,6 +219,28 @@ const decidirSync = (qLocal, qNuvem) => {
   if (n > l) return "puxar";
   if (l > n) return "empurrar";
   return "nada";
+};
+// Quanto trabalho um estado carrega. Serve para uma pergunta só: puxar a
+// nuvem por cima deste aparelho DESTRUIRIA alguma coisa?
+const trabalhoDe = (s) => {
+  const st = (s && s.stats) || {};
+  return {
+    respostas: Object.values(st).reduce((a, v) => a + (v.r || 0) + (v.w || 0), 0),
+    pilulas: Object.keys((s && s.feitos) || {}).length,
+    xp: (s && s.xp) || 0,
+  };
+};
+// A regra do carimbo mais recente é simples, mas cega: quem gravou por
+// último leva tudo. Se este aparelho tem respostas ou pílulas que a nuvem
+// não tem, puxar apaga esse trabalho. Nesse caso a decisão passa a ser do
+// usuário, não do relógio. Função pura, para poder ser testada.
+const conflitoDeSync = (local, nuvem) => {
+  const l = trabalhoDe(local), n = trabalhoDe(nuvem);
+  const perde = [];
+  if (l.respostas > n.respostas) perde.push(`${l.respostas - n.respostas} resposta(s)`);
+  if (l.pilulas > n.pilulas) perde.push(`${l.pilulas - n.pilulas} pílula(s) vencida(s)`);
+  if (l.xp > n.xp) perde.push(`${l.xp - n.xp} XP`);
+  return perde.length ? { perde, local: l, nuvem: n } : null;
 };
 
 const SAVE_KEY = "projeto-cpa-completo-v1";
@@ -806,6 +845,7 @@ export default function ProjetoCPA() {
   const [historico, setHistorico] = useState([]);  // tentativas encerradas
   const [provaVista, setProvaVista] = useState(null); // tentativa aberta na revisão
   const [agora, setAgora] = useState(Date.now());  // relógio de parede da prova
+  const [conflitoSync, setConflitoSync] = useState(null); // nuvem x aparelho
   const [confirmando, setConfirmando] = useState(false);
   const [mapaAberto, setMapaAberto] = useState(false);
   const [avisoDados, setAvisoDados] = useState("");
@@ -857,10 +897,19 @@ export default function ProjetoCPA() {
           const qLocal = local.quando || 0;
           const acao = decidirSync(qLocal, qNuvem);
           if (acao === "puxar") {
-            const juntado = { ...nuvem, syncUrl: local.syncUrl, syncCod: local.syncCod };
-            aplicarEstado(juntado);
-            await window.storage.set(SAVE_KEY, JSON.stringify(juntado));
-            setMsgSync("Progresso atualizado com o que estava na nuvem.");
+            // A nuvem é mais recente — mas "mais recente" não quer dizer
+            // "mais completa". Se este aparelho tem trabalho que a nuvem não
+            // tem, puxar apagaria. Nesse caso, para e pergunta.
+            const conf = conflitoDeSync(local, nuvem);
+            if (conf) {
+              setConflitoSync({ ...conf, nuvemEstado: nuvem, localEstado: local });
+              setMsgSync("");
+            } else {
+              const juntado = { ...nuvem, syncUrl: local.syncUrl, syncCod: local.syncCod };
+              aplicarEstado(juntado);
+              await window.storage.set(SAVE_KEY, JSON.stringify(juntado));
+              setMsgSync("Progresso atualizado com o que estava na nuvem.");
+            }
           } else if (acao === "empurrar") {
             await nuvemEnviar(local.syncUrl, local.syncCod, local);
             setMsgSync(qNuvem ? "Este aparelho estava à frente: enviei o progresso para a nuvem."
@@ -875,14 +924,43 @@ export default function ProjetoCPA() {
     const st = { esquema: ESQUEMA, xp, combo, stats, feitos, bossBest, errados, favs, pressao, som, rev,
       syncUrl, syncCod, ...patch, quando: Date.now() };
     (async () => { try { await window.storage.set(SAVE_KEY, JSON.stringify(st)); } catch (e) {} })();
-    // sobe para a nuvem alguns segundos depois da última mexida
+    // sobe para a nuvem pouco depois da última mexida. O atraso é curto de
+    // propósito: cada segundo aqui é uma janela em que fechar o app deixa o
+    // progresso preso neste aparelho.
     if (st.syncUrl && st.syncCod) {
+      pendenteNuvem = st;
       clearTimeout(temporizadorNuvem);
       temporizadorNuvem = setTimeout(() => {
-        nuvemEnviar(st.syncUrl, st.syncCod, st).catch(() => {});
-      }, 4000);
+        const alvo = pendenteNuvem;
+        if (!alvo) return;
+        nuvemEnviar(alvo.syncUrl, alvo.syncCod, alvo)
+          .then(() => { if (pendenteNuvem === alvo) pendenteNuvem = null; })
+          .catch(() => {});
+      }, 1500);
     }
   };
+
+  // Fecha a janela em que o progresso ficava preso no aparelho: quando a
+  // página é escondida ou descarregada, o que estiver pendente vai AGORA,
+  // com keepalive, sem esperar o temporizador.
+  useEffect(() => {
+    const despejar = () => {
+      const alvo = pendenteNuvem;
+      if (!alvo || !alvo.syncUrl || !alvo.syncCod) return;
+      clearTimeout(temporizadorNuvem);
+      pendenteNuvem = null;
+      nuvemEnviarAgora(alvo.syncUrl, alvo.syncCod, alvo).catch(() => { pendenteNuvem = alvo; });
+    };
+    // pagehide cobre o fechamento e o "voltar" no iOS; visibilitychange cobre
+    // bloquear a tela e trocar de app, que é o caso do dia a dia no celular.
+    const aoEsconder = () => { if (document.visibilityState === "hidden") despejar(); };
+    window.addEventListener("pagehide", despejar);
+    document.addEventListener("visibilitychange", aoEsconder);
+    return () => {
+      window.removeEventListener("pagehide", despejar);
+      document.removeEventListener("visibilitychange", aoEsconder);
+    };
+  }, []);
 
   const modulo = MODULOS.find((m) => m.id === mId);
   const bloco = bId ? IDX_BLOCO[bId] : null;
@@ -1457,6 +1535,47 @@ export default function ProjetoCPA() {
       <div className="cx"><style>{CSS}</style><div className="cx-dots" />
         <Topo />
         <div className="cx-wrap">
+          {conflitoSync && (
+            <div className="cx-pane" style={{ marginTop: 14, borderColor: "var(--gold)", borderWidth: 2 }} role="alert">
+              <div className="cx-lb" style={{ color: "var(--gold)" }}>Os dois lados têm progresso diferente</div>
+              <p style={{ color: "var(--ink2)" }}>
+                A nuvem foi gravada depois, mas <b>este aparelho tem coisa que ela não tem</b>:
+                {" "}{conflitoSync.perde.join(" · ")}. Trazer a nuvem por cima apagaria isso, então
+                parei aqui. <b>Nada foi alterado ainda.</b>
+              </p>
+              <table className="cx-tbl"><tbody>
+                <tr><td /><td style={{ textAlign: "right" }}>Este aparelho</td></tr>
+                <tr><td>Respostas dadas</td><td>{conflitoSync.local.respostas} · nuvem {conflitoSync.nuvem.respostas}</td></tr>
+                <tr><td>Pílulas vencidas</td><td>{conflitoSync.local.pilulas} · nuvem {conflitoSync.nuvem.pilulas}</td></tr>
+                <tr><td>XP</td><td>{brl(conflitoSync.local.xp)} · nuvem {brl(conflitoSync.nuvem.xp)}</td></tr>
+              </tbody></table>
+              <div style={{ display: "grid", gap: 9, marginTop: 14 }}>
+                <button className="cx-btn" onClick={async () => {
+                  // fica com o deste aparelho e manda para a nuvem
+                  const st = { ...estadoAtual(), quando: Date.now() };
+                  try { await nuvemEnviar(st.syncUrl, st.syncCod, st); await window.storage.set(SAVE_KEY, JSON.stringify(st)); setMsgSync("Este aparelho virou a versão boa: enviei para a nuvem."); }
+                  catch (e) { setMsgSync("Não consegui enviar agora. Seu progresso continua intacto aqui; tente de novo com internet."); }
+                  setConflitoSync(null);
+                }}>Ficar com o deste aparelho e enviar</button>
+                <button className="cx-btn sec" onClick={async () => {
+                  const n = conflitoSync.nuvemEstado;
+                  const juntado = { ...n, syncUrl, syncCod };
+                  aplicarEstado(juntado);
+                  try { await window.storage.set(SAVE_KEY, JSON.stringify(juntado)); } catch (e) {}
+                  setMsgSync("Trouxe o da nuvem. Se precisar do que havia aqui, use um código de backup antigo.");
+                  setConflitoSync(null);
+                }}>Trazer o da nuvem (descarta o daqui)</button>
+                <button className="cx-chip" style={{ justifyContent: "center" }} onClick={() => {
+                  // não decide nada: leva à cópia de segurança para o usuário
+                  // guardar o estado deste aparelho ANTES de escolher
+                  const el = document.getElementById("cx-backup");
+                  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}>
+                  Guardar um backup deste aparelho antes de decidir
+                </button>
+              </div>
+            </div>
+          )}
           {avisoDados && (
             <div className="cx-pane" style={{ marginTop: 14, borderColor: "var(--no)" }} role="alert">
               <div className="cx-lb" style={{ color: "var(--no)" }}>Atenção com os dados</div>
@@ -1513,7 +1632,7 @@ export default function ProjetoCPA() {
             })}
           </div>
 
-          <div className="cx-pane" style={{ marginTop: 22 }}>
+          <div className="cx-pane" id="cx-backup" style={{ marginTop: 22 }}>
             <div className="cx-lb">Cópia de segurança</div>
             <p style={{ fontSize: 13.5, color: "var(--ink2)" }}>
               O progresso salva sozinho a cada questão. Este código é a apólice, e o campo de restauração

@@ -250,6 +250,61 @@ secao("6. SINCRONIA (regressão do que já funcionava)");
   t("aparelho zerado com nuvem cheia → puxar", decidirSync(0, 100) === "puxar");
   t("ambos zerados → nada", decidirSync(0, 0) === "nada");
   t("undefined não quebra", decidirSync(undefined, undefined) === "nada");
+
+  // ------------------------------------------------------------------
+  // O carimbo mais recente é cego: quem gravou por último leva tudo.
+  // conflitoDeSync existe para pegar o caso em que puxar DESTRUIRIA
+  // trabalho que só existe neste aparelho.
+  global.trabalhoDe = extrai("trabalhoDe", "\n};");
+  const conflitoDeSync = extrai("conflitoDeSync", "\n};");
+  const est = (resp, pil, xp) => ({
+    xp,
+    stats: Object.fromEntries([...Array(1)].map(() => ["t", { r: resp, w: 0 }])),
+    feitos: Object.fromEntries([...Array(pil)].map((_, i) => ["p" + i, {}])),
+  });
+  t("nuvem tem tudo que o aparelho tem → sem conflito, pode puxar",
+    conflitoDeSync(est(10, 5, 100), est(20, 9, 300)) === null);
+  t("estados iguais → sem conflito", conflitoDeSync(est(10, 5, 100), est(10, 5, 100)) === null);
+  {
+    const c = conflitoDeSync(est(120, 143, 9720), est(40, 20, 3000));
+    t("aparelho à frente em tudo → conflito detectado", !!c);
+    t("o conflito diz exatamente o que se perderia",
+      c && c.perde.length === 3 && /80 resposta/.test(c.perde[0]) && /123 pílula/.test(c.perde[1]) && /6720 XP/.test(c.perde[2]),
+      c && c.perde.join(" | "));
+  }
+  t("aparelho à frente só em respostas já basta para parar",
+    !!conflitoDeSync(est(50, 5, 100), est(40, 5, 100)));
+  t("aparelho à frente só em pílulas já basta para parar",
+    !!conflitoDeSync(est(10, 8, 100), est(10, 5, 100)));
+  t("estado vazio não gera conflito falso", conflitoDeSync({}, est(10, 5, 100)) === null);
+  t("nuvem vazia com aparelho cheio → conflito", !!conflitoDeSync(est(10, 5, 100), {}));
+
+  // o app precisa de fato consultar conflitoDeSync antes de aplicar a nuvem
+  t("o app pergunta antes de puxar por cima do aparelho",
+    /const conf = conflitoDeSync\(local, nuvem\);/.test(s) && /if \(conf\) \{\s*\n\s*setConflitoSync/.test(s));
+  t("nada é gravado enquanto o conflito não é resolvido",
+    /setConflitoSync\(\{ \.\.\.conf, nuvemEstado: nuvem, localEstado: local \}\);/.test(s));
+}
+
+// ================================================================
+secao("6b. O PROGRESSO NÃO PODE FICAR PRESO NO APARELHO");
+{
+  // Defeito real: o envio para a nuvem era um setTimeout de 4s. No iPhone,
+  // bloquear a tela ou trocar de app congela a página e o timer não dispara.
+  t("existe um registro do que ainda não subiu", /let pendenteNuvem = null;/.test(s));
+  t("salvar marca o estado como pendente", /pendenteNuvem = st;/.test(s));
+  t("o envio limpa o pendente só depois de dar certo",
+    /\.then\(\(\) => \{ if \(pendenteNuvem === alvo\) pendenteNuvem = null; \}\)/.test(s));
+  t("há despejo quando a página some (pagehide)", /window\.addEventListener\("pagehide", despejar\)/.test(s));
+  t("há despejo ao esconder a aba — bloquear a tela e trocar de app",
+    /document\.addEventListener\("visibilitychange", aoEsconder\)/.test(s) &&
+    /document\.visibilityState === "hidden"/.test(s));
+  t("o envio de despejo usa keepalive, que sobrevive ao fechamento",
+    /keepalive: true/.test(s));
+  t("falhou o despejo, o pendente volta para a fila em vez de sumir",
+    /\.catch\(\(\) => \{ pendenteNuvem = alvo; \}\)/.test(s));
+  const atraso = (s.match(/\}, (\d+)\);\s*\n\s*\}\;\s*\n\s*\n\s*\/\/ Fecha a janela/) || [])[1];
+  t(`o atraso do envio encolheu para 1,5s (era 4s)`, /\}, 1500\);/.test(s));
 }
 
 // ================================================================
