@@ -836,6 +836,7 @@ const CSS = `
   padding:12px 16px;border:2px solid var(--azul);border-radius:10px;font-weight:800;z-index:99}
 .cx-pular:focus{left:8px;top:8px}
 @media (prefers-reduced-motion:reduce){.cx *{animation:none!important;transition:none!important}}
+${VISUAL_CSS}
 `;
 
 // =====================================================================
@@ -1020,6 +1021,16 @@ export default function ProjetoCPA() {
   const [confirmando, setConfirmando] = useState(false);
   const [mapaAberto, setMapaAberto] = useState(false);
   const [avisoDados, setAvisoDados] = useState("");
+
+  // ---- camada visual ----
+  // `useRevelar(tela)` reobserva a cada troca de tela, porque o conteúdo
+  // muda inteiro. `useAmbiente()` instala UM listener de ponteiro e UM de
+  // scroll para o app todo, os dois passivos.
+  useRevelar(tela);
+  useAmbiente();
+  const xpMostrado = useContador(xp);
+  // no exame não há aurora nem revelação: a tela é austera de propósito
+  const noExameAgora = tela === "prova";
 
   // aplica um estado inteiro (vindo do disco ou da nuvem) na tela
   const aplicarEstado0 = (s) => {
@@ -1844,13 +1855,13 @@ export default function ProjetoCPA() {
 
   const Topo = ({ voltar, cAtiva }) => (
     <>
-      <div className="cx-top">
+      <div className="cx-top cx-topo">
         <div className="cx-topin">
           {voltar ? <button className="cx-chip" onClick={voltar}>← Voltar</button>
             : <div className="cx-logo">Projeto <b>CPA</b></div>}
           <div className="cx-xp">
             {delta !== null && <span className={"cx-delta " + (delta > 0 ? "up" : "dn")}>{delta > 0 ? "+" : "−"}{Math.abs(delta)}</span>}
-            <span className="cx-num" style={{ color: cAtiva || "var(--azul)" }}>{brl(xp)}</span>
+            <span className="cx-num" style={{ color: cAtiva || "var(--azul)" }}>{brl(xpMostrado)}</span>
             <button className="cx-chip" style={{ padding: "5px 9px" }} aria-label={som ? "Desligar som" : "Ligar som"}
               onClick={() => { const v = !som; setSom(v); salvar({ som: v }); }}>{som ? "🔊" : "🔇"}</button>
             <span className="cx-pat">{pat.emoji}<span style={{ display: "none" }}>x</span></span>
@@ -1878,7 +1889,7 @@ export default function ProjetoCPA() {
   // ---------------- HOME ----------------
   if (tela === "home") {
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo />
         <div className="cx-wrap">
           {conflitoSync && (
@@ -1929,13 +1940,13 @@ export default function ProjetoCPA() {
               <button className="cx-chip" style={{ marginTop: 9 }} onClick={() => setAvisoDados("")}>Entendi</button>
             </div>
           )}
-          <h1 className="cx-h1">Um app,<br />quatro módulos,<br /><span style={{ color: "var(--azul)" }}>{TOTAL_QUESTOES} questões.</span></h1>
-          <p className="cx-p">
+          <h1 className="cx-h1 rv rv-1">Um app,<br />quatro módulos,<br /><span style={{ color: "var(--azul)" }}>{TOTAL_QUESTOES} questões.</span></h1>
+          <p className="cx-p rv rv-2">
             {pat.emoji} <b>{pat.nome}</b>{prox ? ` · faltam ${brl(prox.xp - xp)} XP para ${prox.nome}` : " · patente máxima"}.
             Você venceu {totalFeitos} das {TOTAL_NIVEIS} pílulas.
           </p>
 
-          <div className="cx-bar">
+          <div className="cx-bar rv rv-3">
             <button className="cx-chip" onClick={() => setTela("fichas")}>🗂 Fichas de memorização</button>
             <button className="cx-chip" onClick={() => { setArv(null); setTela("arvores"); }}>💬 Atendimento (árvore)</button>
             <button className="cx-chip" onClick={() => setTela("musicas")}>🎵 Cantigas da prova</button>
@@ -1953,12 +1964,15 @@ export default function ProjetoCPA() {
           </div>
 
           <div className="cx-mods">
-            {MODULOS.map((m) => {
+            {MODULOS.map((m, iMod) => {
               const f = feitosDoModulo(m), tot = niveisDoModulo(m);
               const pct = Math.round((f / tot) * 100);
               const prec = precisaoModulo(m);
               return (
-                <button key={m.id} className="cx-mod" onClick={() => { setMId(m.id); setTela("modulo"); }}>
+                <button key={m.id} data-luz
+                  className={"cx-mod rv rv-" + Math.min(6, iMod + 3)}
+                  style={{ "--luz": cor(m.id) }}
+                  onClick={() => { setMId(m.id); setTela("modulo"); }}>
                   <span className="faixa" style={{ background: cor(m.id) }} />
                   <div className="cab">
                     <span className="cx-badge" style={{ background: cor(m.id) }}>{m.id}</span>
@@ -2049,7 +2063,7 @@ export default function ProjetoCPA() {
   // ---------------- MÓDULO ----------------
   if (tela === "modulo") {
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setTela("home")} cAtiva={cor(mId)} />
         <div className="cx-wrap">
           <div className="cx-eye" style={{ marginTop: 20, color: cor(mId) }}>Módulo {modulo.id} · {modulo.peso}% da prova</div>
@@ -2060,7 +2074,7 @@ export default function ProjetoCPA() {
               const f = feitosDoBloco(b), pct = Math.round((f / b.niveis.length) * 100);
               const best = bossBest[b.id], corte = Math.ceil(b.boss.length * 0.7);
               return (
-                <button key={b.id} className="cx-mod" style={{ marginBottom: 11 }} onClick={() => { setBId(b.id); setTela("bloco"); }}>
+                <button key={b.id} data-luz className="cx-mod rv" style={{ marginBottom: 11 }} onClick={() => { setBId(b.id); setTela("bloco"); }}>
                   <span className="faixa" style={{ background: cor(mId) }} />
                   <div className="cab">
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -2093,7 +2107,7 @@ export default function ProjetoCPA() {
       return p === null ? null : { id: n.id, pct: p };
     }).filter(Boolean).sort((a, b) => a.pct - b.pct);
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setTela("modulo")} cAtiva={cor(mId)} />
         <div className="cx-wrap">
           <div className="cx-eye" style={{ marginTop: 20, color: cor(mId) }}>Bloco {bloco.id}</div>
@@ -2124,7 +2138,7 @@ export default function ProjetoCPA() {
             )}
           </div>
           {linhas.length > 0 && (
-            <div className="cx-pane" style={{ marginTop: 20 }}>
+            <div className="cx-pane rv" style={{ marginTop: 20 }}>
               <div className="cx-lb">Onde você mais escorrega</div>
               <div className="cx-chart">
                 {linhas.slice(0, 9).map((l) => (
@@ -2146,7 +2160,7 @@ export default function ProjetoCPA() {
   if (tela === "pilula") {
     const vistos = new Set(); // um mesmo termo é marcado uma vez por pílula
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setTela("bloco")} cAtiva={cor(mId)} />
         <div className="cx-wrap">
           <div className="cx-eye" style={{ marginTop: 20, color: cor(mId) }}>Pílula {nivel.id}</div>
@@ -2177,7 +2191,7 @@ export default function ProjetoCPA() {
     // lista de árvores
     if (!a) {
       return (
-        <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+        <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
           <Topo voltar={() => setTela("home")} />
           <div className="cx-wrap">
             <h1 className="cx-h1" style={{ fontSize: 27 }}>Atendimento (árvore de decisão)</h1>
@@ -2188,7 +2202,7 @@ export default function ProjetoCPA() {
             </p>
             <div style={{ marginTop: 18 }}>
               {ARVORES.map((x) => (
-                <button key={x.id} className="cx-mod" style={{ marginBottom: 11 }}
+                <button key={x.id} data-luz className="cx-mod rv" style={{ marginBottom: 11 }}
                   onClick={() => { setArv({ id: x.id, passo: 0, escolhas: [], ordens: ordensDaArvore(x) }); }}>
                   <span className="faixa" style={{ background: "var(--roxo)" }} />
                   <div className="cab">
@@ -2213,7 +2227,7 @@ export default function ProjetoCPA() {
     const pct = Math.round((pontos / maxPontos) * 100);
 
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setArv(null)} cAtiva="var(--roxo)" />
         <div className="cx-wrap">
           <div className="cx-eye" style={{ marginTop: 18, color: "var(--roxo)" }}>Atendimento · {a.titulo}</div>
@@ -2305,7 +2319,7 @@ export default function ProjetoCPA() {
       setTocandoMus(foi ? m.id : null);
     };
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => { Som.pararMusica(); setTocandoMus(null); setLinhaMus(-1); setTela("home"); }} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Cantigas da prova</h1>
@@ -2345,7 +2359,7 @@ export default function ProjetoCPA() {
   // ---------------- CONFRONTOS ----------------
   if (tela === "confrontos") {
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Fichas de confronto</h1>
@@ -2392,7 +2406,7 @@ export default function ProjetoCPA() {
   if (tela === "tabelao") {
     const totalItens = TABELAO.reduce((a, t) => a + t.itens.length, 0);
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Tabelão da prova</h1>
@@ -2423,7 +2437,7 @@ export default function ProjetoCPA() {
       ? termos.filter((t) => t.toLowerCase().includes(alvo) || VERBETES[t].toLowerCase().includes(alvo))
       : termos;
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Glossário</h1>
@@ -2454,7 +2468,7 @@ export default function ProjetoCPA() {
   // ---------------- FERRAMENTAS ----------------
   if (tela === "ferramentas") {
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Ferramentas da prova</h1>
@@ -2483,7 +2497,7 @@ export default function ProjetoCPA() {
       </tr>
     );
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Exame</h1>
@@ -2519,7 +2533,7 @@ export default function ProjetoCPA() {
             </div>
           )}
 
-          <div className="cx-pane" style={{ marginTop: 16 }}>
+          <div className="cx-pane rv" style={{ marginTop: 16 }}>
             <div className="cx-lb">Estrutura reproduzida</div>
             <table className="cx-tbl"><tbody>
               {linha("Duração", "2h30", R.duracaoSeg.origem, R.duracaoSeg.nota)}
@@ -2537,7 +2551,7 @@ export default function ProjetoCPA() {
             </p>
           </div>
 
-          <div className="cx-pane" style={{ marginTop: 12 }}>
+          <div className="cx-pane rv" style={{ marginTop: 12 }}>
             <div className="cx-lb">De onde saem as questões</div>
             <p style={{ color: "var(--ink2)" }}>
               O sorteio usa <b>{ELEGIVEIS_EXAME.length}</b> das {TODAS_CHAVES.length} questões do banco.
@@ -2547,7 +2561,7 @@ export default function ProjetoCPA() {
             </p>
           </div>
 
-          <div className="cx-pane" style={{ marginTop: 12 }}>
+          <div className="cx-pane rv" style={{ marginTop: 12 }}>
             <div className="cx-lb">O que é adaptação nossa</div>
             <p style={{ color: "var(--ink2)" }}>
               As questões são <b>autorais</b>, escritas no formato da banca — não são questões da ANBIMA.
@@ -2573,7 +2587,7 @@ export default function ProjetoCPA() {
               {historico.map((h) => {
                 const r = h.resultado || corrigir(h);
                 return (
-                  <div key={h.id} className="cx-mod" style={{ marginBottom: 9, cursor: "default" }}>
+                  <div key={h.id} data-luz className="cx-mod rv" style={{ marginBottom: 9, cursor: "default" }}>
                     <span className="faixa" style={{ background: r.aprovado ? "var(--ok)" : "var(--no)" }} />
                     <div className="cab">
                       <button className="cx-histbt" onClick={() => { setProvaVista(h); setTela("provaFim"); }}>
@@ -2786,7 +2800,7 @@ export default function ProjetoCPA() {
       return { p, max: arv.length * 3, pct: Math.round((p / (arv.length * 3)) * 100) };
     })();
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setTela("provaHome")} />
         <div className="cx-wrap">
           <div style={{ textAlign: "center", paddingTop: 14 }}>
@@ -2814,7 +2828,7 @@ export default function ProjetoCPA() {
             )}
           </div>
 
-          <div className="cx-pane" style={{ marginTop: 20 }}>
+          <div className="cx-pane rv" style={{ marginTop: 20 }}>
             <div className="cx-lb">Como esta nota foi calculada</div>
             <table className="cx-tbl"><tbody>
               <tr><td>Itens da prova</td><td>{r.total}</td></tr>
@@ -2838,7 +2852,7 @@ export default function ProjetoCPA() {
             </p>
           </div>
 
-          <div className="cx-pane" style={{ marginTop: 12 }}>
+          <div className="cx-pane rv" style={{ marginTop: 12 }}>
             <div className="cx-lb">Por módulo</div>
             <table className="cx-tbl"><tbody>
               {Object.keys(porMod).sort().map((m) => {
@@ -2915,7 +2929,7 @@ export default function ProjetoCPA() {
     const total = sessao.itens.length, pctT = (tick / TEMPO_QUESTAO) * 100;
     const cAtiva = cor(q.mId);
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setTela(sessao.tipo === "nivel" || sessao.tipo === "boss" ? "bloco" : "home")} cAtiva={cAtiva} />
         <div className="cx-wrap">
           <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginTop: 18, flexWrap: "wrap" }}>
@@ -2980,7 +2994,7 @@ export default function ProjetoCPA() {
     const pos = nAtual ? irmaos.findIndex((x) => x.id === nAtual.id) : -1;
     const prox = pos >= 0 && pos + 1 < irmaos.length ? irmaos[pos + 1] : null;
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo />
         <div className="cx-wrap" style={{ textAlign: "center", paddingTop: 32 }}>
           <div className="cx-medal" style={{ borderColor: passou ? "var(--ok)" : "var(--no)", color: passou ? "var(--ok)" : "var(--no)", background: passou ? "var(--verde-l)" : "#FEECEC" }}>
@@ -3037,7 +3051,7 @@ export default function ProjetoCPA() {
     // na revisão e no maço de fracos, o conteúdo fica coberto até você tentar lembrar
     const modoRecall = filtroFicha === "rev" || filtroFicha === "fracos";
     return (
-      <div className="cx"><style>{CSS}</style><div className="cx-dots" />
+      <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Fichas de memorização</h1>
@@ -3057,7 +3071,7 @@ export default function ProjetoCPA() {
             ))}
           </div>
           {lista.length === 0 && (
-            <div className="cx-pane" style={{ marginTop: 16 }}>
+            <div className="cx-pane rv" style={{ marginTop: 16 }}>
               <p style={{ color: "var(--ink2)" }}>
                 {filtroFicha === "rev"
                   ? "Nenhuma ficha vence hoje. As favoritas voltam em intervalos crescentes: 1, 3, 7, 15 e 30 dias."
