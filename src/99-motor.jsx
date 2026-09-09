@@ -1191,6 +1191,16 @@ export default function ProjetoCPA() {
     return () => window.removeEventListener("online", aoReconectar);
   }, []);
 
+  // O rascunho e a planilha entravam no que é gravado, mas NADA disparava a
+  // gravação — só telas de estudo chamam salvar(). Resultado: o usuário
+  // fechava o app e perdia a conta que tinha acabado de montar. Aqui um
+  // atraso curto evita escrever o disco a cada tecla.
+  useEffect(() => {
+    if (!loaded) return;
+    const t = setTimeout(() => salvar({}), 700);
+    return () => clearTimeout(t);
+  }, [ferr.notas, ferr.plan, loaded]);
+
   // som: liga/desliga trilha e efeitos; no iPhone o áudio destrava no 1º toque
   useEffect(() => { if (loaded) Som.set(som); }, [som, loaded]);
   useEffect(() => {

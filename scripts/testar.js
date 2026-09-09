@@ -643,6 +643,13 @@ secao("6f. FERRAMENTAS — planilha, fórmulas e o lacre do exame");
   t("o aviso cita o item do edital", /edital 13\.11/.test(s));
   t("rascunho e planilha são guardados; teclas da calculadora não",
     /ferr: \{ notas: ferr\.notas \|\| "", plan: ferr\.plan \|\| \{\} \}/.test(s));
+  // DOIS BUGS REAIS, pegos abrindo a tela e usando:
+  t("algo DISPARA a gravação do rascunho e da planilha",
+    /useEffect\(\(\) => \{\s*if \(!loaded\) return;\s*const t = setTimeout\(\(\) => salvar\(\{\}\), 700\);/.test(s));
+  t("a célula em edição é estado de INTERFACE, fora dos dados",
+    /const \[editando, setEditando\] = useState\(null\);/.test(s) && !/__editando/.test(s));
+  t("o que vai para o disco não carrega controle de foco",
+    !/__editando/.test(s));
 }
 
 // ================================================================

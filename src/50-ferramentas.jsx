@@ -659,6 +659,9 @@ function CalcSimples({ est, setEst }) {
 
 // ---------------------------------------------------------------------
 function Planilha({ celulas, setCelulas }) {
+  // qual célula está sendo digitada. É estado de INTERFACE: não pertence aos
+  // dados, não vai para o disco e não entra na corrida do onChange/onBlur.
+  const [editando, setEditando] = useState(null);
   return (
     <div className="fr-wrap">
       <p style={{ fontSize: 13, color: "var(--ink2)", lineHeight: 1.55 }}>
@@ -689,12 +692,12 @@ function Planilha({ celulas, setCelulas }) {
                     return (
                       <td key={ref} className={erro ? "erro" : ""}>
                         <input
-                          value={celulas.__editando === ref ? bruto : exibido}
+                          value={editando === ref ? bruto : exibido}
                           aria-label={`célula ${ref}`}
                           inputMode={bruto.startsWith("=") ? "text" : "decimal"}
-                          onFocus={() => setCelulas({ ...celulas, __editando: ref })}
-                          onBlur={() => setCelulas((x) => { const n = { ...x }; delete n.__editando; return n; })}
-                          onChange={(ev) => setCelulas({ ...celulas, [ref]: ev.target.value, __editando: ref })}
+                          onFocus={() => setEditando(ref)}
+                          onBlur={() => setEditando((a) => (a === ref ? null : a))}
+                          onChange={(ev) => setCelulas({ ...celulas, [ref]: ev.target.value })}
                         />
                       </td>
                     );
@@ -706,7 +709,7 @@ function Planilha({ celulas, setCelulas }) {
         </table>
       </div>
       <button className="cx-chip" style={{ justifySelf: "start" }}
-        onClick={() => setCelulas({})}>Limpar a planilha</button>
+        onClick={() => { setCelulas({}); setEditando(null); }}>Limpar a planilha</button>
     </div>
   );
 }
@@ -768,7 +771,7 @@ function Ferramentas({ estado, setEstado, noExame }) {
       <div style={{ marginTop: 12 }}>
         {aba === "calc" && <CalcSimples est={e.calc || { entrada: "0", acum: 0, op: null, novo: true, mem: 0 }}
           setEst={(v) => set({ calc: v })} />}
-        {aba === "plan" && <Planilha celulas={e.plan || {}} setCelulas={(v) => set({ plan: typeof v === "function" ? v(e.plan || {}) : v })} />}
+        {aba === "plan" && <Planilha celulas={e.plan || {}} setCelulas={(v) => set({ plan: v })} />}
         {aba === "notas" && (
           <div className="fr-wrap">
             <p style={{ fontSize: 13, color: "var(--ink2)" }}>
