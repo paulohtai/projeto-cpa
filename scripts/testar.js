@@ -184,8 +184,8 @@ secao("3. CRONÔMETRO POR PRAZO ABSOLUTO");
 secao("4. TOQUE REPETIDO E TENTATIVA ENCERRADA");
 {
   t("responder o mesmo valor de novo sai cedo", /if \(it\[campo\] === valor\) return;/.test(s));
-  t("não aceita resposta com a prova entregue ou vencida",
-    /if \(!prova \|\| prova\.entregue \|\| Date\.now\(\) >= prova\.fimEm\) return;/.test(s));
+  t("não aceita resposta com a prova entregue, pausada ou vencida",
+    /if \(!prova \|\| prova\.entregue \|\| prova\.pausada \|\| Date\.now\(\) >= prova\.fimEm\) return;/.test(s));
   t("navegar entre itens exige prova aberta", /const irPara = \(i\) => \{ if \(prova && !prova\.entregue\)/.test(s));
   t("marcar item exige prova aberta", /const marcarItem[\s\S]{0,120}if \(!prova \|\| prova\.entregue\) return;/.test(s));
   t("encerrar duas vezes não duplica no histórico", /const encerrarProva = \(motivo\) => \{\s*if \(!prova \|\| prova\.entregue\) return;/.test(s));
@@ -314,8 +314,8 @@ secao("6c. HISTÓRICO DE PROVAS ENTRE APARELHOS");
 {
   const packItem = global.packItem = extrai("packItem", "].join(\";\");");
   const unpackItem = global.unpackItem = extrai("unpackItem", "\n};");
-  const packTentativa = extrai("packTentativa", "\n});");
-  const unpackTentativa = extrai("unpackTentativa", "\n});");
+  const packTentativa = global.packTentativa = extrai("packTentativa", "\n});");
+  const unpackTentativa = global.unpackTentativa = extrai("unpackTentativa", "\n});");
   const mesclarHistorico = extrai("mesclarHistorico", "\n};");
   const mesclarApagados = extrai("mesclarApagados", ".slice(-200);");
 
@@ -403,6 +403,87 @@ secao("6c. HISTÓRICO DE PROVAS ENTRE APARELHOS");
   t("apagar avisa a nuvem na hora", /const apagarTentativa[\s\S]{0,900}nuvemEnviar\(syncUrl, syncCod, estadoAtual\(/.test(s));
   t("apagar pede confirmação", /Apagar esta prova\?/.test(s) && /setApagarId\(h\.id\)/.test(s));
   t("a prova registra em que aparelho foi feita", /aparelho: nomeDoAparelho\(\)/.test(s));
+}
+
+// ================================================================
+secao("6d. PAUSAR E RETOMAR A PROVA");
+{
+  global.packProva = extrai("packProva", "\n});");
+  global.unpackProva = extrai("unpackProva", "\n});");
+  const restanteDaProva = extrai("restanteDaProva", "\n};");
+  const escolherProva = extrai("escolherProva", "\n};");
+  const packProva = global.packProva, unpackProva = global.unpackProva;
+
+  // ---- o relógio
+  const agora = 1000000000;
+  const rodando = { fimEm: agora + 3600e3, pausada: false };
+  t("rodando, o relógio conta a partir do prazo absoluto", restanteDaProva(rodando, agora) === 3600);
+  t("rodando, o tempo passa mesmo com o app fechado", restanteDaProva(rodando, agora + 600e3) === 3000);
+  const pausada = { fimEm: agora + 3600e3, pausada: true, restanteSeg: 3000 };
+  t("pausada, o relógio NÃO anda", restanteDaProva(pausada, agora) === 3000 && restanteDaProva(pausada, agora + 86400e3) === 3000);
+  t("pausada ignora o fimEm velho", restanteDaProva(pausada, agora + 99999e3) === 3000);
+  t("nunca devolve tempo negativo", restanteDaProva({ fimEm: agora - 1e6, pausada: false }, agora) === 0);
+  t("prova inexistente devolve zero", restanteDaProva(null, agora) === 0);
+
+  // retomar: o prazo renasce do que sobrou
+  {
+    const p = { fimEm: agora + 3600e3, pausada: false };
+    const resta = restanteDaProva(p, agora + 600e3);              // 3000s
+    const pausou = { ...p, pausada: true, restanteSeg: resta, pausadaEm: agora + 600e3 };
+    const bemDepois = agora + 600e3 + 86400e3;                     // um dia parado
+    const voltou = { ...pausou, pausada: false, fimEm: bemDepois + pausou.restanteSeg * 1000 };
+    t("retomar um dia depois devolve exatamente o tempo que sobrou",
+      restanteDaProva(voltou, bemDepois) === 3000, String(restanteDaProva(voltou, bemDepois)));
+    t("pausar não cria tempo do nada", pausou.restanteSeg <= 3600);
+  }
+
+  // ---- ida e volta pela nuvem
+  const prova = { id: 777, inicio: 777, i: 36, fimEm: agora + 6000e3, pausada: true, restanteSeg: 6404,
+    pausas: 2, tempoPausadoMs: 120000, pausadaEm: agora, atualizadoEm: agora, aparelho: "Computador",
+    versaoGabarito: "2026-09-08", regras: { minimoAcertos: 35 }, resultado: null,
+    itens: [{ tipo: "mc", chave: "2.1.3.3|0", ordem: [1, 3, 0, 2], gabarito: 1, resposta: 1, marcada: false },
+            { tipo: "mc", chave: "1.1.1|0", ordem: [0, 1, 2, 3], gabarito: 2, resposta: null, marcada: true }] };
+  const v = unpackProva(packProva(prova));
+  t("a prova pausada volta no mesmo item", v.i === 36);
+  t("o tempo restante sobrevive à ida e volta", v.restanteSeg === 6404 && v.pausada === true);
+  t("as respostas sobrevivem, inclusive a que estava em branco",
+    v.itens[0].resposta === 1 && v.itens[1].resposta === null && v.itens[1].marcada === true);
+  t("a contagem de pausas sobrevive", v.pausas === 2 && v.tempoPausadoMs === 120000);
+  t("a prova volta como NÃO entregue", v.entregue === false && v.motivoFim === null);
+  t("o aparelho onde foi pausada sobrevive", v.aparelho === "Computador");
+  t("prova nula vira nula, sem quebrar", packProva(null) === null && unpackProva(null) === null);
+  t(`a prova pausada é leve o bastante para a nuvem (${JSON.stringify(packProva(prova)).length} bytes com 2 itens)`,
+    JSON.stringify(packProva(prova)).length < 1500);
+
+  // ---- qual prova vale quando os dois lados têm uma
+  const P = (id, u, extra) => ({ id, atualizadoEm: u, ...extra });
+  t("só a nuvem tem prova → vale a da nuvem", escolherProva(null, P(1, 10), []).id === 1);
+  t("só o aparelho tem prova → vale a daqui", escolherProva(P(2, 10), null, []).id === 2);
+  t("mesma prova nos dois lados → vale a mexida mais recentemente",
+    escolherProva(P(3, 10), P(3, 20), []).atualizadoEm === 20);
+  t("mesma prova, a daqui é mais nova → fica a daqui",
+    escolherProva(P(3, 30), P(3, 20), []).atualizadoEm === 30);
+  t("provas diferentes → vale a mais recente", escolherProva(P(4, 10), P(5, 40), []).id === 5);
+  t("prova já encerrada não ressuscita da nuvem", escolherProva(null, P(6, 99), [6]) === null);
+  t("prova já encerrada não ressuscita do disco", escolherProva(P(7, 99), null, [7]) === null);
+  t("nenhum dos lados tem prova → nada", escolherProva(null, null, []) === null);
+
+  // ---- o app precisa mesmo usar isso
+  t("existe ação de pausar", /const pausarProva = async \(\) => \{/.test(s));
+  t("existe ação de retomar", /const retomarProva = async \(\) => \{/.test(s));
+  t("pausar guarda o tempo restante", /pausada: true, restanteSeg: resta/.test(s));
+  t("retomar recria o prazo a partir de agora", /fimEm: Date\.now\(\) \+ \(prova\.restanteSeg \|\| 0\) \* 1000/.test(s));
+  t("pausada, o cronômetro nem roda nem encerra sozinha",
+    /if \(!prova \|\| prova\.entregue \|\| prova\.pausada\) return;/.test(s));
+  t("a tela da prova não abre com ela pausada", /tela === "prova" && prova && !prova\.entregue && !prova\.pausada/.test(s));
+  t("pausar sobe para a nuvem na hora", /const pausarProva[\s\S]{0,700}await subirProva\(p\)/.test(s));
+  t("a prova em andamento viaja no estado sincronizado", /prova: packProva\(prova\)/.test(s));
+  t("encerrar tira a prova da nuvem", /prova: null, hist: novo\.map\(packTentativa\)/.test(s));
+  t("a carga escolhe qual prova vale", /const vencedora = escolherProva\(provaLocal, daNuvemProva, ids\);/.test(s));
+  t("o resultado avisa que a prova foi pausada", /Pausada \{h\.pausas\}×/.test(s));
+  t("o aviso diz que pausar não reproduz a condição de prova",
+    /no exame de verdade não existe pausa/.test(s));
+  t("a tela explica que as respostas sobem AO PAUSAR", /As respostas sobem para a nuvem <b>ao pausar<\/b>/.test(s));
 }
 
 // ================================================================

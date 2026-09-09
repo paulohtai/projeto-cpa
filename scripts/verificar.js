@@ -445,7 +445,7 @@ colisao === 0 ? ok("nenhum exemplo repete enunciado de questão (não entrega ga
 // 6j. EXAME LACRADO — nada pode corrigir antes de entregar
 // Recorta só o bloco da tela da prova e procura qualquer sinal de correção.
 {
-  const ini = s.indexOf('if (tela === "prova" && prova && !prova.entregue)');
+  const ini = s.indexOf('if (tela === "prova" && prova && !prova.entregue && !prova.pausada)');
   const fim = s.indexOf('if (tela === "provaFim"');
   if (ini < 0 || fim < 0 || fim < ini) erro("não encontrei o bloco da tela do exame para auditar");
   else {
@@ -529,8 +529,8 @@ colisao === 0 ? ok("nenhum exemplo repete enunciado de questão (não entrega ga
     ? ok("prazo da prova é um instante absoluto gravado no disco") : erro("o prazo da prova não é absoluto — recarregar devolveria tempo");
   /agora >= prova\.fimEm/.test(s) ? ok("encerra sozinha ao vencer o prazo") : erro("a prova não encerra sozinha no prazo");
   /window\.storage\.set\(PROVA_KEY/.test(s) ? ok("tentativa em andamento é gravada em chave própria") : erro("a prova não é persistida");
-  /if \(!prova \|\| prova\.entregue \|\| Date\.now\(\) >= prova\.fimEm\) return;/.test(s)
-    ? ok("não aceita resposta depois de entregue nem depois do prazo") : erro("dá para responder depois do fim");
+  /if \(!prova \|\| prova\.entregue \|\| prova\.pausada \|\| Date\.now\(\) >= prova\.fimEm\) return;/.test(s)
+    ? ok("não aceita resposta depois de entregue, pausada nem depois do prazo") : erro("dá para responder depois do fim");
   /if \(it\[campo\] === valor\) return;/.test(s) ? ok("tocar duas vezes na mesma alternativa não pontua duas vezes") : erro("toque repetido não está protegido");
 }
 

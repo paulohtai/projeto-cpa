@@ -276,6 +276,49 @@ const unpackTentativa = (p) => ({
   versaoGabarito: p.v, aparelho: p.n || "", resultado: p.r, regras: p.g,
   itens: (p.x || []).map(unpackItem),
 });
+// ---------------------------------------------------------------------
+// PROVA EM ANDAMENTO NA NUVEM — para pausar aqui e continuar em outro lugar.
+//
+// Contrato, e ele precisa estar claro na tela: as respostas sobem para a
+// nuvem QUANDO VOCÊ PAUSA. Não a cada questão. Então retomar em outro
+// aparelho retoma do ponto em que foi pausado, não do último toque.
+// Sincronizar a cada resposta seria conversa constante com o servidor por
+// um ganho que ninguém pediu.
+//
+// O relógio: enquanto roda, vale `fimEm` (instante absoluto — recarregar
+// não devolve tempo). Ao pausar, guardamos `restanteSeg` e o `fimEm` deixa
+// de valer; ao retomar, um `fimEm` novo nasce de Date.now() + restante.
+// ---------------------------------------------------------------------
+const packProva = (p) => (!p ? null : {
+  ...packTentativa(p),
+  cur: p.i || 0, f: p.fimEm, s: p.restanteSeg, z: p.pausada ? 1 : 0,
+  u: p.atualizadoEm || p.inicio, ps: p.pausas || 0, tp: p.tempoPausadoMs || 0, pe: p.pausadaEm || 0,
+});
+const unpackProva = (o) => (!o ? null : {
+  ...unpackTentativa(o),
+  entregue: false, entregueEm: null, motivoFim: null,
+  i: o.cur || 0, fimEm: o.f, restanteSeg: o.s, pausada: !!o.z,
+  atualizadoEm: o.u, pausas: o.ps || 0, tempoPausadoMs: o.tp || 0, pausadaEm: o.pe || 0,
+});
+// Quanto tempo resta, seja rodando ou pausada. Função pura: é a mesma conta
+// que a tela usa e que o encerramento automático consulta.
+const restanteDaProva = (p, agora) => {
+  if (!p) return 0;
+  if (p.pausada) return Math.max(0, Math.round(p.restanteSeg || 0));
+  return Math.max(0, Math.round(((p.fimEm || 0) - agora) / 1000));
+};
+// Qual prova em andamento vale: a mexida mais recentemente. Uma já encerrada
+// (id presente no histórico) é descartada, para não ressuscitar.
+const escolherProva = (local, nuvem, idsNoHistorico) => {
+  const viva = (p) => p && !(idsNoHistorico || []).includes(p.id);
+  const l = viva(local) ? local : null;
+  const n = viva(nuvem) ? nuvem : null;
+  if (!l) return n;
+  if (!n) return l;
+  if (l.id === n.id) return (n.atualizadoEm || 0) > (l.atualizadoEm || 0) ? n : l;
+  return (n.atualizadoEm || 0) > (l.atualizadoEm || 0) ? n : l;
+};
+
 // União por id, com lápides. Sem isto, a regra do "carimbo mais recente"
 // apagaria as provas do outro aparelho a cada sincronização — e apagar uma
 // prova num aparelho não pegaria no outro, porque a união a traria de volta.
@@ -968,11 +1011,12 @@ export default function ProjetoCPA() {
       }
       // exame e histórico moram em chaves próprias: um erro no estudo não
       // derruba uma prova em andamento, e vice-versa.
+      let provaLocal = null;
       try {
         const rp = await window.storage.get(PROVA_KEY);
         if (rp && rp.value) {
           const p = JSON.parse(rp.value);
-          if (p && Array.isArray(p.itens) && !p.entregue) setProva(p);
+          if (p && Array.isArray(p.itens) && !p.entregue) { provaLocal = p; setProva(p); }
         }
       } catch (e) { setAvisoDados((a) => a || "A prova em andamento não pôde ser lida e foi descartada. O histórico e o progresso de estudo estão intactos."); }
       let histLocal = [], apagadosLocal = [];
@@ -1041,6 +1085,21 @@ export default function ProjetoCPA() {
             if (mudouAqui && unido.length > histLocal.length) {
               setMsgSync(`Trouxe ${unido.length - histLocal.length} prova(s) feita(s) em outro aparelho.`);
             }
+
+            // ---- PROVA EM ANDAMENTO: a mexida mais recentemente é a que vale
+            // Uma prova pausada no celular tem de aparecer aqui para ser
+            // retomada. Uma já encerrada (id no histórico) é descartada.
+            const daNuvemProva = unpackProva(nuvem.prova);
+            const ids = unido.map((x) => x.id);
+            const vencedora = escolherProva(provaLocal, daNuvemProva, ids);
+            if (vencedora !== provaLocal) {
+              setProva(vencedora);
+              await window.storage.set(PROVA_KEY, vencedora ? JSON.stringify(vencedora) : "");
+              if (vencedora && vencedora.pausada) {
+                const resp = vencedora.itens.filter((x) => (x.tipo === "arvore" ? x.escolha : x.resposta) !== null).length;
+                setMsgSync(`Há uma prova pausada${vencedora.aparelho ? " no " + vencedora.aparelho : ""}: ${resp} de ${vencedora.itens.length} respondidos, ${fmtRelogio(restanteDaProva(vencedora, Date.now()))} restando. Abra Exame para retomar.`);
+              }
+            }
           } catch (e) {}
         } catch (e) { setMsgSync("Sem conexão com a nuvem agora — seguindo com o progresso local."); }
       }
@@ -1055,6 +1114,7 @@ export default function ProjetoCPA() {
       syncUrl, syncCod,
       hist: (histAgora || historico).map(packTentativa),
       apagados: apagadosAgora || apagados,
+      prova: packProva(prova),
       ...resto, quando: Date.now() };
     (async () => { try { await window.storage.set(SAVE_KEY, JSON.stringify(st)); } catch (e) {} })();
     // sobe para a nuvem pouco depois da última mexida. O atraso é curto de
@@ -1144,14 +1204,15 @@ export default function ProjetoCPA() {
   // app não reinicia nada nem devolve tempo. Voltar depois do prazo cai
   // direto no encerramento automático.
   useEffect(() => {
-    if (!prova || prova.entregue) return;
+    if (!prova || prova.entregue || prova.pausada) return;
     const t = setInterval(() => setAgora(Date.now()), 1000);
     setAgora(Date.now());
     return () => clearInterval(t);
-  }, [prova && prova.id, prova && prova.entregue]);
+  }, [prova && prova.id, prova && prova.entregue, prova && prova.pausada]);
 
   useEffect(() => {
-    if (!prova || prova.entregue) return;
+    // pausada, o relógio não corre — e portanto não encerra sozinha
+    if (!prova || prova.entregue || prova.pausada) return;
     if (agora >= prova.fimEm) encerrarProva("tempo");
   }, [agora, prova]);
 
@@ -1314,7 +1375,7 @@ export default function ProjetoCPA() {
   // grava uma resposta. Tocar de novo na MESMA alternativa não faz nada;
   // trocar por outra sobrescreve. Nunca acumula nem pontua duas vezes.
   const responderProva = (valor) => {
-    if (!prova || prova.entregue || Date.now() >= prova.fimEm) return;
+    if (!prova || prova.entregue || prova.pausada || Date.now() >= prova.fimEm) return;
     const it = prova.itens[prova.i];
     const campo = it.tipo === "arvore" ? "escolha" : "resposta";
     if (it[campo] === valor) return;
@@ -1329,6 +1390,40 @@ export default function ProjetoCPA() {
     salvarProva({ ...prova, itens });
   };
 
+  // Sobe a prova para a nuvem AGORA. Só é chamado ao pausar, retomar e
+  // encerrar — não a cada resposta.
+  const subirProva = async (p) => {
+    if (!syncUrl || !syncCod) return true;
+    try { await nuvemEnviar(syncUrl, syncCod, estadoAtual({ prova: packProva(p) })); return true; }
+    catch (e) { return false; }
+  };
+
+  const pausarProva = async () => {
+    if (!prova || prova.entregue || prova.pausada) return;
+    const resta = restanteDaProva(prova, Date.now());
+    const p = { ...prova, pausada: true, restanteSeg: resta, pausadaEm: Date.now(),
+      aparelho: nomeDoAparelho(),
+      pausas: (prova.pausas || 0) + 1, atualizadoEm: Date.now() };
+    salvarProva(p);
+    setTela("provaHome");
+    const foi = await subirProva(p);
+    setMsgSync(foi
+      ? "Prova pausada e guardada na nuvem. Dá para retomar aqui ou em outro aparelho."
+      : "Prova pausada neste aparelho. Sem internet agora, então ela ainda não está disponível nos outros.");
+  };
+
+  const retomarProva = async () => {
+    if (!prova || prova.entregue || !prova.pausada) return;
+    // o prazo renasce a partir de agora, com o tempo que sobrou
+    const p = { ...prova, pausada: false, fimEm: Date.now() + (prova.restanteSeg || 0) * 1000,
+      tempoPausadoMs: (prova.tempoPausadoMs || 0) + (prova.pausadaEm ? Date.now() - prova.pausadaEm : 0),
+      pausadaEm: 0, atualizadoEm: Date.now() };
+    salvarProva(p);
+    setTela("prova");
+    setMsgSync("");
+    await subirProva(p); // avisa os outros aparelhos que ela voltou a correr aqui
+  };
+
   const irPara = (i) => { if (prova && !prova.entregue) salvarProva({ ...prova, i: Math.max(0, Math.min(prova.itens.length - 1, i)) }); };
   const marcarItem = () => {
     if (!prova || prova.entregue) return;
@@ -1340,7 +1435,7 @@ export default function ProjetoCPA() {
   const encerrarProva = (motivo) => {
     if (!prova || prova.entregue) return;
     const fechada = { ...prova, entregue: true, entregueEm: Date.now(), motivoFim: motivo,
-      aparelho: nomeDoAparelho(), resultado: corrigir(prova) };
+      pausada: false, aparelho: nomeDoAparelho(), resultado: corrigir(prova) };
     // O histórico guarda as 30 mais recentes. Passou disso, a mais antiga
     // sai — e o usuário fica sabendo, em vez de a prova sumir em silêncio.
     const juntado = [fechada, ...historico];
@@ -1355,6 +1450,10 @@ export default function ProjetoCPA() {
     (async () => {
       try { await window.storage.set(HIST_KEY, JSON.stringify({ h: novo, apagados })); } catch (e) {}
       try { await window.storage.set(PROVA_KEY, ""); } catch (e) {}
+      // tira a prova da nuvem: ela virou histórico, não está mais em andamento
+      if (syncUrl && syncCod) {
+        try { await nuvemEnviar(syncUrl, syncCod, estadoAtual({ prova: null, hist: novo.map(packTentativa) })); } catch (e) {}
+      }
     })();
     setTela("provaFim");
   };
@@ -1508,6 +1607,9 @@ export default function ProjetoCPA() {
   // leva as lápides, para apagar num aparelho valer em todos.
   const estadoAtual = (extra) => ({ xp, combo, stats, feitos, bossBest, errados, favs, pressao, som, rev,
     syncUrl, syncCod, hist: historico.map(packTentativa), apagados,
+    // a prova em andamento vai junto para não ser apagada da nuvem por um
+    // envio de rotina; quem chama passa `prova: null` de propósito ao encerrar
+    prova: packProva(prova),
     ...extra, quando: Date.now() });
   const enviarNuvem = async () => {
     if (!syncUrl || !syncCod) { setMsgSync("Cole o endereço e gere um código primeiro."); return; }
@@ -2281,12 +2383,28 @@ export default function ProjetoCPA() {
 
           {prova && (
             <div className="cx-pane" style={{ marginTop: 16, borderColor: "var(--gold)" }}>
-              <div className="cx-lb" style={{ color: "var(--gold)" }}>Tentativa em andamento</div>
+              <div className="cx-lb" style={{ color: "var(--gold)" }}>
+                {prova.pausada ? "Tentativa pausada" : "Tentativa em andamento"}
+              </div>
               <p style={{ color: "var(--ink2)" }}>
-                Iniciada em {new Date(prova.inicio).toLocaleString("pt-BR")} · restam {fmtRelogio(Math.max(0, Math.round((prova.fimEm - agora) / 1000)))}.
-                O relógio não parou enquanto o app esteve fechado.
+                Iniciada em {new Date(prova.inicio).toLocaleString("pt-BR")} ·{" "}
+                {prova.itens.filter((x) => (x.tipo === "arvore" ? x.escolha : x.resposta) !== null).length} de {prova.itens.length} respondidos ·{" "}
+                restam <b>{fmtRelogio(restanteDaProva(prova, agora))}</b>.
+                {prova.pausada
+                  ? <> O relógio está <b>parado</b> desde {new Date(prova.pausadaEm || prova.atualizadoEm).toLocaleString("pt-BR")}
+                      {prova.aparelho ? <> · pausada no {prova.aparelho}</> : null}.</>
+                  : <> O relógio <b>não parou</b> enquanto o app esteve fechado. Se precisar de uma pausa, use o botão dentro da prova.</>}
               </p>
-              <button className="cx-btn" style={{ marginTop: 11, background: "var(--gold)", boxShadow: "none" }} onClick={() => setTela("prova")}>Continuar a prova</button>
+              <button className="cx-btn" style={{ marginTop: 11, background: "var(--gold)", boxShadow: "none" }}
+                onClick={prova.pausada ? retomarProva : () => setTela("prova")}>
+                {prova.pausada ? "▶ Retomar de onde parei" : "Continuar a prova"}
+              </button>
+              {prova.pausas > 0 && (
+                <p style={{ color: "var(--mut)", fontSize: 12, fontWeight: 700, marginTop: 9 }}>
+                  Esta tentativa já foi pausada {prova.pausas}× — o resultado vai registrar isso,
+                  porque prova pausada não reproduz a condição do exame de verdade.
+                </p>
+              )}
             </div>
           )}
 
@@ -2353,7 +2471,8 @@ export default function ProjetoCPA() {
                         <div className="cx-mst">
                           {h.motivoFim === "tempo" ? "encerrada pelo tempo" : "entregue por você"}
                           {r.pendentes ? ` · ${r.pendentes} em branco` : ""}
-                          {h.aparelho ? ` · ${h.aparelho}` : ""} · gabarito {h.versaoGabarito || "?"}
+                          {h.aparelho ? ` · ${h.aparelho}` : ""}
+                          {h.pausas > 0 ? ` · pausada ${h.pausas}×` : ""} · gabarito {h.versaoGabarito || "?"}
                         </div>
                       </button>
                       <button className="cx-apagar" aria-label={`Apagar a prova de ${new Date(h.id).toLocaleString("pt-BR")}`}
@@ -2385,10 +2504,10 @@ export default function ProjetoCPA() {
   }
 
   // ---------------- EXAME · sessão lacrada ----------------
-  if (tela === "prova" && prova && !prova.entregue) {
+  if (tela === "prova" && prova && !prova.entregue && !prova.pausada) {
     const it = prova.itens[prova.i];
     const total = prova.itens.length;
-    const resta = Math.max(0, Math.round((prova.fimEm - agora) / 1000));
+    const resta = restanteDaProva(prova, agora);
     const apertado = resta <= 5 * 60;
     const respondidos = prova.itens.filter((x) => (x.tipo === "arvore" ? x.escolha : x.resposta) !== null).length;
     const pendentes = total - respondidos;
@@ -2462,6 +2581,13 @@ export default function ProjetoCPA() {
               ? <button className="cx-btn" onClick={() => irPara(prova.i + 1)}>Próxima →</button>
               : <button className="cx-btn" onClick={() => setConfirmando(true)}>Entregar</button>}
           </div>
+          <button className="cx-btn sec" style={{ marginTop: 14 }} onClick={pausarProva}>
+            ⏸ Pausar e continuar depois
+          </button>
+          <p style={{ color: "var(--mut)", fontSize: 12, fontWeight: 700, marginTop: 8, lineHeight: 1.5 }}>
+            O relógio para. As respostas sobem para a nuvem <b>ao pausar</b> — dá para retomar
+            aqui ou em outro aparelho, do ponto em que parou.
+          </p>
           <div style={{ display: "flex", gap: 4, flexWrap: "wrap", alignItems: "center", marginTop: 10 }}>
             <button className="cx-linkbt" onClick={() => setConfirmando(true)}>Encerrar a prova agora</button>
             <span style={{ color: "var(--mut)" }}>·</span>
@@ -2553,6 +2679,12 @@ export default function ProjetoCPA() {
             )}
             {h.motivoFim === "tempo" && (
               <div style={{ color: "var(--gold)", fontSize: 13, fontWeight: 700, marginTop: 6 }}>Encerrada automaticamente ao fim das 2h30.</div>
+            )}
+            {h.pausas > 0 && (
+              <div style={{ color: "var(--gold)", fontSize: 13, fontWeight: 700, marginTop: 6 }}>
+                Pausada {h.pausas}× · {Math.round((h.tempoPausadoMs || 0) / 60000)} min fora do relógio.
+                A nota vale; a <b>condição de prova</b>, não — no exame de verdade não existe pausa.
+              </div>
             )}
           </div>
 
