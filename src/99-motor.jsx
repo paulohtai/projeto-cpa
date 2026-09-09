@@ -258,7 +258,12 @@ const unpackItem = (linha) => {
       escolha: resp === "" ? null : Number(resp),
       grauEscolhido: terceiro === "" ? null : Number(terceiro) };
   }
+  // `mId` e `nId` NÃO viajam: são só rótulos de tela e saem do banco atual.
+  // O `gabarito`, esse sim, viaja — porque mexer no banco depois não pode
+  // reescrever o que aquela prova mostrou. Rótulo se recalcula; nota, não.
+  const q = (typeof IDX_Q !== "undefined" && IDX_Q[ref]) || null;
   return { ...base, tipo: "mc", chave: ref, gabarito: Number(terceiro),
+    mId: q ? q.mId : "?", nId: q ? q.nId : ref.split("|")[0],
     resposta: resp === "" ? null : Number(resp) };
 };
 const packTentativa = (t) => ({

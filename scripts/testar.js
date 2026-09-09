@@ -341,6 +341,15 @@ secao("6c. HISTÓRICO DE PROVAS ENTRE APARELHOS");
   t("árvore em branco não vira grau 0", arvBranco.escolha === null && arvBranco.grauEscolhido === null);
   const anul = unpackItem(packItem({ ...mc, anulado: true, motivoAnulacao: "gabarito duplo" }));
   t("anulação e motivo sobrevivem ao empacotamento", anul.anulado === true && anul.motivoAnulacao === "gabarito duplo");
+  // BUG REAL pego no teste de interface: a revisão de uma prova vinda de
+  // outro aparelho mostrava "MUNDEFINED · UNDEFINED", porque mId/nId não
+  // viajam. São rótulos: têm de ser rederivados do banco na volta.
+  t("módulo e tópico voltam preenchidos, nunca undefined",
+    v.mId !== undefined && v.nId !== undefined, `mId=${v.mId} nId=${v.nId}`);
+  t("chave desconhecida não vira undefined na tela",
+    (() => { const d = unpackItem("9.9.9|0;0123;1;1;"); return d.mId === "?" && d.nId === "9.9.9"; })());
+  t("o rótulo é rederivado, o gabarito não",
+    /mId: q \? q\.mId : "\?"/.test(s) && /gabarito: Number\(terceiro\)/.test(s));
 
   // ---- tamanho: o motivo de existir este codec
   const tent = { id: 1, entregueEm: 2, motivoFim: "manual", versaoGabarito: "2026-09-08",
