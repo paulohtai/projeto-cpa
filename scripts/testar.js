@@ -316,6 +316,8 @@ secao("6c. HISTÓRICO DE PROVAS ENTRE APARELHOS");
   const unpackItem = global.unpackItem = extrai("unpackItem", "\n};");
   const packTentativa = global.packTentativa = extrai("packTentativa", "\n});");
   const unpackTentativa = global.unpackTentativa = extrai("unpackTentativa", "\n});");
+  global.respondidasDe = extrai("respondidasDe", "\n  }).length;");
+  global.melhorVersao = extrai("melhorVersao", "\n};");
   const mesclarHistorico = extrai("mesclarHistorico", "\n};");
   const mesclarApagados = extrai("mesclarApagados", ".slice(-200);");
 
@@ -379,6 +381,38 @@ secao("6c. HISTÓRICO DE PROVAS ENTRE APARELHOS");
   t("a lista sai da mais nova para a mais velha", u[0].id === 300 && u[2].id === 100);
   const comItens = mesclarHistorico([T(100)], [T(100, [1, 2, 3])], []);
   t("entre duas cópias da mesma prova, fica a que tem os itens", comItens[0].itens.length === 3);
+
+  // ------------------------------------------------------------------
+  // CASO REAL: a prova de 08/09 foi encerrada em DOIS aparelhos. O
+  // computador (aba antiga) encerrou por tempo com 36 das 50 respondidas;
+  // o celular terminou a mesma prova com as 50. A regra antiga desempatava
+  // por "mais itens" — as duas tinham 50 — e acabava ficando com a primeira
+  // da lista, sempre a local. Cada aparelho reescrevia o outro.
+  const melhorVersao = global.melhorVersao;
+  const item = (resp) => ({ tipo: "mc", resposta: resp });
+  const tentDup = (id, respondidas, entregueEm, extra) => ({
+    id, entregueEm,
+    itens: [...Array(50)].map((_, k) => item(k < respondidas ? 1 : null)),
+    ...extra,
+  });
+  const doPc = tentDup(999, 36, 1000, { aparelho: "Computador", motivoFim: "tempo" });
+  const doCel = tentDup(999, 50, 2000, { aparelho: "iPhone", motivoFim: "manual" });
+  t("respondidasDe conta só o que foi respondido", global.respondidasDe(doPc) === 36 && global.respondidasDe(doCel) === 50);
+  t("vence quem RESPONDEU mais, não a ordem da lista",
+    melhorVersao(doPc, doCel).aparelho === "iPhone" && melhorVersao(doCel, doPc).aparelho === "iPhone");
+  t("na união, a versão do celular sobrevive vindo em qualquer ordem",
+    mesclarHistorico([doPc], [doCel], [])[0].aparelho === "iPhone" &&
+    mesclarHistorico([doCel], [doPc], [])[0].aparelho === "iPhone");
+  t("empate em respondidas → vence a entregue por último",
+    melhorVersao(tentDup(1, 50, 100), tentDup(1, 50, 900)).entregueEm === 900);
+  t("a união avisa que houve duas versões da mesma prova",
+    mesclarHistorico([doPc], [doCel], []).conflitos.length === 1);
+  t("sem conflito, a lista de conflitos fica vazia",
+    mesclarHistorico([doPc], [], []).conflitos.length === 0);
+  t("a marca de conflito não polui os dados gravados",
+    JSON.stringify(mesclarHistorico([doPc], [doCel], [])).indexOf("conflitos") === -1);
+  t("o app avisa o usuário quando escolheu entre duas versões",
+    /tinha duas versões \(encerrada em dois aparelhos\)/.test(s));
   t("união com lado vazio não perde nada", mesclarHistorico([], cel, []).length === 2);
   t("união de dois vazios não quebra", mesclarHistorico(null, undefined, null).length === 0);
   t("entradas sem id são descartadas", mesclarHistorico([{ itens: [] }, T(5)], [], []).length === 1);

@@ -322,17 +322,50 @@ const escolherProva = (local, nuvem, idsNoHistorico) => {
 // União por id, com lápides. Sem isto, a regra do "carimbo mais recente"
 // apagaria as provas do outro aparelho a cada sincronização — e apagar uma
 // prova num aparelho não pegaria no outro, porque a união a traria de volta.
+// Quantos itens de uma tentativa foram efetivamente respondidos.
+const respondidasDe = (t) =>
+  ((t && t.itens) || []).filter((x) => {
+    const r = x.tipo === "arvore" ? x.escolha : x.resposta;
+    return r !== null && r !== undefined;
+  }).length;
+
+// Qual das duas versões da MESMA tentativa vale.
+//
+// Isto existe por causa de um caso real: a prova de 08/09 foi encerrada em
+// DOIS aparelhos. O computador, com uma aba antiga, encerrou por tempo com
+// 36 respondidas; o celular terminou a mesma prova com as 50. A regra
+// anterior desempatava por "quem tem mais ITENS" — mas as duas têm 50 itens,
+// então ficava com a primeira da lista, que era sempre a local. Ou seja:
+// cada aparelho achava que a SUA versão era a boa e reescrevia a do outro,
+// num empurra-empurra em que a nota do celular sumia.
+//
+// A regra certa é: vence quem RESPONDEU mais — quem trabalhou mais na prova.
+// Empatou, vence quem foi entregue por último. Nunca a ordem da lista.
+const melhorVersao = (a, b) => {
+  if (!a) return b;
+  if (!b) return a;
+  const ra = respondidasDe(a), rb = respondidasDe(b);
+  if (ra !== rb) return ra > rb ? a : b;
+  const ia = (a.itens || []).length, ib = (b.itens || []).length;
+  if (ia !== ib) return ia > ib ? a : b;
+  return (b.entregueEm || 0) > (a.entregueEm || 0) ? b : a;
+};
+
 const mesclarHistorico = (a, b, apagados) => {
   const mortos = new Set((apagados || []).map(Number));
   const porId = new Map();
+  const conflitos = [];
   [...(a || []), ...(b || [])].forEach((t) => {
     if (!t || !t.id || mortos.has(Number(t.id))) return;
     const anterior = porId.get(t.id);
-    // se a mesma prova vier dos dois lados, fica a que tem os itens
-    const melhor = !anterior || ((t.itens || []).length > (anterior.itens || []).length) ? t : anterior;
-    porId.set(t.id, melhor);
+    // a mesma prova encerrada duas vezes com resultados diferentes não pode
+    // ser resolvida em silêncio: o usuário precisa saber que houve escolha
+    if (anterior && respondidasDe(anterior) !== respondidasDe(t)) conflitos.push(t.id);
+    porId.set(t.id, melhorVersao(anterior, t));
   });
-  return [...porId.values()].sort((x, y) => y.id - x.id).slice(0, LIMITE_HIST);
+  const lista = [...porId.values()].sort((x, y) => y.id - x.id).slice(0, LIMITE_HIST);
+  Object.defineProperty(lista, "conflitos", { value: [...new Set(conflitos)], enumerable: false });
+  return lista;
 };
 const mesclarApagados = (a, b) =>
   [...new Set([...(a || []), ...(b || [])].map(Number).filter(Boolean))].slice(-200);
@@ -1085,7 +1118,10 @@ export default function ProjetoCPA() {
                 hist: unido.map(packTentativa), apagados: mortos, quando: Date.now(),
               });
             }
-            if (mudouAqui && unido.length > histLocal.length) {
+            if (unido.conflitos && unido.conflitos.length) {
+              const q = unido.conflitos.map((id) => new Date(id).toLocaleDateString("pt-BR")).join(", ");
+              setMsgSync(`A prova de ${q} tinha duas versões (encerrada em dois aparelhos). Fiquei com a que tem mais questões respondidas.`);
+            } else if (mudouAqui && unido.length > histLocal.length) {
               setMsgSync(`Trouxe ${unido.length - histLocal.length} prova(s) feita(s) em outro aparelho.`);
             }
 
