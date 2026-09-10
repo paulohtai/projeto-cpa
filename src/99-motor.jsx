@@ -254,7 +254,14 @@ const unpackItem = (linha) => {
   if (anulado) { base.anulado = true; base.motivoAnulacao = motivo || ""; }
   if (ref.startsWith("@")) {
     const [arvId, passo] = ref.slice(1).split("|");
-    return { ...base, tipo: "arvore", chave: ref.slice(1), arvId, passo: Number(passo), mId: "3",
+    // `mId` e `dif` da árvore são RÓTULOS e por isso são relidos do banco
+    // atual, como já era feito com os da múltipla escolha. Antes disto o
+    // módulo vinha fixo em "3" aqui e na montagem, o que jogava toda a
+    // árvore para o módulo 3 e distorcia a distribuição da prova inteira.
+    const a = (typeof ARVORES !== "undefined" && ARVORES.find((x) => x.id === arvId)) || null;
+    const pr = a && a.prompts[Number(passo)];
+    return { ...base, tipo: "arvore", chave: ref.slice(1), arvId, passo: Number(passo),
+      mId: (a && a.mId) || "3", dif: (pr && pr.dif) || 2,
       escolha: resp === "" ? null : Number(resp),
       grauEscolhido: terceiro === "" ? null : Number(terceiro) };
   }
@@ -266,14 +273,23 @@ const unpackItem = (linha) => {
     mId: q ? q.mId : "?", nId: q ? q.nId : ref.split("|")[0],
     resposta: resp === "" ? null : Number(resp) };
 };
+// `p` e `tp` (quantas pausas e quanto tempo fora do relógio) e `c` (a
+// composição sorteada) NÃO viajavam. Efeito: bastava a tentativa dar uma
+// volta pela nuvem ou pelo código de backup para o resultado deixar de
+// mostrar "pausada 2× · 34 min fora do relógio" e a composição da prova.
+// A nota nunca esteve em risco — só o contexto dela, que é o que permite
+// interpretar a nota. Campos antigos, sem estes dados, continuam abrindo:
+// o unpack devolve zero e a tela simplesmente não mostra a linha.
 const packTentativa = (t) => ({
   i: t.id, e: t.entregueEm, m: t.motivoFim, v: t.versaoGabarito,
   n: t.aparelho || "", r: t.resultado, g: t.regras,
+  p: t.pausas || 0, tp: t.tempoPausadoMs || 0, c: t.cotas || null,
   x: (t.itens || []).map(packItem),
 });
 const unpackTentativa = (p) => ({
   id: p.i, inicio: p.i, entregue: true, entregueEm: p.e, motivoFim: p.m,
   versaoGabarito: p.v, aparelho: p.n || "", resultado: p.r, regras: p.g,
+  pausas: p.p || 0, tempoPausadoMs: p.tp || 0, cotas: p.c || null,
   itens: (p.x || []).map(unpackItem),
 });
 // ---------------------------------------------------------------------
@@ -433,9 +449,135 @@ const REGRAS_EXAME = {
   rotuloDificuldade: { valor: "régua própria, cortada nos percentis oficiais", origem: "pedagogica", nota: "Medimos, no caderno oficial, se o rótulo de dificuldade da ANBIMA é previsível pelo texto da questão. A correlação mais forte foi r = 0,186 — ruído. Um classificador treinado ali seria adivinhação com cara de método. Então ordenamos as questões por uma régua declarada (o quanto as quatro alternativas se parecem, densidade técnica, cálculo, carga de leitura) e cortamos nos percentis 25/75 dentro de cada módulo. A ordenação é nossa; a proporção é da ANBIMA." },
   anulacao: { valor: "credita a todos", origem: "oficial", nota: "Edital 16.1: o resultado \"pode ser alterado caso alguma questão seja atribuída a todas as pessoas candidatas\". Questão anulada NÃO sai da prova: ela é creditada como acerto para todo mundo e o total continua 50." },
   fechamentoAutomatico: { valor: true, origem: "oficial", nota: "Edital 13.6: o sistema fecha automaticamente ao término do tempo." },
-  pesosModulo: { valor: PESOS, origem: "naoConfirmado", nota: "Distribuição por módulo usada no sorteio. O edital remete o conteúdo programático ao ANBIMA Edu e não publica o peso de cada módulo; estes pesos vêm do programa detalhado anterior." },
+  pesosModulo: { valor: PESOS, origem: "oficial", nota: "Programa Detalhado CPA, versão 1.2 (revisado em 04/06/2025, vigência a partir de 01/01/2026): a palavra \"Proporção\" abre cada módulo — 20% no módulo 1 (p. 4), 40% no módulo 2 (p. 11), 30% no módulo 3 (p. 20) e 10% no módulo 4 (p. 27). Estes pesos estavam marcados aqui como \"não confirmado\" por engano nosso: o edital de fato não os traz, mas o programa detalhado traz, e ele é fonte primária. Conferido em 10/09/2026." },
+  cotasSobreOTodo: { valor: "sim", origem: "pedagogica", nota: "Os pesos de módulo e a proporção de dificuldade são aplicados aos 50 itens da prova, e não só às 40 de múltipla escolha. A ANBIMA publica as duas proporções para o exame; não diz se elas valem dentro de cada formato. Aplicar ao conjunto é leitura nossa — e é a que mantém a prova inteira no 20/40/30/10." },
 };
 const TOTAL_ITENS_PROVA = REGRAS_EXAME.multiplaEscolha.valor + REGRAS_EXAME.itensArvore.valor; // 50
+
+// =====================================================================
+// CENÁRIO E PERGUNTA — a hierarquia que faltava na tela de questão
+//
+// No formato contextualizado da banca, o enunciado tem duas partes com
+// funções diferentes: uma cena de 300 a 500 caracteres e, no fim, a tarefa
+// ("Sobre a tributação da LCI, Thiago deve informar que elas são:").
+//
+// O app renderizava as duas como um bloco só, em negrito de 17,5px. O
+// resultado é que o olho não sabe onde está a pergunta e relê a cena
+// inteira a cada volta — e no exame, com 50 itens e relógio correndo, reler
+// custa caro.
+//
+// A separação é textual e conservadora: a pergunta é a ÚLTIMA frase. Se o
+// corte cair num lugar improvável (frase final curta demais, cena que
+// sobraria vazia, texto curto que não é contextualizado), a função devolve
+// tudo junto e a tela volta ao comportamento antigo. Errar para o lado de
+// não separar é seguro; errar cortando no meio de uma frase, não.
+// =====================================================================
+const partirEnunciado = (texto) => {
+  const t = String(texto || "").trim();
+  const juntos = { cena: "", pergunta: t };
+  if (t.length < 220) return juntos;                       // não é contextualizada
+  // último ponto final seguido de espaço e maiúscula (ou aspas/travessão)
+  const m = [...t.matchAll(/[.!?]\s+(?=[A-ZÀ-Ú"“(])/g)];
+  if (!m.length) return juntos;
+  const corte = m[m.length - 1].index + m[m.length - 1][0].length;
+  const cena = t.slice(0, corte).trim();
+  const pergunta = t.slice(corte).trim();
+  if (pergunta.length < 25 || pergunta.length > 260 || cena.length < 80) return juntos;
+  return { cena, pergunta };
+};
+
+// =====================================================================
+// COTAS: POLÍTICA DE ARREDONDAMENTO EXPLÍCITA
+//
+// 25% de 50 dá 12,5. Arredondar cada balde por conta própria (o que o código
+// antigo fazia com Math.round) pode fechar em 49 ou 51 e faz o erro cair
+// sempre no mesmo lugar. Aqui o método é o de MAIOR RESTO (Hare):
+//   1. cada balde leva o PISO da sua parte exata;
+//   2. as vagas que sobram vão para os maiores restos, um a um;
+//   3. empate de resto é desempatado pela ORDEM DECLARADA na chamada.
+//
+// O passo 3 é o que torna o resultado reproduzível: com 25/50/25 sobre 50 os
+// restos de fácil e difícil empatam em 0,5, e a vaga extra vai para o
+// primeiro da ordem — fácil. É uma escolha, está escrita, e não muda entre
+// execuções.
+// =====================================================================
+const cotaMaiorResto = (total, pesos, ordem) => {
+  const soma = ordem.reduce((a, k) => a + (Number(pesos[k]) || 0), 0) || 1;
+  const exato = {}, base = {};
+  let usado = 0;
+  ordem.forEach((k) => {
+    exato[k] = (total * (Number(pesos[k]) || 0)) / soma;
+    base[k] = Math.floor(exato[k]);
+    usado += base[k];
+  });
+  const sobra = total - usado;
+  const fila = [...ordem].sort((a, b) => {
+    const ra = exato[a] - base[a], rb = exato[b] - base[b];
+    if (Math.abs(ra - rb) > 1e-9) return rb - ra;
+    return ordem.indexOf(a) - ordem.indexOf(b);
+  });
+  for (let i = 0; i < sobra; i++) base[fila[i % fila.length]]++;
+  return base;
+};
+
+// Ajusta um conjunto de cotas para somar exatamente `total`, preservando as
+// proporções entre elas. Usado quando as árvores já consumiram parte da cota
+// de um módulo e o que sobrou para a múltipla escolha não fecha 40.
+const reescalar = (obj, total, ordem) => {
+  const soma = ordem.reduce((a, k) => a + obj[k], 0);
+  if (soma === total) return obj;
+  const novo = soma > 0 ? cotaMaiorResto(total, obj, ordem)
+                        : cotaMaiorResto(total, Object.fromEntries(ordem.map((k) => [k, 1])), ordem);
+  ordem.forEach((k) => { obj[k] = novo[k]; });
+  return obj;
+};
+
+// =====================================================================
+// SORTEIO DA ÁRVORE
+//
+// A ANBIMA publica "10 questões relacionadas a árvore de decisão". O que ela
+// NÃO publica é o que conta como uma dessas dez: uma decisão dentro de um
+// atendimento, ou o atendimento inteiro. Adotamos "uma decisão = um item",
+// o que dá dois atendimentos por prova. É leitura nossa e está declarada em
+// referencia/FONTES-OFICIAIS.md e na tela de regras do app.
+//
+// Os atendimentos entram INTEIROS e a partir da primeira fala: uma conversa
+// que começa no meio não faz sentido para quem está respondendo.
+// =====================================================================
+const montarArvore = (porFrescor) => {
+  const itens = [];
+  const usadosMod = new Set();
+  const baralho = porFrescor(ARVORES.map((a) => "@" + a.id)).map((k) => k.slice(1)).reverse();
+
+  // Dois atendimentos do MESMO módulo estouram a cota daquele módulo na prova
+  // inteira. O caso extremo é o módulo 4: peso 10%, cota de 5 itens em 50, e
+  // um atendimento sozinho já traz 6. Duas árvores do módulo 4 na mesma prova
+  // dariam 10 de 5 — o dobro. Medido: sem esta regra, o pior desvio numa
+  // prova individual era de 5 itens; com ela, de 1.
+  //
+  // É preferência, não proibição: se o banco não tiver atendimento de outro
+  // módulo disponível, é melhor a prova sair com 50 itens e o desvio anotado
+  // do que sair com menos de 50.
+  const tentar = (respeitarModulo) => {
+    for (let i = baralho.length - 1; i >= 0 && itens.length < REGRAS_EXAME.itensArvore.valor; i--) {
+      const a = ARVORES.find((x) => x.id === baralho[i]);
+      if (!a) { baralho.splice(i, 1); continue; }
+      const m = a.mId || "3";
+      if (respeitarModulo && usadosMod.has(m)) continue;
+      baralho.splice(i, 1);
+      usadosMod.add(m);
+      for (let k = 0; k < a.prompts.length && itens.length < REGRAS_EXAME.itensArvore.valor; k++) {
+        itens.push({ tipo: "arvore", chave: `${a.id}|${k}`, arvId: a.id, passo: k,
+          mId: m, dif: a.prompts[k].dif || 2,
+          ordem: ordemAlts(a.prompts[k].alts.length),
+          escolha: null, grauEscolhido: null, marcada: false });
+      }
+    }
+  };
+  tentar(true);   // primeiro respeitando um atendimento por módulo
+  tentar(false);  // e só então, se ainda faltar item, sem a restrição
+  return itens;
+};
 const PROVA_SEG = REGRAS_EXAME.duracaoSeg.valor;
 const QUESTOES_PROVA = REGRAS_EXAME.multiplaEscolha.valor;
 // Identifica a versão do banco. Guardada em cada tentativa encerrada, para
@@ -837,6 +979,7 @@ const CSS = `
 .cx-pular:focus{left:8px;top:8px}
 @media (prefers-reduced-motion:reduce){.cx *{animation:none!important;transition:none!important}}
 ${VISUAL_CSS}
+${DESIGN_CSS}
 `;
 
 // =====================================================================
@@ -967,6 +1110,149 @@ const Som = (() => {
 })();
 
 // =====================================================================
+const montarItensProva = (historico) => {
+  // Múltipla escolha: sorteio em duas dimensões ao mesmo tempo —
+  //   · por MÓDULO, nos pesos 20/40/30/10;
+  //   · por DIFICULDADE, nos 25% fácil / 50% médio / 25% difícil que a
+  //     ANBIMA publica na página oficial da CPA.
+  // A cota de cada módulo é repartida nessas três faixas; o que faltar
+  // numa faixa é completado pela faixa vizinha e, em último caso, por
+  // qualquer questão, para a prova nunca sair com menos de 40.
+  const alvo = REGRAS_EXAME.multiplaEscolha.valor;
+  const D = REGRAS_EXAME.dificuldade.valor; // { facil, medio, dificil }
+  const usadas = new Set();
+
+  // ----------------------------------------------------------------
+  // MEMÓRIA ENTRE PROVAS
+  //
+  // Sorteio sem memória repete. Com 40 questões tiradas de 870, a chance
+  // de uma questão específica voltar na prova seguinte é baixa; a chance
+  // de ALGUMA voltar é quase certa. E nas árvores, onde o pool é pequeno,
+  // a repetição é garantida.
+  //
+  // A memória sai do próprio histórico, que já existe e já sincroniza
+  // entre os aparelhos — não inventamos chave de disco nova. Para cada
+  // chave já vista, guardamos há QUANTAS provas ela apareceu pela última
+  // vez. Zero = saiu na prova mais recente.
+  //
+  // O sorteio não proíbe repetir: se proibisse, um balde pequeno acabaria
+  // e a prova sairia fora da distribuição por módulo e dificuldade, que é
+  // regra da banca. Ele ORDENA: primeiro o que nunca saiu, depois o mais
+  // antigo. Só reaproveita quando não há material novo naquele balde.
+  // ----------------------------------------------------------------
+  const recencia = new Map();
+  (historico || []).forEach((t, idx) => {
+    ((t && t.itens) || []).forEach((it) => {
+      const k = it.tipo === "arvore" ? "@" + it.arvId : it.chave;
+      if (!k) return;
+      // idx 0 é a tentativa mais recente (o histórico vem em ordem
+      // decrescente de id). Guardamos a MENOR distância, ou seja, a
+      // aparição mais recente.
+      if (!recencia.has(k) || recencia.get(k) > idx) recencia.set(k, idx);
+    });
+  });
+
+  // Embaralha primeiro e ordena depois: Array.prototype.sort é estável no
+  // JS moderno, então o embaralho decide a ordem DENTRO de cada faixa de
+  // recência e o sort só separa as faixas. Sem o embaralho antes, questões
+  // igualmente antigas sairiam sempre na mesma ordem de arquivo.
+  const porFrescor = (lista) => shuffle(lista).sort((a, b) => {
+    const ra = recencia.has(a) ? recencia.get(a) : Infinity;
+    const rb = recencia.has(b) ? recencia.get(b) : Infinity;
+    return rb - ra; // nunca vista (Infinity) primeiro, depois a mais antiga
+  });
+
+  const pegar = (lista, n) => {
+    const out = [];
+    for (const k of porFrescor(lista)) {
+      if (out.length >= n) break;
+      if (!usadas.has(k)) { usadas.add(k); out.push(k); }
+    }
+    return out;
+  };
+
+  // ================================================================
+  // AS COTAS VALEM SOBRE OS 50 ITENS, NÃO SOBRE AS 40
+  //
+  // Defeito que isto corrige, medido em 200 montagens da versão anterior:
+  // as cotas de módulo eram aplicadas só às 40 de múltipla escolha e os 10
+  // itens de árvore entravam depois com o módulo 3 fixo no código. A prova
+  // inteira saía em M1 16% · M2 32% · M3 44% · M4 8%, contra os 20/40/30/10
+  // publicados. M3 quatorze pontos acima e M2 — o módulo mais pesado da
+  // prova — oito pontos abaixo. Quem treinasse aqui treinaria errado.
+  //
+  // Agora a árvore é sorteada PRIMEIRO, o módulo e a dificuldade de cada
+  // decisão são lidos do dado (ver scripts/marcar-arvores.js), e as 40 de
+  // múltipla escolha são o COMPLEMENTO do que falta para fechar os 50.
+  // ================================================================
+  const itensArv = montarArvore(porFrescor);
+
+  const jaMod = { 1: 0, 2: 0, 3: 0, 4: 0 };
+  const jaDif = { 1: 0, 2: 0, 3: 0 };
+  itensArv.forEach((it) => { jaMod[it.mId] = (jaMod[it.mId] || 0) + 1; jaDif[it.dif]++; });
+
+  // Alvo do exame inteiro. `cotaMaiorResto` é o método de Hare: piso para
+  // todos e as sobras para os maiores restos, com desempate por ordem fixa.
+  const alvoMod = cotaMaiorResto(TOTAL_ITENS_PROVA, PESOS, ["1", "2", "3", "4"]);
+  const alvoDif = cotaMaiorResto(TOTAL_ITENS_PROVA,
+    { 1: D.facil, 2: D.medio, 3: D.dificil }, ["1", "2", "3"]);
+
+  // O que sobra para a múltipla escolha, por módulo e por dificuldade.
+  const restoMod = {}, restoDif = {};
+  ["1", "2", "3", "4"].forEach((m) => { restoMod[m] = Math.max(0, alvoMod[m] - (jaMod[m] || 0)); });
+  ["1", "2", "3"].forEach((d) => { restoDif[d] = Math.max(0, alvoDif[d] - (jaDif[d] || 0)); });
+  // Se uma árvore estourou a cota do módulo dela, os que sobraram somam
+  // menos que `alvo`. Reequilibramos proporcionalmente ao que ainda falta,
+  // para a prova nunca sair com menos de 40 de múltipla escolha.
+  reescalar(restoMod, alvo, ["1", "2", "3", "4"]);
+  reescalar(restoDif, alvo, ["1", "2", "3"]);
+
+  const faltou = [];   // baldes que o banco não conseguiu preencher
+  let chaves = [];
+  ["1", "2", "3", "4"].forEach((m) => {
+    const cota = restoMod[m];
+    if (!cota) return;
+    const porDif = CHAVES_POR_MODULO_DIF[m] || { 1: [], 2: [], 3: [] };
+    // Reparte a cota do módulo nas três faixas na proporção do que ainda
+    // falta de cada faixa no exame inteiro — de novo por maior resto.
+    const alvoPorFaixa = cotaMaiorResto(cota, restoDif, ["1", "2", "3"]);
+    let doModulo = [];
+    [1, 2, 3].forEach((d) => {
+      const pego = pegar(porDif[d], alvoPorFaixa[d]);
+      if (pego.length < alvoPorFaixa[d]) {
+        faltou.push({ m, d, pedido: alvoPorFaixa[d], obtido: pego.length });
+      }
+      doModulo = doModulo.concat(pego);
+    });
+    // Faixa vazia é completada pelo PRÓPRIO módulo: preferimos furar a
+    // dificuldade (que é régua nossa) a furar o módulo (que é oficial).
+    if (doModulo.length < cota) {
+      doModulo = doModulo.concat(pegar(
+        CHAVES_POR_MODULO[m].filter((k) => !IDX_Q[k].foraDoExame), cota - doModulo.length));
+    }
+    if (doModulo.length < cota) faltou.push({ m, d: "todas", pedido: cota, obtido: doModulo.length });
+    chaves = chaves.concat(doModulo);
+  });
+  // Rede final. Se ela precisar agir, o módulo já furou — e isso fica
+  // registrado em `faltou`, não é completado em silêncio.
+  if (chaves.length < alvo) {
+    const antes = chaves.length;
+    chaves = chaves.concat(pegar(ELEGIVEIS_EXAME, alvo - chaves.length));
+    faltou.push({ m: "qualquer", d: "qualquer", pedido: alvo, obtido: antes });
+  }
+  chaves = shuffle(chaves).slice(0, alvo);
+
+  const itensMC = chaves.map((k) => {
+    const q = IDX_Q[k];
+    const ordem = ordemAlts(q.alts.length);
+    return { tipo: "mc", chave: k, mId: q.mId, nId: q.nId, ordem, dif: q.dif || 2,
+      gabarito: ordem.indexOf(q.c), // gabarito JÁ na ordem em que vai aparecer
+      resposta: null, marcada: false };
+  });
+
+  return { itensMC, itensArv, alvoMod, alvoDif, faltou };
+};
+
 export default function ProjetoCPA() {
   const [xp, setXp] = useState(0);
   const [combo, setCombo] = useState(0);
@@ -981,6 +1267,8 @@ export default function ProjetoCPA() {
   const [loaded, setLoaded] = useState(false);
 
   const [tela, setTela] = useState("home");
+  const [mostrarMais, setMostrarMais] = useState(false);
+  const [histArvAberto, setHistArvAberto] = useState(false);
   const [mId, setMId] = useState("1");
   const [bId, setBId] = useState(null);
   const [nId, setNId] = useState(null);
@@ -1372,116 +1660,30 @@ export default function ProjetoCPA() {
     (async () => { try { await window.storage.set(PROVA_KEY, JSON.stringify(p)); } catch (e) {} })();
   };
 
+// =====================================================================
+// MONTAGEM DOS ITENS DA PROVA — função pura, de propósito.
+//
+// Ela ficava dentro do componente e por isso não dava para testar: os
+// testes só conseguiam procurar trechos de texto no arquivo, o que não
+// prova comportamento nenhum. Aqui fora, o scripts/testar.js monta provas
+// de verdade e CONTA os itens — que é o único jeito de saber se a
+// distribuição fecha.
+//
+// Recebe o histórico (para a memória entre provas) e devolve os itens mais
+// o relatório de cotas. Não toca em estado, disco nem relógio.
+// =====================================================================
+
   const montarProva = () => {
-    // Múltipla escolha: sorteio em duas dimensões ao mesmo tempo —
-    //   · por MÓDULO, nos pesos 20/40/30/10;
-    //   · por DIFICULDADE, nos 25% fácil / 50% médio / 25% difícil que a
-    //     ANBIMA publica na página oficial da CPA.
-    // A cota de cada módulo é repartida nessas três faixas; o que faltar
-    // numa faixa é completado pela faixa vizinha e, em último caso, por
-    // qualquer questão, para a prova nunca sair com menos de 40.
-    const alvo = REGRAS_EXAME.multiplaEscolha.valor;
-    const D = REGRAS_EXAME.dificuldade.valor; // { facil, medio, dificil }
-    const usadas = new Set();
-
-    // ----------------------------------------------------------------
-    // MEMÓRIA ENTRE PROVAS
-    //
-    // Sorteio sem memória repete. Com 40 questões tiradas de 870, a chance
-    // de uma questão específica voltar na prova seguinte é baixa; a chance
-    // de ALGUMA voltar é quase certa. E nas árvores, onde o pool é pequeno,
-    // a repetição é garantida.
-    //
-    // A memória sai do próprio histórico, que já existe e já sincroniza
-    // entre os aparelhos — não inventamos chave de disco nova. Para cada
-    // chave já vista, guardamos há QUANTAS provas ela apareceu pela última
-    // vez. Zero = saiu na prova mais recente.
-    //
-    // O sorteio não proíbe repetir: se proibisse, um balde pequeno acabaria
-    // e a prova sairia fora da distribuição por módulo e dificuldade, que é
-    // regra da banca. Ele ORDENA: primeiro o que nunca saiu, depois o mais
-    // antigo. Só reaproveita quando não há material novo naquele balde.
-    // ----------------------------------------------------------------
-    const recencia = new Map();
-    (historico || []).forEach((t, idx) => {
-      ((t && t.itens) || []).forEach((it) => {
-        const k = it.tipo === "arvore" ? "@" + it.arvId : it.chave;
-        if (!k) return;
-        // idx 0 é a tentativa mais recente (o histórico vem em ordem
-        // decrescente de id). Guardamos a MENOR distância, ou seja, a
-        // aparição mais recente.
-        if (!recencia.has(k) || recencia.get(k) > idx) recencia.set(k, idx);
-      });
-    });
-
-    // Embaralha primeiro e ordena depois: Array.prototype.sort é estável no
-    // JS moderno, então o embaralho decide a ordem DENTRO de cada faixa de
-    // recência e o sort só separa as faixas. Sem o embaralho antes, questões
-    // igualmente antigas sairiam sempre na mesma ordem de arquivo.
-    const porFrescor = (lista) => shuffle(lista).sort((a, b) => {
-      const ra = recencia.has(a) ? recencia.get(a) : Infinity;
-      const rb = recencia.has(b) ? recencia.get(b) : Infinity;
-      return rb - ra; // nunca vista (Infinity) primeiro, depois a mais antiga
-    });
-
-    const pegar = (lista, n) => {
-      const out = [];
-      for (const k of porFrescor(lista)) {
-        if (out.length >= n) break;
-        if (!usadas.has(k)) { usadas.add(k); out.push(k); }
-      }
-      return out;
-    };
-
-    let chaves = [];
-    Object.entries(PESOS).forEach(([m, p]) => {
-      const cota = Math.round((alvo * p) / 100);
-      const porDif = CHAVES_POR_MODULO_DIF[m] || { 1: [], 2: [], 3: [] };
-      // reparte a cota do módulo nas três faixas, fechando a sobra no médio
-      const nF = Math.round((cota * D.facil) / 100);
-      const nD = Math.round((cota * D.dificil) / 100);
-      const nM = cota - nF - nD;
-      const alvoPorFaixa = { 1: nF, 2: nM, 3: nD };
-      let doModulo = [];
-      [1, 2, 3].forEach((d) => { doModulo = doModulo.concat(pegar(porDif[d], alvoPorFaixa[d])); });
-      // faltou em alguma faixa? completa com o restante do próprio módulo
-      if (doModulo.length < cota) doModulo = doModulo.concat(pegar(CHAVES_POR_MODULO[m].filter((k) => !IDX_Q[k].foraDoExame), cota - doModulo.length));
-      chaves = chaves.concat(doModulo);
-    });
-    // rede final: arredondar quatro vezes pode fechar em 39 ou 41
-    if (chaves.length < alvo) chaves = chaves.concat(pegar(ELEGIVEIS_EXAME, alvo - chaves.length));
-    chaves = shuffle(chaves).slice(0, alvo);
-
-    const itensMC = chaves.map((k) => {
-      const q = IDX_Q[k];
-      const ordem = ordemAlts(q.alts.length);
-      return { tipo: "mc", chave: k, mId: q.mId, nId: q.nId, ordem, dif: q.dif || 2,
-        gabarito: ordem.indexOf(q.c), // gabarito JÁ na ordem em que vai aparecer
-        resposta: null, marcada: false };
-    });
-
-    // árvore: a ANBIMA conta 10 QUESTÕES, não 10 árvores. Pegamos atendimentos
-    // inteiros a partir da primeira fala (a conversa precisa fazer sentido) e
-    // cortamos no décimo item.
-    // As árvores entram pelo mesmo critério de frescor. Aqui ele pesa muito
-    // mais: são 10 dos 50 itens da prova saindo de um punhado de
-    // atendimentos, e sem memória o mesmo cliente reaparecia toda semana.
-    const itensArv = [];
-    const baralho = porFrescor(ARVORES.map((a) => "@" + a.id)).map((k) => k.slice(1)).reverse();
-    while (itensArv.length < REGRAS_EXAME.itensArvore.valor && baralho.length) {
-      // pop() UMA vez, fora do find: dentro do callback ele era chamado a cada
-      // comparação e esvaziava o baralho, devolvendo undefined (bug real,
-      // pego no teste de interface — a prova quebrava ao montar).
-      const id = baralho.pop();
-      const a = ARVORES.find((x) => x.id === id);
-      if (!a) continue;
-      for (let i = 0; i < a.prompts.length && itensArv.length < REGRAS_EXAME.itensArvore.valor; i++) {
-        itensArv.push({ tipo: "arvore", chave: `${a.id}|${i}`, arvId: a.id, passo: i,
-          mId: "3", ordem: ordemAlts(a.prompts[i].alts.length),
-          escolha: null, grauEscolhido: null, marcada: false });
-      }
-    }
+    const { itensMC, itensArv, alvoMod, alvoDif, faltou } = montarItensProva(historico);
     const inicio = Date.now();
+    // Distribuição REALMENTE obtida, guardada com a tentativa. A tela do
+    // resultado mostra isto — sem número na tela, "respeita as cotas" é
+    // afirmação, não evidência.
+    const obtido = { mod: { 1: 0, 2: 0, 3: 0, 4: 0 }, dif: { 1: 0, 2: 0, 3: 0 } };
+    [...itensMC, ...itensArv].forEach((it) => {
+      obtido.mod[it.mId] = (obtido.mod[it.mId] || 0) + 1;
+      obtido.dif[it.dif] = (obtido.dif[it.dif] || 0) + 1;
+    });
     return {
       id: inicio,
       inicio,
@@ -1490,6 +1692,7 @@ export default function ProjetoCPA() {
       regras: { duracaoSeg: REGRAS_EXAME.duracaoSeg.valor, mc: alvo,
         arvore: REGRAS_EXAME.itensArvore.valor, minimoAcertos: REGRAS_EXAME.minimoAcertos.valor,
         verificadoEm: REGRAS_EXAME.verificadoEm },
+      cotas: { alvoMod, alvoDif, obtido, faltou },
       i: 0,
       itens: [...itensMC, ...itensArv], // MC primeiro, atendimentos ao final
       entregue: false, entregueEm: null, motivoFim: null,
@@ -1932,10 +2135,58 @@ export default function ProjetoCPA() {
     </>
   );
 
+  // ===================================================================
+  // DESTINOS DA NAVEGAÇÃO — uma lista só, dois desenhos.
+  //
+  // `barra: true` marca os quatro que ficam na barra inferior do celular.
+  // A escolha dos quatro não é estética: são os que aparecem em toda sessão
+  // de estudo. Ferramenta, glossário e tabelão são consulta pontual e vivem
+  // na folha "Mais" — botão pequeno demais para o polegar é pior do que um
+  // toque a mais.
+  //
+  // Durante a prova a navegação some por inteiro (ver `noExameAgora`): sair
+  // da tela do exame por engano é perder tempo de relógio.
+  // ===================================================================
+  const NAV = [
+    { id: "home", grupo: "Estudo", ico: "casa", rotulo: "Início", curto: "Início", tela: "home", barra: true,
+      onClick: () => setTela("home") },
+    { id: "fichas", grupo: "Estudo", ico: "cartao", rotulo: "Fichas de memorização", curto: "Fichas", tela: "fichas", barra: true,
+      onClick: () => { setFiltroFicha("todas"); setTela("fichas"); } },
+    { id: "arvores", grupo: "Estudo", ico: "conversa", rotulo: "Atendimentos (árvore)", curto: "Árvores", tela: "arvores", barra: true,
+      onClick: () => { setArv(null); setTela("arvores"); } },
+    { id: "exame", grupo: "Avaliação", ico: "chapeu", rotulo: `Exame · ${TOTAL_ITENS_PROVA} itens`, curto: "Exame", tela: "provaHome", barra: true,
+      cnt: prova ? (prova.pausada ? "pausada" : "em curso") : undefined,
+      onClick: () => setTela("provaHome") },
+
+    { id: "simulado", grupo: "Avaliação", ico: "alvo", rotulo: "Simulado autoral (60)",
+      onClick: () => jogarSimulado(60) },
+    { id: "erros", grupo: "Avaliação", ico: "volta", rotulo: "Revisar erros", cnt: errados.length,
+      desabilitado: !errados.length, onClick: jogarRevisao },
+    { id: "revdia", grupo: "Avaliação", ico: "agenda", rotulo: "Revisão do dia", cnt: revDevidas.length,
+      desabilitado: !favs.length, onClick: () => { setFiltroFicha("rev"); setTela("fichas"); } },
+
+    { id: "confrontos", grupo: "Consulta", ico: "balanca", rotulo: "Fichas de confronto", tela: "confrontos",
+      onClick: () => setTela("confrontos") },
+    { id: "tabelao", grupo: "Consulta", ico: "tabela", rotulo: "Tabelão de números", tela: "tabelao",
+      onClick: () => setTela("tabelao") },
+    { id: "glossario", grupo: "Consulta", ico: "livro", rotulo: "Glossário", tela: "glossario",
+      onClick: () => { setBuscaGl(""); setTela("glossario"); } },
+    { id: "ferramentas", grupo: "Consulta", ico: "calc", rotulo: "Ferramentas da prova", tela: "ferramentas",
+      onClick: () => setTela("ferramentas") },
+    { id: "musicas", grupo: "Consulta", ico: "som", rotulo: "Cantigas da prova", tela: "musicas",
+      onClick: () => setTela("musicas") },
+
+    { id: "pressao", grupo: "Ajustes", ico: "relogio", rotulo: `Modo pressão ${pressao ? "ligado" : "desligado"}`,
+      onClick: () => { setPressao(!pressao); salvar({ pressao: !pressao }); } },
+    { id: "ajustes", grupo: "Ajustes", ico: "engrenagem", rotulo: "Backup e sincronia",
+      onClick: () => { setTela("home"); setTimeout(() => { const el = document.getElementById("cx-backup"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }, 60); } },
+  ];
+
   // ---------------- HOME ----------------
   if (tela === "home") {
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo />
         <div className="cx-wrap">
           {conflitoSync && (
@@ -1992,20 +2243,18 @@ export default function ProjetoCPA() {
             Você venceu {totalFeitos} das {TOTAL_NIVEIS} pílulas.
           </p>
 
+          {/* A fileira de treze botões com emoji saiu daqui: navegação de app
+              não é lista de atalhos no meio do conteúdo, e emoji não é ícone —
+              muda de desenho por sistema e é lido em voz alta como "arquivo de
+              fichário". Os mesmos destinos estão no trilho (computador) e na
+              barra inferior mais a folha "Mais" (celular). Aqui ficam só as
+              duas ações que iniciam uma sessão de estudo. */}
           <div className="cx-bar rv rv-3">
-            <button className="cx-chip" onClick={() => setTela("fichas")}>🗂 Fichas de memorização</button>
-            <button className="cx-chip" onClick={() => { setArv(null); setTela("arvores"); }}>💬 Atendimento (árvore)</button>
-            <button className="cx-chip" onClick={() => setTela("musicas")}>🎵 Cantigas da prova</button>
-            <button className="cx-chip" onClick={() => setTela("confrontos")}>⚖️ Fichas de confronto</button>
-            <button className="cx-chip" onClick={() => setTela("tabelao")}>🔢 Tabelão da prova</button>
-            <button className="cx-chip" onClick={() => setTela("ferramentas")}>🧮 Ferramentas da prova</button>
-            <button className="cx-chip" onClick={() => { setBuscaGl(""); setTela("glossario"); }}>📖 Glossário</button>
-            <button className="cx-chip" onClick={() => jogarSimulado(60)}>🎯 Simulado autoral (60)</button>
-            <button className="cx-chip" onClick={() => setTela("provaHome")}>🎓 Exame · {TOTAL_ITENS_PROVA} itens · 2h30{prova ? " (em andamento)" : ""}</button>
-            <button className="cx-chip" onClick={jogarRevisao} disabled={!errados.length}>🔁 Revisar erros ({errados.length})</button>
-            <button className="cx-chip" onClick={() => { setFiltroFicha("rev"); setTela("fichas"); }} disabled={!favs.length}>📅 Revisão do dia ({revDevidas.length})</button>
-            <button className={"cx-chip" + (pressao ? " on" : "")} onClick={() => { setPressao(!pressao); salvar({ pressao: !pressao }); }}>
-              ⏱ Modo pressão {pressao ? "on" : "off"}
+            <button className="cx-btn" onClick={() => setTela("provaHome")}>
+              <Ico n="chapeu" /> {prova ? (prova.pausada ? "Retomar o exame pausado" : "Voltar ao exame em andamento") : `Fazer o exame · ${TOTAL_ITENS_PROVA} itens · 2h30`}
+            </button>
+            <button className="cx-chip" onClick={jogarRevisao} disabled={!errados.length}>
+              <Ico n="volta" s={17} /> Revisar erros ({errados.length})
             </button>
           </div>
 
@@ -2069,10 +2318,19 @@ export default function ProjetoCPA() {
               Com um endereço de sincronia configurado, iPhone e computador passam a mostrar o mesmo
               progresso sozinhos. Sem endereço, o app continua 100% local e nada sai daqui.
             </p>
-            <p style={{ fontSize: 12.5, color: "var(--ink2)", marginTop: 9, fontWeight: 700, lineHeight: 1.5 }}>
-              <b>Vai para a nuvem:</b> XP, precisão por tópico, pílulas vencidas, fila de erros, favoritas e revisão.<br />
-              <b>Fica só neste aparelho:</b> a prova em andamento e o histórico de provas encerradas — são pesados
-              demais para o limite do serviço. Para levá-los a outro aparelho, use o código de backup abaixo.
+            <p style={{ fontSize: 12.5, color: "var(--ink2)", marginTop: 9, lineHeight: 1.55 }}>
+              <b>Com a sincronia ligada, vai para o endereço que você configurou:</b> XP e combo; precisão por
+              tópico; pílulas concluídas e vencidas; fila de erros; favoritas; agenda de revisão; preferências de
+              som e pressão; <b>o texto do seu bloco de notas e da sua planilha</b>; o histórico de provas
+              encerradas; a prova em andamento, inclusive pausada; e a lista do que você apagou.
+              <br />
+              <b>Não sai daqui:</b> o endereço e o código são guardados neste aparelho, e nenhum outro serviço
+              recebe nada — não há analytics, rastreador nem terceiros.
+            </p>
+            <p style={{ fontSize: 12, color: "var(--mut)", marginTop: 7, lineHeight: 1.5 }}>
+              Este texto já esteve errado: dizia que a prova e o histórico ficavam só no aparelho, quando os dois
+              passaram a ser enviados assim que a sincronia de provas foi criada, e não mencionava o bloco de
+              notas. Corrigido em 10/09/2026 conferindo campo a campo o que a função de envio monta.
             </p>
             <input className="cx-busca" style={{ marginTop: 12 }} value={syncUrl}
               onChange={(e) => { setSyncUrl(e.target.value.trim()); salvar({ syncUrl: e.target.value.trim() }); }}
@@ -2110,6 +2368,7 @@ export default function ProjetoCPA() {
   if (tela === "modulo") {
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setTela("home")} cAtiva={cor(mId)} />
         <div className="cx-wrap">
           <div className="cx-eye" style={{ marginTop: 20, color: cor(mId) }}>Módulo {modulo.id} · {modulo.peso}% da prova</div>
@@ -2154,6 +2413,7 @@ export default function ProjetoCPA() {
     }).filter(Boolean).sort((a, b) => a.pct - b.pct);
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setTela("modulo")} cAtiva={cor(mId)} />
         <div className="cx-wrap">
           <div className="cx-eye" style={{ marginTop: 20, color: cor(mId) }}>Bloco {bloco.id}</div>
@@ -2207,6 +2467,7 @@ export default function ProjetoCPA() {
     const vistos = new Set(); // um mesmo termo é marcado uma vez por pílula
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setTela("bloco")} cAtiva={cor(mId)} />
         <div className="cx-wrap">
           <div className="cx-eye" style={{ marginTop: 20, color: cor(mId) }}>Pílula {nivel.id}</div>
@@ -2238,6 +2499,7 @@ export default function ProjetoCPA() {
     if (!a) {
       return (
         <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
           <Topo voltar={() => setTela("home")} />
           <div className="cx-wrap">
             <h1 className="cx-h1" style={{ fontSize: 27 }}>Atendimento (árvore de decisão)</h1>
@@ -2274,49 +2536,109 @@ export default function ProjetoCPA() {
 
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setArv(null)} cAtiva="var(--roxo)" />
         <div className="cx-wrap">
           <div className="cx-eye" style={{ marginTop: 18, color: "var(--roxo)" }}>Atendimento · {a.titulo}</div>
-          <div className="cx-passos">
-            {a.prompts.map((_, i) => <i key={i} className={i < arv.passo ? "f" : ""} />)}
-          </div>
-          <div className="cx-ctx" style={{ marginTop: 10 }}>{a.contexto}</div>
 
-          <div className="cx-chat">
-            {a.prompts.slice(0, arv.passo + (fim ? 0 : 1)).map((p, i) => (
-              <div key={i} style={{ display: "contents" }}>
-                <div className="cx-bolha cli">
-                  <div className="quem">{a.cliente}</div>
-                  {p.fala}
-                </div>
-                {arv.escolhas[i] !== undefined && (
-                  <div style={{ display: "contents" }}>
-                    <div className="cx-bolha eu">
-                      <div className="quem">Você</div>
-                      {p.alts[arv.escolhas[i]].t}
-                    </div>
-                    <div className={"cx-nota g" + p.alts[arv.escolhas[i]].grau}>
-                      <span className="selo">{GRAUS[p.alts[arv.escolhas[i]].grau]}</span>
-                      {p.alts[arv.escolhas[i]].nota}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
+          {/* ANDAMENTO EM NÚMERO, NÃO SÓ EM BARRINHA.
+              A barra sozinha diz "estamos em algum lugar"; o número diz
+              quanto falta, que é o que a pessoa quer saber para decidir se
+              começa agora ou depois. */}
+          <div className="cx-and">
+            <span>Decisão <b>{Math.min(arv.passo + 1, a.prompts.length)}</b> de {a.prompts.length}</span>
+            <span className="cx-passos" aria-hidden="true">
+              {a.prompts.map((_, i) => <i key={i} className={i < arv.passo ? "f" : i === arv.passo ? "n" : ""} />)}
+            </span>
           </div>
+
+          <div className="cx-cena" style={{ marginTop: 12 }}>{a.contexto}</div>
+
+          {/* HISTÓRICO RECOLHIDO.
+              Antes, cada decisão empilhava três blocos (fala, sua resposta e
+              o comentário graduado) e nunca saíam da tela. Na sexta decisão
+              a página tinha dezoito blocos e a fala atual ficava no fim de
+              uma rolagem longa — justamente a informação que precisa estar
+              à vista.
+
+              Agora: a rodada ATUAL aparece inteira; as anteriores viram uma
+              linha cada, com o grau que você tirou. O contexto continua
+              disponível a um toque, e nada é apagado. */}
+          {arv.passo > 0 && (
+            <div className="cx-hist">
+              <button className="cx-hist-bt" aria-expanded={histArvAberto}
+                onClick={() => setHistArvAberto(!histArvAberto)}>
+                <Ico n={histArvAberto ? "seta" : "grade"} s={15} />
+                {histArvAberto ? "Recolher as decisões anteriores" : `Ver as ${arv.passo} decisões anteriores`}
+              </button>
+              {!histArvAberto && (
+                <ol className="cx-hist-min">
+                  {a.prompts.slice(0, arv.passo).map((p, i) => (
+                    <li key={i}>
+                      <span className={"cx-gsel g" + p.alts[arv.escolhas[i]].grau}>{p.alts[arv.escolhas[i]].grau}</span>
+                      <span className="t">{p.fala.replace(/^[A-ZÀ-Ú][a-zà-ú]+: /, "").slice(0, 68)}…</span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+              {histArvAberto && (
+                <div className="cx-chat" style={{ marginTop: 10 }}>
+                  {a.prompts.slice(0, arv.passo).map((p, i) => (
+                    <div key={i} style={{ display: "contents" }}>
+                      <div className="cx-bolha cli"><div className="quem">{a.cliente}</div>{p.fala}</div>
+                      <div className="cx-bolha eu"><div className="quem">Você</div>{p.alts[arv.escolhas[i]].t}</div>
+                      <div className={"cx-nota g" + p.alts[arv.escolhas[i]].grau}>
+                        <span className="selo">{GRAUS[p.alts[arv.escolhas[i]].grau]}</span>
+                        {p.alts[arv.escolhas[i]].nota}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* A RODADA ATUAL, sempre inteira */}
+          {!fim && (
+            <div className="cx-chat" style={{ marginTop: 14 }}>
+              <div className="cx-bolha cli">
+                <div className="quem">{a.cliente}</div>
+                {a.prompts[arv.passo].fala}
+              </div>
+              {arv.escolhas[arv.passo] !== undefined && (
+                <>
+                  <div className="cx-bolha eu">
+                    <div className="quem">Você</div>
+                    {a.prompts[arv.passo].alts[arv.escolhas[arv.passo]].t}
+                  </div>
+                  <div className={"cx-nota g" + a.prompts[arv.passo].alts[arv.escolhas[arv.passo]].grau}>
+                    <span className="selo">{GRAUS[a.prompts[arv.passo].alts[arv.escolhas[arv.passo]].grau]}</span>
+                    {a.prompts[arv.passo].alts[arv.escolhas[arv.passo]].nota}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
 
           {!fim && arv.escolhas[arv.passo] === undefined && (
             <div style={{ marginTop: 16 }}>
               <div className="cx-lb">Selecione a alternativa que melhor concilia a informação correta a um atendimento adequado</div>
+              {/* As escolhas usam a MESMA peça das alternativas de questão:
+                  mesma letra, mesmo alvo de toque, mesmo estado selecionado.
+                  Componentes diferentes para a mesma decisão obrigam o olho a
+                  reaprender a tela a cada troca de modo. */}
               {ordemDoPasso(a, arv, arv.passo).map((orig, i) => {
                 const alt = a.prompts[arv.passo].alts[orig];
                 return (
-                  <button key={orig} className="cx-esc" onClick={() => {
+                  <button key={orig} className="cx-alt" aria-pressed="false" onClick={() => {
                     // grava o índice ORIGINAL: o comentário e o grau seguem colados
                     const ne = [...arv.escolhas]; ne[arv.passo] = orig;
                     setArv({ ...arv, escolhas: ne });
                     if (alt.grau === 3) Som.acerto(); else if (alt.grau === 0) Som.erro();
-                  }}>{alt.t}</button>
+                  }}>
+                    <span className="k">{["A", "B", "C", "D"][i]}</span>
+                    <span className="t">{alt.t}</span>
+                  </button>
                 );
               })}
             </div>
@@ -2366,6 +2688,7 @@ export default function ProjetoCPA() {
     };
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => { Som.pararMusica(); setTocandoMus(null); setLinhaMus(-1); setTela("home"); }} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Cantigas da prova</h1>
@@ -2406,6 +2729,7 @@ export default function ProjetoCPA() {
   if (tela === "confrontos") {
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Fichas de confronto</h1>
@@ -2453,6 +2777,7 @@ export default function ProjetoCPA() {
     const totalItens = TABELAO.reduce((a, t) => a + t.itens.length, 0);
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Tabelão da prova</h1>
@@ -2484,6 +2809,7 @@ export default function ProjetoCPA() {
       : termos;
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Glossário</h1>
@@ -2515,6 +2841,7 @@ export default function ProjetoCPA() {
   if (tela === "ferramentas") {
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Ferramentas da prova</h1>
@@ -2544,6 +2871,7 @@ export default function ProjetoCPA() {
     );
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Exame</h1>
@@ -2554,9 +2882,13 @@ export default function ProjetoCPA() {
 
           {prova && (
             <div className="cx-pane" style={{ marginTop: 16, borderColor: "var(--gold)" }}>
-              <div className="cx-lb" style={{ color: "var(--gold)" }}>
-                {prova.pausada ? "Tentativa pausada" : "Tentativa em andamento"}
-              </div>
+              {/* Estado em palavra e em forma, não só em cor — quem não
+                  distingue laranja de verde precisa ler o que está havendo
+                  com o próprio relógio. */}
+              <span className={"cx-estado " + (prova.pausada ? "pausada" : "ativa")}>
+                <i className="pt" aria-hidden="true" />
+                {prova.pausada ? "Prova pausada · relógio parado" : "Prova ativa · relógio correndo"}
+              </span>
               <p style={{ color: "var(--ink2)" }}>
                 Iniciada em {new Date(prova.inicio).toLocaleString("pt-BR")} ·{" "}
                 {prova.itens.filter((x) => (x.tipo === "arvore" ? x.escolha : x.resposta) !== null).length} de {prova.itens.length} respondidos ·{" "}
@@ -2568,7 +2900,7 @@ export default function ProjetoCPA() {
               </p>
               <button className="cx-btn" style={{ marginTop: 11, background: "var(--gold)", boxShadow: "none" }}
                 onClick={prova.pausada ? retomarProva : () => setTela("prova")}>
-                {prova.pausada ? "▶ Retomar de onde parei" : "Continuar a prova"}
+                <Ico n={prova.pausada ? "play" : "seta"} s={17} /> {prova.pausada ? "Retomar de onde parei" : "Continuar a prova"}
               </button>
               {prova.pausas > 0 && (
                 <p style={{ color: "var(--mut)", fontSize: 12, fontWeight: 700, marginTop: 9 }}>
@@ -2694,9 +3026,27 @@ export default function ProjetoCPA() {
     return (
       <div className="cx cx-lacrado"><style>{CSS}</style>
         <div className="cx-wrap" style={{ paddingTop: 14 }}>
-          <div className="cx-provahd">
-            <span className="cx-eye">Exame · item {prova.i + 1} de {total}</span>
-            <span className={"cx-cron" + (apertado ? " d" : "")} role="timer" aria-live="off">⏳ {fmtRelogio(resta)}</span>
+          {/* BARRA DO EXAME — gruda no topo e carrega as três coisas que o
+              candidato precisa ver sem rolar: em que item está, quanto falta
+              de relógio e o botão de pausar.
+
+              A pausa vivia no fim da página, depois das quatro alternativas.
+              Num item longo isso são duas rolagens de distância — e pausar é
+              justamente o que se quer fazer com pressa. Continua existindo lá
+              embaixo, com a explicação; aqui em cima é atalho, não mudança de
+              comportamento.
+
+              O estado ("prova ativa" / "prova pausada") é texto, não só cor:
+              quem não distingue verde de laranja lê a palavra. */}
+          <div className="cx-provabar">
+            <span className="cx-estado ativa"><i className="pt" aria-hidden="true" />Prova ativa</span>
+            <span className="cx-eye">Item {prova.i + 1} de {total}</span>
+            <span className={"cx-cron" + (apertado ? " d" : "")} role="timer" aria-live="off">
+              <Ico n="relogio" s={15} /> {fmtRelogio(resta)}
+            </span>
+            <button className="cx-pausa" onClick={pausarProva}>
+              <Ico n="pausa" s={17} /> Pausar
+            </button>
           </div>
           {/* progresso SEM cor de acerto: cheio = respondido, contorno = em branco */}
           <div className="cx-pgs" aria-hidden="true">
@@ -2708,7 +3058,7 @@ export default function ProjetoCPA() {
           <div className="cx-provasub">
             {respondidos} respondidos · {pendentes} em branco
             <button className="cx-linkbt" onClick={() => setMapaAberto(true)}>ver o mapa</button>
-            <button className="cx-linkbt" onClick={() => setFerrAberta(true)}>🧮 ferramentas</button>
+            <button className="cx-linkbt" onClick={() => setFerrAberta(true)}><Ico n="calc" s={14} /> ferramentas</button>
           </div>
 
           {it.tipo === "arvore" ? (
@@ -2732,7 +3082,13 @@ export default function ProjetoCPA() {
           ) : (
             <div>
               <div className="cx-eye" style={{ marginTop: 14, color: "var(--mut)" }}>Módulo {q.mId}</div>
-              <p className="cx-q">{q.q}</p>
+              {(() => {
+                const { cena, pergunta } = partirEnunciado(q.q);
+                return (<>
+                  {cena && <div className="cx-cena">{cena}</div>}
+                  <p className="cx-perg">{pergunta}</p>
+                </>);
+              })()}
             </div>
           )}
 
@@ -2747,14 +3103,14 @@ export default function ProjetoCPA() {
           <div className="cx-provanav">
             <button className="cx-btn sec" disabled={prova.i === 0} onClick={() => irPara(prova.i - 1)}>← Anterior</button>
             <button className={"cx-chip" + (it.marcada ? " on" : "")} onClick={marcarItem}>
-              {it.marcada ? "🔖 Marcada" : "🔖 Marcar"}
+              <Ico n="agenda" s={15} /> {it.marcada ? "Marcada" : "Marcar"}
             </button>
             {prova.i + 1 < total
               ? <button className="cx-btn" onClick={() => irPara(prova.i + 1)}>Próxima →</button>
               : <button className="cx-btn" onClick={() => setConfirmando(true)}>Entregar</button>}
           </div>
           <button className="cx-btn sec" style={{ marginTop: 14 }} onClick={pausarProva}>
-            ⏸ Pausar e continuar depois
+            <Ico n="pausa" s={17} /> Pausar e continuar depois
           </button>
           <p style={{ color: "var(--mut)", fontSize: 12, fontWeight: 700, marginTop: 8, lineHeight: 1.5 }}>
             O relógio para. As respostas sobem para a nuvem <b>ao pausar</b> — dá para retomar
@@ -2847,6 +3203,7 @@ export default function ProjetoCPA() {
     })();
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setTela("provaHome")} />
         <div className="cx-wrap">
           <div style={{ textAlign: "center", paddingTop: 14 }}>
@@ -2868,11 +3225,49 @@ export default function ProjetoCPA() {
             )}
             {h.pausas > 0 && (
               <div style={{ color: "var(--gold)", fontSize: 13, fontWeight: 700, marginTop: 6 }}>
-                Pausada {h.pausas}× · {Math.round((h.tempoPausadoMs || 0) / 60000)} min fora do relógio.
-                A nota vale; a <b>condição de prova</b>, não — no exame de verdade não existe pausa.
+                Pausada {h.pausas}× · tempo ativo {fmtRelogio(Math.max(0, Math.round(((h.entregueEm || 0) - (h.inicio || 0) - (h.tempoPausadoMs || 0)) / 1000)))} ·
+                {" "}{Math.round((h.tempoPausadoMs || 0) / 60000)} min fora do relógio.
+                A pausa <b>não desconta nada da sua nota</b>: os dois tempos aparecem separados só para você
+                saber em que condição fez esta tentativa. No exame de verdade não existe pausa.
               </div>
             )}
           </div>
+
+          {/* COMPOSIÇÃO REALMENTE SORTEADA
+              Dizer "a prova respeita os pesos oficiais" é afirmação; mostrar a
+              contagem é evidência. Está aqui porque durante meses a montagem
+              aplicava as cotas só às 40 de múltipla escolha e a prova saía com
+              44% de módulo 3 — e nada na tela permitia perceber. */}
+          {h.cotas && h.cotas.obtido && (
+            <div className="cx-pane" style={{ marginTop: 14, padding: 16 }}>
+              <div className="cx-lb">Composição desta prova</div>
+              <div className="cx-tab" style={{ marginTop: 10, display: "grid", gap: 6 }}>
+                {[["1", "Sistema financeiro"], ["2", "Produtos"], ["3", "Relacionamento"], ["4", "Inovação"]].map(([m, nome]) => {
+                  const teve = h.cotas.obtido.mod[m] || 0, alvo2 = (h.cotas.alvoMod || {})[m] || 0;
+                  return (
+                    <div key={m} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13 }}>
+                      <span style={{ width: 132, color: "var(--ink2)", fontWeight: 700 }}>M{m} · {nome}</span>
+                      <span style={{ flex: 1, height: 7, background: "var(--sup2)", borderRadius: 4, overflow: "hidden" }}>
+                        <span style={{ display: "block", height: "100%", width: `${(teve / 50) * 100 * 2}%`, background: "var(--azul)" }} />
+                      </span>
+                      <span style={{ width: 96, textAlign: "right", fontWeight: 800, color: teve === alvo2 ? "var(--ink2)" : "var(--gold)" }}>
+                        {teve} de {alvo2}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+              <p style={{ color: "var(--mut)", fontSize: 12, marginTop: 10, lineHeight: 1.5 }}>
+                Alvo do Programa Detalhado da CPA (20/40/30/10 dos 50 itens), contando também os itens de
+                árvore. Dificuldade: {h.cotas.obtido.dif[1]} fácil · {h.cotas.obtido.dif[2]} médio ·{" "}
+                {h.cotas.obtido.dif[3]} difícil — a proporção é da banca, a classificação de cada item é nossa.
+                {h.cotas.faltou && h.cotas.faltou.length > 0 && (
+                  <> <b style={{ color: "var(--gold)" }}>O banco não tinha material para {h.cotas.faltou.length} balde(s);
+                  a prova foi completada com questões de faixa vizinha.</b></>
+                )}
+              </p>
+            </div>
+          )}
 
           <div className="cx-pane rv" style={{ marginTop: 20 }}>
             <div className="cx-lb">Como esta nota foi calculada</div>
@@ -2976,6 +3371,7 @@ export default function ProjetoCPA() {
     const cAtiva = cor(q.mId);
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setTela(sessao.tipo === "nivel" || sessao.tipo === "boss" ? "bloco" : "home")} cAtiva={cAtiva} />
         <div className="cx-wrap">
           <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginTop: 18, flexWrap: "wrap" }}>
@@ -2997,7 +3393,13 @@ export default function ProjetoCPA() {
           {(sessao.tipo === "simulado" || sessao.tipo === "revisao") && (
             <div className="cx-eye" style={{ marginTop: 8, color: cAtiva }}>Módulo {q.mId} · {q.origem}</div>
           )}
-          <p className="cx-q">{q.q}</p>
+          {(() => {
+            const { cena, pergunta } = partirEnunciado(q.q);
+            return (<>
+              {cena && <div className="cx-cena">{cena}</div>}
+              <p className="cx-perg">{pergunta}</p>
+            </>);
+          })()}
           {q.alts.map((a, i) => {
             let cls = "cx-alt";
             if (respondida) cls += i === q.c ? " ok" : i === escolha ? " no" : " off";
@@ -3041,6 +3443,7 @@ export default function ProjetoCPA() {
     const prox = pos >= 0 && pos + 1 < irmaos.length ? irmaos[pos + 1] : null;
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo />
         <div className="cx-wrap" style={{ textAlign: "center", paddingTop: 32 }}>
           <div className="cx-medal" style={{ borderColor: passou ? "var(--ok)" : "var(--no)", color: passou ? "var(--ok)" : "var(--no)", background: passou ? "var(--verde-l)" : "#FEECEC" }}>
@@ -3098,6 +3501,7 @@ export default function ProjetoCPA() {
     const modoRecall = filtroFicha === "rev" || filtroFicha === "fracos";
     return (
       <div className="cx cx-tela"><style>{CSS}</style><div className="cx-dots" /><div className="cx-trilho" aria-hidden="true" /><Aurora />
+        <Nav tela={tela} itens={NAV} mostrarMais={mostrarMais} setMostrarMais={setMostrarMais} />
         <Topo voltar={() => setTela("home")} />
         <div className="cx-wrap">
           <h1 className="cx-h1" style={{ fontSize: 27 }}>Fichas de memorização</h1>

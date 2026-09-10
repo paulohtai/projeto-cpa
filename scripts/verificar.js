@@ -409,6 +409,60 @@ colisao === 0 ? ok("nenhum exemplo repete enunciado de questão (não entrega ga
   }
 }
 
+// 6g5. O TEXTO DE PRIVACIDADE TEM DE DESCREVER O QUE É ENVIADO DE FATO.
+//
+// Defeito real encontrado em 10/09/2026: a tela de Ajustes dizia "Fica só
+// neste aparelho: a prova em andamento e o histórico de provas encerradas",
+// e os dois eram enviados havia semanas — desde que a sincronia de provas
+// foi criada. O texto também não mencionava o bloco de notas nem a planilha,
+// que também sobem. Ninguém tinha mentido de propósito: o texto envelheceu
+// e nada o obrigava a acompanhar o código.
+//
+// Este portão lê as chaves que `estadoAtual()` monta e exige que cada uma
+// esteja nesta tabela, com a descrição que aparece na tela. Campo novo na
+// sincronia reprova o build até ser descrito para o usuário.
+{
+  const i = s.indexOf("const estadoAtual = (extra) => ({");
+  if (i < 0) erro("não achei estadoAtual() — a sincronia mudou de forma?");
+  else {
+    const corpo = s.slice(i, s.indexOf("...extra, quando: Date.now() });", i));
+    // O objeto usa forma abreviada (`xp, combo, stats`) e forma completa
+    // (`ferr: {...}`). Precisamos das duas, senão o portão olha meia dúzia de
+    // campos e dá tudo certo — que é exatamente o tipo de checagem inútil que
+    // deixou o texto envelhecer.
+    const semComentario = corpo.replace(/\/\/[^\n]*/g, "");
+    const chaves = [...new Set([
+      ...(semComentario.match(/(?:^|[\s{,])([a-zA-Z][a-zA-Z0-9_]*)\s*:/gm) || [])
+        .map((x) => x.replace(/[\s{,:]/g, "")),
+      ...(semComentario.match(/(?:^|[\s{,])([a-zA-Z][a-zA-Z0-9_]*)\s*(?=[,}\n])/gm) || [])
+        .map((x) => x.trim().replace(/[{,]/g, "")),
+    ])].filter((k) => k && !["Date", "now", "extra", "const", "estadoAtual", "packTentativa", "packProva", "map"].includes(k));
+    // chave -> trecho que precisa aparecer no texto da tela
+    const DESCRITO = {
+      xp: "XP", combo: "combo", stats: "precisão por tópico", feitos: "pílulas",
+      bossBest: "pílulas", errados: "fila de erros", favs: "favoritas",
+      pressao: "pressão", som: "som", rev: "agenda de revisão",
+      ferr: "bloco de notas", notas: "bloco de notas", plan: "planilha",
+      syncUrl: "endereço", syncCod: "código", hist: "histórico de provas",
+      apagados: "apagou", prova: "prova em andamento", quando: "",
+    };
+    const semDescricao = chaves.filter((k) => DESCRITO[k] === undefined);
+    semDescricao.length === 0
+      ? ok(`os ${chaves.length} campos enviados à nuvem estão todos descritos na tela`)
+      : erro(`campo(s) enviados à nuvem sem descrição na tela: ${semDescricao.join(", ")} — descreva em Ajustes antes de publicar`);
+    const plano = s.replace(/\s+/g, " ");
+    const faltaNoTexto = [...new Set(Object.values(DESCRITO).filter(Boolean))]
+      .filter((frase) => !plano.includes(frase));
+    faltaNoTexto.length === 0
+      ? ok("o texto de Ajustes cita cada categoria enviada")
+      : erro(`o texto de Ajustes não cita: ${faltaNoTexto.join(" · ")}`);
+    // e não pode voltar a afirmar o que é falso
+    /Fica só neste aparelho:<\/b> a prova em andamento e o histórico/.test(s)
+      ? erro("o texto voltou a dizer que a prova e o histórico não são enviados")
+      : ok("o texto não afirma que a prova e o histórico ficam só no aparelho");
+  }
+}
+
 // 6h. árvores de decisão (questão interativa oficial)
 {
   try {
@@ -490,7 +544,22 @@ colisao === 0 ? ok("nenhum exemplo repete enunciado de questão (não entrega ga
     : erro(`${foraDoAlvo} módulo(s) fora de 25/50/25; o sorteio do exame não fecharia a distribuição`);
 
   /const CHAVES_POR_MODULO_DIF = \{\}/.test(s) ? ok("índice por dificuldade existe") : erro("falta CHAVES_POR_MODULO_DIF");
-  /const alvoPorFaixa = \{ 1: nF, 2: nM, 3: nD \}/.test(s) ? ok("o exame reparte a cota do módulo por dificuldade") : erro("o exame ignora a dificuldade no sorteio");
+  // ATENÇÃO AO MÉTODO: as três linhas abaixo procuram TEXTO no arquivo, e
+  // texto não prova comportamento. Elas existem só para acusar remoção
+  // acidental das peças. Quem testa se a distribuição fecha de verdade é o
+  // scripts/testar.js, que MONTA provas e conta os itens.
+  /const alvoPorFaixa = cotaMaiorResto\(cota, restoDif/.test(s)
+    ? ok("o exame reparte a cota do módulo por dificuldade (peça presente)")
+    : erro("o exame ignora a dificuldade no sorteio");
+  /const cotaMaiorResto = \(total, pesos, ordem\)/.test(s)
+    ? ok("política de arredondamento declarada (maior resto, com ordem de desempate)")
+    : erro("falta a política de arredondamento das cotas");
+  /const itensArv = montarArvore\(porFrescor\);[\s\S]{0,400}const alvoMod = cotaMaiorResto\(TOTAL_ITENS_PROVA/.test(s)
+    ? ok("as cotas são calculadas sobre os 50 itens, com a árvore sorteada antes")
+    : erro("as cotas voltaram a valer só sobre as 40 de múltipla escolha");
+  /mId: m, dif: a\.prompts\[k\]\.dif \|\| 2/.test(s) && /const m = a\.mId \|\| "3";/.test(s)
+    ? ok("o item de árvore leva o módulo e a dificuldade da própria árvore")
+    : erro("o item de árvore está com módulo ou dificuldade fixos no código");
   /origem: "pedagogica"/.test(s) ? ok("a ordenação de dificuldade está declarada como escolha nossa")
     : erro("o rótulo de dificuldade não está declarado como pedagógico — seria atribuir à ANBIMA uma classificação que não é dela");
 }
@@ -593,7 +662,23 @@ colisao === 0 ? ok("nenhum exemplo repete enunciado de questão (não entrega ga
 {
   /Simulado oficial/.test(s) ? erro('ainda chama material autoral de "Simulado oficial"') : ok('nenhum material autoral é chamado de "oficial"');
   /verificadoEm: "\d{4}-\d{2}-\d{2}"/.test(s) ? ok("as regras do exame carregam data de verificação") : erro("REGRAS_EXAME sem data de verificação");
-  /origem: "naoConfirmado"/.test(s) ? ok("o que não foi reconfirmado está marcado como tal") : erro("nada marcado como não confirmado — suspeito");
+  // Este portão exigia que EXISTISSE ao menos um `naoConfirmado`, como prova
+  // de que não estávamos nos declarando certos de tudo. Em 10/09/2026 o
+  // último deles (os pesos por módulo) foi encontrado publicado no Programa
+  // Detalhado e virou `oficial` — e o portão passou a reprovar por acertarmos.
+  // A regra certa não é "tem de haver dúvida", é "toda origem declarada tem
+  // de ser uma das três, e `oficial` tem de citar onde está".
+  {
+    const origens = [...new Set((s.match(/origem: "(\w+)"/g) || []).map((x) => x.slice(9, -1)))];
+    const validas = origens.every((o) => ["oficial", "pedagogica", "naoConfirmado"].includes(o));
+    validas ? ok(`origens declaradas dentro do vocabulário (${origens.join(", ")})`)
+            : erro("origem fora do vocabulário: " + origens.join(", "));
+    const blocos = s.match(/\{ valor: [^}]*origem: "oficial"[^}]*\}/g) || [];
+    const semFonte = blocos.filter((b) => !/(Edital|Programa Detalhado|Página oficial|página oficial)/.test(b));
+    semFonte.length === 0
+      ? ok(`as ${blocos.length} regras marcadas como oficiais citam o documento`)
+      : erro(`${semFonte.length} regra(s) "oficial" sem citar o documento de origem`);
+  }
   /const ESQUEMA = \d+/.test(s) && /const migrar = /.test(s) ? ok("armazenamento versionado com migração") : erro("falta migração versionada");
 }
 

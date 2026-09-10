@@ -18,6 +18,8 @@ const GRAUS = ["Escolha abaixo do ideal", "Escolha razoável", "Boa escolha", "M
 const ARVORES = [
   {
     id: "A.5",
+    mId: "2",
+    mFonte: "LCA, indexadores e isenção — Produtos do mercado financeiro",
     titulo: "Duas LCAs e um carro para a neta",
     tema: "Indexadores, rentabilidade comparada e linguagem com o cliente",
     cliente: "Antônio",
@@ -25,6 +27,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Boa tarde! Preciso resgatar 80 mil para dar um carro de presente para minha neta, que faz 18 anos. Tenho uma LCA do CDI e outra do IPCA. Pode me explicar a diferença para me ajudar a decidir?",
+        dif: 3,
         alts: [
           { t: "Claro. Uma acompanha os juros do mercado e a outra paga a inflação mais uma taxa fixa. Vamos ver o que isso significou no seu caso.", grau: 3, nota: "Explica os dois indexadores em linguagem simples e já sinaliza que vai olhar os números dele, que é o que a decisão exige." },
           { t: "Posso consultar os valores no sistema e ver qual rendeu mais até agora, para você decidir.", grau: 1, nota: "Consultar é útil, porém entregar só o número sem explicar o mecanismo deixa o cliente sem entender a escolha." },
@@ -34,6 +37,7 @@ const ARVORES = [
       },
       {
         fala: "Tá, mas não entendi direito. Sempre preferi coisa atrelada à inflação, por causa dos anos 80. Só que minha filha falou que a do CDI está rendendo mais.",
+        dif: 3,
         alts: [
           { t: "Como o senhor prefere inflação, o melhor é manter a do IPCA e resgatar a outra.", grau: 0, nota: "Recomenda pela preferência declarada sem checar rentabilidade, prazo ou isenção. É atalho, não diagnóstico." },
           { t: "Sua filha tem razão neste momento: com o CDI a 15% e a inflação em 4%, a do CDI está entregando bem mais. Mas isso muda quando os juros caem.", grau: 3, nota: "Usa os números que estão na mesa e ainda mostra que a vantagem é do cenário, não permanente." },
@@ -43,6 +47,7 @@ const ARVORES = [
       },
       {
         fala: "Deixa eu ver se entendi: a do IPCA me garante a inflação e a do CDI depende de como o Banco Central mexer nos juros?",
+        dif: 3,
         alts: [
           { t: "Exato. A do IPCA garante a inflação e a do CDI depende da política monetária do Banco Central.", grau: 2, nota: "Correto, embora deixe de fora a taxa fixa de 5,5%, que é parte relevante do retorno." },
           { t: "Mais ou menos. As duas protegem da inflação, só que de jeitos diferentes.", grau: 1, nota: "Impreciso: a do CDI pode ficar abaixo da inflação em certos cenários, então proteção não é garantida." },
@@ -52,6 +57,7 @@ const ARVORES = [
       },
       {
         fala: "E se eu resgatar a do CDI? Ela tem 13 meses. Vou pagar imposto sobre esse rendimento?",
+        dif: 3,
         alts: [
           { t: "Com 13 meses o senhor já saiu da faixa mais alta da tabela, então o imposto fica menor.", grau: 0, nota: "Erro grave: aplica a tabela regressiva a um produto isento." },
           { t: "Vou verificar no sistema como fica a tributação nesse resgate específico.", grau: 1, nota: "Prudente, mas a isenção da LCA é regra conhecida; adiar aqui passa insegurança." },
@@ -61,6 +67,7 @@ const ARVORES = [
       },
       {
         fala: "Entendi. Mas e se eu resgatar a do IPCA, que é maior? Assim sobra mais dinheiro aplicado depois.",
+        dif: 2,
         alts: [
           { t: "Antes de escolher pelo tamanho, vale olhar o que cada uma rende daqui para frente e qual delas o senhor precisaria manter para os próximos anos.", grau: 3, nota: "Recoloca a decisão no critério certo: o objetivo futuro, e não qual aplicação é maior." },
           { t: "Podemos resgatar da maior, sim. Só quero conferir antes se ela já cumpriu a carência.", grau: 2, nota: "Cuidado correto com a carência, mas aceita o critério do cliente sem discuti-lo." },
@@ -70,6 +77,7 @@ const ARVORES = [
       },
       {
         fala: "Você me ajudou bastante. Sobre o que sobrar aplicado, precisa eu fazer alguma coisa agora?",
+        dif: 2,
         alts: [
           { t: "Não precisa. Eu acompanho e aviso se aparecer algo relevante para o senhor.", grau: 2, nota: "Compromisso bom, sem critério do que seria relevante." },
           { t: "Agora não. Combino de revisar com o senhor quando a Selic mudar de patamar ou quando a carência da outra LCA vencer, o que vier primeiro.", grau: 3, nota: "Transforma o pós-venda em acompanhamento com gatilho definido, em vez de promessa vaga." },
@@ -81,6 +89,8 @@ const ARVORES = [
   },
   {
     id: "A.1",
+    mId: "4",
+    mFonte: "Criptoativo e oferta fora do mercado regulado — Inovação e desenvolvimento de mercado",
     titulo: "O cliente que viu um vídeo sobre cripto",
     tema: "Suitability, dever de informar e registro da decisão",
     cliente: "Rogério",
@@ -88,6 +98,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Vi um vídeo de um cara que ganhou três vezes o dinheiro em cripto em oito meses. Quero colocar uns R$ 45 mil. Como faço?",
+        dif: 3,
         alts: [
           { t: "Posso te explicar como funciona esse tipo de ativo e quais riscos ele carrega, se você quiser.", grau: 2, nota: "Informar é dever seu, mas vem antes de entender o objetivo e o prazo do dinheiro." },
           { t: "Sem problema, faço a aplicação. O dinheiro é seu e você decide onde colocar.", grau: 0, nota: "Executar sem diagnóstico e sem alerta abandona o dever de adequação." },
@@ -97,6 +108,7 @@ const ARVORES = [
       },
       {
         fala: "É o dinheiro da minha aposentadoria mesmo. Mas faltam sete anos, dá tempo de recuperar se cair, não dá?",
+        dif: 3,
         alts: [
           { t: "Dá tempo, sim, mas o tamanho da posição preocupa: metade é muito.", grau: 2, nota: "Aponta o ponto certo, ainda que sem ligar ao objetivo da aposentadoria." },
           { t: "Dá tempo tranquilo. Em sete anos o mercado sempre se recupera.", grau: 0, nota: "'Sempre se recupera' é promessa disfarçada e não se sustenta." },
@@ -106,6 +118,7 @@ const ARVORES = [
       },
       {
         fala: "E se eu colocar menos? Uns R$ 10 mil, digamos. Aí você me libera?",
+        dif: 2,
         alts: [
           { t: "Reduzir a exposição muda bastante o quadro. Vamos ver quanto você pode arriscar sem afetar a aposentadoria.", grau: 3, nota: "Trabalha com o cliente a capacidade de risco em vez de simplesmente liberar ou barrar." },
           { t: "Qualquer valor em cripto continua desenquadrado do seu perfil conservador.", grau: 1, nota: "Tecnicamente coerente, porém ignora que a decisão final é do cliente informado." },
@@ -115,6 +128,7 @@ const ARVORES = [
       },
       {
         fala: "Sinceramente, achei que você fosse me empurrar um fundo do banco. Por que está me segurando?",
+        dif: 2,
         alts: [
           { t: "Na verdade eu tenho um fundo que bate meta e serve para você. Quer ver?", grau: 0, nota: "Aproveitar a brecha para empurrar produto por meta é exatamente o conflito de interesses vedado." },
           { t: "Meu dever é oferecer o que combina com o seu objetivo. Se eu empurrasse qualquer coisa, estaria falhando com você.", grau: 3, nota: "Explica o dever de adequação em linguagem simples e reforça a confiança." },
@@ -124,6 +138,7 @@ const ARVORES = [
       },
       {
         fala: "Entendi. Mas eu quero mesmo assim. Vamos com os R$ 10 mil, é decisão minha.",
+        dif: 2,
         alts: [
           { t: "Tudo bem, mas quero que você assine o termo de ciência de risco antes.", grau: 2, nota: "O termo é parte do processo, embora o essencial seja a compreensão, não só a assinatura." },
           { t: "Prefiro que você pense mais uns dias antes de a gente fechar.", grau: 1, nota: "Prudente, mas adiar sem motivo novo pode virar obstrução à vontade do cliente." },
@@ -133,6 +148,7 @@ const ARVORES = [
       },
       {
         fala: "Fechado. E se daqui a três meses despencar, o que a gente faz?",
+        dif: 2,
         alts: [
           { t: "Aí é esperar. Vender na baixa costuma ser o pior negócio.", grau: 1, nota: "Máxima genérica que não considera o objetivo nem o prazo dele." },
           { t: "Não se preocupe, eu te aviso antes de qualquer queda grande.", grau: 0, nota: "Promessa impossível de cumprir: ninguém antecipa quedas." },
@@ -144,6 +160,8 @@ const ARVORES = [
   },
   {
     id: "A.2",
+    mId: "3",
+    mFonte: "Reação do cliente à queda e dever de conduta — Relacionamento com o cliente",
     titulo: "A carteira caiu e o telefone tocou",
     tema: "Comunicação de má notícia, pós-venda e expectativa",
     cliente: "Dona Neusa",
@@ -151,6 +169,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Eu vi o extrato e perdi quatorze mil reais! Isso é um absurdo. Tira tudo hoje e põe na poupança.",
+        dif: 3,
         alts: [
           { t: "Entendo o susto, dona Neusa. Antes de tirar, posso te explicar em dois minutos o que causou essa queda?", grau: 3, nota: "Acolhe a emoção e pede espaço para informar antes da decisão no impulso." },
           { t: "Posso fazer o resgate, sim. Só queria te contar antes o que aconteceu no mês.", grau: 2, nota: "Respeita a vontade dela, mas colocar o resgate na frente reforça a decisão no susto." },
@@ -160,6 +179,7 @@ const ARVORES = [
       },
       {
         fala: "Explica então. Mas eu não entendo esses nomes complicados, viu?",
+        dif: 2,
         alts: [
           { t: "É a marcação a mercado: os ativos são reprecificados diariamente conforme a curva de juros.", grau: 2, nota: "Tecnicamente certo, mas usa justamente os termos que ela disse não entender." },
           { t: "O fundo tem títulos que variam de preço todo dia. Quando os juros sobem, esses títulos valem menos hoje, mesmo sem ninguém ter errado.", grau: 3, nota: "Traduz marcação a mercado em linguagem cotidiana, sem infantilizar." },
@@ -169,6 +189,7 @@ const ARVORES = [
       },
       {
         fala: "Mas quando você me vendeu esse fundo, disse que era seguro. Eu me lembro bem.",
+        dif: 2,
         alts: [
           { t: "Registramos o seu perfil moderado e o produto está dentro dele, dona Neusa.", grau: 2, nota: "Correto e documentado, mas responde com processo a uma queixa emocional." },
           { t: "Eu nunca disse que era seguro. A senhora deve estar confundindo.", grau: 0, nota: "Confrontar a memória do cliente destrói a relação e não resolve nada." },
@@ -178,6 +199,7 @@ const ARVORES = [
       },
       {
         fala: "E agora? Eu preciso desse dinheiro daqui a três anos para complementar minha renda.",
+        dif: 2,
         alts: [
           { t: "Nesse prazo, historicamente esse tipo de fundo se recupera de quedas assim.", grau: 2, nota: "Contextualiza, mas apoiar-se no histórico chega perto de prometer resultado." },
           { t: "Deixa quieto que até lá recupera com folga.", grau: 0, nota: "Garantia de recuperação: promessa que você não pode fazer." },
@@ -187,6 +209,7 @@ const ARVORES = [
       },
       {
         fala: "Se eu tirar metade agora e deixar metade, resolve? Pelo menos eu durmo à noite.",
+        dif: 1,
         alts: [
           { t: "Reduzir a posição para você dormir tranquila é um motivo legítimo. Vamos calcular quanto resgatar sem furar o plano dos três anos.", grau: 3, nota: "Trata a tolerância emocional como dado real e ajusta com técnica." },
           { t: "Metade ainda mantém a exposição ao risco que te incomodou.", grau: 1, nota: "Observação técnica correta que não avança para uma solução." },
@@ -196,6 +219,7 @@ const ARVORES = [
       },
       {
         fala: "Está bem, vamos fazer assim. E me avisa se piorar, tá?",
+        dif: 1,
         alts: [
           { t: "Não vai piorar, fique tranquila.", grau: 0, nota: "Previsão que ninguém pode dar, e que destrói a confiança se falhar." },
           { t: "Combinado. Vou te ligar no fim de cada mês, e também se a queda passar do limite que definirmos hoje.", grau: 3, nota: "Transforma o pedido vago num acompanhamento com critério e periodicidade." },
@@ -207,6 +231,8 @@ const ARVORES = [
   },
   {
     id: "A.3",
+    mId: "3",
+    mFonte: "Sinal de lavagem numa remessa — PLDFT, dentro de Relacionamento",
     titulo: "A remessa que acendeu o alerta",
     tema: "PLDFT, LGPD e sigilo na prática",
     cliente: "Auditoria interna",
@@ -214,6 +240,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Auditoria: preciso dos dados cadastrais e do histórico desse cliente hoje ainda. Pode me mandar por e-mail?",
+        dif: 3,
         alts: [
           { t: "Compartilho pelos sistemas internos, mas prefiro não usar e-mail comum para esse tipo de dado.", grau: 2, nota: "Cuidado certo com o meio; falta apenas nomear a base legal que autoriza." },
           { t: "Preciso confirmar com o meu gestor antes de encaminhar qualquer dado.", grau: 1, nota: "Prudente, mas atrasa uma apuração que a norma já autoriza." },
@@ -223,6 +250,7 @@ const ARVORES = [
       },
       {
         fala: "Auditoria: e o cliente? Alguém avisa que ele está sendo analisado?",
+        dif: 3,
         alts: [
           { t: "Acho melhor não avisar, para não atrapalhar a apuração.", grau: 1, nota: "Chega ao resultado certo por intuição, não pela norma." },
           { t: "Vou ligar para ele confirmar a origem do dinheiro antes de reportarmos.", grau: 0, nota: "Alertar o cliente sobre a suspeita é justamente o que a lei proíbe." },
@@ -232,6 +260,7 @@ const ARVORES = [
       },
       {
         fala: "Auditoria: o valor está alto, mas ele explicou na abertura que recebe do exterior. Isso derruba a suspeita?",
+        dif: 2,
         alts: [
           { t: "Ajuda a avaliar, mas não elimina: o que pesa é a incompatibilidade com o histórico e o destino de alto risco.", grau: 3, nota: "Mantém a análise ancorada no conjunto de indícios, não numa justificativa isolada." },
           { t: "É um elemento a considerar na análise, junto com os demais indícios.", grau: 2, nota: "Equilibrado, embora não aponte o que de fato pesa no caso." },
@@ -241,6 +270,7 @@ const ARVORES = [
       },
       {
         fala: "Auditoria: e se a análise concluir que é suspeita mesmo? Qual valor mínimo para comunicar ao COAF?",
+        dif: 3,
         alts: [
           { t: "Suspeita se comunica independentemente do valor envolvido.", grau: 2, nota: "Correto e direto, sem separar registro de comunicação." },
           { t: "Não existe piso: suspeita de qualquer valor deve ser comunicada, e sem dar ciência ao cliente.", grau: 3, nota: "Valores acionam registro; suspeita aciona comunicação. É a pegadinha mais cobrada." },
@@ -250,6 +280,7 @@ const ARVORES = [
       },
       {
         fala: "Auditoria: aproveitando, um colega de outra instituição me perguntou sobre esse mesmo cliente. Posso repassar?",
+        dif: 2,
         alts: [
           { t: "Não podemos compartilhar dados de cliente com outra instituição desse jeito.", grau: 2, nota: "Conduta certa, sem explicar o fundamento." },
           { t: "Se for para ajudar numa investigação, acho que sim.", grau: 0, nota: "Compartilhar com terceiro sem base legal viola sigilo e LGPD de uma vez." },
@@ -259,6 +290,7 @@ const ARVORES = [
       },
       {
         fala: "Auditoria: por fim, quanto tempo guardamos os registros dessa operação?",
+        dif: 2,
         alts: [
           { t: "Mantemos os registros arquivados pelo prazo previsto na regulamentação.", grau: 2, nota: "Correto, ainda que genérico sobre a contagem do prazo." },
           { t: "Depois de comunicar ao COAF, podemos descartar o material.", grau: 0, nota: "Descartar registro de operação comunicada contraria o dever de guarda." },
@@ -270,6 +302,8 @@ const ARVORES = [
   },
   {
     id: "A.4",
+    mId: "3",
+    mFonte: "Meta comercial contra adequação — conflito de interesse, Relacionamento",
     titulo: "Última semana do trimestre",
     tema: "Conflito de interesses, meta comercial e adequação",
     cliente: "Seu gerente e o cliente Marcelo",
@@ -277,6 +311,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Gerente: aproveita esse cliente que chegou e encaixa o PGBL da campanha, que a gente fecha a meta hoje.",
+        dif: 2,
         alts: [
           { t: "Vou atender e ver o que serve para ele. Se o PGBL couber, ótimo; se não, ofereço o adequado.", grau: 3, nota: "Não confronta o gerente nem abre mão da adequação. É a saída profissional." },
           { t: "Vou tentar, mas não prometo nada.", grau: 1, nota: "Ambíguo: deixa no ar que a meta pode pesar na recomendação." },
@@ -286,6 +321,7 @@ const ARVORES = [
       },
       {
         fala: "Marcelo: tenho trinta mil guardados. É o que me segura se ficar sem trabalho por uns meses. Queria que rendesse mais.",
+        dif: 2,
         alts: [
           { t: "Nesse caso a previdência é ótima, porque força você a não mexer.", grau: 0, nota: "Trancar a reserva de emergência em produto de longo prazo é o oposto do adequado." },
           { t: "Como esse dinheiro é a sua segurança, ele precisa render bem mas continuar disponível a qualquer momento.", grau: 3, nota: "Identifica a função do dinheiro e fixa liquidez como requisito antes de falar de produto." },
@@ -295,6 +331,7 @@ const ARVORES = [
       },
       {
         fala: "Marcelo: um amigo falou que previdência dá desconto no imposto. Isso vale para mim?",
+        dif: 2,
         alts: [
           { t: "Esse benefício vale para quem declara no modelo completo, que não é o seu caso.", grau: 2, nota: "Correto e claro, faltando a condição de contribuir ao regime oficial." },
           { t: "Depende do plano e da sua situação. Podemos simular.", grau: 1, nota: "Evasivo diante de uma pergunta que tem resposta objetiva aqui." },
@@ -304,6 +341,7 @@ const ARVORES = [
       },
       {
         fala: "Marcelo: então o que você me indica para essa reserva?",
+        dif: 2,
         alts: [
           { t: "Podemos dividir: uma parte em renda fixa e outra em previdência para o futuro.", grau: 1, nota: "Misturar a reserva com longo prazo compromete justamente a emergência." },
           { t: "Um VGBL resolve, já que o PGBL não serve para você.", grau: 0, nota: "Trocar de sigla mantém o erro: previdência não é lugar de reserva de emergência." },
@@ -313,6 +351,7 @@ const ARVORES = [
       },
       {
         fala: "Gerente: e aí, fechou a previdência? Preciso desse número até sexta.",
+        dif: 2,
         alts: [
           { t: "Não fechou: o dinheiro dele é reserva de emergência e ele declara no simplificado. Vou buscar a meta em quem tem perfil.", grau: 3, nota: "Sustenta a decisão com o motivo técnico e mantém o compromisso com a meta." },
           { t: "Esse cliente não tinha perfil para o produto da campanha.", grau: 2, nota: "Correto, mas sem apresentar o caminho para a meta." },
@@ -322,6 +361,7 @@ const ARVORES = [
       },
       {
         fala: "Marcelo: gostei do atendimento. Quando eu tiver mais dinheiro, previdência passa a fazer sentido para mim?",
+        dif: 3,
         alts: [
           { t: "Sim, quando você já tiver a reserva pronta e pensar no longo prazo.", grau: 2, nota: "Boa condição, sem indicar qual modalidade serviria a ele." },
           { t: "Passa a fazer sentido quando você tiver reserva formada e objetivo de longo prazo. E o VGBL costuma encaixar melhor em quem declara no simplificado.", grau: 3, nota: "Abre a porta futura com o critério certo e já orienta a modalidade adequada." },
@@ -342,6 +382,8 @@ const ARVORES = [
 
   {
     id: "A.6",
+    mId: "1",
+    mFonte: "Poupança, inflação e juro real — Política econômica, módulo 1",
     titulo: "A poupança que ele acha que nunca perde",
     tema: "Inflação, juro real e o custo de ficar parado",
     cliente: "Dona Neusa",
@@ -349,6 +391,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Meu filho vive dizendo que poupança é coisa de quem não entende nada. Mas eu nunca vi meu saldo cair, nunca. Como é que eu estou perdendo dinheiro?",
+        dif: 2,
         alts: [
           { t: "Depende do período. Teve ano em que a poupança foi bem.", grau: 1, nota: "Correto em tese, mas não responde à dúvida e não avança para o caso dela." },
           { t: "Ele tem razão, a senhora está deixando dinheiro na mesa faz oito anos.", grau: 0, nota: "Dá razão ao filho contra a cliente e começa o atendimento por uma repreensão." },
@@ -358,6 +401,7 @@ const ARVORES = [
       },
       {
         fala: "Compra menos como assim? Se estão lá os mesmos 180 mil, eu compro as mesmas coisas, não é?",
+        dif: 3,
         alts: [
           { t: "É a inflação corroendo o poder aquisitivo do capital ao longo do tempo.", grau: 1, nota: "Correto, mas dito em vocabulário técnico para uma cliente que acabou de dizer que não entendeu." },
           { t: "Os preços sobem todo ano, então o dinheiro parado vale menos.", grau: 2, nota: "Simples e correto, embora não mostre a conta que faria a cliente enxergar o tamanho da perda." },
@@ -367,6 +411,7 @@ const ARVORES = [
       },
       {
         fala: "Então me diz uma coisa: quanto a poupança rendeu de verdade no último ano?",
+        dif: 2,
         alts: [
           { t: "Perto de 6,2% no ano. Descontando a inflação de 4,5%, o ganho real ficou em torno de 1,6% — foi isso que a senhora ganhou de verdade.", grau: 3, nota: "Responde com o número, faz o desconto da inflação e nomeia o que é ganho real, que é a resposta à pergunta original." },
           { t: "Rendeu cerca de 6,17% no ano, que é a regra da poupança com a Selic acima de 8,5%.", grau: 2, nota: "Traz o número nominal correto, mas para justamente antes do que a cliente precisa saber." },
@@ -376,6 +421,7 @@ const ARVORES = [
       },
       {
         fala: "E se eu tirasse da poupança, para onde iria? Não quero nada arriscado, tenho medo dessas coisas de bolsa.",
+        dif: 2,
         alts: [
           { t: "A senhora pode aplicar em fundos multimercado, que diversificam o risco entre vários ativos.", grau: 0, nota: "Ignora a restrição de risco que a cliente acabou de declarar." },
           { t: "Existem aplicações conservadoras que acompanham a Selic e ficam acima da poupança. Antes disso, precisamos separar quanto a senhora pode precisar de uma hora para outra.", grau: 3, nota: "Responde no nível de risco pedido e coloca a liquidez antes do produto, que é a ordem correta." },
@@ -385,6 +431,7 @@ const ARVORES = [
       },
       {
         fala: "Meu filho falou que na poupança o governo garante tudo. Isso é verdade? Porque aí eu prefiro ficar.",
+        dif: 2,
         alts: [
           { t: "A poupança tem cobertura do FGC, como vários outros produtos bancários.", grau: 2, nota: "Corrige a ideia de garantia estatal e amplia o leque, mas sem o limite nem o alcance." },
           { t: "Existe uma garantia, sim, com limite por pessoa. Posso levantar os detalhes.", grau: 1, nota: "Aponta a direção certa e deixa a cliente esperando o essencial." },
@@ -394,6 +441,7 @@ const ARVORES = [
       },
       {
         fala: "Entendi. Mas confesso que vou pensar. Faz tanto tempo que está lá que dá até um aperto de mexer.",
+        dif: 2,
         alts: [
           { t: "Pense com calma. Quando quiser, é só voltar.", grau: 1, nota: "Educado, mas encerra sem oferecer nenhum caminho para a cliente sair da inércia." },
           { t: "É natural. Podemos combinar de conversar de novo depois que a senhora falar com seu filho.", grau: 2, nota: "Respeita o tempo dela e mantém a porta aberta, ainda que devolva a decisão a um terceiro." },
@@ -406,6 +454,8 @@ const ARVORES = [
 
   {
     id: "A.7",
+    mId: "1",
+    mFonte: "CMN, BACEN, CVM, SUSEP e PREVIC — Sistema financeiro nacional",
     titulo: "Ele quer denunciar ao Banco Central",
     tema: "Quem regula o quê: CMN, BACEN, CVM, SUSEP e PREVIC",
     cliente: "Wagner",
@@ -413,6 +463,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Vou abrir reclamação no Banco Central das três coisas de uma vez. Eles resolvem tudo isso, certo?",
+        dif: 2,
         alts: [
           { t: "Cada uma dessas três tem um supervisor diferente. Vamos separar uma a uma para o senhor reclamar no lugar certo e não perder o prazo.", grau: 3, nota: "Corrige a premissa, explica o porquê da separação e transforma a irritação em um plano de ação." },
           { t: "Não exatamente. Seguros, por exemplo, ficam com a SUSEP.", grau: 2, nota: "Corrige com um exemplo certo, mas trata só um dos três casos." },
@@ -422,6 +473,7 @@ const ARVORES = [
       },
       {
         fala: "Começa pela tarifa então. Cobraram manutenção de conta e eu nem uso essa conta.",
+        dif: 2,
         alts: [
           { t: "Se o senhor não usa a conta, é só encerrar e o problema acaba.", grau: 0, nota: "Resolve o futuro e ignora a cobrança que o cliente contesta." },
           { t: "Essa é a que de fato fica com o Banco Central, que supervisiona as instituições financeiras. Antes disso, vamos ao nosso canal interno: a maioria dos casos de tarifa se resolve aqui, e é o passo anterior.", grau: 3, nota: "Confirma o supervisor correto e ainda coloca a ordem certa dos canais, poupando o cliente de um caminho mais longo." },
@@ -431,6 +483,7 @@ const ARVORES = [
       },
       {
         fala: "Agora o fundo. Caiu 12% em três meses. Isso não é irregularidade?",
+        dif: 1,
         alts: [
           { t: "Fundos de investimento são regulados pela CVM, é para lá que vai essa.", grau: 2, nota: "Acerta o supervisor, mas deixa o cliente achando que a queda em si é o problema." },
           { t: "Oscilação faz parte de renda variável, senhor Wagner.", grau: 1, nota: "Verdadeiro e importante, porém soa como encerramento do assunto e não indica caminho nenhum." },
@@ -440,6 +493,7 @@ const ARVORES = [
       },
       {
         fala: "E o seguro do meu irmão? Negaram a indenização dizendo que era doença preexistente.",
+        dif: 1,
         alts: [
           { t: "Seguro é com a SUSEP.", grau: 2, nota: "Correto e direto, mas curto demais para um cliente que chegou confundindo os três órgãos." },
           { t: "Se foi doença preexistente e não foi declarada, infelizmente a negativa costuma proceder.", grau: 1, nota: "Pode até ser verdade, porém julga o mérito sem os documentos e não informa onde recorrer." },
@@ -449,6 +503,7 @@ const ARVORES = [
       },
       {
         fala: "Puxa, achei que fosse tudo o mesmo órgão. E o CMN, que o senhor citou, faz o quê?",
+        dif: 1,
         alts: [
           { t: "O CMN não atende cliente: ele é o órgão normativo, define as diretrizes e fixa a meta de inflação. Quem executa e fiscaliza no dia a dia são o Banco Central, a CVM, a SUSEP e a PREVIC.", grau: 3, nota: "Dá a chave da estrutura inteira — normatizar contra supervisionar — que é o que faltava para o cliente parar de se perder." },
           { t: "O CMN é o conselho que fica acima de todos os outros no sistema financeiro.", grau: 1, nota: "Hierarquia vaga que não explica a diferença de função nem ajuda o cliente a se orientar." },
@@ -458,6 +513,7 @@ const ARVORES = [
       },
       {
         fala: "Beleza. Anota tudo isso num papel para mim? Não quero errar de novo.",
+        dif: 1,
         alts: [
           { t: "Não precisa anotar, é só o senhor lembrar que cada assunto tem um órgão.", grau: 0, nota: "Recusa um pedido simples e razoável de um cliente que já se confundiu uma vez." },
           { t: "Anoto agora e coloco o canal de cada uma na ordem: primeiro o nosso atendimento e a ouvidoria, depois o supervisor. É essa ordem que costuma resolver mais rápido.", grau: 3, nota: "Entrega o registro pedido e agrega a sequência de canais, que é a informação que muda o resultado prático." },
@@ -470,6 +526,8 @@ const ARVORES = [
 
   {
     id: "A.8",
+    mId: "1",
+    mFonte: "FGC, limite por CPF e risco de emissor — Regulação e infraestrutura",
     titulo: "Quatrocentos mil no banco que paga mais",
     tema: "FGC: limite, alcance e o que ele não cobre",
     cliente: "Rosângela",
@@ -477,6 +535,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Achei um CDB pagando 125% do CDI. Como tem FGC, é dinheiro garantido, certo? Quero colocar os 400 mil.",
+        dif: 2,
         alts: [
           { t: "Taxa alta assim costuma indicar banco com dificuldade de captação.", grau: 1, nota: "Observação pertinente, mas responde outra pergunta e soa como alarme antes de qualquer explicação." },
           { t: "Certo. Com FGC o senhor pode aplicar à vontade que não há risco.", grau: 0, nota: "Confirma a premissa errada e ainda desfaz o limite, que é justamente o ponto crítico dos R$ 400 mil." },
@@ -486,6 +545,7 @@ const ARVORES = [
       },
       {
         fala: "Limite? Não sabia. Qual é o limite então?",
+        dif: 1,
         alts: [
           { t: "R$ 250 mil por CPF e por instituição.", grau: 2, nota: "Número certo, sem o teto global e sem aplicar ao valor da cliente." },
           { t: "É um valor por pessoa. Posso confirmar o número exato no material do FGC.", grau: 1, nota: "Aponta a existência do limite e adia justamente o dado que decide a alocação." },
@@ -495,6 +555,7 @@ const ARVORES = [
       },
       {
         fala: "Então eu divido entre bancos diferentes e resolvo?",
+        dif: 2,
         alts: [
           { t: "É um caminho, sim, desde que sejam conglomerados diferentes — duas marcas do mesmo grupo contam como uma só. E ainda restaria olhar o prazo de três anos.", grau: 3, nota: "Confirma a estratégia, corrige a armadilha do conglomerado e já sinaliza o segundo risco, que a cliente ainda não viu." },
           { t: "Resolve. Pode dividir em dois bancos e fica tudo coberto.", grau: 1, nota: "Simplifica demais: sem a ressalva do conglomerado, a cliente pode dividir entre duas marcas do mesmo grupo." },
@@ -504,6 +565,7 @@ const ARVORES = [
       },
       {
         fala: "Que prazo? Ah, é. São três anos. Mas eu não pretendo mexer mesmo.",
+        dif: 1,
         alts: [
           { t: "Então tudo bem, se a senhora não vai mexer o prazo não atrapalha.", grau: 1, nota: "Aceita a intenção declarada como se fosse garantia de que nada vai mudar em três anos." },
           { t: "Só que sem liquidez antes do vencimento a senhora não consegue sacar nem em emergência, e o FGC não cobre esse tipo de aperto. Antes de travar tudo, quanto a senhora precisa manter acessível?", grau: 3, nota: "Explica que garantia e liquidez são coisas diferentes e faz a pergunta que estrutura a decisão." },
@@ -513,6 +575,7 @@ const ARVORES = [
       },
       {
         fala: "E se o banco quebrar mesmo, quanto tempo demora para eu receber do FGC?",
+        dif: 1,
         alts: [
           { t: "Depende do processo de liquidação da instituição.", grau: 2, nota: "Correto, mas genérico demais para uma cliente prestes a concentrar R$ 400 mil." },
           { t: "Nunca acompanhei um caso desses de perto, então prefiro não estimar.", grau: 1, nota: "Sinceridade sem conteúdo: o funcionamento do FGC é informação pública e esperada do profissional." },
@@ -522,6 +585,7 @@ const ARVORES = [
       },
       {
         fala: "Certo, mudei de ideia sobre colocar tudo num lugar só. Como a senhora faria?",
+        dif: 1,
         alts: [
           { t: "Dividiria entre três bancos diferentes para ficar tudo dentro do limite.", grau: 2, nota: "Resolve a cobertura, mas ignora a reserva de liquidez discutida há pouco." },
           { t: "Eu manteria o CDB de 125% do CDI, que é uma taxa muito boa.", grau: 0, nota: "Volta ao ponto de partida e coloca a taxa acima de tudo que foi levantado." },
@@ -534,6 +598,8 @@ const ARVORES = [
 
   {
     id: "A.9",
+    mId: "1",
+    mFonte: "Risco e retorno, oferta irregular e registro na CVM — módulo 1",
     titulo: "Três por cento ao mês, garantido",
     tema: "Risco e retorno, promessa de rentabilidade e o que a CVM autoriza",
     cliente: "Sandro",
@@ -541,6 +607,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Vi uma operação que paga 3% ao mês garantido. Aqui na corretora tem algo assim?",
+        dif: 1,
         alts: [
           { t: "Não temos, e vale a gente olhar esse número com calma: 3% ao mês dá mais de 42% ao ano, quase o triplo da Selic. Esse tamanho de retorno não convive com a palavra garantido.", grau: 3, nota: "Recusa sem desdém, converte a taxa mensal em anual e ancora a comparação na Selic, dando ao cliente o critério para julgar sozinho." },
           { t: "Não trabalhamos com isso. É golpe na certa.", grau: 1, nota: "A conclusão pode até estar certa, mas afirmada sem elemento nenhum ela não ensina o cliente a se defender da próxima." },
@@ -550,6 +617,7 @@ const ARVORES = [
       },
       {
         fala: "Mas o cara mostrou print de rendimento. Tinha gente comentando que recebeu.",
+        dif: 1,
         alts: [
           { t: "Se tem gente recebendo, é sinal de que a operação está funcionando.", grau: 0, nota: "Confunde pagamento inicial com solidez e é exatamente o raciocínio que sustenta esse tipo de esquema." },
           { t: "Print e comentário não são prova, porque quem paga os primeiros com o dinheiro dos últimos também consegue mostrar print. O que dá para verificar é se a pessoa e o produto têm registro na CVM.", grau: 3, nota: "Explica por que a evidência apresentada não vale e substitui por um critério verificável e público." },
@@ -559,6 +627,7 @@ const ARVORES = [
       },
       {
         fala: "Como eu vejo esse registro? Nem saberia por onde começar.",
+        dif: 1,
         alts: [
           { t: "Posso verificar para o senhor e trago a resposta depois.", grau: 1, nota: "Prestativo, mas deixa o cliente dependente em vez de ensiná-lo a conferir sozinho." },
           { t: "Registro não quer dizer muita coisa, tem gente registrada que também dá prejuízo.", grau: 0, nota: "Desqualifica a única verificação objetiva disponível ao cliente." },
@@ -568,6 +637,7 @@ const ARVORES = [
       },
       {
         fala: "Entendi. E o dinheiro é para a entrada do apartamento daqui a dois anos. Isso muda alguma coisa?",
+        dif: 2,
         alts: [
           { t: "Com prazo definido, o ideal é buscar aplicações com vencimento próximo à data.", grau: 2, nota: "Recomendação tecnicamente adequada, sem explicitar por que o risco muda quando há data e finalidade." },
           { t: "Dois anos dá tempo de recuperar se algo der errado no meio.", grau: 0, nota: "Trata prazo curto e objetivo essencial como margem para especular." },
@@ -577,6 +647,7 @@ const ARVORES = [
       },
       {
         fala: "Então o que eu faço com os 60 mil? Deixo na conta?",
+        dif: 2,
         alts: [
           { t: "Na conta parada, não. Para dois anos com data certa, aplicações pós-fixadas de baixo risco cobrem o objetivo. Antes de escolher, preciso atualizar seu perfil de investidor — é o que sustenta a recomendação.", grau: 3, nota: "Responde à pergunta, indica a classe compatível com o objetivo e coloca a análise de perfil onde ela pertence." },
           { t: "Aplicações conservadoras pós-fixadas atendem bem esse prazo.", grau: 2, nota: "Direção correta, sem a etapa de perfil que precede a recomendação." },
@@ -586,6 +657,7 @@ const ARVORES = [
       },
       {
         fala: "Última coisa: se eu tivesse colocado lá e desse errado, eu teria alguma proteção?",
+        dif: 3,
         alts: [
           { t: "O FGC acaba cobrindo boa parte dos casos de perda no mercado.", grau: 0, nota: "Erro grave: o FGC cobre depósitos e alguns títulos bancários, não perdas em investimento nem operações irregulares." },
           { t: "Nenhuma. Fora do mercado regulado não há FGC, não há supervisão e não há a quem recorrer — a perda seria integral. É essa a diferença que a taxa alta estava tentando esconder.", grau: 3, nota: "Fecha o atendimento nomeando a ausência de qualquer rede de proteção e amarra de volta à promessa inicial." },
@@ -603,6 +675,8 @@ const ARVORES = [
 
   {
     id: "A.10",
+    mId: "2",
+    mFonte: "Tabela regressiva, IOF e liquidez — Produtos",
     titulo: "Resgatou no dia 170 e levou um susto",
     tema: "Tabela regressiva, IOF e o custo de resgatar cedo",
     cliente: "Fabiana",
@@ -610,6 +684,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Descontaram 22,5% do meu rendimento! Isso é legal? Ninguém me avisou que ia ter esse tanto de imposto.",
+        dif: 2,
         alts: [
           { t: "Realmente foi muito imposto. Vou verificar se houve erro no cálculo.", grau: 0, nota: "Sugere erro onde a cobrança está correta e cria uma expectativa de estorno que não vai acontecer." },
           { t: "É legal sim, está tudo previsto na tabela do imposto de renda.", grau: 1, nota: "Responde à legalidade e ignora completamente a frustração e a falta de informação prévia." },
@@ -619,6 +694,7 @@ const ARVORES = [
       },
       {
         fala: "Como assim faltaram dez dias? Explica isso direito.",
+        dif: 2,
         alts: [
           { t: "Quanto mais tempo aplicado, menor a alíquota. É por isso que resgatar cedo custa mais.", grau: 2, nota: "Explica o princípio corretamente, sem dar os números que permitiriam planejar o próximo resgate." },
           { t: "A tabela é regressiva e vai de 22,5% a 15% conforme o prazo.", grau: 1, nota: "Correto e curto demais: não diz onde ficam as fronteiras, que é justamente o que doeu." },
@@ -628,6 +704,7 @@ const ARVORES = [
       },
       {
         fala: "E se eu tivesse resgatado no dia 30, tinha sido pior ainda?",
+        dif: 2,
         alts: [
           { t: "Bem pior: além dos 22,5%, existe o IOF, que morde o rendimento nos primeiros 30 dias e chega a levar quase tudo nos primeiros dias.", grau: 3, nota: "Introduz o segundo tributo, que é o mais brutal no curtíssimo prazo, e responde exatamente ao cenário que ela imaginou." },
           { t: "Sim, no primeiro mês ainda incide IOF sobre o rendimento.", grau: 2, nota: "Traz o IOF corretamente, sem transmitir o tamanho do impacto nos primeiros dias." },
@@ -637,6 +714,7 @@ const ARVORES = [
       },
       {
         fala: "Poxa. E tem alguma aplicação que não tem esse imposto todo?",
+        dif: 3,
         alts: [
           { t: "Fundos de investimento não têm essa tabela, então saem melhor.", grau: 0, nota: "Falso: fundos de renda fixa seguem a mesma tabela regressiva e ainda têm come-cotas." },
           { t: "Tem: LCI e LCA são isentas de imposto de renda para pessoa física. A contrapartida é a carência — nelas você não resgata quando quer, e foi exatamente disso que você precisou.", grau: 3, nota: "Apresenta a alternativa isenta e imediatamente a condição que a torna inadequada ao problema real da cliente, sem vender ilusão." },
@@ -646,6 +724,7 @@ const ARVORES = [
       },
       {
         fala: "Entendi. O problema é que eu nunca sei quando vou precisar do dinheiro.",
+        dif: 1,
         alts: [
           { t: "Vale dividir o dinheiro entre prazos diferentes, conforme a necessidade.", grau: 2, nota: "Direção correta, sem explicitar o critério que separa um bloco do outro." },
           { t: "Aí não tem jeito, você vai sempre pagar 22,5%.", grau: 0, nota: "Conclusão derrotista e incorreta: parte do capital dela pode perfeitamente esperar." },
@@ -655,6 +734,7 @@ const ARVORES = [
       },
       {
         fala: "Faz sentido. Você consegue me ajudar a montar isso?",
+        dif: 3,
         alts: [
           { t: "Claro. Posso já deixar uma sugestão de carteira pronta para você aprovar.", grau: 1, nota: "Pula o diagnóstico e apresenta produto antes de conhecer as necessidades da cliente." },
           { t: "Consigo sim, vamos marcar uma conversa para levantar seus objetivos.", grau: 2, nota: "Aceita e propõe o levantamento, embora sem indicar por onde vai começar." },
@@ -667,6 +747,8 @@ const ARVORES = [
 
   {
     id: "A.11",
+    mId: "2",
+    mFonte: "Taxa de administração, benchmark e come-cotas — Produtos",
     titulo: "O fundo rendeu menos que o CDI",
     tema: "Taxa de administração, índice de referência e come-cotas",
     cliente: "Otávio",
@@ -674,6 +756,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "O CDI rendeu mais que o meu fundo. Quero resgatar tudo hoje. Para que eu pago taxa se rende menos?",
+        dif: 2,
         alts: [
           { t: "A taxa explica parte da diferença, mas não toda. Antes de resgatar, deixa eu abrir com você de onde saiu cada pedaço — porque uma parte não voltou nunca e outra você recupera.", grau: 3, nota: "Reconhece a taxa, recusa a explicação única e segura a decisão para depois do diagnóstico, que é o dever aqui." },
           { t: "A taxa de administração de 1,2% ao ano reduz a rentabilidade líquida do fundo.", grau: 2, nota: "Verdadeiro e específico, mas apresenta a taxa como se fosse a explicação inteira." },
@@ -683,6 +766,7 @@ const ARVORES = [
       },
       {
         fala: "Como assim uma parte eu recupero? Imposto não volta.",
+        dif: 2,
         alts: [
           { t: "Isso mesmo, no fundo você acaba pagando imposto duas vezes.", grau: 0, nota: "Erro que confirma a suspeita do cliente e ainda destrói a confiança no produto e no banco." },
           { t: "O come-cotas não é imposto a mais: em maio e novembro o fundo antecipa parte do IR e, no resgate, você só paga a diferença até a alíquota final. O total não muda, só a data.", grau: 3, nota: "Desfaz o mal-entendido central com precisão: antecipação não é acréscimo, e é isso que faz o extrato parecer pior do que é." },
@@ -692,6 +776,7 @@ const ARVORES = [
       },
       {
         fala: "Tá. E a taxa de 1,2%? Isso é caro ou barato?",
+        dif: 1,
         alts: [
           { t: "É uma taxa acima da média para fundos que seguem o CDI.", grau: 2, nota: "Dá um julgamento comparativo honesto, sem explicar o raciocínio por trás dele." },
           { t: "É a taxa padrão da indústria, todos os fundos cobram por aí.", grau: 0, nota: "Falso e cômodo: existem fundos equivalentes com taxa bem inferior, e o cliente merece saber." },
@@ -701,6 +786,7 @@ const ARVORES = [
       },
       {
         fala: "Então o fundo é ruim mesmo. Por que vocês vendem isso?",
+        dif: 2,
         alts: [
           { t: "Fundos servem para quem quer diversificação e gestão profissional.", grau: 1, nota: "Discurso de folheto que não responde à acusação nem reconhece o desconforto real." },
           { t: "Esse produto não se encaixa bem no seu objetivo, e isso deveria ter sido visto antes.", grau: 2, nota: "Assume a falha de adequação com honestidade, mas deixa passar a generalização do cliente." },
@@ -710,6 +796,7 @@ const ARVORES = [
       },
       {
         fala: "Certo. Se eu resgatar tudo agora, perco alguma coisa?",
+        dif: 1,
         alts: [
           { t: "Você paga a diferença de imposto até a alíquota do prazo e some com o que já foi antecipado — não há multa. O ponto é decidir para onde vai, senão o dinheiro fica parado rendendo nada.", grau: 3, nota: "Responde ao custo concreto do resgate e já aponta o risco maior, que é resgatar sem destino." },
           { t: "Não há carência nem multa, o resgate é livre.", grau: 2, nota: "Correto quanto ao produto, sem tratar do imposto nem do destino do dinheiro." },
@@ -719,6 +806,7 @@ const ARVORES = [
       },
       {
         fala: "Então me sugere: para onde eu levo esses 300 mil?",
+        dif: 2,
         alts: [
           { t: "Com esse valor eu diversificaria em multimercados e um pouco de ações.", grau: 0, nota: "Sobe o risco de um cliente que veio reclamar de um fundo conservador, sem qualquer análise de perfil." },
           { t: "Depende de quando você vai precisar deles, e isso eu ainda não sei. Me diz o horizonte e eu te trago duas ou três opções com o custo total de cada uma na mesa.", grau: 3, nota: "Recusa recomendar sem a informação que fundamenta a recomendação e se compromete a mostrar custo, que foi a queixa de origem." },
@@ -731,6 +819,8 @@ const ARVORES = [
 
   {
     id: "A.12",
+    mId: "2",
+    mFonte: "PGBL, VGBL e portabilidade — Produtos de previdência complementar",
     titulo: "A previdência que o pai indicou",
     tema: "PGBL e VGBL, modelo de declaração e portabilidade",
     cliente: "Simone",
@@ -738,6 +828,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Meu pai disse que a previdência abate 12% do imposto. Faz dois anos que eu aporto e nunca vi esse abatimento. O que está errado?",
+        dif: 3,
         alts: [
           { t: "Seu pai deve ter se confundido, esse benefício não é bem assim.", grau: 1, nota: "Desautoriza a fonte da cliente sem explicar a regra, e ela sai sem entender nada." },
           { t: "Provavelmente sua contadora não informou o plano na declaração. Vale conferir com ela.", grau: 0, nota: "Atribui o problema a um terceiro quando a causa é a incompatibilidade do produto com a situação da cliente." },
@@ -747,6 +838,7 @@ const ARVORES = [
       },
       {
         fala: "Como assim regime oficial? Eu sou autônoma, não contribuo com nada há três anos.",
+        dif: 3,
         alts: [
           { t: "Sem contribuição ao INSS, a dedução do PGBL não se aplica.", grau: 2, nota: "Correto e direto, sem mencionar a tributação sobre o total no resgate." },
           { t: "Então realmente não faz sentido você manter esse plano.", grau: 1, nota: "Conclusão provavelmente certa, tirada antes de a cliente entender o porquê." },
@@ -756,6 +848,7 @@ const ARVORES = [
       },
       {
         fala: "Tributar o valor total? Achei que imposto fosse só sobre o que rendeu.",
+        dif: 3,
         alts: [
           { t: "No VGBL é assim, só sobre o rendimento. No PGBL o imposto incide sobre tudo que sair, aporte e rendimento juntos — é a contrapartida da dedução que você não está usando.", grau: 3, nota: "Contrasta as duas bases de cálculo e mostra que a regra do PGBL é o outro lado de um benefício que ela não recebe." },
           { t: "No PGBL o imposto incide sobre o valor total do resgate.", grau: 2, nota: "Fato correto, sem a comparação com o VGBL que faria a cliente entender a lógica." },
@@ -765,6 +858,7 @@ const ARVORES = [
       },
       {
         fala: "Então eu tenho que cancelar e perder tudo que já coloquei?",
+        dif: 3,
         alts: [
           { t: "Infelizmente, para trocar de plano é preciso resgatar e recolher o imposto.", grau: 0, nota: "Informação incorreta que custaria caro à cliente e a faria desistir da solução adequada." },
           { t: "Não precisa cancelar. Existe portabilidade: o saldo migra de um plano para outro sem passar pelo seu bolso e sem incidir imposto na transferência.", grau: 3, nota: "Resolve o medo central da cliente com o instrumento correto e destaca justamente o que faz a portabilidade valer a pena: não há tributação no caminho." },
@@ -774,6 +868,7 @@ const ARVORES = [
       },
       {
         fala: "Portabilidade eu posso fazer para qualquer plano? Inclusive de outra seguradora?",
+        dif: 2,
         alts: [
           { t: "Pode portar para qualquer plano, inclusive mudando de PGBL para VGBL.", grau: 0, nota: "Erro relevante: a portabilidade entre tipos diferentes não é permitida, por causa do tratamento fiscal distinto." },
           { t: "Sim, a portabilidade entre seguradoras é livre no mercado.", grau: 1, nota: "Metade certa: livre entre seguradoras, mas não entre tipos de plano." },
@@ -783,6 +878,7 @@ const ARVORES = [
       },
       {
         fala: "Que confusão. Se eu tivesse perguntado antes de assinar, teria evitado tudo isso?",
+        dif: 1,
         alts: [
           { t: "Sim, uma análise de perfil e da sua situação fiscal teria apontado isso.", grau: 2, nota: "Correto, mas devolve o processo em vez do critério que ela pode usar sozinha." },
           { t: "Infelizmente muita gente contrata por indicação de família e depois descobre.", grau: 1, nota: "Solidariza sem entregar nada que a impeça de repetir o erro." },
@@ -798,6 +894,8 @@ const ARVORES = [
 
   {
     id: "A.13",
+    mId: "2",
+    mFonte: "Renda variável: isenção mensal, day trade, dividendos e JCP — Produtos",
     titulo: "Vendeu quinze mil e achou que devia imposto",
     tema: "Renda variável: isenção mensal, day trade, dividendos e JCP",
     cliente: "Murilo",
@@ -805,6 +903,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Vendi 15 mil em açoes e lucrei 1.800. Quanto de imposto eu tenho que pagar sobre isso?",
+        dif: 3,
         alts: [
           { t: "Nessa parte, nada: vendas em operações comuns até R$ 20.000 no mês são isentas para pessoa física, e você ficou abaixo. Mas isso vale só para essa fatia — as outras três têm regras próprias.", grau: 3, nota: "Responde com a regra e o limite exatos, aplica ao caso e já avisa que a isenção não contamina o resto da planilha." },
           { t: "São 15% sobre o lucro apurado, com recolhimento por DARF até o mês seguinte.", grau: 0, nota: "Ignora a isenção mensal e faria o cliente recolher imposto indevido." },
@@ -814,6 +913,7 @@ const ARVORES = [
       },
       {
         fala: "E o day trade? Foram só 300 reais de lucro, deve estar dentro da isenção também.",
+        dif: 2,
         alts: [
           { t: "Melhor você conferir com um contador, day trade é complicado.", grau: 1, nota: "Empurra para fora uma dúvida básica que o profissional deveria responder." },
           { t: "Aí não: a isenção dos R$ 20 mil não alcança day trade. Qualquer lucro em day trade é tributado, mesmo que seja um real, e ainda tem retenção na fonte.", grau: 3, nota: "Corrige a extensão indevida da isenção e explicita que o valor pequeno não muda a regra, que é o erro mais comum aqui." },
@@ -823,6 +923,7 @@ const ARVORES = [
       },
       {
         fala: "Tá. E os 900 de dividendos e os 400 de JCP? Isso conta como lucro também?",
+        dif: 2,
         alts: [
           { t: "Os dois são rendimentos e precisam ser somados ao lucro das vendas.", grau: 0, nota: "Erro que inflaria a base de cálculo e poderia jogar o cliente para fora da isenção indevidamente." },
           { t: "Proventos têm regras específicas na declaração anual.", grau: 1, nota: "Verdadeiro e vago: não diz quais são as regras nem o que o cliente faz com elas." },
@@ -832,6 +933,7 @@ const ARVORES = [
       },
       {
         fala: "Então, resumindo, eu só devo imposto sobre os 300 do day trade?",
+        dif: 1,
         alts: [
           { t: "Correto, o day trade é a única fatia tributável do seu mês.", grau: 2, nota: "Confirma com clareza, sem indicar prazo nem procedimento de recolhimento." },
           { t: "Isso, e o valor é tão pequeno que provavelmente nem vai gerar DARF.", grau: 1, nota: "Semeia a ideia de que talvez não precise recolher, que é justamente o risco." },
@@ -841,6 +943,7 @@ const ARVORES = [
       },
       {
         fala: "E se num mês eu vender 25 mil? Perco a isenção só do que passar de 20?",
+        dif: 2,
         alts: [
           { t: "Não é assim: passou de R$ 20.000 no mês, o lucro inteiro daquelas vendas comuns vira tributável, e não só a parte excedente. O limite é uma porteira, não um desconto.", grau: 3, nota: "Desfaz a leitura de faixa progressiva, que é o erro clássico, com uma imagem que fixa a regra." },
           { t: "O limite é sobre o valor vendido no mês; ultrapassando, o lucro passa a ser tributado.", grau: 2, nota: "Correto, embora não deixe explícito que a tributação alcança o lucro todo." },
@@ -850,6 +953,7 @@ const ARVORES = [
       },
       {
         fala: "Nossa, quase paguei errado. Tem como você me mandar isso organizado?",
+        dif: 1,
         alts: [
           { t: "Não precisa, é só você lembrar dos 20 mil que o resto é detalhe.", grau: 0, nota: "Reduz a regra a um único número e ignora day trade e proventos, que foram metade da conversa." },
           { t: "Mando: uma linha para cada tipo de operação, com o que é isento, o que é tributado e o prazo de recolhimento. Assim você repete a conta sozinho todo mês.", grau: 3, nota: "Entrega o pedido em formato que serve para os próximos meses, não só para este." },
@@ -862,6 +966,8 @@ const ARVORES = [
 
   {
     id: "A.14",
+    mId: "2",
+    mFonte: "Câmbio, VET e modalidades — Serviços bancários, módulo 2",
     titulo: "O dólar da viagem e a cotação do aeroporto",
     tema: "Câmbio: VET, modalidades e transparência de custo",
     cliente: "Kelly",
@@ -869,6 +975,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Achei a 5,40 numa casa de câmbio, e aqui vocês estão 5,52. Vou fechar lá. A cotação não é a mesma em todo lugar?",
+        dif: 2,
         alts: [
           { t: "Existe o VET, Valor Efetivo Total, que reúne cotação, tarifas e tributos.", grau: 2, nota: "Nomeia o indicador correto, sem explicar por que a cotação isolada engana." },
           { t: "Se está mais barato lá, feche lá mesmo. Não temos como cobrir.", grau: 0, nota: "Aceita uma comparação que o profissional sabe ser incompleta e deixa a cliente decidir errado." },
@@ -878,6 +985,7 @@ const ARVORES = [
       },
       {
         fala: "VET? Nunca ouvi falar. Eles são obrigados a me informar isso?",
+        dif: 2,
         alts: [
           { t: "Sim, a informação do VET é obrigatória nas operações de câmbio.", grau: 2, nota: "Correto e direto, sem dizer de onde vem a obrigação nem como usá-la." },
           { t: "Normalmente eles informam, mas nem sempre fica em destaque no contrato.", grau: 1, nota: "Descreve a prática e deixa a cliente sem saber que tem direito de exigir." },
@@ -887,6 +995,7 @@ const ARVORES = [
       },
       {
         fala: "Entendi. E eu levo em espécie mesmo ou é melhor cartão pré-pago?",
+        dif: 2,
         alts: [
           { t: "Depende do uso: espécie resolve gorjeta e lugar pequeno, mas você carrega risco de perda e roubo. O cartão dá rastreio e recarga, e o custo muda conforme a modalidade — vale comparar o VET de cada uma.", grau: 3, nota: "Trata a escolha pelos critérios que importam para a viagem e aplica o VET que acabou de explicar, em vez de decidir pela cliente." },
           { t: "Cartão pré-pago é sempre melhor, mais seguro e mais prático.", grau: 1, nota: "Recomendação categórica que ignora as situações em que dinheiro em espécie é necessário." },
@@ -896,6 +1005,7 @@ const ARVORES = [
       },
       {
         fala: "E aquela casa de câmbio, é confiável? Fica numa galeria e o rapaz falou que aceita PIX.",
+        dif: 3,
         alts: [
           { t: "Se aceita PIX e emite comprovante, está tudo certo.", grau: 0, nota: "Critério irrelevante: aceitar PIX não diz nada sobre autorização para operar câmbio." },
           { t: "Aí tem uma checagem antes do preço: só instituição autorizada pelo Banco Central pode operar câmbio, e dá para consultar isso no site do Bacen. Se não estiver na lista, o preço não importa.", grau: 3, nota: "Coloca a autorização antes do preço, dá o caminho da consulta e a regra de decisão." },
@@ -905,6 +1015,7 @@ const ARVORES = [
       },
       {
         fala: "Nossa, nem pensei nisso. E se der problema depois de eu já ter pago?",
+        dif: 3,
         alts: [
           { t: "Aí infelizmente o caminho seria procurar a Justiça.", grau: 1, nota: "Descreve o pior cenário sem apontar o que evitaria chegar até ele." },
           { t: "Dificilmente dá problema, esse tipo de operação é bem simples.", grau: 0, nota: "Minimiza um risco real e desestimula a verificação que acabou de ser recomendada." },
@@ -914,6 +1025,7 @@ const ARVORES = [
       },
       {
         fala: "Beleza, vou pedir o VET dos três antes de decidir. Faz sentido comprar tudo de uma vez?",
+        dif: 3,
         alts: [
           { t: "Pode dividir a compra em algumas datas para diluir a variação da cotação.", grau: 2, nota: "Recomendação adequada, sem explicar o objetivo e o limite dela." },
           { t: "Compre tudo agora, o dólar tende a subir nas próximas semanas.", grau: 0, nota: "Faz previsão de câmbio, que ninguém tem como sustentar, e a transforma em recomendação." },
@@ -926,6 +1038,8 @@ const ARVORES = [
 
   {
     id: "A.15",
+    mId: "2",
+    mFonte: "Seguro de vida contra capitalização — Seguros, módulo 2",
     titulo: "Ele achava que tinha seguro de vida",
     tema: "Seguro, capitalização e previdência: três produtos diferentes",
     cliente: "Seu Genésio",
@@ -933,6 +1047,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Faz sete anos que eu pago esse seguro de vida de 200 reais. Se acontecer alguma coisa comigo, minha família recebe, né?",
+        dif: 2,
         alts: [
           { t: "Preciso te dizer uma coisa antes de tudo: o que está no seu débito é um título de capitalização, não um seguro de vida. Ele não paga indenização por falecimento.", grau: 3, nota: "Não adia a informação que muda a vida do cliente e nomeia com precisão o que ele tem e o que ele não tem." },
           { t: "Vamos conferir no sistema qual é exatamente o produto contratado.", grau: 2, nota: "Procedimento correto, embora adie uma resposta que o profissional já pode antecipar pelo débito." },
@@ -942,6 +1057,7 @@ const ARVORES = [
       },
       {
         fala: "Como assim não é seguro? Eu pago todo mês! Então o que é isso que eu tenho?",
+        dif: 2,
         alts: [
           { t: "Alguns títulos de capitalização também têm cobertura por morte.", grau: 0, nota: "Confunde o cliente misturando produtos e enfraquece o alerta que ele precisa ouvir." },
           { t: "Capitalização é uma poupança programada com sorteios: você resgata o valor ao final do prazo, e nada é pago aos seus filhos em caso de falecimento. Seguro de vida é outro produto, com outra finalidade.", grau: 3, nota: "Define o que ele tem, o que ele não tem e coloca os dois lado a lado, que é a única forma de o cliente entender o tamanho do problema." },
@@ -951,6 +1067,7 @@ const ARVORES = [
       },
       {
         fala: "Sete anos jogados fora, então. Perdi tudo que paguei?",
+        dif: 2,
         alts: [
           { t: "Infelizmente em capitalização o resgate costuma ser bem abaixo do que se pagou.", grau: 1, nota: "Verdadeiro, porém entrega só a má notícia e não abre caminho nenhum." },
           { t: "Não perdeu nada, o senhor recebe tudo de volta corrigido no fim do prazo.", grau: 0, nota: "Promessa incorreta sobre o resgate da capitalização." },
@@ -960,6 +1077,7 @@ const ARVORES = [
       },
       {
         fala: "E agora? Com dois filhos pequenos e a mulher sem trabalhar, eu preciso de proteção mesmo.",
+        dif: 1,
         alts: [
           { t: "Nesse perfil, um seguro de vida temporário costuma ser a solução adequada.", grau: 2, nota: "Recomendação coerente com o caso, oferecida antes de dimensionar a necessidade." },
           { t: "Tenho um plano de vida aqui que já posso contratar hoje para o senhor.", grau: 0, nota: "Vende no momento de maior fragilidade do cliente, sem qualquer análise." },
@@ -969,6 +1087,7 @@ const ARVORES = [
       },
       {
         fala: "Nunca pensei nisso como conta. E esse dinheiro do seguro, minha família paga imposto?",
+        dif: 3,
         alts: [
           { t: "Não: a indenização do seguro de vida é isenta de imposto de renda e não entra em inventário, então chega rápido a quem o senhor indicar como beneficiário. É justamente por isso que ele resolve o aperto imediato.", grau: 3, nota: "Traz as duas características que fazem o seguro funcionar no momento crítico e explica por que elas importam." },
           { t: "A indenização por morte em seguro de vida é isenta de imposto de renda.", grau: 2, nota: "Correto, sem mencionar que o valor não passa pelo inventário, que é metade do benefício." },
@@ -978,6 +1097,7 @@ const ARVORES = [
       },
       {
         fala: "Quero resolver isso ainda esta semana. Por onde começamos?",
+        dif: 1,
         alts: [
           { t: "Deixa comigo, eu resolvo tudo e o senhor só assina.", grau: 0, nota: "Retira o cliente de uma decisão que é dele e sobre a qual ele acabou de ser mal informado uma vez." },
           { t: "Começamos pelo número: eu levanto o valor de resgate da capitalização e o senhor pensa em quanto sua família precisaria por mês. Com os dois na mão, montamos a cobertura e decidimos o que fazer com o resgate.", grau: 3, nota: "Define tarefas concretas para os dois lados e amarra o resgate ao novo produto, fechando o atendimento com um plano executável." },
@@ -993,6 +1113,8 @@ const ARVORES = [
 
   {
     id: "A.16",
+    mId: "3",
+    mFonte: "Procuração, capacidade de decidir e abuso financeiro — Relacionamento",
     titulo: "A filha que decide por ele",
     tema: "Dever fiduciário, capacidade de decisão e abuso financeiro",
     cliente: "Seu Aparício",
@@ -1000,6 +1122,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Regina: pode resgatar os 250 mil do meu pai, eu tenho procuração. Ele já sabe de tudo, não precisa explicar de novo.",
+        dif: 2,
         alts: [
           { t: "A senhora pode aguardar um momento? Preciso verificar alguns pontos internos.", grau: 1, nota: "Ganha tempo sem estabelecer o procedimento nem falar com o cliente." },
           { t: "Com procuração está tudo certo, faço o resgate agora.", grau: 0, nota: "Executa uma operação relevante sem conferir o documento nem dirigir uma única palavra ao titular presente." },
@@ -1009,6 +1132,7 @@ const ARVORES = [
       },
       {
         fala: "Regina: ele está cansado, veio só para assinar. Fala comigo que é mais rápido.",
+        dif: 2,
         alts: [
           { t: "Sem problema, a senhora me passa os dados e eu adianto o preenchimento.", grau: 0, nota: "Cede à pressão e afasta definitivamente o titular de uma decisão sobre o próprio patrimônio." },
           { t: "Seu Aparício, o senhor confirma que autoriza esse resgate?", grau: 2, nota: "Fala com o titular, mas uma pergunta fechada diante da filha convida a um sim automático." },
@@ -1018,6 +1142,7 @@ const ARVORES = [
       },
       {
         fala: "Seu Aparício, em voz baixa: ah, se a Regina falou, deve estar certo. Ela cuida das minhas coisas agora.",
+        dif: 2,
         alts: [
           { t: "O senhor confia nela e isso é bonito. Mesmo assim, o dinheiro é seu e eu preciso que o senhor entenda: são 250 mil saindo de uma aplicação que rende hoje. O senhor sabia desse negócio da família?", grau: 3, nota: "Respeita o vínculo, reafirma a titularidade e faz uma pergunta aberta que revela se há entendimento real, sem sugerir má-fé." },
           { t: "Tudo bem, então vamos seguir com o pedido da sua filha.", grau: 0, nota: "Aceita a delegação informal justamente onde o dever de cuidado deveria aumentar." },
@@ -1027,6 +1152,7 @@ const ARVORES = [
       },
       {
         fala: "Seu Aparício: negócio? Ela falou de uma reforma na casa dela, acho. Não lembro de 250 mil, não.",
+        dif: 2,
         alts: [
           { t: "Talvez ele tenha esquecido. Com a procuração eu consigo prosseguir mesmo assim.", grau: 0, nota: "Usa a possível fragilidade cognitiva do cliente como razão para ignorá-lo, que é exatamente o padrão do abuso financeiro." },
           { t: "Então vamos parar por aqui. Não é desconfiança de ninguém: é que eu não posso executar um resgate desse tamanho sem o senhor saber para onde vai. Prefiro que os dois conversem e voltem juntos.", grau: 3, nota: "Interrompe a operação com o fundamento correto e sem acusação, e deixa uma porta aberta para que a família resolva." },
@@ -1036,6 +1162,7 @@ const ARVORES = [
       },
       {
         fala: "Regina, irritada: você está me chamando de quê? É meu pai, eu cuido dele!",
+        dif: 2,
         alts: [
           { t: "Não estou acusando ninguém, mas o titular precisa entender a operação para eu executá-la.", grau: 2, nota: "Explica o fundamento com clareza, sem indicar como a família pode resolver." },
           { t: "A senhora tem razão, desculpe. Vou seguir com o resgate.", grau: 0, nota: "Recua diante da reação emocional e abandona a proteção do cliente." },
@@ -1045,6 +1172,7 @@ const ARVORES = [
       },
       {
         fala: "Eles saem, e o gerente pergunta: precisava criar caso? A filha é procuradora, estava tudo formalmente certo.",
+        dif: 2,
         alts: [
           { t: "O cliente demonstrou não conhecer a operação, então não executei.", grau: 2, nota: "Fundamento correto, sem mencionar o registro nem a comunicação interna." },
           { t: "Achei melhor não arriscar, o valor era alto demais.", grau: 1, nota: "Justifica pelo valor e não pelo dever, o que enfraquece a decisão numa eventual revisão." },
@@ -1057,6 +1185,8 @@ const ARVORES = [
 
   {
     id: "A.17",
+    mId: "3",
+    mFonte: "Suitability e operação acima do perfil — Relacionamento",
     titulo: "Conservador que quer o fundo de ações",
     tema: "Adequação: o que fazer quando o cliente insiste",
     cliente: "Débora",
@@ -1064,6 +1194,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Já sei que pode cair, não precisa me explicar risco. Só coloca os 120 mil no fundo e pronto.",
+        dif: 3,
         alts: [
           { t: "Posso executar, mas não posso recomendar: esse fundo está acima do seu perfil, e a regra me obriga a te alertar formalmente antes. Deixa eu te mostrar o que muda e aí a senhora decide.", grau: 3, nota: "Separa recomendar de executar, informa a obrigação legal e mantém a decisão com a cliente sem ceder nem bloquear." },
           { t: "Seu perfil é conservador, então esse fundo não é indicado para a senhora.", grau: 2, nota: "Cumpre o alerta, mas encerra como se fosse proibição e não abre o caminho legítimo." },
@@ -1073,6 +1204,7 @@ const ARVORES = [
       },
       {
         fala: "Que alerta formal? Isso é para vocês se protegerem, não é?",
+        dif: 1,
         alts: [
           { t: "É, basicamente é para nos resguardar mesmo.", grau: 0, nota: "Confirma a leitura cínica da cliente e reduz uma proteção dela a burocracia interna." },
           { t: "Protege os dois. Ele existe para eu não te empurrar produto que não combina com o que você me disse, e para você decidir sabendo exatamente o que está aceitando. Sem isso eu não posso seguir.", grau: 3, nota: "Reconhece a desconfiança e responde com a finalidade real da regra, que é limitar o profissional antes de limitar o cliente." },
@@ -1082,6 +1214,7 @@ const ARVORES = [
       },
       {
         fala: "Tá. Então me diz: quanto eu posso perder nesse fundo?",
+        dif: 1,
         alts: [
           { t: "Historicamente esse fundo nunca caiu mais de 20%.", grau: 0, nota: "Transforma histórico em garantia implícita, que é o oposto do que renda variável permite afirmar." },
           { t: "Depende do mercado, é impossível prever.", grau: 1, nota: "Encerra sem dar à cliente nenhum parâmetro, mesmo havendo dados disponíveis." },
@@ -1091,6 +1224,7 @@ const ARVORES = [
       },
       {
         fala: "E se eu precisar do dinheiro no meio? Meu carro está velho, posso trocar ano que vem.",
+        dif: 1,
         alts: [
           { t: "O fundo tem resgate em D+30, então precisaria programar com antecedência.", grau: 2, nota: "Informação operacional relevante, sem discutir o conflito entre o objetivo e o produto." },
           { t: "Se precisar, é só resgatar. O fundo tem liquidez.", grau: 1, nota: "Trata liquidez como se resolvesse o problema, ignorando que resgatar na baixa realiza a perda." },
@@ -1100,6 +1234,7 @@ const ARVORES = [
       },
       {
         fala: "Faz sentido. E se eu colocar 40 mil em vez de 120?",
+        dif: 1,
         alts: [
           { t: "Muda bastante: 40 mil é um terço do que a senhora ia expor e ainda deixa o carro e a reserva fora do risco. Continua acima do seu perfil, então o alerta permanece, mas agora a conta fecha.", grau: 3, nota: "Valida o ajuste, quantifica o efeito e mantém a obrigação de alerta, sem tratar a redução como se resolvesse tudo." },
           { t: "É uma exposição bem mais compatível com a sua situação.", grau: 2, nota: "Aprova o ajuste, sem lembrar que o alerta de adequação continua necessário." },
@@ -1109,6 +1244,7 @@ const ARVORES = [
       },
       {
         fala: "Fechado, 40 mil. Depois eu aumento se gostar. Você anota tudo isso?",
+        dif: 1,
         alts: [
           { t: "Não precisa formalizar, ficou tudo combinado entre nós.", grau: 0, nota: "Dispensa o registro justamente na operação em que ele é obrigatório." },
           { t: "Anoto: o alerta de inadequação, a sua ciência e o motivo da redução. E combino de revisar seu perfil quando o carro sair da frente, porque aí a conversa muda de verdade.", grau: 3, nota: "Documenta os três elementos que sustentam a operação e agenda a revisão pelo evento certo, não por prazo arbitrário." },
@@ -1121,6 +1257,8 @@ const ARVORES = [
 
   {
     id: "A.18",
+    mId: "3",
+    mFonte: "Depósito em espécie, comunicação e vedação de dar ciência — PLDFT",
     titulo: "Os depósitos em espécie do salão",
     tema: "Prevenção à lavagem: o que comunicar e o que não dizer",
     cliente: "Vânia",
@@ -1128,6 +1266,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Trouxe mais 45 mil. Pode ir contando que eu já preencho o depósito.",
+        dif: 3,
         alts: [
           { t: "Preciso registrar a origem dos recursos antes de processar o depósito.", grau: 2, nota: "Faz a pergunta certa, sem enquadrá-la como procedimento geral, o que soa como abordagem pessoal." },
           { t: "A senhora tem depositado bastante ultimamente, aconteceu alguma coisa?", grau: 1, nota: "Comenta o padrão de movimentação com o cliente, o que se aproxima de dar ciência do monitoramento." },
@@ -1137,6 +1276,7 @@ const ARVORES = [
       },
       {
         fala: "É do salão, ué. Faturamento normal. Por que tanta pergunta agora?",
+        dif: 1,
         alts: [
           { t: "Porque o valor está muito acima do seu histórico e isso chama atenção.", grau: 1, nota: "Revela ao cliente que a movimentação foi sinalizada, o que é justamente o que não se deve fazer." },
           { t: "É uma exigência das normas de prevenção à lavagem de dinheiro.", grau: 2, nota: "Verdadeiro e legítimo, mas mencionar a norma pelo nome já sinaliza suspeita." },
@@ -1146,6 +1286,7 @@ const ARVORES = [
       },
       {
         fala: "É de uma sociedade nova. O dinheiro é de um sócio que prefere não aparecer, mas é tudo legal.",
+        dif: 3,
         alts: [
           { t: "Entendi. Para eu registrar corretamente, vou precisar dos dados desse sócio e do contrato — recurso de terceiro depositado na sua conta exige identificação de quem é o dono do dinheiro.", grau: 3, nota: "Trata a informação sem alarde, pede o que a identificação do beneficiário final exige e não antecipa nenhuma conclusão." },
           { t: "Sem problema, então registro como recurso de sociedade.", grau: 0, nota: "Aceita e formaliza uma declaração que descreve exatamente o uso de conta de terceiro para ocultar titularidade." },
@@ -1155,6 +1296,7 @@ const ARVORES = [
       },
       {
         fala: "Ah, deixa isso para lá. Eu deposito em outro banco então. Você não vai comentar isso com ninguém, né?",
+        dif: 2,
         alts: [
           { t: "Vou ter que comunicar isso ao COAF, é obrigação minha.", grau: 1, nota: "A obrigação existe, mas informar o cliente sobre a comunicação é vedado e compromete a investigação." },
           { t: "Não posso comentar nada com terceiros, isso eu garanto. O que eu preciso fazer, e vou fazer, é registrar internamente o atendimento — como faço com qualquer operação em espécie.", grau: 3, nota: "Assegura o sigilo bancário, que é verdade, sem prometer omissão dos registros internos que a lei obriga, e sem revelar a comunicação." },
@@ -1164,6 +1306,7 @@ const ARVORES = [
       },
       {
         fala: "Ela vai embora sem depositar. O que você faz agora?",
+        dif: 2,
         alts: [
           { t: "Como ela desistiu, não houve operação. Só anoto no cadastro.", grau: 0, nota: "Erro central: operações não realizadas e tentativas suspeitas também devem ser comunicadas." },
           { t: "Aviso o gerente da agência e aguardo orientação dele.", grau: 1, nota: "Escalar é razoável, mas a comunicação ao compliance não depende de autorização da chefia." },
@@ -1173,6 +1316,7 @@ const ARVORES = [
       },
       {
         fala: "O gerente pergunta: e se ela reclamar que perdemos uma cliente de cinco anos?",
+        dif: 1,
         alts: [
           { t: "O dever de comunicar não depende do tempo de relacionamento.", grau: 2, nota: "Princípio correto, sem tratar da conduta esperada se a cliente perguntar." },
           { t: "Se ela reclamar, explico com calma o que aconteceu e por quê.", grau: 0, nota: "Explicar ao cliente o que aconteceu é exatamente dar ciência da comunicação, o que é vedado." },
@@ -1185,6 +1329,8 @@ const ARVORES = [
 
   {
     id: "A.19",
+    mId: "3",
+    mFonte: "Venda casada e pressão de meta — conduta, Relacionamento",
     titulo: "O consórcio que veio junto com o crédito",
     tema: "Venda casada, conflito de interesse e pressão de meta",
     cliente: "Edmilson",
@@ -1192,6 +1338,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Edmilson: preciso dos 300 mil até sexta. O rapaz anterior disse que sai, mas que eu teria que levar um consórcio junto. É assim mesmo?",
+        dif: 3,
         alts: [
           { t: "Não é, e é bom o senhor saber: condicionar a liberação do crédito à compra de outro produto é venda casada, que é vedada. Vamos analisar o crédito pelo que ele é.", grau: 3, nota: "Nomeia a prática, informa que é proibida e recoloca a operação nos trilhos, protegendo o cliente de uma imposição ilegal." },
           { t: "O consórcio ajuda na análise, mas não é obrigatório. Fica a seu critério.", grau: 1, nota: "Sugere que a compra melhora a análise, o que mantém a coação em forma disfarçada." },
@@ -1201,6 +1348,7 @@ const ARVORES = [
       },
       {
         fala: "Edmilson: e o seguro? Ele falou que sem seguro o banco não aprova quem tem empresa.",
+        dif: 2,
         alts: [
           { t: "Nesse valor, o seguro costuma ser exigido pela política interna.", grau: 0, nota: "Inventa uma exigência para viabilizar a venda e repete a conduta do assessor anterior." },
           { t: "Também não procede. O seguro prestamista pode fazer sentido no seu caso — se o senhor faltar, a dívida não passa para a família —, mas isso é uma escolha sua, avaliada à parte, nunca uma condição.", grau: 3, nota: "Desfaz a imposição e ainda apresenta o mérito real do produto, separando informar de condicionar, que é a distinção que importa." },
@@ -1210,6 +1358,7 @@ const ARVORES = [
       },
       {
         fala: "Edmilson: então o rapaz mentiu para mim? Eu quase assinei.",
+        dif: 2,
         alts: [
           { t: "Cada profissional tem seu jeito de trabalhar, senhor Edmilson.", grau: 0, nota: "Relativiza uma conduta vedada e deixa o cliente sem saber em que acreditar." },
           { t: "Prefiro não comentar sobre o trabalho do colega.", grau: 1, nota: "Discrição compreensível, porém deixa o cliente sem a confirmação de que foi mal informado." },
@@ -1219,6 +1368,7 @@ const ARVORES = [
       },
       {
         fala: "O gerente te chama de lado: você acabou de jogar fora duas vendas. A meta do trimestre é minha também.",
+        dif: 2,
         alts: [
           { t: "Venda casada é vedada, não posso condicionar o crédito a outro produto.", grau: 2, nota: "Fundamento correto, apresentado sem nenhuma alternativa para a pressão real que o gerente tem." },
           { t: "Eu sei, mas o cliente estava desconfiado e ia dar problema.", grau: 1, nota: "Justifica pela reação do cliente e não pela regra, o que sugere que faria diferente se ele não tivesse notado." },
@@ -1228,6 +1378,7 @@ const ARVORES = [
       },
       {
         fala: "O gerente: e aquela anotação no sistema, você vai deixar lá?",
+        dif: 2,
         alts: [
           { t: "Não vou apagar. Vou comunicar ao compliance com a anotação anexada, porque ela é a prova de que a orientação existiu — e se outros clientes receberam a mesma, isso precisa aparecer.", grau: 3, nota: "Preserva a evidência em vez de eliminá-la e transforma um caso isolado em verificação sistêmica, que é o que o controle interno exige." },
           { t: "Vou reportar ao compliance junto com o registro do atendimento.", grau: 2, nota: "Encaminha corretamente, sem explicitar a preservação da evidência nem a possibilidade de haver outros casos." },
@@ -1237,6 +1388,7 @@ const ARVORES = [
       },
       {
         fala: "Edmilson volta: e aí, sai o crédito? Se sair, eu até olho o seguro depois, achei que fazia sentido.",
+        dif: 2,
         alts: [
           { t: "Perfeito, assim fica bem melhor para a análise do seu processo.", grau: 0, nota: "Volta a vincular o seguro à aprovação, retomando a venda casada que ele mesmo denunciou." },
           { t: "O crédito segue pela análise normal e eu te dou retorno até quinta. O seguro fica para depois da liberação, sem qualquer vínculo com ela — se fizer sentido para o senhor, a gente conversa com calma.", grau: 3, nota: "Cumpre o prazo do cliente e mantém a separação absoluta entre as duas decisões, inclusive quando é o próprio cliente quem as aproxima." },
@@ -1249,6 +1401,8 @@ const ARVORES = [
 
   {
     id: "A.20",
+    mId: "4",
+    mFonte: "Open Finance, consentimento e revogação — Inovação",
     titulo: "Ele compartilhou os dados sem ler",
     tema: "Open Finance: consentimento, prazo e revogação",
     cliente: "Juninho",
@@ -1256,6 +1410,7 @@ const ARVORES = [
     prompts: [
       {
         fala: "Invadiram minha conta! Tem gente que sabe quanto eu ganho e está me oferecendo empréstimo. Como conseguiram isso?",
+        dif: 3,
         alts: [
           { t: "Não houve invasão. Provavelmente foi um compartilhamento de dados via Open Finance.", grau: 2, nota: "Provavelmente correto, mas afirma antes de confirmar com o cliente." },
           { t: "Vou bloquear sua conta imediatamente por segurança.", grau: 0, nota: "Medida drástica e desproporcional, tomada sem apurar nada, que deixa o cliente sem acesso ao próprio dinheiro." },
@@ -1265,6 +1420,7 @@ const ARVORES = [
       },
       {
         fala: "Autorizei um app de empréstimo semana passada. Mas era só para ver a taxa, não para espalhar meus dados!",
+        dif: 2,
         alts: [
           { t: "O consentimento que você deu autoriza o acesso aos dados pela instituição receptora.", grau: 2, nota: "Correto, sem detalhar finalidade, prazo e escopo, que é o que o cliente precisa entender." },
           { t: "É por isso que sempre é preciso ler os termos antes de aceitar.", grau: 0, nota: "Repreende o cliente e não resolve nada do problema que ele trouxe." },
@@ -1274,6 +1430,7 @@ const ARVORES = [
       },
       {
         fala: "Mas eu autorizei UM app. Por que três empresas diferentes estão me ligando?",
+        dif: 1,
         alts: [
           { t: "Aí são duas coisas separadas: o Open Finance compartilha com quem você autorizou, e só. Se outras empresas apareceram, ou houve consentimento adicional que passou despercebido, ou vieram por outro caminho, que a gente precisa apurar.", grau: 3, nota: "Delimita o que o Open Finance faz e o que não faz, e trata o excedente como algo a investigar em vez de aceitar." },
           { t: "O compartilhamento vale apenas para a instituição que você autorizou.", grau: 2, nota: "Regra correta, sem encaminhar o que fazer com as ligações que não se explicam por ela." },
@@ -1283,6 +1440,7 @@ const ARVORES = [
       },
       {
         fala: "Quero cancelar isso agora. Dá para voltar atrás?",
+        dif: 3,
         alts: [
           { t: "Só é possível cancelar quando o prazo do consentimento vencer.", grau: 0, nota: "Nega um direito que existe e prolonga desnecessariamente a exposição do cliente." },
           { t: "Dá, e a qualquer momento: a revogação do consentimento é um direito seu e pode ser feita tanto aqui no nosso aplicativo quanto no do app que você autorizou. Te mostro o caminho agora.", grau: 3, nota: "Confirma o direito, informa os dois canais possíveis e se oferece para conduzir, que é o que resolve o problema hoje." },
@@ -1292,6 +1450,7 @@ const ARVORES = [
       },
       {
         fala: "E os dados que já pegaram? Somem?",
+        dif: 2,
         alts: [
           { t: "Sim, ao revogar todos os dados são apagados automaticamente.", grau: 0, nota: "Promessa falsa que faz o cliente deixar de exercer o direito de exclusão perante a empresa." },
           { t: "Isso já foge um pouco do que eu consigo te informar aqui.", grau: 1, nota: "Desiste de uma pergunta legítima sobre um direito básico do cliente." },
@@ -1301,6 +1460,7 @@ const ARVORES = [
       },
       {
         fala: "Achei que Open Finance fosse coisa ruim. É melhor eu nunca mais usar?",
+        dif: 1,
         alts: [
           { t: "O Open Finance é seguro e regulado; o cuidado está em ler o que se autoriza.", grau: 2, nota: "Equilibrado e correto, sem dizer o que exatamente conferir na tela de consentimento." },
           { t: "Se você não se sente confortável, o melhor é não usar mesmo.", grau: 1, nota: "Respeita o desconforto e abre mão de corrigir um entendimento que vai custar oportunidades ao cliente." },

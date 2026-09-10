@@ -31,6 +31,7 @@ const ordem = [
   "src/dados/arvores.part.js",
   "src/50-ferramentas.jsx",
   "src/55-visual.jsx",
+  "src/56-design.jsx",
   "src/99-motor.jsx",
 ];
 
@@ -46,6 +47,7 @@ out += ler("src/dados/musicas.part.js");
 out += ler("src/dados/arvores.part.js");
 out += ler("src/50-ferramentas.jsx");
 out += ler("src/55-visual.jsx");
+out += ler("src/56-design.jsx");
 out += ler("src/99-motor.jsx");
 
 fs.mkdirSync(path.join(raiz, "app"), { recursive: true });

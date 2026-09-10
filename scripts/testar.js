@@ -75,7 +75,13 @@ secao("0. FUMAÇA — o arquivo EXECUTA, não só compila");
       Blob: function () {}, URL: { createObjectURL: () => "", revokeObjectURL() {} },
       AudioContext: function () { return { createGain: () => ({ connect() {}, gain: { value: 0, setValueAtTime() {} } }), destination: {}, currentTime: 0, state: "running" }; },
     });
-    vm.runInContext(topo + "\n;globalThis.__ok = { chaves: TODAS_CHAVES.length, elegiveis: ELEGIVEIS_EXAME.length, fora: FORA_DO_EXAME.length, niveis: TOTAL_NIVEIS, regras: REGRAS_EXAME.minimoAcertos.valor, dif: Object.keys(CHAVES_POR_MODULO_DIF).length };", ctx, { timeout: 20000 });
+    vm.runInContext(topo + "\n;globalThis.__ok = { chaves: TODAS_CHAVES.length, elegiveis: ELEGIVEIS_EXAME.length, fora: FORA_DO_EXAME.length, niveis: TOTAL_NIVEIS, regras: REGRAS_EXAME.minimoAcertos.valor, dif: Object.keys(CHAVES_POR_MODULO_DIF).length };"
+      // Exporta as peças REAIS da montagem para os testes de comportamento
+      // mais abaixo. Sem isto, só dava para procurar texto no arquivo — e
+      // texto não prova que a prova sai com a distribuição certa.
+      + "\n;globalThis.__real = { montarItensProva, cotaMaiorResto, reescalar, montarArvore, ARVORES, TOTAL_ITENS_PROVA, PESOS, REGRAS_EXAME };",
+      ctx, { timeout: 20000 });
+    global.__real = ctx.__real;
   } catch (e) { erroTopo = e.message; }
   t("as constantes de topo executam sem erro de ordem (zona morta temporal)", !erroTopo, erroTopo);
 
@@ -539,7 +545,22 @@ secao("6d. PAUSAR E RETOMAR A PROVA");
   t("a carga escolhe qual prova vale", /const vencedora = escolherProva\(provaLocal, daNuvemProva, ids\);/.test(s));
   t("o resultado avisa que a prova foi pausada", /Pausada \{h\.pausas\}×/.test(s));
   t("o aviso diz que pausar não reproduz a condição de prova",
-    /no exame de verdade não existe pausa/.test(s));
+    /[Nn]o exame de verdade não existe pausa/.test(s));
+  // A pausa é uma escolha do produto, pedida pelo usuário. O relatório
+  // precisa separar tempo ativo de tempo pausado SEM sugerir punição.
+  t("o relatório separa tempo ativo de tempo pausado",
+    /tempo ativo \{fmtRelogio/.test(s) && /min fora do relógio/.test(s));
+  t("o relatório diz explicitamente que a pausa não desconta nota",
+    /não desconta nada da sua nota/.test(s));
+  t("pausas e tempo pausado sobrevivem ao backup e à sincronia",
+    /p: t\.pausas \|\| 0, tp: t\.tempoPausadoMs \|\| 0/.test(s)
+    && /pausas: p\.p \|\| 0, tempoPausadoMs: p\.tp \|\| 0/.test(s));
+  t("a composição sorteada também sobrevive ao backup",
+    /c: t\.cotas \|\| null/.test(s) && /cotas: p\.c \|\| null/.test(s));
+  t("o botão de pausar está na barra fixa do topo da prova",
+    /className="cx-provabar"[\s\S]{0,900}className="cx-pausa"/.test(s));
+  t("o estado da prova aparece como TEXTO, não só como cor",
+    /Prova ativa/.test(s) && /Prova pausada · relógio parado/.test(s));
   t("a tela explica que as respostas sobem AO PAUSAR", /As respostas sobem para a nuvem <b>ao pausar<\/b>/.test(s));
   // BUG REAL: pausar numa aba não parava o cronômetro da outra aba aberta,
   // e a aba atrasada encerrava a prova sozinha ao vencer o prazo antigo.
@@ -788,14 +809,16 @@ secao("7. SORTEIO DA SESSÃO DE EXAME");
   Object.values(PESOS).forEach((p) => { soma += Math.round((alvo * p) / 100); });
   t("os pesos por módulo fecham 100%", Object.values(PESOS).reduce((a, b) => a + b, 0) === 100);
   t("o sorteio ponderado dá exatamente 40 itens", soma === 40, "deu " + soma);
-  t("há completação para o caso de o arredondamento não fechar", /if \(chaves\.length < alvo\) chaves = chaves\.concat\(pegar\(ELEGIVEIS_EXAME/.test(s));
+  t("há completação para o caso de o arredondamento não fechar", /if \(chaves\.length < alvo\) \{/.test(s) && /pegar\(ELEGIVEIS_EXAME, alvo - chaves\.length\)/.test(s));
+  t("a completação NÃO é silenciosa: fica registrada em `faltou`",
+    /faltou\.push\(\{ m: "qualquer", d: "qualquer"/.test(s));
   t("a completação também respeita a exclusão do exame",
-    /pegar\(CHAVES_POR_MODULO\[m\]\.filter\(\(k\) => !IDX_Q\[k\]\.foraDoExame\)/.test(s));
+    /CHAVES_POR_MODULO\[m\]\.filter\(\(k\) => !IDX_Q\[k\]\.foraDoExame\)/.test(s));
   t("o índice por dificuldade já exclui as questões fora do exame",
     /CHAVES_POR_MODULO\[m\.id\]\.filter\(\(k\) => !IDX_Q\[k\]\.foraDoExame\)/.test(s));
   t("questão fora do exame continua no estudo, com o motivo na tela",
     /q\.foraDoExame && \(/.test(s) && /className="cx-fora"/.test(s) && /\{q\.motivoFora\}/.test(s));
-  t("o sorteio reparte a cota do módulo em fácil/médio/difícil", /const alvoPorFaixa = \{ 1: nF, 2: nM, 3: nD \}/.test(s));
+  t("o sorteio reparte a cota do módulo em fácil/médio/difícil", /const alvoPorFaixa = cotaMaiorResto\(cota, restoDif/.test(s));
   t("nenhuma questão pode sair repetida (conjunto de usadas)", /const usadas = new Set\(\);/.test(s) && /if \(!usadas\.has\(k\)\) \{ usadas\.add\(k\)/.test(s));
   t("o índice por dificuldade existe", /const CHAVES_POR_MODULO_DIF = \{\}/.test(s));
   {
@@ -842,12 +865,19 @@ secao("7. SORTEIO DA SESSÃO DE EXAME");
   t("3.000 sorteios de ordem são permutações completas de 0-3", ruim === 0, ruim + " inválidas");
   // o gabarito guardado já vem na ordem sorteada
   t("o gabarito do item é gravado na ordem em que aparece", /gabarito: ordem\.indexOf\(q\.c\)/.test(s));
-  t("a árvore corta no décimo item", /itensArv\.length < REGRAS_EXAME\.itensArvore\.valor/.test(s));
+  t("a árvore corta no décimo item", /itens\.length < REGRAS_EXAME\.itensArvore\.valor/.test(s));
 
   // REGRESSÃO: pop() dentro do find() era chamado a cada comparação e
   // esvaziava o baralho, devolvendo undefined. A prova quebrava ao montar.
-  t("pop() do baralho acontece fora do find()", /const id = baralho\.pop\(\);\s*\n\s*const a = ARVORES\.find\(\(x\) => x\.id === id\);/.test(s));
-  t("árvore não encontrada não derruba a montagem", /const a = ARVORES\.find\(\(x\) => x\.id === id\);\s*\n\s*if \(!a\) continue;/.test(s));
+  // REGRESSÃO HISTÓRICA: `pop()` era chamado DENTRO do callback do `find()`,
+  // uma vez por comparação, e esvaziava o baralho. A montagem devolvia
+  // undefined e a prova quebrava. O laço foi reescrito e não usa mais esse
+  // par, então o antigo grep virou letra morta — e grep nunca provou nada
+  // disso mesmo. Os testes agora exercitam o comportamento.
+  t("item de árvore inexistente é descartado sem derrubar a montagem",
+    /if \(!a\) \{ baralho\.splice\(i, 1\); continue; \}/.test(s));
+  t("a preferência de um atendimento por módulo está declarada",
+    /const tentar = \(respeitarModulo\)/.test(s) && /tentar\(true\);/.test(s) && /tentar\(false\);/.test(s));
   {
     // reproduz o laço corrigido com 5 árvores de 6 prompts, 500 vezes
     const ARV = [...Array(5)].map((_, i) => ({ id: "A." + i, prompts: [...Array(6)].map(() => ({ alts: [1, 2, 3, 4] })) }));
@@ -868,6 +898,127 @@ secao("7. SORTEIO DA SESSÃO DE EXAME");
       Object.values(porArv).forEach((ps) => { if (ps.join(",") !== ps.map((_, k) => k).join(",")) ruins++; });
     }
     t("500 sorteios dão sempre 10 itens de árvore, em conversas sem buraco", ruins === 0, ruins + " sorteios ruins");
+  }
+
+  // ==================================================================
+  // MONTAGEM DE VERDADE — a função real, executada, com os itens contados.
+  //
+  // Tudo o que existia antes disto era busca de texto no arquivo. Texto não
+  // prova comportamento: as cotas de módulo eram aplicadas só às 40 de
+  // múltipla escolha, os 10 itens de árvore entravam com o módulo 3 fixo, e
+  // TODOS os testes passavam. A prova de 50 itens saía em M1 16 / M2 32 /
+  // M3 44 / M4 8 contra os 20/40/30/10 do Programa Detalhado, e nada acusou.
+  // ==================================================================
+  if (global.__real) {
+    const R = global.__real;
+    const N = 120;
+
+    // --- cotaMaiorResto: teste unitário da política de arredondamento
+    {
+      const c1 = R.cotaMaiorResto(50, { "1": 20, "2": 40, "3": 30, "4": 10 }, ["1", "2", "3", "4"]);
+      t("cotas de módulo sobre 50 dão exatamente 10/20/15/5",
+        c1["1"] === 10 && c1["2"] === 20 && c1["3"] === 15 && c1["4"] === 5,
+        JSON.stringify(c1));
+      const c2 = R.cotaMaiorResto(50, { 1: 25, 2: 50, 3: 25 }, ["1", "2", "3"]);
+      t("cotas de dificuldade sobre 50 somam 50 e resolvem o 12,5 pela ordem declarada",
+        c2["1"] + c2["2"] + c2["3"] === 50 && c2["2"] === 25 && c2["1"] >= c2["3"],
+        JSON.stringify(c2));
+      // determinismo: mesma entrada, mesma saída, sempre
+      let igual = true;
+      for (let i = 0; i < 50; i++) {
+        const x = R.cotaMaiorResto(50, { 1: 25, 2: 50, 3: 25 }, ["1", "2", "3"]);
+        if (JSON.stringify(x) !== JSON.stringify(c2)) igual = false;
+      }
+      t("o arredondamento é determinístico (50 repetições, mesmo resultado)", igual);
+      // caso degenerado: nada a repartir não pode explodir nem inventar item
+      const c3 = R.cotaMaiorResto(0, { 1: 25, 2: 50, 3: 25 }, ["1", "2", "3"]);
+      t("repartir zero item devolve zero em todos os baldes",
+        c3["1"] === 0 && c3["2"] === 0 && c3["3"] === 0);
+    }
+
+    // --- montagem completa
+    const provas = [];
+    let erroMonta = null;
+    try { for (let i = 0; i < N; i++) provas.push(R.montarItensProva([])); }
+    catch (e) { erroMonta = e.message; }
+    t(`${N} montagens completas sem erro`, !erroMonta, erroMonta);
+
+    if (!erroMonta) {
+      const itensDe = (p) => [...p.itensMC, ...p.itensArv];
+
+      t("toda prova tem exatamente 50 itens",
+        provas.every((p) => itensDe(p).length === R.TOTAL_ITENS_PROVA),
+        "tamanhos: " + [...new Set(provas.map((p) => itensDe(p).length))].join("/"));
+
+      t("toda prova tem 40 de múltipla escolha e 10 de árvore",
+        provas.every((p) => p.itensMC.length === 40 && p.itensArv.length === 10));
+
+      t("nenhuma questão se repete dentro da mesma prova",
+        provas.every((p) => {
+          const ch = itensDe(p).map((x) => x.chave);
+          return new Set(ch).size === ch.length;
+        }));
+
+      // O que o defeito corrigido produzia: módulo fixo em "3" na árvore.
+      t("nenhum item de árvore usa módulo fixo — cada um traz o da sua árvore",
+        provas.every((p) => p.itensArv.every((x) => {
+          const a = R.ARVORES.find((y) => y.id === x.arvId);
+          return a && x.mId === a.mId;
+        })));
+
+      t("todo item de árvore tem dificuldade rotulada",
+        provas.every((p) => p.itensArv.every((x) => [1, 2, 3].includes(x.dif))));
+
+      // --- distribuição sobre os 50, que é o coração da correção
+      const somaMod = { 1: 0, 2: 0, 3: 0, 4: 0 }, somaDif = { 1: 0, 2: 0, 3: 0 };
+      let piorMod = 0, piorDif = 0;
+      provas.forEach((p) => {
+        const m = { 1: 0, 2: 0, 3: 0, 4: 0 }, d = { 1: 0, 2: 0, 3: 0 };
+        itensDe(p).forEach((x) => { m[x.mId]++; d[x.dif]++; somaMod[x.mId]++; somaDif[x.dif]++; });
+        [1, 2, 3, 4].forEach((k) => { piorMod = Math.max(piorMod, Math.abs(m[k] - R.cotaMaiorResto(50, R.PESOS, ["1", "2", "3", "4"])[k])); });
+        const aD = R.cotaMaiorResto(50, { 1: 25, 2: 50, 3: 25 }, ["1", "2", "3"]);
+        [1, 2, 3].forEach((k) => { piorDif = Math.max(piorDif, Math.abs(d[k] - aD[k])); });
+      });
+      const tot = N * 50;
+      const pctM = (k) => (somaMod[k] / tot) * 100;
+      const pctD = (k) => (somaDif[k] / tot) * 100;
+      t(`módulos batem os 20/40/30/10 do Programa Detalhado (deu ${pctM(1).toFixed(1)}/${pctM(2).toFixed(1)}/${pctM(3).toFixed(1)}/${pctM(4).toFixed(1)})`,
+        Math.abs(pctM(1) - 20) <= 1 && Math.abs(pctM(2) - 40) <= 1
+        && Math.abs(pctM(3) - 30) <= 1 && Math.abs(pctM(4) - 10) <= 1);
+      t(`dificuldade bate os 25/50/25 sobre os 50 itens (deu ${pctD(1).toFixed(1)}/${pctD(2).toFixed(1)}/${pctD(3).toFixed(1)})`,
+        Math.abs(pctD(1) - 25) <= 2 && Math.abs(pctD(2) - 50) <= 2 && Math.abs(pctD(3) - 25) <= 2);
+      t(`nenhuma prova individual desvia mais de 2 itens da cota de módulo (pior: ${piorMod})`, piorMod <= 2);
+      t(`nenhuma prova individual desvia mais de 3 itens da cota de dificuldade (pior: ${piorDif})`, piorDif <= 3);
+
+      // --- a conversa da árvore nunca começa no meio
+      t("as decisões de cada atendimento vêm em sequência a partir da primeira",
+        provas.every((p) => {
+          const por = {};
+          p.itensArv.forEach((x) => { (por[x.arvId] = por[x.arvId] || []).push(x.passo); });
+          return Object.values(por).every((ps) => ps.join(",") === ps.map((_, i) => i).join(","));
+        }));
+
+      // --- banco insuficiente é DENUNCIADO, não completado em silêncio
+      const semFalta = provas.filter((p) => p.faltou.length === 0).length;
+      t(`com o banco atual nenhum balde fica sem material (${semFalta}/${N} montagens limpas)`, semFalta === N,
+        "exemplo: " + JSON.stringify((provas.find((p) => p.faltou.length) || {}).faltou));
+
+      // --- memória entre provas: a 2ª prova reaproveita menos
+      {
+        const p1 = R.montarItensProva([]);
+        const hist = [{ itens: [...p1.itensMC, ...p1.itensArv] }];
+        const p2 = R.montarItensProva(hist);
+        const arv1 = new Set(p1.itensArv.map((x) => x.arvId));
+        const arv2 = new Set(p2.itensArv.map((x) => x.arvId));
+        const repetiu = [...arv2].filter((x) => arv1.has(x)).length;
+        t("a prova seguinte não repete nenhum atendimento da anterior", repetiu === 0, repetiu + " repetidos");
+        const mc1 = new Set(p1.itensMC.map((x) => x.chave));
+        const rep = p2.itensMC.filter((x) => mc1.has(x.chave)).length;
+        t(`a prova seguinte repete pouca múltipla escolha (repetiu ${rep} de 40)`, rep <= 2);
+      }
+    }
+  } else {
+    t("as peças da montagem foram exportadas para teste", false, "__real não veio do contexto");
   }
 
   // ------------------------------------------------------------------
