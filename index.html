@@ -362,8 +362,24 @@ const VISUAL_CSS=`
   width:var(--lido,0%);transition:width 90ms linear}
 
 /* ---------- entrada de tela ---------- */
-.cx-tela{animation:entraTela 300ms var(--mola) both}
-@keyframes entraTela{from{opacity:0;transform:translate3d(0,10px,0)}to{opacity:1;transform:none}}
+/* ATENÇÃO — não devolva o 'transform' para esta regra.
+   Ela tinha 'animation:entraTela ... both', e os keyframes mexiam em
+   'transform'. Com fill-mode 'both' o elemento fica com 'transform:matrix(...)'
+   PARA SEMPRE, mesmo sendo a matriz identidade. E elemento com transform vira
+   containing block de tudo que for 'position:fixed' dentro dele.
+
+   Consequência medida em 10/09/2026, a 390px de largura: a barra inferior de
+   navegação, que é 'position:fixed; bottom:0', foi parar em top:2318px numa
+   tela de 844px — ancorada no fim da PÁGINA em vez do fim da TELA. Ou seja: a
+   navegação do celular só aparecia depois de rolar o app inteiro. O trilho do
+   computador tinha o mesmo problema e só parecia certo porque começa no topo.
+
+   Agora a tela anima só opacidade (que não cria containing block) e o deslize
+   foi para '.cx-wrap', que não tem nenhum filho fixo. */
+.cx-tela{animation:entraTelaOpacidade 300ms var(--mola) both}
+@keyframes entraTelaOpacidade{from{opacity:0}to{opacity:1}}
+.cx-tela > .cx-wrap{animation:entraDesliza 300ms var(--mola) both}
+@keyframes entraDesliza{from{transform:translate3d(0,10px,0)}to{transform:none}}
 
 /* ---------- números que sobem ---------- */
 .cx-num{font-variant-numeric:tabular-nums;transition:color var(--medio)}
@@ -387,7 +403,7 @@ const VISUAL_CSS=`
 .cx-lacrado .cx-alt:hover:not(:disabled){transform:none;box-shadow:none}
 .cx-lacrado .cx-btn:hover:not(:disabled){transform:none;filter:none}
 .cx-lacrado .cx-h1{animation:none;background:none;-webkit-text-fill-color:currentColor}
-.cx-lacrado .cx-tela{animation:none}
+.cx-lacrado .cx-tela,.cx-lacrado .cx-tela > .cx-wrap{animation:none}
 
 /* 2. QUEM PEDIU MENOS MOVIMENTO. Com a preferência do sistema ligada, o
       app volta a ser estático — e continua inteiro. A revelação vira
@@ -396,7 +412,7 @@ const VISUAL_CSS=`
   .cx-aurora{display:none}
   .rv{opacity:1!important;transform:none!important;transition:none!important}
   .cx-h1{animation:none;background:none;-webkit-text-fill-color:currentColor}
-  .cx-tela{animation:none}
+  .cx-tela,.cx-tela > .cx-wrap{animation:none}
   .cx-mod:hover,.cx-btn:hover:not(:disabled),.cx-chip:hover,.cx-alt:hover:not(:disabled){transform:none}
   [data-luz]::before{transition:none}
   .cx-trilho{transition:none}
@@ -679,10 +695,25 @@ const DESIGN_CSS=`
   .cx-pausa{padding:0 var(--e3);font-size:13.5px;min-height:44px}
 }
 
-/* ---------- 7. alvos de toque ---------- */
-@media (pointer:coarse){
-  .cx-btn,.cx-chip,.cx-alt,.cx-rail-it,.cx-pausa{min-height:44px}
+/* ---------- 7. alvos de toque ----------
+   Dois gatilhos, de propósito. 'pointer:coarse' cobre o dedo; a largura
+   cobre o tablet que se anuncia como mouse e o navegador que não expõe o
+   tipo de ponteiro. Medido a 768px: sem a regra de largura, nove fichas
+   ficavam com 40px de altura. */
+@media (pointer:coarse), (max-width:1023px){
+  .cx-btn,.cx-chip,.cx-alt,.cx-rail-it,.cx-pausa,.cx-linkbt{min-height:44px}
   .cx-chip{padding-left:var(--e3);padding-right:var(--e3)}
+}
+
+/* ---------- 7b. piso do texto pequeno ----------
+   Rótulo pequeno é recurso legítimo de hierarquia, mas 10px num celular na
+   rua não se lê. O piso é 11px no computador e 11,5px no celular — vale para
+   contadores, selos e títulos de grupo, não para texto de leitura, que já
+   está em 16px. */
+.cx-lb{font-size:11px}
+.cx-rail-gr{font-size:11px}
+@media (max-width:520px){
+  .cx-lb,.cx-eye,.cx-cnt,.cx-peso,.cx-pat,.cx-kbd{font-size:11.5px}
 }
 
 /* ---------- 8. foco: um só desenho, em tudo ---------- */

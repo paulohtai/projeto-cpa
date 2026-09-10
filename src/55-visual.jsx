@@ -103,8 +103,24 @@ const VISUAL_CSS = `
   width:var(--lido,0%);transition:width 90ms linear}
 
 /* ---------- entrada de tela ---------- */
-.cx-tela{animation:entraTela 300ms var(--mola) both}
-@keyframes entraTela{from{opacity:0;transform:translate3d(0,10px,0)}to{opacity:1;transform:none}}
+/* ATENÇÃO — não devolva o 'transform' para esta regra.
+   Ela tinha 'animation:entraTela ... both', e os keyframes mexiam em
+   'transform'. Com fill-mode 'both' o elemento fica com 'transform:matrix(...)'
+   PARA SEMPRE, mesmo sendo a matriz identidade. E elemento com transform vira
+   containing block de tudo que for 'position:fixed' dentro dele.
+
+   Consequência medida em 10/09/2026, a 390px de largura: a barra inferior de
+   navegação, que é 'position:fixed; bottom:0', foi parar em top:2318px numa
+   tela de 844px — ancorada no fim da PÁGINA em vez do fim da TELA. Ou seja: a
+   navegação do celular só aparecia depois de rolar o app inteiro. O trilho do
+   computador tinha o mesmo problema e só parecia certo porque começa no topo.
+
+   Agora a tela anima só opacidade (que não cria containing block) e o deslize
+   foi para '.cx-wrap', que não tem nenhum filho fixo. */
+.cx-tela{animation:entraTelaOpacidade 300ms var(--mola) both}
+@keyframes entraTelaOpacidade{from{opacity:0}to{opacity:1}}
+.cx-tela > .cx-wrap{animation:entraDesliza 300ms var(--mola) both}
+@keyframes entraDesliza{from{transform:translate3d(0,10px,0)}to{transform:none}}
 
 /* ---------- números que sobem ---------- */
 .cx-num{font-variant-numeric:tabular-nums;transition:color var(--medio)}
@@ -128,7 +144,7 @@ const VISUAL_CSS = `
 .cx-lacrado .cx-alt:hover:not(:disabled){transform:none;box-shadow:none}
 .cx-lacrado .cx-btn:hover:not(:disabled){transform:none;filter:none}
 .cx-lacrado .cx-h1{animation:none;background:none;-webkit-text-fill-color:currentColor}
-.cx-lacrado .cx-tela{animation:none}
+.cx-lacrado .cx-tela,.cx-lacrado .cx-tela > .cx-wrap{animation:none}
 
 /* 2. QUEM PEDIU MENOS MOVIMENTO. Com a preferência do sistema ligada, o
       app volta a ser estático — e continua inteiro. A revelação vira
@@ -137,7 +153,7 @@ const VISUAL_CSS = `
   .cx-aurora{display:none}
   .rv{opacity:1!important;transform:none!important;transition:none!important}
   .cx-h1{animation:none;background:none;-webkit-text-fill-color:currentColor}
-  .cx-tela{animation:none}
+  .cx-tela,.cx-tela > .cx-wrap{animation:none}
   .cx-mod:hover,.cx-btn:hover:not(:disabled),.cx-chip:hover,.cx-alt:hover:not(:disabled){transform:none}
   [data-luz]::before{transition:none}
   .cx-trilho{transition:none}

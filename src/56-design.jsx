@@ -238,10 +238,25 @@ const DESIGN_CSS = `
   .cx-pausa{padding:0 var(--e3);font-size:13.5px;min-height:44px}
 }
 
-/* ---------- 7. alvos de toque ---------- */
-@media (pointer:coarse){
-  .cx-btn,.cx-chip,.cx-alt,.cx-rail-it,.cx-pausa{min-height:44px}
+/* ---------- 7. alvos de toque ----------
+   Dois gatilhos, de propósito. 'pointer:coarse' cobre o dedo; a largura
+   cobre o tablet que se anuncia como mouse e o navegador que não expõe o
+   tipo de ponteiro. Medido a 768px: sem a regra de largura, nove fichas
+   ficavam com 40px de altura. */
+@media (pointer:coarse), (max-width:1023px){
+  .cx-btn,.cx-chip,.cx-alt,.cx-rail-it,.cx-pausa,.cx-linkbt{min-height:44px}
   .cx-chip{padding-left:var(--e3);padding-right:var(--e3)}
+}
+
+/* ---------- 7b. piso do texto pequeno ----------
+   Rótulo pequeno é recurso legítimo de hierarquia, mas 10px num celular na
+   rua não se lê. O piso é 11px no computador e 11,5px no celular — vale para
+   contadores, selos e títulos de grupo, não para texto de leitura, que já
+   está em 16px. */
+.cx-lb{font-size:11px}
+.cx-rail-gr{font-size:11px}
+@media (max-width:520px){
+  .cx-lb,.cx-eye,.cx-cnt,.cx-peso,.cx-pat,.cx-kbd{font-size:11.5px}
 }
 
 /* ---------- 8. foco: um só desenho, em tudo ---------- */
