@@ -486,6 +486,54 @@ colisao === 0 ? ok("nenhum exemplo repete enunciado de questão (não entrega ga
   } catch (e) { erro("árvores: " + e.message); }
 }
 
+// 6h2. VIÉS DE TAMANHO NA ÁRVORE — o portão que faltava.
+//
+// Em 10/09/2026 o Paulo fez um simulado e disse: "a resposta das novas
+// árvores sempre são as alternativas maiores". Medido: **120 de 120**. A
+// melhor escolha era a mais longa em TODAS as decisões, das 20 árvores.
+// Média de 134 caracteres contra 54 das outras três.
+//
+// Ou seja: os 10 itens de árvore de cada prova — um quinto da nota — eram
+// de graça para quem clicasse na maior. Pior que o simulado do concorrente
+// que nós mesmos criticamos por 66%.
+//
+// O mais grave é o método: este arquivo JÁ tinha o "placar do espertalhão"
+// para as 872 questões de múltipla escolha, e eu nunca apontei a mesma régua
+// para as árvores. Portão que existe mas não é apontado para o conteúdo novo
+// não protege nada.
+{
+  try {
+    let av = s.slice(s.indexOf("const ARVORES = [") + "const ARVORES = ".length);
+    av = av.slice(0, av.indexOf("\n];") + 2);
+    const AR = eval(av);
+    const semEsp = (t) => String(t || "").replace(/\s/g, "").length;
+    let maisLonga = 0, maisCurta = 0, n = 0, somaG = 0, somaO = 0;
+    const piores = [];
+    AR.forEach((a) => a.prompts.forEach((p, i) => {
+      const L = p.alts.map((x) => semEsp(x.t));
+      const i3 = p.alts.findIndex((x) => x.grau === 3);
+      const mx = Math.max(...L), mn = Math.min(...L);
+      const nMax = L.filter((x) => x === mx).length, nMin = L.filter((x) => x === mn).length;
+      if (L[i3] === mx) { maisLonga += 1 / nMax; if (L[i3] > mn * 1.8) piores.push(`${a.id}/${i + 1}`); }
+      if (L[i3] === mn) maisCurta += 1 / nMin;
+      somaG += L[i3]; somaO += L.filter((_, k) => k !== i3).reduce((x, y) => x + y, 0) / 3;
+      n++;
+    }));
+    const pL = (maisLonga / n) * 100, pC = (maisCurta / n) * 100;
+    console.log(`  info ÁRVORES · ESPERTALHÃO: clicar sempre na mais longa acerta ${pL.toFixed(0)}% · na mais curta ${pC.toFixed(0)}% (acaso 25%)`);
+    console.log(`       tamanho médio: melhor escolha ${Math.round(somaG / n)} car. · outras três ${Math.round(somaO / n)} car.`);
+    const dentro = pL >= 15 && pL <= 35 && pC >= 15 && pC <= 35;
+    dentro ? ok("o tamanho da alternativa não entrega a melhor escolha da árvore")
+      : erro(`o tamanho entrega a melhor escolha da árvore: mais longa ${pL.toFixed(0)}% · mais curta ${pC.toFixed(0)}% (aceito 15%–35%)`
+        + (piores.length ? `\n       ${piores.length} decisões com a melhor 80% maior que a menor, ex.: ${piores.slice(0, 6).join(" · ")}` : ""));
+    // e o tamanho médio não pode destoar
+    const razao = somaG / Math.max(1, somaO);
+    razao <= 1.25 && razao >= 0.8
+      ? ok(`melhor escolha e distratores têm tamanho comparável (razão ${razao.toFixed(2)})`)
+      : erro(`a melhor escolha é ${razao.toFixed(2)}× o tamanho das outras (aceito 0,80 a 1,25)`);
+  } catch (e) { erro("viés de tamanho na árvore: " + e.message); }
+}
+
 // 6i. VIÉS DE POSIÇÃO NA ÁRVORE
 // O defeito que existia: a "Melhor escolha" estava na 1ª posição em 30 de 30
 // decisões. Quem clicasse sempre na A tirava 100% sem ler nada.
