@@ -1342,9 +1342,29 @@ export default function ProjetoCPA() {
         const r = await window.storage.get(SAVE_KEY);
         if (r && r.value) { local = migrar(JSON.parse(r.value)); aplicarEstado(local); }
       } catch (e) {
-        // dado ilegível não é apagado: o app segue vazio e avisa, para que o
-        // backup possa ser restaurado por cima em vez de sumir em silêncio.
-        setAvisoDados("Não consegui ler o progresso guardado neste aparelho. Nada foi apagado — abra Ajustes e restaure um backup, ou sincronize com a nuvem.");
+        // DADO ILEGÍVEL — e a intenção aqui já esteve só no comentário.
+        //
+        // O texto dizia "nada foi apagado", mas o app seguia adiante e a
+        // primeira gravação de rotina sobrescrevia os bytes que não deram
+        // para ler. Verificado em 10/09/2026 injetando lixo na chave: o
+        // aviso aparecia e o conteúdo original sumia. Se a corrupção fosse
+        // uma gravação truncada — o caso mais comum —, o que restava de
+        // recuperável era destruído pela própria mensagem que prometia o
+        // contrário.
+        //
+        // Agora os bytes originais são copiados para uma chave de socorro
+        // ANTES de qualquer coisa. Só então a frase é verdadeira.
+        let salvou = false;
+        try {
+          const cru = await window.storage.get(SAVE_KEY);
+          if (cru && cru.value) {
+            await window.storage.set(SAVE_KEY + "-ilegivel-" + new Date().toISOString().slice(0, 10), cru.value);
+            salvou = true;
+          }
+        } catch (e2) { /* se nem copiar dá, o aviso abaixo muda de texto */ }
+        setAvisoDados(salvou
+          ? "Não consegui ler o progresso guardado neste aparelho. Guardei uma cópia intacta do arquivo ilegível numa chave de socorro (\"" + SAVE_KEY + "-ilegivel-...\"), então nada foi perdido. Abra Ajustes e restaure um backup, ou sincronize com a nuvem."
+          : "Não consegui ler o progresso guardado neste aparelho, e também não consegui copiá-lo para uma chave de socorro. Antes de continuar, abra Ajustes e restaure um backup, ou sincronize com a nuvem — seguir estudando pode sobrescrever o que estiver lá.");
       }
       // exame e histórico moram em chaves próprias: um erro no estudo não
       // derruba uma prova em andamento, e vice-versa.

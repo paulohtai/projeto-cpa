@@ -561,6 +561,14 @@ secao("6d. PAUSAR E RETOMAR A PROVA");
     /className="cx-provabar"[\s\S]{0,900}className="cx-pausa"/.test(s));
   t("o estado da prova aparece como TEXTO, não só como cor",
     /Prova ativa/.test(s) && /Prova pausada · relógio parado/.test(s));
+  // Defeito real de 10/09/2026, encontrado injetando lixo na chave de disco:
+  // o aviso dizia "Nada foi apagado" e o app sobrescrevia o dado ilegível na
+  // primeira gravação de rotina. A frase virou verdade só depois de copiar os
+  // bytes originais para uma chave de socorro.
+  t("dado ilegível é copiado para uma chave de socorro antes de qualquer gravação",
+    /SAVE_KEY \+ "-ilegivel-"/.test(s));
+  t("o aviso de dado ilegível só promete preservação se a cópia deu certo",
+    /salvou\s*\?/.test(s) && /também não consegui copiá-lo/.test(s));
   t("a tela explica que as respostas sobem AO PAUSAR", /As respostas sobem para a nuvem <b>ao pausar<\/b>/.test(s));
   // BUG REAL: pausar numa aba não parava o cronômetro da outra aba aberta,
   // e a aba atrasada encerrava a prova sozinha ao vencer o prazo antigo.

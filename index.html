@@ -1456,9 +1456,19 @@ const[confirmando,setConfirmando]=useState(false);const[mapaAberto,setMapaAberto
 // e o efeito precisa rodar de novo quando ele aparece
 useRevelar(tela+"|"+loaded);useAmbiente();const xpMostrado=useContador(xp);// no exame não há aurora nem revelação: a tela é austera de propósito
 const noExameAgora=tela==="prova";// aplica um estado inteiro (vindo do disco ou da nuvem) na tela
-const aplicarEstado0=s=>{if(!s)return;setXp(s.xp||0);setCombo(s.combo||0);setStats(s.stats||{});setFeitos(s.feitos||{});setBossBest(s.bossBest||{});setErrados(s.errados||[]);setFavs(s.favs||[]);setPressao(!!s.pressao);setSom(s.som!==false);setRev(s.rev||{});if(s.ferr)setFerr(s.ferr);if(s.syncUrl!==undefined)setSyncUrl(s.syncUrl||"");if(s.syncCod!==undefined)setSyncCod(s.syncCod||"");};const aplicarEstado=s=>aplicarEstado0(migrar(s));useEffect(()=>{(async()=>{let local=null;try{const r=await window.storage.get(SAVE_KEY);if(r&&r.value){local=migrar(JSON.parse(r.value));aplicarEstado(local);}}catch(e){// dado ilegível não é apagado: o app segue vazio e avisa, para que o
-// backup possa ser restaurado por cima em vez de sumir em silêncio.
-setAvisoDados("Não consegui ler o progresso guardado neste aparelho. Nada foi apagado — abra Ajustes e restaure um backup, ou sincronize com a nuvem.");}// exame e histórico moram em chaves próprias: um erro no estudo não
+const aplicarEstado0=s=>{if(!s)return;setXp(s.xp||0);setCombo(s.combo||0);setStats(s.stats||{});setFeitos(s.feitos||{});setBossBest(s.bossBest||{});setErrados(s.errados||[]);setFavs(s.favs||[]);setPressao(!!s.pressao);setSom(s.som!==false);setRev(s.rev||{});if(s.ferr)setFerr(s.ferr);if(s.syncUrl!==undefined)setSyncUrl(s.syncUrl||"");if(s.syncCod!==undefined)setSyncCod(s.syncCod||"");};const aplicarEstado=s=>aplicarEstado0(migrar(s));useEffect(()=>{(async()=>{let local=null;try{const r=await window.storage.get(SAVE_KEY);if(r&&r.value){local=migrar(JSON.parse(r.value));aplicarEstado(local);}}catch(e){// DADO ILEGÍVEL — e a intenção aqui já esteve só no comentário.
+//
+// O texto dizia "nada foi apagado", mas o app seguia adiante e a
+// primeira gravação de rotina sobrescrevia os bytes que não deram
+// para ler. Verificado em 10/09/2026 injetando lixo na chave: o
+// aviso aparecia e o conteúdo original sumia. Se a corrupção fosse
+// uma gravação truncada — o caso mais comum —, o que restava de
+// recuperável era destruído pela própria mensagem que prometia o
+// contrário.
+//
+// Agora os bytes originais são copiados para uma chave de socorro
+// ANTES de qualquer coisa. Só então a frase é verdadeira.
+let salvou=false;try{const cru=await window.storage.get(SAVE_KEY);if(cru&&cru.value){await window.storage.set(SAVE_KEY+"-ilegivel-"+new Date().toISOString().slice(0,10),cru.value);salvou=true;}}catch(e2){/* se nem copiar dá, o aviso abaixo muda de texto */}setAvisoDados(salvou?"Não consegui ler o progresso guardado neste aparelho. Guardei uma cópia intacta do arquivo ilegível numa chave de socorro (\""+SAVE_KEY+"-ilegivel-...\"), então nada foi perdido. Abra Ajustes e restaure um backup, ou sincronize com a nuvem.":"Não consegui ler o progresso guardado neste aparelho, e também não consegui copiá-lo para uma chave de socorro. Antes de continuar, abra Ajustes e restaure um backup, ou sincronize com a nuvem — seguir estudando pode sobrescrever o que estiver lá.");}// exame e histórico moram em chaves próprias: um erro no estudo não
 // derruba uma prova em andamento, e vice-versa.
 let provaLocal=null;try{const rp=await window.storage.get(PROVA_KEY);if(rp&&rp.value){const p=JSON.parse(rp.value);if(p&&Array.isArray(p.itens)&&!p.entregue){provaLocal=p;setProva(p);}}}catch(e){setAvisoDados(a=>a||"A prova em andamento não pôde ser lida e foi descartada. O histórico e o progresso de estudo estão intactos.");}let histLocal=[],apagadosLocal=[];try{const rh=await window.storage.get(HIST_KEY);if(rh&&rh.value){const g=JSON.parse(rh.value);// v1 gravava um array puro; v2 guarda { h, apagados }
 if(Array.isArray(g))histLocal=g;else if(g&&typeof g==="object"){histLocal=g.h||[];apagadosLocal=g.apagados||[];}setHistorico(histLocal);setApagados(apagadosLocal);}}catch(e){setAvisoDados(a=>a||"O histórico de provas não pôde ser lido. Nada foi apagado.");}setLoaded(true);// Sincronia automática ao abrir, nos DOIS sentidos:
