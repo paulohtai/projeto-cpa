@@ -3589,8 +3589,20 @@ export default function ProjetoCPA() {
                     {filtroFicha === "fracos" && prec !== null && (
                       <span style={{ fontSize: 11.5, fontWeight: 900, color: "var(--no)", whiteSpace: "nowrap" }}>{prec}%</span>
                     )}
+                    {/* A estrela tinha 23px de altura, repetida 170 vezes nesta
+                        tela — o menor alvo de toque do app inteiro, e num
+                        botão que muda dado. Agora tem 44×44 de área tocável
+                        com o desenho de 19px centralizado, e é ícone
+                        desenhado em vez de emoji: ⭐ e ☆ mudam de forma e de
+                        cor conforme o sistema, e o estado "guardado" ficava
+                        dependendo dessa diferença. */}
                     <button className={"cx-star" + (fav ? " on" : "")} onClick={(e) => { e.stopPropagation(); toggleFav(n.id); }}
-                      aria-label={fav ? "Remover do meu maço" : "Guardar no meu maço"}>{fav ? "⭐" : "☆"}</button>
+                      aria-pressed={fav}
+                      aria-label={fav ? "Remover do meu maço" : "Guardar no meu maço"}>
+                      <svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+                        fill={fav ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.7"
+                        strokeLinejoin="round"><path d="M12 3.6l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" /></svg>
+                    </button>
                     <span style={{ color: "var(--mut)", fontSize: 15, marginLeft: 4 }}>{liberada ? (on ? "▾" : "▸") : "🔒"}</span>
                   </div>
                   {modoRecall && !liberada && (

@@ -325,6 +325,43 @@ const DESIGN_CSS = `
   .cx-rail{padding-top:var(--e3)}
   .cx-rail-marca{padding-bottom:var(--e2)}
 }
+/* ---------- 11. correções encontradas na varredura de telas ---------- */
+
+/* TABELÃO — o defeito mais silencioso desta rodada.
+   A coluna de valor era .cx-tema .lin b { white-space: nowrap }. Numa linha
+   como "a cada 6 meses, no mínimo, e só sobre o que exceder o índice" o
+   conteúdo media 505px dentro de uma caixa de 326px. O navegador não corta:
+   ele ALARGA a viewport de layout para caber. Medido num aparelho de 390px:
+   innerWidth virava 537 e o app inteiro encolhia para ~72%, com todo o texto
+   junto — sem rolagem horizontal e sem nenhum aviso de que algo estourou.
+   O sintoma parecia "fonte pequena demais"; a causa era uma linha de CSS. */
+.cx-tema .lin{align-items:baseline}
+.cx-tema .lin span:first-child{min-width:0;overflow-wrap:anywhere}
+.cx-tema .lin b{white-space:normal;overflow-wrap:anywhere;max-width:62%}
+@media (max-width:430px){
+  /* abaixo disto, rótulo e valor deixam de disputar a mesma linha */
+  .cx-tema .lin{display:grid;grid-template-columns:1fr;gap:1px}
+  .cx-tema .lin b{max-width:100%;text-align:left;color:var(--ink)}
+}
+
+/* ESTRELA DO MAÇO — 44×44 de área tocável, desenho de 19px no meio. */
+.cx-star{
+  display:inline-grid;place-items:center;width:44px;height:44px;flex:0 0 auto;
+  margin-left:auto;padding:0;border:0;background:transparent;cursor:pointer;
+  color:var(--mut);opacity:1
+}
+.cx-star:hover{color:var(--gold)}
+.cx-star.on{color:var(--gold);transform:none}
+
+/* FIM DA PÁGINA — a barra inferior comia os últimos pixels do conteúdo.
+   Medido: último elemento terminava a 790px e a barra começava a 787px, três
+   pixels de sobreposição. O padding era 64px para uma barra de 57px, e a
+   margem do último bloco consumia a folga. Agora a reserva é a altura real
+   da barra mais uma respiração, e não um número escolhido a olho. */
+@media (max-width:1023px){
+  .cx{ --barra-h:57px; padding-bottom:calc(var(--barra-h) + 28px + env(safe-area-inset-bottom,0px)) }
+}
+
 `;
 
 // =====================================================================
