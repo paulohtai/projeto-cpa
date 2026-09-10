@@ -1250,7 +1250,7 @@ const montarItensProva = (historico) => {
       resposta: null, marcada: false };
   });
 
-  return { itensMC, itensArv, alvoMod, alvoDif, faltou };
+  return { itensMC, itensArv, alvoMod, alvoDif, faltou, alvo };
 };
 
 export default function ProjetoCPA() {
@@ -1674,7 +1674,7 @@ export default function ProjetoCPA() {
 // =====================================================================
 
   const montarProva = () => {
-    const { itensMC, itensArv, alvoMod, alvoDif, faltou } = montarItensProva(historico);
+    const { itensMC, itensArv, alvoMod, alvoDif, faltou, alvo } = montarItensProva(historico);
     const inicio = Date.now();
     // Distribuição REALMENTE obtida, guardada com a tentativa. A tela do
     // resultado mostra isto — sem número na tela, "respeita as cotas" é

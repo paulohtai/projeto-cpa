@@ -943,6 +943,42 @@ secao("7. SORTEIO DA SESSÃO DE EXAME");
     catch (e) { erroMonta = e.message; }
     t(`${N} montagens completas sem erro`, !erroMonta, erroMonta);
 
+    // ------------------------------------------------------------------
+    // O CHAMADOR TAMBÉM PRECISA EXECUTAR.
+    //
+    // Bug real de 10/09/2026, encontrado clicando no app e não aqui: ao mover
+    // a montagem para fora do componente, `montarProva` continuou usando a
+    // variável `alvo`, que passou a existir só dentro da função extraída.
+    // Resultado: "Começar o exame" lançava ReferenceError e não acontecia
+    // nada. TODOS os testes passavam, porque exercitavam a função extraída e
+    // nunca quem a chama.
+    //
+    // A lição, e o motivo deste bloco: testar a peça não é testar a montagem.
+    // Aqui o corpo de `montarProva` é executado de verdade, com as mesmas
+    // dependências, e o objeto resultante é conferido campo a campo.
+    // ------------------------------------------------------------------
+    {
+      const corpo = s.slice(s.indexOf("const montarProva = () => {"));
+      const fim = corpo.indexOf("\n  };");
+      const fonte = corpo.slice("const montarProva = () => {".length, fim);
+      let erroChamador = null, p = null;
+      try {
+        const f = new Function("montarItensProva", "REGRAS_EXAME", "VERSAO_GABARITO", "historico",
+          fonte.replace(/^\s*const \{/, "const {"));
+        p = f(R.montarItensProva, R.REGRAS_EXAME, "vTeste", []);
+      } catch (e) { erroChamador = e.message; }
+      t("montarProva() — o chamador — executa sem variável perdida", !erroChamador, erroChamador);
+      if (p) {
+        t("a prova montada tem 50 itens, prazo absoluto e versão de gabarito",
+          p.itens.length === 50 && p.fimEm > p.inicio && p.versaoGabarito === "vTeste");
+        t("a prova montada guarda as cotas alvo e as obtidas",
+          !!p.cotas && !!p.cotas.alvoMod && !!p.cotas.obtido && Array.isArray(p.cotas.faltou));
+        t("a prova montada declara quantas são de múltipla escolha",
+          p.regras.mc === 40, "veio " + p.regras.mc);
+        t("a prova nasce não entregue, no item 0", p.entregue === false && p.i === 0);
+      }
+    }
+
     if (!erroMonta) {
       const itensDe = (p) => [...p.itensMC, ...p.itensArv];
 
