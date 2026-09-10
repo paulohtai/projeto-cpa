@@ -3258,17 +3258,24 @@ export default function ProjetoCPA() {
           {h.cotas && h.cotas.obtido && (
             <div className="cx-pane" style={{ marginTop: 14, padding: 16 }}>
               <div className="cx-lb">Composição desta prova</div>
-              <div className="cx-tab" style={{ marginTop: 10, display: "grid", gap: 6 }}>
+              {/* Grade de duas colunas com a barra numa faixa própria.
+                  Na primeira versão isto era um flex de três filhos com
+                  larguras fixas de 132px e 96px. Medido a 390px: a linha
+                  tinha 248px, os dois fixos comiam 228 e a barra ficava com
+                  LARGURA ZERO — sumia da tela sem nenhum aviso. */}
+              <div className="cx-comp">
                 {[["1", "Sistema financeiro"], ["2", "Produtos"], ["3", "Relacionamento"], ["4", "Inovação"]].map(([m, nome]) => {
                   const teve = h.cotas.obtido.mod[m] || 0, alvo2 = (h.cotas.alvoMod || {})[m] || 0;
+                  const bate = teve === alvo2;
                   return (
-                    <div key={m} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13 }}>
-                      <span style={{ width: 132, color: "var(--ink2)", fontWeight: 700 }}>M{m} · {nome}</span>
-                      <span style={{ flex: 1, height: 7, background: "var(--sup2)", borderRadius: 4, overflow: "hidden" }}>
-                        <span style={{ display: "block", height: "100%", width: `${(teve / 50) * 100 * 2}%`, background: "var(--azul)" }} />
-                      </span>
-                      <span style={{ width: 96, textAlign: "right", fontWeight: 800, color: teve === alvo2 ? "var(--ink2)" : "var(--gold)" }}>
+                    <div key={m} className="cx-comp-l">
+                      <span className="rot">M{m} · {nome}</span>
+                      <span className={"val" + (bate ? "" : " fora")}>
                         {teve} de {alvo2}
+                        {!bate && <span className="sr"> — fora da cota</span>}
+                      </span>
+                      <span className="barra" aria-hidden="true">
+                        <span style={{ width: `${Math.min(100, (teve / Math.max(1, alvo2)) * 100)}%` }} />
                       </span>
                     </div>
                   );

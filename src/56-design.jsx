@@ -207,6 +207,18 @@ const DESIGN_CSS = `
 .cx-gsel.g3{background:var(--ok)} .cx-gsel.g2{background:var(--azul)}
 .cx-gsel.g1{background:var(--gold)} .cx-gsel.g0{background:var(--no)}
 
+/* ---------- 5c. composição da prova no resultado ---------- */
+.cx-comp{display:flex;flex-direction:column;gap:10px;margin-top:var(--e3)}
+.cx-comp-l{display:grid;grid-template-columns:1fr auto;gap:2px var(--e3);align-items:baseline}
+.cx-comp-l .rot{font-size:13px;font-weight:700;color:var(--ink2);min-width:0}
+.cx-comp-l .val{font-size:13px;font-weight:800;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cx-comp-l .val.fora{color:var(--gold)}
+.cx-comp-l .barra{grid-column:1 / -1;height:6px;border-radius:3px;background:var(--sup2);overflow:hidden}
+.cx-comp-l .barra > span{display:block;height:100%;background:var(--azul);border-radius:3px}
+.cx-comp-l .val.fora ~ .barra > span{background:var(--gold)}
+/* texto só para leitor de tela: a cor sozinha não pode carregar o aviso */
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
 /* ---------- 6. barra do exame: estado sempre visível ---------- */
 .cx-provabar{
   position:sticky;top:0;z-index:30;
