@@ -2315,16 +2315,16 @@ export default function ProjetoCPA() {
               aceita também os códigos dos quatro apps antigos: cole um por linha e o progresso é somado.
             </p>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap", margin: "12px 0 10px" }}>
-              <button className="cx-chip" onClick={gerarBackup}>⬇ Gerar código</button>
-              {backup && <button className="cx-chip" onClick={copiar}>📋 Copiar</button>}
-              {backup && <button className="cx-chip" onClick={baixarBackup}>⬇ Baixar arquivo</button>}
+              <button className="cx-chip" onClick={gerarBackup}><Ico n="baixar" s={16} /> Gerar código</button>
+              {backup && <button className="cx-chip" onClick={copiar}><Ico n="copiar" s={16} /> Copiar</button>}
+              {backup && <button className="cx-chip" onClick={baixarBackup}><Ico n="baixar" s={16} /> Baixar arquivo</button>}
             </div>
             {backup && <textarea className="cx-ta" readOnly value={backup} rows={4} onFocus={(e) => e.target.select()} />}
             <div className="cx-lb" style={{ marginTop: 16 }}>Restaurar ou importar</div>
             <textarea className="cx-ta" rows={3} value={entrada} onChange={(e) => setEntrada(e.target.value)} placeholder="cole aqui um ou mais códigos, um por linha" />
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 9 }}>
-              <button className="cx-chip" onClick={() => restaurar("somar")}>➕ Somar ao que já tenho</button>
-              <button className="cx-chip" onClick={() => restaurar("substituir")}>♻️ Substituir tudo</button>
+              <button className="cx-chip" onClick={() => restaurar("somar")}><Ico n="mais" s={16} /> Somar ao que já tenho</button>
+              <button className="cx-chip" onClick={() => restaurar("substituir")}><Ico n="trocar" s={16} /> Substituir tudo</button>
             </div>
             <p style={{ fontSize: 12, color: "var(--mut)", marginTop: 8, fontWeight: 700 }}>
               Para juntar apps antigos, use Somar. Para copiar o progresso de outro aparelho, use Substituir.
@@ -2359,9 +2359,9 @@ export default function ProjetoCPA() {
               onChange={(e) => { setSyncCod(e.target.value.trim()); salvar({ syncCod: e.target.value.trim() }); }}
               placeholder="seu código secreto" aria-label="Código de sincronia" />
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 10 }}>
-              <button className="cx-chip" onClick={() => { const c = novoCodigo(); setSyncCod(c); salvar({ syncCod: c }); setMsgSync("Código criado. Guarde-o: é a chave do seu cofre."); }}>🔑 Gerar código</button>
-              <button className="cx-chip" disabled={sincronizando} onClick={enviarNuvem}>⬆ Enviar para a nuvem</button>
-              <button className="cx-chip" disabled={sincronizando} onClick={buscarNuvem}>⬇ Buscar da nuvem</button>
+              <button className="cx-chip" onClick={() => { const c = novoCodigo(); setSyncCod(c); salvar({ syncCod: c }); setMsgSync("Código criado. Guarde-o: é a chave do seu cofre."); }}><Ico n="chave" s={16} /> Gerar código</button>
+              <button className="cx-chip" disabled={sincronizando} onClick={enviarNuvem}><Ico n="subir" s={16} /> Enviar para a nuvem</button>
+              <button className="cx-chip" disabled={sincronizando} onClick={buscarNuvem}><Ico n="baixar" s={16} /> Buscar da nuvem</button>
             </div>
             {msgSync && <p style={{ fontSize: 13, color: "var(--azul)", fontWeight: 700, marginTop: 10 }}>{msgSync}</p>}
             <p style={{ fontSize: 12, color: "var(--mut)", marginTop: 10, fontWeight: 700, lineHeight: 1.5 }}>
@@ -2735,7 +2735,7 @@ export default function ProjetoCPA() {
                       <div key={i} className={"cx-verso" + (on && linhaMus === i ? " ativa" : "")}>{li.l}</div>
                     ))}
                   </div>
-                  <div className="dica">💡 {m.dica}</div>
+                  <div className="dica"><Ico n="luz" s={15} /> {m.dica}</div>
                 </div>
               );
             })}
@@ -2778,7 +2778,7 @@ export default function ProjetoCPA() {
                         </tbody>
                       </table>
                       <div className="arm">
-                        <div className="h">⚠ Como a banca derruba você aqui</div>
+                        <div className="h"><Ico n="aviso" s={15} /> Como a banca derruba você aqui</div>
                         <p>{c.armadilha}</p>
                       </div>
                     </div>
@@ -2868,7 +2868,7 @@ export default function ProjetoCPA() {
           <p className="cx-p">
             As mesmas quatro que a plataforma da ANBIMA dá durante o exame — calculadora,
             planilha, rascunho e fórmulas (edital 13.8, 13.10 e 13.11). Elas também abrem
-            <b> dentro da prova</b>, pelo botão 🧮.
+            <b> dentro da prova</b>, pelo botão <b>Ferramentas</b> na barra do exame.
           </p>
           <div style={{ marginTop: 16 }}>
             <Ferramentas estado={ferr} setEstado={setFerr} noExame={false} />
@@ -2999,7 +2999,7 @@ export default function ProjetoCPA() {
                         </div>
                       </button>
                       <button className="cx-apagar" aria-label={`Apagar a prova de ${new Date(h.id).toLocaleString("pt-BR")}`}
-                        onClick={() => setApagarId(h.id)}>🗑</button>
+                        onClick={() => setApagarId(h.id)}><Ico n="lixeira" s={16} /></button>
                     </div>
                   </div>
                 );
@@ -3460,7 +3460,7 @@ export default function ProjetoCPA() {
               </div>
               <p>{q.exp}</p>
               {q.foraDoExame && (
-                <p className="cx-fora">⚠ {q.motivoFora}</p>
+                <p className="cx-fora"><Ico n="aviso" s={15} /> {q.motivoFora}</p>
               )}
               <button className="cx-btn" style={{ marginTop: 13, background: cAtiva, boxShadow: "none" }} onClick={avancar}>
                 {sessao.i + 1 < total ? "Próxima →" : sessao.tipo === "nivel" && sessao.erros.length && !sessao.resgate ? "Encarar a redenção →" : "Ver resultado"}
@@ -3555,9 +3555,9 @@ export default function ProjetoCPA() {
           </p>
           <div className="cx-bar">
             <button className={"cx-chip" + (filtroFicha === "todas" ? " on" : "")} onClick={() => setFiltroFicha("todas")}>Todas ({TOTAL_NIVEIS})</button>
-            <button className={"cx-chip" + (filtroFicha === "favs" ? " on" : "")} onClick={() => setFiltroFicha("favs")}>⭐ Minhas ({favs.length})</button>
-            <button className={"cx-chip" + (filtroFicha === "rev" ? " on" : "")} onClick={() => setFiltroFicha("rev")}>📅 Revisão ({revDevidas.length})</button>
-            <button className={"cx-chip" + (filtroFicha === "fracos" ? " on" : "")} onClick={() => setFiltroFicha("fracos")}>🎯 Pontos fracos ({fracos.length})</button>
+            <button className={"cx-chip" + (filtroFicha === "favs" ? " on" : "")} onClick={() => setFiltroFicha("favs")}><Ico n="estrela" s={16} /> Minhas ({favs.length})</button>
+            <button className={"cx-chip" + (filtroFicha === "rev" ? " on" : "")} onClick={() => setFiltroFicha("rev")}><Ico n="agenda" s={16} /> Revisão ({revDevidas.length})</button>
+            <button className={"cx-chip" + (filtroFicha === "fracos" ? " on" : "")} onClick={() => setFiltroFicha("fracos")}><Ico n="alvo" s={16} /> Pontos fracos ({fracos.length})</button>
             {MODULOS.map((m) => (
               <button key={m.id} className={"cx-chip" + (filtroFicha === m.id ? " on" : "")}
                 style={filtroFicha === m.id ? { background: cor(m.id), borderColor: cor(m.id) } : {}}
@@ -3625,16 +3625,16 @@ export default function ProjetoCPA() {
                   {on && (
                     <div className="cx-fb2">
                       <div className="cx-box mac">
-                        <div className="h">🔑 Macete</div>
+                        <div className="h"><Ico n="chave" s={15} /> Macete</div>
                         <p>{n.macete}</p>
                       </div>
                       <div className="cx-box peg">
-                        <div className="h">⚠ Pegadinha da banca</div>
+                        <div className="h"><Ico n="aviso" s={15} /> Pegadinha da banca</div>
                         <p>{n.pegadinha}</p>
                       </div>
                       {ex && (
                         <div className="cx-box ex">
-                          <div className="h">💡 Na prática</div>
+                          <div className="h"><Ico n="luz" s={15} /> Na prática</div>
                           <p className="cx-ex-q">{ex.caso}</p>
                           <p className="cx-ex-r">{ex.resolve}</p>
                         </div>

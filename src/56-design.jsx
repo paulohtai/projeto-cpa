@@ -325,6 +325,14 @@ const DESIGN_CSS = `
   .cx-rail{padding-top:var(--e3)}
   .cx-rail-marca{padding-bottom:var(--e2)}
 }
+/* SELO DE PESO DO MÓDULO — "20% da prova" tinha white-space:nowrap e 95px
+   fixos. A 196px de largura (o que um celular de 390px vira com zoom de
+   200%) o selo terminava em 204px e estourava a caixa. Abaixo de 300px ele
+   passa a quebrar e a soltar o texto longo. */
+@media (max-width:300px){
+  .cx-peso{white-space:normal;text-align:right;line-height:1.25}
+}
+
 /* ---------- 11. correções encontradas na varredura de telas ---------- */
 
 /* TABELÃO — o defeito mais silencioso desta rodada.
@@ -396,6 +404,16 @@ const ICONES = {
   seta: "M5 12h14M13 6l6 6-6 6",
   volta2: "M19 12H5M11 6l-6 6 6 6",
   grade: "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z",
+  baixar: "M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14",
+  subir: "M12 20V9M7.5 13.5 12 9l4.5 4.5M5 5h14",
+  mais: "M12 5v14M5 12h14",
+  trocar: "M4 8h12l-3-3M20 16H8l3 3",
+  lixeira: "M5 7h14M9 7V5h6v2M7 7l1 13h8l1-13",
+  copiar: "M9 9h11v11H9zM5 15V4h11",
+  chave: "M15 4a5 5 0 1 0-4.6 7L4 17.4V20h2.6l1.2-1.2h1.9v-1.9h1.9l1.4-1.4A5 5 0 0 0 15 4ZM16 8h.01",
+  luz: "M9.5 18h5M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3Z",
+  aviso: "M12 4 2.5 20h19zM12 10v4M12 17h.01",
+  estrela: "M12 3.6l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z",
 };
 
 const Ico = ({ n, s = 20 }) => (
