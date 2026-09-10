@@ -19,9 +19,9 @@ iPhone, é gerado por um comando.
 | Fichas de confronto | 15 comparativos, com a armadilha da banca |
 | Tabelão | 105 números decorados, em 20 temas |
 | Cantigas | 7 melodias mnemônicas, com letra sincronizada |
-| Árvores de decisão | 5 atendimentos interativos, 30 decisões graduadas |
+| Árvores de decisão | **20 atendimentos interativos, 120 decisões graduadas** |
 | Tamanho do arquivo final | ~1,4 MB (`app/index.html`) |
-| Modo de exame | 40 múltipla escolha + 10 itens de árvore, 2h30, lacrado |
+| Modo de exame | 40 múltipla escolha + 10 itens de árvore, 2h30, lacrado, **com memória entre provas** |
 
 Distribuição: M1 com 43 níveis e 202 questões · M2 com 71 e 345 · M3 com 40 e
 221 (inclui o bloco R de reforço e o bloco S situacional) · M4 com 16 e 104.
@@ -147,7 +147,8 @@ Havia um defeito silencioso: a "Melhor escolha" estava na **1ª posição em 30 
 30 decisões**. Clicar sempre em A dava 100%. A correção tem duas camadas, e
 mexer em uma sem a outra reabre o buraco:
 
-1. a ordem na **fonte** foi rebalanceada (7/8/7/8 nas quatro posições);
+1. a ordem na **fonte** é rebalanceada por `scripts/equilibrar-arvores.js`,
+   que rotaciona as alternativas de cada decisão — hoje 30/30/30/30 nas 120;
 2. a apresentação é **sorteada por tentativa** (`ordensDaArvore`), e a escolha é
    gravada pelo **índice original** — nunca pela posição na tela, senão o
    embaralhamento descolaria a nota do comentário.
@@ -162,7 +163,7 @@ escolha 3 vezes, e os quatro graus apareceram.
 ```
 node build.js                      # monta o .jsx e gera o app/index.html
 node scripts/verificar.js          # ESTRUTURA e DADOS (~70 checagens)
-node scripts/testar.js             # EXECUTA o código (102 testes)
+node scripts/testar.js             # EXECUTA o código (302 testes)
 node scripts/conferir-contraste.js # ACESSIBILIDADE (WCAG 2.1)
 node scripts/conferir-numeros.js   # CONTEÚDO contra fonte primária
 node scripts/conferir-vazamento.js # a questão entrega a própria resposta?
@@ -200,6 +201,121 @@ dado fornecido pelo próprio enunciado.
 sem saber a matéria. Ver a seção abaixo: ele existe porque a versão anterior
 desta checagem deu o banco por limpo e o Paulo achou o contra-exemplo em dois
 minutos.
+
+---
+
+## O simulado do concorrente, medido com as nossas réguas
+
+O Paulo trouxe um simulado de 49 questões de um preparatório concorrente e
+pediu para comparar. Rodei nele exatamente os mesmos scripts que rodam no
+nosso banco e nas 41 questões do caderno oficial da ANBIMA. As três colunas
+que importam:
+
+| | gabarito é a + LONGA | gabarito é a + CURTA | gabarito é o que mais repete o enunciado | acima do corte de vazamento |
+|---|---|---|---|---|
+| Caderno oficial ANBIMA | 30% | 21% | 32% | 9,8% |
+| Simulado do concorrente | **66%** | 16% | 32% | **16,3%** |
+| Nosso banco (depois desta rodada) | 25% | 35% | 20% | **0,5%** |
+
+Acaso = 25%. Corte de aprovação da CPA = 70%.
+
+O número que salta é o 66%. **Quem não estudasse nada e marcasse sempre a
+alternativa mais comprida acertaria 66% daquele simulado** — a quatro pontos
+da aprovação. Não é uma prova de conhecimento; é uma prova de datilografia do
+elaborador. O vazamento de resposta também está em 16,3%, quase o dobro do
+que a própria banca pratica.
+
+O simulado tem outras lacunas: 49 questões em vez de 50, nenhuma questão de
+árvore de decisão (que são 10 dos 50 itens da prova real), e nenhum
+comentário — só uma grade de gabarito no fim, que não ensina nada a quem
+errou.
+
+### O mesmo espelho apontado para nós
+
+A comparação não serviu só para apontar o dedo. Rodando a régua no nosso
+banco, apareceu o defeito espelhado: **o gabarito era a alternativa mais
+CURTA em 63% das questões.** Chutar sempre a menor acertava 63%.
+
+O `verificar.js` não pegou porque a checagem de viés de comprimento só olhava
+um lado: "a correta é a mais longa?". A origem é conhecida e está registrada:
+numa rodada anterior nós tínhamos o viés clássico e a correção enxugou os
+gabaritos. Passou do ponto e parou do outro lado.
+
+**Correção, em `scripts/engordar-gabaritos.js` (271 gabaritos reescritos):**
+o gabarito passou a ter a mesma densidade de informação dos distratores.
+Nenhum índice `c` foi tocado — o gabarito continua sendo a mesma alternativa.
+A regra que me impus: nenhum acréscimo pode trazer fato que não esteja na
+explicação já auditada daquela questão.
+
+Isso deu errado uma vez, e o erro está registrado porque foi instrutivo: as
+explicações muitas vezes parafraseiam o enunciado, então enriquecer o
+gabarito com elas fez **16 questões voltarem a entregar a resposta**. O
+`conferir-vazamento.js` acusou, e o lote 8 reescreveu as 16 com informação
+que o enunciado não tem — efeito, alcance, consequência. Dois portões
+puxando em direções opostas é exatamente o que impede uma correção de virar
+um defeito novo.
+
+O portão agora mede as duas pontas e exige 15%–35% em cada uma:
+
+```
+info PLACAR DO ESPERTALHÃO: chutar sempre a mais longa acerta 25% ·
+     sempre a mais curta acerta 35%
+     (acaso 25% · caderno oficial 30% e 21% · corte de aprovação 70%)
+ok   tamanho da alternativa não denuncia o gabarito em nenhuma das duas direções
+```
+
+Fica declarado o que ainda não fechamos: nossas alternativas têm 82
+caracteres contra 106 do caderno oficial. O tamanho não denuncia mais nada,
+mas ainda escrevemos mais enxuto que a banca.
+
+---
+
+## Por que a prova repetia as mesmas questões
+
+O Paulo relatou que no modo prova reencontrava sempre os mesmos atendimentos.
+A causa não era a múltipla escolha — dos 870 itens elegíveis, cada prova sorteia
+4% a 5% de cada balde de módulo e dificuldade. Era a árvore:
+
+- 5 árvores × 6 falas = 30 passos;
+- a prova consome 10 passos, ou seja, **duas árvores inteiras**;
+- restavam **20 combinações possíveis**. Medido em simulação: sem memória,
+  a segunda prova reencontrava um atendimento da primeira em **67% das vezes**.
+
+**Duas correções.**
+
+**1. Mais material.** De 5 para **20 árvores** (120 decisões), cobrindo os
+quatro módulos: economia e SFN, produtos, relacionamento e conduta,
+inovação. São **380 pares de atendimento possíveis** em vez de 20.
+
+**2. Memória entre provas**, em `montarProva()`. O sorteio passou a ler o
+próprio histórico — que já existe e já sincroniza entre aparelhos, sem chave
+de disco nova — e a ordenar os candidatos por frescor: primeiro o que nunca
+saiu, depois o mais antigo.
+
+Ele **ordena, não proíbe**. Proibir repetição esvaziaria um balde pequeno e a
+prova sairia fora da distribuição por módulo e dificuldade, que é regra da
+banca. O embaralho vem antes do `sort` (estável no JS), então o acaso decide
+a ordem dentro de cada faixa de recência e a recência só separa as faixas.
+
+Testes que provam o comportamento, e não só a presença do código:
+
+```
+ok  200 ordenações põem as inéditas na frente e a mais antiga antes da recente
+ok  entre iguais o sorteio continua aleatório
+ok  com 5 árvores e sem memória, a 2ª prova repete em 67% das vezes
+ok  com 20 árvores e memória, a 2ª prova nunca repete
+```
+
+### O equilibrador de posição
+
+Escrever árvore tem um viés próprio: quem redige põe a resposta certa
+primeiro e inventa as erradas depois. Nas 15 novas, a melhor escolha caiu na
+primeira posição 26 vezes em 54. O `scripts/equilibrar-arvores.js`
+**rotaciona** as quatro alternativas de cada decisão — as mesmas quatro, com
+os mesmos graus e as mesmas justificativas, em outra ordem — e a
+distribuição fechou em **30 / 30 / 30 / 30** nas 120 decisões. O script
+aborta se o conjunto de alternativas mudar, o que garante que rotação é
+rotação e não reescrita.
 
 ---
 

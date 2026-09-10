@@ -175,7 +175,7 @@
               {
                 "q": "Ao montar a carteira de um cliente que quer proteger o poder de compra até a aposentadoria, o assessor separa dois papéis parecidos no nome, mas diferentes na mecânica: a NTN-B e a NTN-B Principal. O cliente pergunta qual é a diferença prática entre elas, já que ambas aparecem no extrato com a mesma indexação. O assessor lembra que, como regra geral, os títulos chamados de Notas costumam distribuir cupons periódicos, mas que uma dessas duas versões foge a essa regra justamente por não fazer pagamentos intermediários. Ao descrever a NTN-B Principal para o cliente, o assessor deve afirmar que ela:",
                 "alts": [
-                  "é indexada ao IPCA e concentra o pagamento de juros e principal na data de vencimento do título.",
+                  "é indexada ao IPCA e, ao contrário das demais Notas, concentra juros e principal na data de vencimento do título.",
                   "é indexada ao IPCA e distribui cupons semestrais de juros ao investidor até a data de vencimento.",
                   "é prefixada na emissão e concentra o pagamento de juros e principal na data de vencimento do título.",
                   "é indexada à Selic Over e distribui cupons semestrais de juros ao investidor até o vencimento do papel."
@@ -319,7 +319,7 @@
                 "alts": [
                   "renda mensal por 60 meses, com dispensa da taxa de custódia da B3 enquanto a renda não superar 4 salários mínimos.",
                   "renda mensal por 240 meses, com dispensa da taxa de custódia da B3 enquanto a renda não superar 4 salários mínimos.",
-                  "renda mensal por 240 meses, com dispensa da custódia da B3 enquanto a renda não superar 6 salários mínimos.",
+                  "renda mensal por 240 meses, ou vinte anos, com dispensa da custódia da B3 enquanto a renda não superar 6 salários mínimos.",
                   "renda mensal por 60 meses, com dispensa da taxa de custódia da B3 enquanto a renda não superar 6 salários mínimos."
                 ],
                 "c": 2,
@@ -372,7 +372,7 @@
                 "q": "Sofia procurou o profissional CPA Diego para entender a proposta que recebeu de um CDB que paga 101% do CDI, com vencimento em dois anos. Ela perguntou se conseguiria calcular hoje quanto receberá no vencimento e comentou que um amigo afirmou que esse papel tem taxa travada na data da aplicação. Diego explicou que a remuneração do título acompanha a variação de um indexador divulgado ao longo do período, sem qualquer parcela de juros fixa somada a ele, de modo que o valor final só é conhecido no encerramento da aplicação. Diante dessas características, Diego deve classificar essa remuneração como:",
                 "alts": [
                   "prefixada, pois o percentual de 101% define na contratação o valor exato a ser recebido no vencimento.",
-                  "pós-fixada, pois o retorno acompanha a variação do CDI apurada ao longo do prazo da aplicação.",
+                  "pós-fixada, porque o retorno acompanha exclusivamente a variação do CDI apurada ao longo do prazo da aplicação.",
                   "híbrida, pois combina uma taxa de juros fixa com a variação de um indexador de preços do período.",
                   "isenta de indexador, pois o percentual contratado substitui a referência a qualquer taxa de mercado."
                 ],
@@ -385,7 +385,7 @@
                 "q": "REDENÇÃO: Em uma palestra para clientes, o profissional CPA Otávio foi questionado sobre a razão de existir de produtos como CDB, RDB, LCI, LCA e LCD. Um participante afirmou que esses papéis servem para financiar a dívida do governo federal; outro sustentou que a função deles é transformar carteiras de recebíveis em papéis negociáveis no mercado. Otávio esclareceu que cada família de títulos atende a uma finalidade distinta e que os títulos bancários nascem de uma necessidade específica da instituição emissora, ligada ao funcionamento da sua atividade de intermediação. A finalidade econômica dos títulos bancários é:",
                 "alts": [
                   "financiar a dívida pública mobiliária federal, função atribuída aos papéis emitidos pelo Tesouro Nacional.",
-                  "captar recursos do público para a instituição financeira, que os aplica em suas operações de crédito.",
+                  "captar recursos do público para a própria instituição financeira, que os aplica em suas operações de crédito.",
                   "transformar carteiras de recebíveis em valores mobiliários negociáveis, tarefa própria das securitizadoras.",
                   "distribuir participação societária a novos investidores, com direito a dividendos pagos pela emissora."
                 ],
@@ -415,7 +415,7 @@
                 "q": "Roberto e Márcia mantêm uma conta conjunta com R$ 500.000,00 aplicados em CDB de um banco que teve a liquidação extrajudicial decretada pelo Banco Central. Eles procuraram a profissional CPA Letícia acreditando que cada um receberia R$ 250.000,00, porque são dois CPFs distintos. Letícia explicou que a garantia ordinária do FGC é apurada por instituição e tem como referência o objeto garantido, e não a quantidade de titulares, sendo o valor apurado depois rateado em partes iguais entre os cotitulares, salvo previsão diferente no contrato. A cobertura do FGC devida a cada titular será de:",
                 "alts": [
                   "R$ 250.000,00 para cada um, somando R$ 500.000,00, pois o limite é contado por CPF cadastrado na conta.",
-                  "R$ 125.000,00 para cada um, resultado do rateio do limite de R$ 250.000,00 apurado sobre a conta.",
+                  "R$ 125.000,00 para cada um, porque o limite de R$ 250 mil é apurado sobre a conta e depois rateado entre os titulares.",
                   "R$ 500.000,00, cobrindo o saldo integral, já que a conta possui dois titulares habilitados à garantia.",
                   "nenhum valor, porque contas mantidas em nome de mais de um titular ficam fora da garantia ordinária."
                 ],
@@ -429,7 +429,7 @@
                 "alts": [
                   "R$ 1.000.000,00, pois o teto agregado é apurado de forma independente em cada instituição financeira.",
                   "R$ 250.000,00, valor renovado a cada ano-calendário contado da data do primeiro pagamento recebido.",
-                  "R$ 750.000,00, pois o valor recebido consome parte do teto agregado de R$ 1.000.000,00 do período.",
+                  "R$ 750.000,00, pois os R$ 250 mil já pagos consomem parte do teto agregado de R$ 1 milhão a cada quatro anos.",
                   "nenhum valor, pois a garantia ordinária se encerra em definitivo após o primeiro acionamento do fundo."
                 ],
                 "c": 2,
@@ -443,7 +443,7 @@
                   "cobre depósitos em cooperativas com limite de R$ 500.000,00 por instituição, o dobro do adotado pelo FGC.",
                   "cobre bancos comerciais e múltiplos, enquanto o FGC ficou responsável pelas cooperativas singulares.",
                   "é autarquia federal vinculada ao Banco Central, ao contrário do FGC, constituído como entidade privada.",
-                  "cobre cooperativas e bancos cooperativos, sem aplicar teto agregado por período de quatro anos."
+                  "cobre cooperativas e bancos cooperativos com os mesmos R$ 250 mil, sem aplicar teto agregado por quatro anos."
                 ],
                 "c": 3,
                 "exp": "Os dois fundos garantem R$ 250 mil por CPF em cada instituição. O FGCOOP atende ao segmento cooperativista e não aplica o teto agregado de R$ 1 milhão com renovação em quatro anos.",
@@ -455,7 +455,7 @@
                 "alts": [
                   "autarquia federal vinculada ao Banco Central, custeada por dotações do orçamento anual da União.",
                   "departamento técnico da B3, responsável por garantir a liquidação das operações ali registradas.",
-                  "entidade privada sem fins lucrativos, mantida por contribuições das instituições associadas.",
+                  "entidade privada sem fins lucrativos, mantida pelas contribuições das próprias instituições associadas a ela.",
                   "empresa pública de direito privado, controlada pelo Tesouro Nacional e fiscalizada pelo Banco Central."
                 ],
                 "c": 2,
@@ -581,7 +581,7 @@
                 "q": "Patrícia comparou um CDB que paga 105% do CDI com uma LCI que paga 92% do CDI e concluiu que o CDB seria a melhor escolha. Ela procurou o profissional CPA Thiago, que pediu para ela considerar o efeito do imposto de renda antes de decidir. Thiago lembrou que o CDB sofre a incidência da tabela regressiva, com alíquota que varia de 22,5% a 15% conforme o prazo, e pediu que ela verificasse a regra aplicável às letras de crédito para a pessoa física antes de comparar os percentuais do CDI. Sobre a tributação da LCI, da LCA e da LCD para pessoa física, Thiago deve informar que elas são:",
                 "alts": [
                   "tributadas pela tabela regressiva, com alíquotas que variam de 22,5% a 15% conforme o prazo da aplicação.",
-                  "isentas de imposto de renda, benefício que compensa a carência mínima exigida para o resgate.",
+                  "isentas de imposto de renda, benefício que tem como contrapartida a carência mínima exigida para o resgate.",
                   "tributadas à alíquota fixa de 15% sobre o rendimento, independentemente do prazo de permanência.",
                   "tributadas à alíquota de 20% sobre o rendimento, recolhida pelo emissor na data do resgate do papel."
                 ],
@@ -681,7 +681,7 @@
                 "q": "Renan analisa a escritura de emissão de uma debênture e leu que a companhia oferece em garantia bens do seu ativo, com a faculdade de substituí-los por outros ao longo da vigência do contrato. Ele procurou a profissional CPA Simone para entender em que espécie o papel se enquadra. Simone pediu que ele olhasse um único detalhe da escritura — a faculdade de trocar os bens dados em garantia —, porque é ele que separa as duas espécies garantidas. Nessas condições, a debênture de Renan é classificada como:",
                 "alts": [
                   "real, pois o bem dado em garantia fica vinculado à emissão até a quitação, sem possibilidade de troca.",
-                  "flutuante, pois o credor tem privilégio geral e a emissora conserva a livre disposição dos bens.",
+                  "flutuante, pois o credor tem privilégio geral e a emissora conserva a livre disposição dos bens dados em garantia.",
                   "quirografária, pois o titular concorre em igualdade com os demais credores, sem qualquer preferência.",
                   "subordinada, pois o titular recebe depois dos demais credores, com preferência apenas sobre acionistas."
                 ],
@@ -695,7 +695,7 @@
                 "alts": [
                   "recebe antes dos demais credores da companhia, em razão da garantia real vinculada à emissão do papel.",
                   "concorre em igualdade de condições com os demais credores, sem preferência e sem subordinação.",
-                  "recebe depois dos demais credores da companhia, com preferência apenas sobre os acionistas.",
+                  "fica no fim da fila de credores da companhia, à frente somente dos acionistas na ordem de recebimento.",
                   "recebe do FGC até R$ 250.000,00 por CPF, valor pago antes da habilitação de créditos na massa falida."
                 ],
                 "c": 2,
@@ -763,7 +763,7 @@
                 "q": "Norberto tem R$ 100.000,00 para aplicar e recebeu duas ofertas com prazos parecidos: uma LCI do próprio banco e um CRI distribuído pela mesma agência, este último pagando quase um ponto percentual a mais ao ano. Ele perguntou à profissional CPA Elisa se existe alguma razão técnica para a taxa maior do segundo papel ou se é apenas uma promoção de campanha. Elisa pegou os dois prospectos e foi comparando item a item com ele. A diferença entre a LCI e o CRI que Elisa deve apontar é que:",
                 "alts": [
                   "a LCI é emitida por companhia securitizadora, e o CRI é emitido por banco com carteira imobiliária.",
-                  "a LCI reúne cobertura do FGC e garantia real, e o CRI conta apenas com a garantia real do lastro.",
+                  "a LCI, por ser bancária, reúne cobertura do FGC e garantia real; o CRI conta apenas com a garantia real do lastro.",
                   "os dois papéis são isentos para pessoa física e os dois contam com a cobertura ordinária do FGC.",
                   "o CRI segue a tabela regressiva do imposto de renda, enquanto a LCI é isenta para pessoa física."
                 ],
@@ -859,7 +859,7 @@
                 "q": "REDENÇÃO: Adriano pediu ao profissional CPA Sílvio que transferisse para outra instituição, sem resgate, o saldo que mantém em caderneta de poupança, do mesmo modo como fez com um CDB e com uma LCI no mês anterior. Sílvio explicou que a portabilidade transfere a titularidade e a custódia de um título, preservando taxa, prazo e condições originais, e que ela alcança títulos públicos, CDB, LCI, LCA, ações e cotas de fundo imobiliário. Ele acrescentou que a poupança recebe outra classificação contábil na instituição depositária. A poupança fica fora da portabilidade porque:",
                 "alts": [
                   "tem a remuneração definida em lei, o que impede a manutenção das condições na instituição de destino.",
-                  "é depósito à vista mantido na instituição, e não um título passível de transferência de custódia.",
+                  "é depósito à vista mantido na instituição, e não um título em nome do investidor: sem título, não há o que transferir.",
                   "é isenta de imposto de renda para pessoa física, benefício que se perderia na transferência do saldo.",
                   "conta com a cobertura ordinária do FGC, garantia vinculada à instituição em que o saldo foi depositado."
                 ],
@@ -901,7 +901,7 @@
                 "q": "Jonas comparou o site de duas instituições e notou que uma delas oferece CDB de vários bancos diferentes, enquanto a outra apresenta apenas produtos com a marca da própria casa. Ele perguntou à profissional CPA Priscila o que caracteriza cada modelo de distribuição. Priscila explicou que a plataforma aberta reúne emissões de instituições diversas, o que amplia as opções de emissor e de taxa disponíveis ao investidor, e que o outro modelo trabalha com um conjunto restrito de produtos, sem alterar a tributação nem dispensar a figura do agente de custódia. A característica de uma plataforma fechada é:",
                 "alts": [
                   "reunir títulos de várias instituições emissoras, ampliando as opções de taxa oferecidas ao investidor.",
-                  "limitar as opções aos produtos emitidos pela própria instituição que mantém a plataforma.",
+                  "limitar as opções às emissões da própria instituição que mantém a plataforma de distribuição.",
                   "isentar o investidor do imposto de renda sobre os rendimentos dos produtos ali distribuídos.",
                   "dispensar a figura do agente de custódia, já que a própria instituição registra as operações realizadas."
                 ],
@@ -1066,7 +1066,7 @@
             "q": "Em um mês com a Selic Meta em 12% ao ano, Josefa perguntou ao profissional CPA Aurélio quanto renderá o depósito que acabou de fazer na caderneta de poupança. Ela ouviu de um vizinho que a remuneração seria de 70% da taxa básica acrescida da Taxa Referencial. Aurélio explicou que essa fórmula vale para os períodos em que a Selic Meta fica igual ou abaixo de 8,5% ao ano, e que acima desse patamar a poupança volta a seguir a regra fixa prevista para os depósitos realizados por pessoa física. Nessas condições, a poupança de Josefa renderá:",
             "alts": [
               "70% da Selic Meta mais a Taxa Referencial, regra aplicável quando a Selic fica em até 8,5% ao ano.",
-              "0,5% ao mês mais a Taxa Referencial, regra aplicável quando a Selic Meta supera 8,5% ao ano.",
+              "0,5% ao mês mais a Taxa Referencial, regra fixa aplicável enquanto a Selic Meta ficar acima de 8,5% ao ano.",
               "12% ao ano mais a Taxa Referencial, acompanhando a taxa básica definida pelo Copom no período.",
               "0,5% ao mês, sem acréscimo da Taxa Referencial, por se tratar de depósito feito por pessoa física."
             ],
@@ -1078,7 +1078,7 @@
           {
             "q": "O profissional CPA Everaldo apresentou a um cliente uma debênture de infraestrutura emitida por uma concessionária de rodovias. O cliente perguntou se a aplicação teria cobertura do fundo garantidor e afirmou que a isenção alcançaria também a empresa que ele administra. Everaldo esclareceu que o papel é corporativo e, por isso, fica fora do FGC, e que o incentivo tributário criado para atrair recursos a projetos de infraestrutura tem prazo mínimo definido em norma e alíquotas distintas conforme se trate de pessoa física ou de pessoa jurídica. Sobre a debênture de infraestrutura, é correto afirmar que ela tem:",
             "alts": [
-              "prazo mínimo de 24 meses, isenção para pessoa física e alíquota de 15% para pessoa jurídica.",
+              "prazo médio ponderado mínimo de 24 meses, isenção para pessoa física e alíquota de 15% para pessoa jurídica.",
               "prazo mínimo de 12 meses, com isenção de imposto de renda para pessoa física e para pessoa jurídica.",
               "prazo livre de carência, com tributação pela tabela regressiva para pessoa física e para jurídica.",
               "cobertura do FGC até R$ 250.000,00 por CPF, com isenção de imposto de renda para pessoa física."
@@ -1092,7 +1092,7 @@
             "q": "Ronaldo solicitou às 15h de uma quarta-feira o resgate antecipado de um título mantido no Tesouro Direto e perguntou à profissional CPA Verônica quando o dinheiro estaria disponível em conta. Ele imaginava que o crédito ocorresse no mesmo dia, como acontece com o resgate de fundos de liquidez diária. Verônica explicou que o Tesouro recompra os títulos em qualquer dia útil e que o horário do pedido define a data do pagamento: solicitações feitas até as 13h são liquidadas no próprio dia, e as posteriores a esse horário passam para o dia útil seguinte. O pagamento a Ronaldo ocorrerá:",
             "alts": [
               "no mesmo dia, em D0, pois a recompra do Tesouro é liquidada em qualquer horário do dia útil.",
-              "no dia útil seguinte, em D+1, por ter sido solicitado após as 13h do dia da operação.",
+              "no dia útil seguinte, em D+1, porque o pedido foi feito depois das 13h do dia da operação.",
               "em D+2, prazo padrão de liquidação adotado nas operações registradas na câmara da B3.",
               "apenas no vencimento do título, pois a recompra antecipada depende de leilão do Tesouro Nacional."
             ],
@@ -1118,7 +1118,7 @@
             "q": "Sebastião comparou no site do Tesouro Direto dois títulos corrigidos pelo IPCA com o mesmo vencimento e taxas parecidas, e perguntou à profissional CPA Elaine por que um deles recebe o complemento Principal no nome. Ele imaginava que essa versão fosse prefixada ou indexada à taxa Selic. Elaine explicou que ambos acompanham a variação do IPCA acrescida de uma taxa de juros real contratada na compra, e que a distinção está na forma de pagamento dos rendimentos ao longo da vigência e no momento em que o investidor recebe os valores. A NTN-B Principal difere da NTN-B porque:",
             "alts": [
               "é prefixada na compra, enquanto a NTN-B acompanha a variação do IPCA acrescida de juros reais.",
-              "não paga cupom semestral, de modo que juros e correção são recebidos na data de vencimento.",
+              "não paga cupom semestral: os dois são corrigidos pelo IPCA, mas nele juros e correção só chegam na data de vencimento.",
               "é indexada à taxa Selic diária acumulada, e não à variação do IPCA apurada durante o período.",
               "tem prazo máximo de 24 meses até o vencimento, contra prazos mais longos oferecidos na NTN-B."
             ],
@@ -1164,7 +1164,7 @@
                 "alts": [
                   "a renda variável tem vencimento definido e taxa pactuada na contratação, enquanto a renda fixa remunera pelo resultado da empresa.",
                   "a renda fixa representa participação no capital do emissor e a renda variável representa um empréstimo com prazo certo de devolução.",
-                  "a renda fixa é dívida, com prazo e tabela regressiva; a renda variável é propriedade, sem prazo definido.",
+                  "a renda fixa é dívida, com vencimento e tabela regressiva; a renda variável é propriedade, sem prazo e com alíquota fixa.",
                   "as duas modalidades seguem a tabela regressiva de imposto de renda, variando apenas a garantia oferecida pelo emissor."
                 ],
                 "c": 2,
@@ -1189,7 +1189,7 @@
                 "q": "REDENÇÃO: Helena, aposentada, procurou o profissional CPA Vicente porque queria saber em que data suas ações de uma companhia elétrica e suas cotas de um fundo de ações seriam devolvidas com os rendimentos. Ela guardava a expectativa de receber o dinheiro de volta automaticamente, como acontecia com os CDBs que costumava contratar na agência. Vicente esclareceu que esses ativos pertencem a uma categoria com lógica distinta da renda fixa quanto ao encerramento da posição. Sobre o vencimento dos ativos de renda variável, ele deve explicar que eles:",
                 "alts": [
                   "vencem no prazo definido no prospecto da emissão, quando o emissor devolve o principal corrigido ao investidor.",
-                  "não possuem vencimento, e a saída ocorre pela venda do ativo no mercado, ao preço vigente na data.",
+                  "não possuem vencimento algum, e a saída ocorre pela venda do ativo no mercado, ao preço vigente na data.",
                   "vencem em 720 dias, prazo em que a alíquota de imposto de renda se estabiliza na menor faixa da tabela.",
                   "vencem apenas na hipótese de liquidação da companhia emissora, quando o investidor recebe o valor aplicado."
                 ],
@@ -1242,7 +1242,7 @@
                 "q": "REDENÇÃO: Silvia e o irmão vão abrir um negócio com R$ 200 mil e procuraram a profissional CPA Larissa para escolher entre dois tipos de sociedade usuais no país. Eles querem saber até onde vai o comprometimento de cada um deles caso o negócio feche as portas devendo a fornecedores. Larissa observou que, nesse ponto específico, os dois formatos seguem o mesmo princípio, ainda que a participação de cada um seja representada por documentos diferentes. Nas duas estruturas, a responsabilidade dos sócios é:",
                 "alts": [
                   "ilimitada, alcançando o patrimônio pessoal dos sócios para quitar as obrigações contraídas pela empresa.",
-                  "limitada ao valor das cotas ou das ações que cada sócio detém no capital da sociedade.",
+                  "limitada ao valor das cotas na Ltda ou ao valor das ações na S/A, conforme o tipo societário.",
                   "solidária entre os sócios, que respondem uns pelos outros pelo valor integral das dívidas da sociedade.",
                   "definida caso a caso pela CVM, conforme o porte da empresa e o setor econômico em que ela atua."
                 ],
@@ -1273,7 +1273,7 @@
                 "q": "Ronaldo mantém há anos ações preferenciais de uma indústria têxtil e procurou o profissional CPA Márcio depois de saber que a companhia encerrou o terceiro exercício seguido sem distribuir lucros aos acionistas. Ele reclamou que comprou o papel justamente pela prioridade na distribuição e que agora se sente sem instrumento algum para influenciar as decisões da empresa. Márcio explicou que a lei societária prevê uma compensação específica ao preferencialista nessa situação. A consequência desses três exercícios sem distribuição é que esses acionistas:",
                 "alts": [
                   "perdem a preferência no recebimento de dividendos, passando a receber depois dos titulares de ações ordinárias.",
-                  "passam a ter direito de voto nas assembleias, até que a distribuição de lucros seja retomada.",
+                  "passam a ter direito de voto nas assembleias, e o conservam até que os dividendos voltem a ser pagos.",
                   "ficam obrigados a vender suas ações à companhia pelo valor patrimonial apurado no último balanço.",
                   "recebem tag along de 100% do valor pago ao controlador em eventual alienação do controle acionário."
                 ],
@@ -1300,7 +1300,7 @@
                 "alts": [
                   "uma ação ordinária, com direito de voto na assembleia, cujo código costuma terminar com o dígito 3.",
                   "uma ação preferencial, sem direito de voto em regra, cujo código costuma terminar com o dígito 4.",
-                  "uma unit, certificado que reúne ações ordinárias e preferenciais em um único ativo negociado.",
+                  "uma unit, pacote de ações de espécies distintas negociado como um só papel e liquidado em conjunto.",
                   "um BDR não patrocinado, emitido sem participação da companhia estrangeira que lastreia o certificado."
                 ],
                 "c": 2,
@@ -1358,7 +1358,7 @@
                 "alts": [
                   "dispensar o registro do programa na CVM e circular apenas no mercado de balcão organizado.",
                   "exigir o registro do programa na CVM e admitir a negociação em bolsa, sem oferta pública.",
-                  "exigir registro na CVM, negociação em bolsa e oferta pública de distribuição no país.",
+                  "exigir registro na CVM, negociação em bolsa e oferta pública de distribuição no mercado local.",
                   "ser emitido sem envolvimento da companhia estrangeira cujas ações lastreiam os certificados."
                 ],
                 "c": 2,
@@ -1441,7 +1441,7 @@
                 "q": "REDENÇÃO: Fabiana acompanhou pela imprensa a estreia de uma empresa de energia na bolsa e reservou um lote de ações durante o período de reserva. Depois de confirmada a alocação, ficou em dúvida sobre quem estava do outro lado do negócio e para onde foi o dinheiro que ela desembolsou. Procurou a profissional CPA Denise e contou que já ouviu falar em ambientes distintos de mercado, sem saber em qual deles a compra dela se encaixa. No IPO, os investidores compram as ações no:",
                 "alts": [
                   "mercado secundário, adquirindo os papéis de outros investidores que já os detinham em carteira.",
-                  "mercado primário, junto ao consórcio de distribuição, com os recursos indo para a emissora.",
+                  "mercado primário, junto ao consórcio de distribuição, com os recursos indo para o caixa da própria emissora.",
                   "mercado de balcão não organizado, em operações bilaterais fechadas diretamente com a corretora.",
                   "leilão conduzido pela Secretaria do Tesouro Nacional, que liquida a oferta em nome da companhia."
                 ],
@@ -1485,7 +1485,7 @@
                 "q": "Antes de fechar o valor pelo qual as ações de uma companhia serão vendidas na estreia, os coordenadores ligaram para gestores de fundos e seguradoras perguntando quantos papéis cada um pretendia levar e quanto pagaria por eles. A cliente Vanessa acompanhou a notícia e perguntou ao profissional CPA Alexandre se aquelas conversas já amarravam os gestores à compra ou se eles poderiam simplesmente desistir depois. Alexandre explicou para que serve esse procedimento. Sobre o bookbuilding, ele deve esclarecer que se trata:",
                 "alts": [
                   "da ordem de compra definitiva dos investidores institucionais, que os vincula ao volume informado.",
-                  "da coleta não vinculante de intenções junto a institucionais, que orienta o preço da oferta.",
+                  "da coleta de intenções junto a institucionais, sem caráter vinculante, que orienta a formação do preço da oferta.",
                   "da distribuição proporcional das ações entre os interessados quando a demanda supera a oferta.",
                   "da atuação do formador de mercado no mercado secundário para conter oscilações após a estreia."
                 ],
@@ -1542,7 +1542,7 @@
                 "q": "Uma indústria em dificuldades teve a falência decretada e o cliente Nelson, que detinha ações da companhia, procurou o profissional CPA Marcelo para saber quando receberia sua parte do patrimônio apurado. Marcelo explicou que a ordem de pagamento na liquidação segue uma hierarquia definida em lei, na qual credores trabalhistas, fiscais e financeiros são atendidos antes de qualquer distribuição aos sócios, justamente porque o acionista é proprietário do negócio e assume o risco residual. Na liquidação de uma companhia, os acionistas:",
                 "alts": [
                   "recebem antes dos credores, por serem os proprietários do capital investido na companhia.",
-                  "recebem apenas o que restar após a quitação das obrigações da companhia com seus credores.",
+                  "recebem apenas o que restar depois de bancos, funcionários e demais credores: o sócio é o último da fila.",
                   "recebem em igualdade de condições com os credores quirografários, rateando o patrimônio apurado.",
                   "contam com a garantia do Fundo Garantidor de Créditos até o limite de R$ 250 mil por investidor."
                 ],
@@ -1555,7 +1555,7 @@
                 "q": "Uma companhia de alimentos aprovou aumento de capital com emissão de novas ações e comunicou aos acionistas o prazo para exercerem um direito antes de os papéis serem ofertados ao público em geral. A cliente Regina, que detém 2% do capital, perguntou ao profissional CPA Thiago para que serve esse prazo e o que aconteceria se ela o deixasse passar. Thiago explicou que o instrumento existe para que o acionista possa manter a mesma proporção de participação após a emissão, sem sofrer diluição. O direito descrito é o de:",
                 "alts": [
                   "tag along, que assegura a venda das ações quando ocorre a alienação do controle da companhia.",
-                  "preferência de subscrição, que permite adquirir as novas ações antes da oferta ao público.",
+                  "preferência de subscrição, exercida antes da oferta ao público e negociável quando o titular não a exerce.",
                   "bonificação, que distribui ações novas aos acionistas quando a companhia capitaliza reservas.",
                   "retirada, que permite ao dissidente exigir o reembolso de suas ações em deliberações específicas."
                 ],
@@ -1597,7 +1597,7 @@
                 "q": "Ao analisar os documentos de uma companhia aberta, o profissional CPA Otávio percebeu que o texto aprovado pelos sócios nada diz sobre quanto do resultado do exercício precisa ser repartido todo ano. O cliente Ivan, que pretende comprar o papel justamente pelos proventos, perguntou se esse silêncio permite à empresa reter tudo e nunca pagar nada. Otávio respondeu que a lei societária resolve o silêncio com um percentual próprio, distinto daquele que a assembleia poderia ter fixado se tivesse tratado do tema. Nessa situação, o percentual mínimo aplicável é de:",
                 "alts": [
                   "25% do lucro líquido ajustado, piso que a assembleia pode inserir no estatuto ao alterá-lo.",
-                  "50% do lucro líquido ajustado, parâmetro previsto em lei para o caso de estatuto omisso.",
+                  "50% do lucro líquido ajustado, parâmetro que a lei impõe justamente quando o estatuto é omisso sobre o tema.",
                   "10% do lucro líquido ajustado, percentual mínimo aplicável às companhias de capital aberto.",
                   "não há dividendo obrigatório, ficando a distribuição a critério exclusivo da administração."
                 ],
@@ -1611,7 +1611,7 @@
                 "alts": [
                   "dividendo, parcela do lucro do exercício distribuída em dinheiro aos acionistas pela companhia.",
                   "juros sobre capital próprio, remuneração contabilizada como despesa financeira pela companhia.",
-                  "bonificação, entrega de novas ações aos acionistas mediante capitalização de reservas.",
+                  "bonificação, entrega de novas ações sem custo aos acionistas mediante capitalização de reservas da companhia.",
                   "desdobramento, divisão das ações existentes em número maior, sem alterar o capital social."
                 ],
                 "c": 2,
@@ -1624,7 +1624,7 @@
                 "alts": [
                   "dividendo, parcela do lucro apurado pela companhia e distribuída periodicamente aos acionistas.",
                   "juros sobre capital próprio, remuneração paga pela companhia com retenção de imposto na fonte.",
-                  "ganho de capital, diferença positiva entre o preço de venda e o custo de aquisição do papel.",
+                  "ganho de capital, diferença positiva entre o preço de venda e o custo de aquisição, que vem só do mercado.",
                   "bonificação, atribuição de ações novas ao acionista quando a companhia capitaliza suas reservas."
                 ],
                 "c": 2,
@@ -1653,7 +1653,7 @@
                 "q": "Uma companhia cuja ação era negociada a R$ 100,00 comunicou ao mercado que cada papel passaria a corresponder a dez ações de R$ 10,00, sem alteração do capital social. O cliente Everaldo perguntou ao profissional CPA Rodrigo o que muda em sua posição, já que passou a ter dez vezes mais papéis em carteira. Rodrigo explicou que a medida busca aproximar o valor do lote padrão do bolso do pequeno investidor, ampliando a base de compradores e a facilidade de negociação do papel. Esse evento societário é:",
                 "alts": [
                   "um agrupamento, ou inplit, adotado para reduzir a oscilação percentual da cotação do papel.",
-                  "um desdobramento, ou split, adotado para ampliar a liquidez e o acesso ao lote padrão.",
+                  "um desdobramento, ou split, que aumenta a quantidade e reduz o preço, tornando o lote padrão acessível.",
                   "uma bonificação, pois o acionista passa a deter maior quantidade de ações da companhia.",
                   "um grupamento, adotado para reduzir o número de acionistas registrados na base da companhia."
                 ],
@@ -1666,7 +1666,7 @@
                 "q": "O controlador de uma companhia listada no segmento tradicional da bolsa vendeu seu bloco de ações a um investidor estrangeiro por R$ 50,00 por ação. A cliente Marta, titular de ações ordinárias da mesma companhia, perguntou ao profissional CPA Danilo qual valor a lei societária lhe assegura na oferta que o comprador deve dirigir aos minoritários. Danilo lembrou que o percentual previsto em lei é inferior ao praticado nos segmentos especiais de governança, que costumam adotar o valor integral. O tag along mínimo assegurado por lei às ações ordinárias é de:",
                 "alts": [
                   "100% do preço pago ao controlador, percentual que a lei estende a companhias de qualquer segmento.",
-                  "80% do preço pago ao controlador pelas ações integrantes do bloco de controle.",
+                  "80% do preço pago ao controlador pelas ações do bloco de controle, piso legal da ação ordinária.",
                   "70% do valor de mercado da ação, apurado pela média dos pregões anteriores ao anúncio.",
                   "não há percentual legal, ficando a proteção condicionada à previsão expressa no estatuto."
                 ],
@@ -1679,7 +1679,7 @@
                 "q": "Uma companhia cujo papel vinha sendo negociado a R$ 0,60 comunicou que cada cinquenta deles passariam a corresponder a um só. O cliente Osmar, que tinha 5.000 desses papéis e passará a ter 100, perguntou à profissional CPA Bianca qual a vantagem da medida para ele e para a empresa. Bianca lembrou que, com a cotação na casa dos centavos, um centavo a mais ou a menos já provoca uma variação enorme na tela, e que a operação anunciada muda esse patamar. O objetivo do agrupamento, ou inplit, é:",
                 "alts": [
                   "elevar a liquidez do papel, aproximando o valor do lote padrão do bolso do pequeno investidor.",
-                  "reduzir a quantidade de ações e elevar o preço unitário, contendo a oscilação percentual.",
+                  "reduzir a quantidade de ações e elevar o preço unitário, contendo a oscilação percentual típica dos papéis de centavos.",
                   "distribuir parte dos lucros apurados no exercício aos acionistas registrados na data-base.",
                   "diluir a participação relativa dos acionistas minoritários no capital social da companhia."
                 ],
@@ -1736,7 +1736,7 @@
                 "q": "Ao comparar os segmentos especiais de governança da B3 para um cliente institucional, a profissional CPA Marina descreveu um deles assim: a companhia pode manter em circulação uma classe de papéis sem direito a voto, mas, se o comando for vendido, todos os donos recebem por unidade exatamente o mesmo que o bloco vendedor recebeu; além disso, o balanço precisa sair também em inglês e o conselho de administração precisa ter no mínimo cinco integrantes. O segmento descrito é o:",
                 "alts": [
                   "Nível 1, que exige apenas free float mínimo e divulgações adicionais, mantendo o tag along legal.",
-                  "Nível 2, que admite ações preferenciais e estende a elas o tag along de 100% do preço.",
+                  "Nível 2, que admite ações preferenciais e estende a elas o mesmo tag along de 100% do preço.",
                   "Novo Mercado, cujo capital é composto apenas por ações ordinárias com tag along integral.",
                   "Bovespa Mais, destinado ao ingresso gradual de empresas menores no mercado de bolsa."
                 ],
@@ -1748,7 +1748,7 @@
               {
                 "q": "Durante o treinamento sobre segmentos de listagem, o profissional CPA Gilberto explicou que subir do primeiro degrau de governança para o seguinte da B3 traz obrigações extras, entre elas um colegiado de administração maior e regras adicionais de transparência. Uma analista da equipe anotou tudo e perguntou qual é o número mínimo de integrantes do conselho de administração cobrado em cada um desses degraus. Gilberto respondeu citando os números previstos nos respectivos regulamentos. O mínimo exigido no Nível 1 e no Nível 2 é, respectivamente:",
                 "alts": [
-                  "3 e 5, com pelo menos 20% de conselheiros independentes e mandato unificado de dois anos.",
+                  "3 e 5, respectivamente, com pelo menos 20% de conselheiros independentes e mandato unificado de até dois anos.",
                   "5 e 3, exigência maior no Nível 1 em razão da menor transparência requerida naquele segmento.",
                   "3 e 3, número idêntico nos dois segmentos, que se diferenciam apenas pelo tag along oferecido.",
                   "5 e 7, composição ampliada para acomodar os comitês de auditoria obrigatórios nos dois casos."
@@ -1806,7 +1806,7 @@
                 "alts": [
                   "as units emitidas por bancos e holdings, por reunirem espécies distintas em um só ativo.",
                   "as ações preferenciais, por não conferirem direito de voto nas assembleias da companhia.",
-                  "as penny stocks, papéis cuja cotação se mantém abaixo de R$ 1,00 no período de análise.",
+                  "as penny stocks, papéis cuja cotação fica abaixo de R$ 1,00 no período de análise da carteira.",
                   "as ações de companhias do Novo Mercado, já avaliadas em índices próprios de governança."
                 ],
                 "c": 2,
@@ -1818,7 +1818,7 @@
                 "q": "REDENÇÃO: ao montar uma carteira de referência para um cliente, o profissional CPA Sandro comparou o Ibovespa com o IBrX 50 e explicou que os dois índices partem de critérios semelhantes de seleção. O cliente Douglas perguntou se o segundo reúne simplesmente as maiores empresas do país em valor de mercado, já que os nomes se repetem em boa parte das duas carteiras. Sandro esclareceu que o critério de seleção é outro e está ligado à intensidade com que os papéis são negociados no pregão. O IBrX 50 mede o desempenho:",
                 "alts": [
                   "das 50 companhias de maior valor de mercado do país, apuradas ao fim de cada exercício.",
-                  "dos 50 ativos de maior negociabilidade e representatividade do mercado acionário.",
+                  "dos 50 ativos de maior negociabilidade e representatividade do mercado acionário, e não de maior valor de mercado.",
                   "das 50 ações de menor cotação unitária entre as admitidas à negociação na bolsa brasileira.",
                   "das 50 companhias listadas no segmento Novo Mercado com melhores práticas de governança."
                 ],
@@ -1850,7 +1850,7 @@
                 "q": "Aline comprou e vendeu ações da mesma companhia no mesmo pregão e apurou lucro na operação. Ao consultar a nota de corretagem, encontrou uma pequena retenção de imposto e procurou o profissional CPA Rubens para entender quanto ainda deveria recolher por conta própria. Rubens explicou que as operações iniciadas e encerradas no mesmo dia têm alíquota própria, superior à das demais operações em bolsa, e que a antecipação retida pela corretora também segue base distinta. A alíquota de imposto de renda e a base da retenção na fonte são, respectivamente:",
                 "alts": [
                   "15% sobre o lucro e 0,005% sobre o valor da venda, retidos pela corretora na liquidação.",
-                  "20% sobre o lucro e 1% sobre o lucro apurado, retido na fonte como antecipação.",
+                  "20% sobre o lucro apurado, com retenção na fonte de 1% desse lucro a título de antecipação.",
                   "20% sobre o lucro e 0,005% sobre o valor da venda, base aplicável às operações comuns.",
                   "15% sobre o lucro e 1% sobre o lucro apurado na operação encerrada no mesmo pregão."
                 ],
@@ -1889,7 +1889,7 @@
                 "q": "REDENÇÃO: após vender ações com lucro em julho e ultrapassar o limite mensal de isenção, o cliente Wagner perguntou à profissional CPA Célia quando e como deveria pagar o imposto de renda apurado. Ele imaginava que a corretora já teria recolhido o valor devido, uma vez que viu uma pequena retenção na nota, ou que poderia deixar o acerto para a declaração anual do ano seguinte. Célia explicou que a apuração é mensal e cabe ao próprio investidor. O recolhimento do imposto sobre ganhos em ações ocorre:",
                 "alts": [
                   "por retenção na fonte feita pela corretora sobre o ganho, sem necessidade de ação do investidor.",
-                  "via DARF, até o último dia útil do mês seguinte ao da apuração do ganho.",
+                  "via DARF, até o último dia útil do mês seguinte àquele em que o ganho foi apurado.",
                   "via DARF, até 30 de abril, no ajuste feito quando da entrega da declaração anual.",
                   "via DARF, no mesmo dia útil da venda das ações que gerou o ganho tributável."
                 ],
@@ -1958,7 +1958,7 @@
                 "q": "REDENÇÃO: em março de 2026, Emerson recebeu R$ 45.000,00 em dividendos pagos por uma única empresa da qual é acionista, e nada recebeu de outras empresas naquele mês. Um conhecido lhe disse que, dali em diante, toda distribuição de lucro passou a sofrer desconto do Fisco na origem, e citou 17,5%. Emerson procurou a profissional CPA Tânia para conferir. Tânia mostrou a regra em vigor desde aquele ano e observou que o percentual citado pelo conhecido pertence a outro tipo de provento. A tributação desse recebimento será:",
                 "alts": [
                   "retenção de 10% na fonte sobre o valor recebido, aplicável a qualquer distribuição de lucros.",
-                  "isenção, pois o valor recebido da companhia ficou abaixo do limite mensal de R$ 50.000,00.",
+                  "isenção, pois o valor recebido da companhia ficou abaixo do limite de R$ 50 mil por mês e por empresa.",
                   "retenção de 17,5% na fonte sobre o valor recebido, alíquota aplicável aos juros sobre capital próprio.",
                   "tributação pela tabela regressiva, com alíquota definida pelo prazo de permanência do papel."
                 ],
@@ -1977,7 +1977,7 @@
             "q": "Durante uma palestra para clientes, o profissional CPA Alceu foi questionado sobre o que diferencia a ação preferencial da ordinária. Um participante afirmou que a preferencial reúne o melhor dos dois mundos, pois teria prioridade nos lucros e ainda votaria nas assembleias. Alceu esclareceu que, em regra, essa espécie não confere voto, mas a lei societária prevê a aquisição desse direito quando a companhia deixa de distribuir os dividendos fixos ou mínimos por determinado número de exercícios seguidos. A descrição correta da ação preferencial é:",
             "alts": [
               "confere voto permanente ao titular e prioridade no recebimento dos dividendos distribuídos.",
-              "em regra não confere voto, mas o titular o adquire após três exercícios sem distribuição.",
+              "em regra não confere voto, mas o titular passa a tê-lo após três exercícios consecutivos sem distribuição.",
               "em regra não confere voto, e o titular só o adquire após cinco exercícios sem distribuição.",
               "conta com tag along legal obrigatório de 80% do preço pago ao bloco de controle da companhia."
             ],
@@ -1991,7 +1991,7 @@
             "alts": [
               "15% da oferta original, percentual que a emissora aciona quando a demanda supera a expectativa.",
               "20% da oferta original, limite fixado pela CVM para a ampliação de distribuições públicas.",
-              "25% da quantidade originalmente ofertada, por decisão da própria companhia emissora.",
+              "25% da quantidade originalmente ofertada, por decisão da emissora; o suplementar, de 15%, serve à estabilização.",
               "30% da oferta original, somando as parcelas de estabilização e de atendimento à demanda."
             ],
             "c": 2,
@@ -2029,7 +2029,7 @@
             "q": "A empresa em que Sebastião investe aprovou transformar cada dez papéis em um só, de modo que o preço unitário saltou de R$ 0,80 para R$ 8,00 e a posição dele, antes com 10.000 unidades, passou a somar 1.000. Sebastião ligou preocupado para a profissional CPA Roberta, achando que tinha perdido dinheiro no caminho. Roberta mostrou que o total aplicado continuou idêntico e explicou por que a empresa quis tirar o preço da casa dos centavos. O agrupamento, ou inplit, tem por objetivo:",
             "alts": [
               "aumentar a quantidade de ações em circulação e ampliar a liquidez do papel no pregão.",
-              "reduzir a quantidade de ações e conter a oscilação percentual da cotação do papel.",
+              "reduzir a quantidade de ações e conter a oscilação percentual da cotação do papel no pregão.",
               "distribuir ações gratuitas aos atuais acionistas mediante capitalização de reservas de lucros.",
               "aumentar o capital social da companhia por meio de subscrição pública de novas ações."
             ],
@@ -2042,7 +2042,7 @@
             "q": "Uma companhia de educação concluiu o processo de listagem no Novo Mercado e o cliente Renan, que acompanhou a operação, perguntou ao profissional CPA Hélio quais garantias esse segmento lhe assegura como acionista minoritário. Hélio explicou que o regulamento do segmento define tanto a espécie de ação que pode compor o capital social quanto o percentual que o comprador do controle deve oferecer aos demais acionistas em caso de alienação. No Novo Mercado, o tag along e a espécie de ação admitida são:",
             "alts": [
               "80% do preço pago ao controlador e apenas ações ordinárias no capital social da companhia.",
-              "100% do preço pago ao controlador e apenas ações ordinárias no capital social.",
+              "100% do preço pago ao controlador e a presença exclusiva de ações ordinárias no capital social.",
               "100% do preço pago ao controlador, com admissão de ações ordinárias e preferenciais.",
               "80% para as ações ordinárias e 100% para as preferenciais em circulação no mercado."
             ],
@@ -2164,7 +2164,7 @@
               {
                 "q": "Camila procura o profissional CPA Henrique dizendo que quer se expor à alta de uma cesta de ações americanas, mas não deseja abrir conta no exterior nem comprar papel por papel. Henrique apresenta um Certificado de Operações Estruturadas emitido por um banco, com prazo de três anos e remuneração ligada ao desempenho dessa cesta. Camila pergunta se, ao aplicar no COE, ela passará a ser dona das ações que compõem a referência. Sobre a natureza dessa aplicação, Henrique deve esclarecer que o investidor:",
                 "alts": [
-                  "recebe retorno vinculado ao desempenho dos ativos, sem adquirir a propriedade deles.",
+                  "recebe retorno vinculado ao desempenho dos ativos sem adquirir a propriedade deles, que permanece com o emissor.",
                   "compra diretamente as ações, moedas ou commodities que servem de referência à estrutura.",
                   "adquire cotas de um fundo de investimento imobiliário lastreado nos ativos de referência.",
                   "empresta recursos ao Tesouro Nacional por prazo determinado, com juros definidos na emissão."
@@ -2256,7 +2256,7 @@
             "q": "Em uma reunião de planejamento, o profissional CPA Vinícius organiza com o cliente Jorge a projeção de impostos da carteira para os próximos anos. Jorge tem um COE atrelado ao dólar, outro atrelado a um índice de ações e um terceiro atrelado ao preço do minério. Ele imagina que cada certificado seguirá a tributação do respectivo mercado de referência e pede a Vinícius que confirme essa leitura antes de fechar a projeção. Sobre a tributação dos três certificados, Vinícius deve informar que ela:",
             "alts": [
               "acompanha a alíquota do ativo subjacente, variando conforme o mercado de referência.",
-              "obedece à tabela regressiva da renda fixa, com base no prazo de cada aplicação.",
+              "obedece à tabela regressiva da renda fixa, conforme o prazo de cada aplicação realizada.",
               "é dispensada para a pessoa física, cabendo apenas a declaração anual dos valores.",
               "utiliza alíquota única de 17,5% retida na fonte pelo emissor na data do vencimento."
             ],
@@ -2320,7 +2320,7 @@
           {
             "q": "Em uma live de educação financeira, a profissional CPA Mariana é questionada sobre por que o COE costuma ser chamado de produto de acesso. Ela explica que, com um único certificado emitido por um banco no Brasil, o investidor consegue amarrar o resultado da aplicação ao desempenho de mercados que dificilmente alcançaria sozinho, sem precisar abrir conta lá fora, operar contratos futuros ou comprar papel por papel. Uma espectadora pede exemplos concretos do que pode entrar nessa amarração. Mariana deve responder que o COE dá acesso a:",
             "alts": [
-              "ações, moedas, índices e commodities, com retorno vinculado a eles sem a compra direta.",
+              "ações, moedas, índices e commodities numa estrutura única, com retorno vinculado a eles e sem a compra direta.",
               "títulos públicos federais e debêntures, restrito aos instrumentos de renda fixa local.",
               "ativos isentos de imposto de renda, como LCI, LCA e debêntures incentivadas de infraestrutura.",
               "ativos negociados no mercado brasileiro, já que a emissão local impede referência externa."
@@ -2357,7 +2357,7 @@
                   "O prospecto definitivo, peça usada em ofertas públicas de valores mobiliários e não exigida na aplicação em cotas de fundos.",
                   "O regulamento, documento que reúne as regras de funcionamento da classe, mas cuja vigência independe de assinatura do cotista.",
                   "A lâmina de informações básicas, que resume dados essenciais do fundo em linguagem padronizada, sem função de formalizar adesão.",
-                  "O termo de adesão, em que o investidor atesta ciência dos riscos, direitos e obrigações assumidos ao ingressar na classe."
+                  "O termo de adesão, único documento em que o investidor atesta ciência dos riscos, direitos e obrigações ao ingressar na classe."
                 ],
                 "c": 3,
                 "exp": "Termo de adesão. O regulamento define as regras de funcionamento e a lâmina resume as informações essenciais, mas quem formaliza o ingresso é o termo.",
@@ -2383,7 +2383,7 @@
                   "apenas investidores qualificados podem votar em assembleia, ficando os demais restritos ao direito de resgate das cotas.",
                   "os direitos variam conforme o valor financeiro aplicado, em faixas definidas pelo administrador no termo de adesão.",
                   "quem detém posição maior recebe direitos adicionais por cota, com peso ampliado nas deliberações da assembleia de cotistas.",
-                  "os cotistas de uma mesma classe têm os mesmos direitos, qualquer que seja a quantidade de cotas que cada um detenha."
+                  "os cotistas de uma mesma classe têm exatamente os mesmos direitos, qualquer que seja a quantidade de cotas que detenham."
                 ],
                 "c": 3,
                 "exp": "Ao comprar cotas, o investidor aceita as regras do regulamento e passa a ter os mesmos direitos dos demais cotistas da classe.",
@@ -2466,7 +2466,7 @@
                 "alts": [
                   "investidores não residentes, que aplicam no país por meio de contas e regimes cadastrais específicos de câmbio.",
                   "investidores de varejo em geral, desde que respeitem o aporte mínimo de mil reais previsto no regulamento da classe.",
-                  "investidores qualificados e profissionais, categorias definidas conforme o volume de recursos aplicados.",
+                  "investidores qualificados e profissionais, categorias definidas pelo volume de recursos que cada um declara ter aplicado.",
                   "pessoas jurídicas de qualquer porte, ficando as pessoas físicas limitadas às classes abertas de distribuição ampla."
                 ],
                 "c": 2,
@@ -2498,7 +2498,7 @@
                   "ambos os trechos integram o objetivo, pois descrevem o resultado que a gestão pretende entregar ao cotista.",
                   "ambos os trechos integram a política, pois tratam de restrições operacionais impostas ao gestor da carteira.",
                   "superar o Ibovespa é a política de investimento e o mix de setores admitido corresponde ao objetivo declarado.",
-                  "superar o Ibovespa é o objetivo e o mix de setores com os critérios de seleção é a política de investimento."
+                  "superar o Ibovespa é o objetivo, o destino da classe, e o mix de setores com os critérios de seleção é a rota até ele."
                 ],
                 "c": 3,
                 "exp": "Objetivo é o destino (superar o índice); política de investimento é a rota (como o gestor pretende chegar lá).",
@@ -2665,7 +2665,7 @@
                 "q": "REDENÇÃO: Wilson Prates leu o regulamento de um fundo e encontrou duas cobranças que nunca tinha visto: uma incide quando o dinheiro entra e a outra quando o cliente sai antes do prazo sugerido no material. Nenhuma das duas vai para a gestora — ambas ficam no próprio fundo, em benefício de quem permanece nele. Wilson pretende deixar a aplicação parada por apenas oito meses e pediu ao profissional CPA que dissesse qual das duas será descontada dele nessa situação. A cobrança que incidirá sobre Wilson é a taxa de:",
                 "alts": [
                   "ingresso, devida no momento da aplicação e revertida ao patrimônio da classe para proteger os demais cotistas.",
-                  "saída, devida no momento do resgate e revertida ao patrimônio da classe, com uso pouco frequente no mercado.",
+                  "saída, devida no resgate e revertida ao patrimônio da classe; a de ingresso incide na aplicação, e ambas são pouco usadas.",
                   "distribuição, remuneração destinada à rede que oferta as cotas, deduzida da taxa de administração da classe.",
                   "performance, parcela devida à gestora quando o resultado supera o índice de referência previsto em regulamento."
                 ],
@@ -2721,7 +2721,7 @@
               {
                 "q": "REDENÇÃO: Um cliente perguntou o que aconteceria com suas cotas caso a corretora por meio da qual aplicou, no modelo de conta e ordem, enfrentasse problemas financeiros. A profissional CPA Vanessa Lima explicou que a norma exige um tratamento específico para o registro dessas cotas, de modo que seja possível identificar a titularidade de cada investidor e que os ativos não se confundam com os recursos próprios da instituição distribuidora. Nesse modelo, o registro das cotas deve ser:",
                 "alts": [
-                  "segregado do patrimônio do distribuidor, com identificação da titularidade de cada cotista nos controles.",
+                  "segregado do patrimônio do distribuidor, com a titularidade de cada cotista identificada, o que protege em caso de quebra.",
                   "mantido apenas pelo administrador do fundo, ficando o distribuidor dispensado de controles sobre os cotistas.",
                   "dispensado quando o cotista for enquadrado como investidor qualificado pela instituição em que mantém conta.",
                   "confundido com o patrimônio próprio do distribuidor, simplificando os controles operacionais da instituição."
@@ -2836,7 +2836,7 @@
                 "q": "Um fundo multimercado passou a manter 60% do patrimônio líquido em debêntures e CDBs, ativos emitidos por companhias e por bancos. A profissional CPA Elaine Furtado foi consultada sobre as providências formais que o administrador precisa adotar diante dessa composição, já que a norma trata de forma específica as classes que concentram risco de crédito privado acima de metade do patrimônio líquido. Diante dessa composição, a classe deve obrigatoriamente:",
                 "alts": [
                   "ser reclassificada como classe de renda fixa, em razão do peso dos títulos de dívida na carteira.",
-                  "incluir o sufixo Crédito Privado na denominação e trazer o alerta de risco no termo de adesão.",
+                  "incluir o sufixo Crédito Privado na denominação e trazer o alerta de risco no próprio termo de adesão.",
                   "reduzir de imediato a exposição a 50% do patrimônio, sob pena de suspensão da negociação das cotas.",
                   "obter autorização específica do Banco Central para manter a exposição a emissores privados na carteira."
                 ],
@@ -2862,7 +2862,7 @@
                 "q": "REDENÇÃO: A profissional CPA Sônia Bragança explica a um cliente que, entre as subcategorias de renda fixa, há uma cuja própria denominação já anuncia aquilo que a classe se compromete a seguir — um produto batizado com a sigla do CDI, por exemplo. O cliente, que também tem posição em fundos de ações, quis saber por que essa subcategoria carrega uma exigência de alocação mais dura do que a das demais e pediu o número exato que a norma manda observar. A subcategoria referenciada deve investir, no mínimo:",
                 "alts": [
                   "80% do patrimônio em ativos ligados ao indexador, piso aplicável à tipificação renda fixa em geral, e não à referenciada.",
-                  "95% do patrimônio em ativos que acompanhem o indexador indicado na denominação da classe.",
+                  "95% do patrimônio em ativos que acompanhem o indexador da denominação, o mesmo piso exigido do fundo Simples.",
                   "67% do patrimônio em ações negociadas em bolsa, piso característico da tipificação de ações, e não da renda fixa.",
                   "50% do patrimônio em ativos de crédito privado, parâmetro ligado ao uso do sufixo na denominação da classe."
                 ],
@@ -2959,7 +2959,7 @@
                 "q": "A classe de cotas acompanhada por Fernanda Queiroz possui patrimônio líquido de R$ 200 milhões e o gestor pretende concentrar aplicações em CDBs emitidos por um único banco, atraído pela taxa oferecida. Antes de executar a ordem, a equipe de enquadramento verificou o limite de concentração por emissor aplicável a instituições financeiras, que difere do limite previsto para companhias abertas e do previsto para pessoas físicas. Nessas condições, o valor máximo permitido nesse emissor é:",
                 "alts": [
                   "R$ 200 milhões, pois emissores bancários receberiam o mesmo tratamento conferido aos títulos públicos federais.",
-                  "R$ 40 milhões, equivalentes ao limite de 20% do patrimônio por emissor instituição financeira.",
+                  "R$ 40 milhões, ou 20% de R$ 200 milhões, que é o limite por emissor quando ele é instituição financeira.",
                   "R$ 20 milhões, correspondentes ao limite de 10% do patrimônio aplicável a emissores companhias abertas.",
                   "R$ 10 milhões, correspondentes ao limite de 5% do patrimônio aplicável a emissores pessoas físicas."
                 ],
@@ -2987,7 +2987,7 @@
                   "à diferença entre o valor da cota divulgado e o patrimônio líquido da classe apurado no encerramento do dia.",
                   "ao percentual de taxa de performance cobrado sobre o resultado que exceder o índice de referência da classe.",
                   "à taxa de administração cobrada pelas classes de cotas, deduzida diariamente do patrimônio da carteira.",
-                  "à diferença entre a taxa de juros cobrada nas operações de crédito e a taxa paga na captação de recursos."
+                  "à diferença entre o que a instituição cobra para emprestar e o que ela paga para captar os recursos que empresta."
                 ],
                 "c": 3,
                 "exp": "É a diferença entre o que o banco cobra para emprestar e o que paga para captar recursos.",
@@ -3184,7 +3184,7 @@
                   "renda fixa, que sofre a antecipação com alíquota de 15% ou de 20% conforme o enquadramento tributário.",
                   "cambial, que acompanha a variação de moeda estrangeira e sofre a antecipação nas datas semestrais.",
                   "multimercado, que combina fatores de risco e sofre a antecipação nas mesmas datas das demais classes.",
-                  "ações, tributada apenas no resgate, à alíquota única de 15% sobre o ganho apurado pelo investidor."
+                  "ações, que fica fora do come-cotas e é tributada apenas no resgate, à alíquota única de 15% sobre o ganho apurado."
                 ],
                 "c": 3,
                 "exp": "As classes de ações ficam fora do come-cotas e são tributadas só no resgate, à alíquota de 15%.",
@@ -3194,7 +3194,7 @@
               {
                 "q": "REDENÇÃO: Um cliente aplica há mais de três anos em um fundo com carteira de títulos públicos, enquadrado como de longo prazo, e reparou que em maio e em novembro o número de cotas dele diminui um pouco. Perguntou à profissional CPA Núbia Ferraz se o percentual usado nessa cobrança muda com o tempo de aplicação, como acontece na tabela que ele viu num site, e o que ocorre com o imposto no dia em que ele sacar o saldo. Sobre o percentual aplicado nessa cobrança semestral, Núbia deve explicar que:",
                 "alts": [
-                  "é fixa em 15% ou 20%, conforme o enquadramento da classe, com ajuste do imposto devido no resgate.",
+                  "é fixa em 15% ou 20% conforme o enquadramento da classe, ignorando o prazo do investidor, com ajuste no resgate.",
                   "acompanha a tabela regressiva apenas nas classes tipificadas como cambiais, sendo fixa nas demais.",
                   "cai 2,5 pontos percentuais a cada semestre de permanência, até alcançar o piso previsto na tabela.",
                   "acompanha a tabela regressiva de 22,5% a 15%, conforme o tempo de permanência do investidor na classe."
@@ -3243,7 +3243,7 @@
                 "alts": [
                   "são fundos fechados sem possibilidade de negociação das cotas antes do encerramento do prazo previsto.",
                   "são fundos abertos, com pedido de resgate ao administrador a qualquer momento pelo cotista.",
-                  "são fundos fechados, negociados em bolsa ou em balcão organizado, sem pedido de resgate.",
+                  "são fundos fechados, negociados em bolsa ou em balcão organizado, sem pedido de resgate ao administrador.",
                   "são fundos abertos negociados exclusivamente em bolsa, com liquidação das cotas na data do pedido."
                 ],
                 "c": 2,
@@ -3324,7 +3324,7 @@
                   "haverá retenção de 15% na fonte, alíquota aplicável às classes tipificadas como ações no resgate.",
                   "haverá isenção pela simples condição de pessoa física residente, independentemente da participação.",
                   "haverá isenção, pois o fundo é negociado em mercado organizado e conta com mais de 100 cotistas.",
-                  "haverá retenção de 20% na fonte, pois ele detém participação superior a 10% das cotas do fundo."
+                  "haverá retenção de 20% na fonte, porque ele detém mais de 10% das cotas e uma das condições da isenção falhou."
                 ],
                 "c": 3,
                 "exp": "Uma das três condições falhou (deter menos de 10% das cotas), então a isenção não se aplica.",
@@ -3424,7 +3424,7 @@
             "alts": [
               "15%, piso da tabela de longo prazo, aplicável a prazos superiores a 720 dias contados da data da aplicação.",
               "17,5%, faixa da tabela de longo prazo aplicável a prazos entre 361 e 720 dias contados da aplicação.",
-              "20%, piso da tabela de curto prazo, aplicável a resgates realizados após 180 dias da aplicação.",
+              "20%, piso da tabela de curto prazo, que não cai por mais tempo que o investidor permaneça aplicado.",
               "22,5%, faixa inicial das duas tabelas, aplicável a resgates realizados em até 180 dias da aplicação."
             ],
             "c": 2,
@@ -3450,7 +3450,7 @@
             "alts": [
               "R$ 500 milhões, pois emissores corporativos receberiam o mesmo tratamento dos títulos públicos federais.",
               "R$ 100 milhões, valor que corresponde ao limite de 20% previsto para emissores instituições financeiras.",
-              "R$ 50 milhões, equivalentes ao limite de 10% do patrimônio por emissor companhia aberta.",
+              "R$ 50 milhões, ou 10% de R$ 500 milhões, que é o limite por emissor quando ele é companhia aberta.",
               "R$ 25 milhões, valor que corresponde ao limite de 5% previsto para emissores pessoas físicas."
             ],
             "c": 2,
@@ -3490,7 +3490,7 @@
               "contratar a agência classificadora de risco encarregada de avaliar o crédito dos ativos adquiridos.",
               "comprar e vender os ativos da carteira conforme a política de investimento prevista no regulamento.",
               "exercer o direito de voto das ações detidas pela classe nas assembleias das companhias investidas.",
-              "apreçar os ativos da carteira e supervisionar a atuação do gestor no cumprimento do regulamento."
+              "apreçar os ativos e supervisionar o gestor no cumprimento do regulamento, enquanto as demais atividades são do gestor."
             ],
             "c": 3,
             "exp": "As outras três atividades listadas são atribuições do gestor de recursos.",
@@ -3514,7 +3514,7 @@
             "q": "Uma classe tipificada como renda fixa passou a aplicar 55% do patrimônio líquido em CDBs e debêntures, papéis emitidos por bancos e por companhias. O administrador consultou a profissional CPA Lúcia Trindade sobre o que precisa ser providenciado do ponto de vista formal, já que a norma prevê tratamento próprio quando essa parcela ultrapassa a metade. Lúcia abriu o regulamento e os documentos entregues ao investidor no início da relação. Nessa situação, a classe deve:",
             "alts": [
               "ser reclassificada como classe multimercado, em razão da presença de emissores privados na carteira.",
-              "incluir o sufixo Crédito Privado na denominação e trazer o alerta de risco no termo de adesão.",
+              "incluir o sufixo Crédito Privado na denominação da classe e trazer o alerta de risco no termo de adesão.",
               "reduzir a exposição a emissores privados para o máximo de 20% do patrimônio líquido da classe.",
               "obter aprovação prévia da assembleia de cotistas antes de manter a exposição a emissores privados."
             ],
@@ -3585,7 +3585,7 @@
                 "q": "Marcelo Tavares trabalha como motorista de aplicativo, declara imposto de renda pelo modelo simplificado e não recolhe contribuição para o INSS nem para qualquer regime próprio de previdência. Ao procurar a agência para começar a poupar para a aposentadoria, contou à profissional CPA Renata Bezerra que um colega recomendou o PGBL por causa do benefício fiscal. Renata verificou o perfil tributário do cliente e explicou que o abatimento das contribuições depende de condições que Marcelo não cumpre. Nesse caso, o plano indicado e a base de incidência do imposto no resgate são:",
                 "alts": [
                   "PGBL, com o imposto de renda incidindo sobre o montante integral resgatado, incluindo os aportes feitos.",
-                  "VGBL, com o imposto de renda incidindo apenas sobre o rendimento acumulado no plano.",
+                  "VGBL, em que o imposto de renda incide apenas sobre o rendimento acumulado, e não sobre o total resgatado.",
                   "PGBL, com o imposto de renda incidindo apenas sobre o rendimento, preservando o principal aportado.",
                   "VGBL, com direito ao abatimento de até 12% da renda bruta tributável na declaração de ajuste."
                 ],
@@ -3598,7 +3598,7 @@
                 "q": "Fernanda Quintela é analista de uma indústria, tem carteira assinada, contribui mensalmente para o INSS e entrega a declaração de ajuste anual pelo modelo completo. No atendimento, informou renda bruta tributável de R$ 120.000 no ano e perguntou ao profissional CPA quanto poderia aportar em um PGBL para aproveitar ao máximo o diferimento fiscal, pois leu em um blog que o limite seria de 20% da renda. O profissional esclareceu que o percentual é fixado em lei e incide sobre a renda bruta tributável do ano. O limite de abatimento do PGBL é de:",
                 "alts": [
                   "10% da renda bruta tributável anual, percentual válido para quem declara pelo modelo simplificado.",
-                  "12% da renda bruta tributável do ano, exigindo modelo completo e contribuição a regime oficial.",
+                  "12% da renda bruta tributável do ano, desde que o contribuinte declare pelo modelo completo e contribua a regime oficial.",
                   "15% da renda bruta tributável anual, limite aplicável apenas a planos contratados por pessoa jurídica.",
                   "20% da renda bruta tributável anual, mesmo percentual do desconto padrão da declaração simplificada."
                 ],
@@ -3697,7 +3697,7 @@
                 "alts": [
                   "salário e renda de aluguel, por sofrerem retenção mensal pela fonte pagadora ou pelo carnê-leão.",
                   "CDB e título público federal, cujos rendimentos ficam fora da base do ajuste anual do contribuinte.",
-                  "caderneta de poupança, LCI e LCA, sem incidência de imposto de renda para a pessoa física.",
+                  "caderneta de poupança, LCI e LCA, sem qualquer incidência de imposto de renda para a pessoa física.",
                   "ganho de capital na venda de ações, tributado à alíquota de 15% e recolhido por meio de DARF."
                 ],
                 "c": 2,
@@ -3798,7 +3798,7 @@
                 "q": "Ricardo Salgado contratou renda mensal temporária pelo prazo de quinze anos e faleceu no oitavo ano de recebimento. A viúva procurou a seguradora acreditando que receberia as parcelas dos sete anos restantes e, ao ter o pedido negado, pediu explicações ao profissional CPA da agência. O profissional retomou o contrato e mostrou que a modalidade escolhida vincula o pagamento à sobrevivência do titular, ao contrário de outra modalidade com prazo definido. Quanto ao saldo remanescente, o profissional deve informar que:",
                 "alts": [
                   "é revertido aos beneficiários indicados até que se complete o prazo de quinze anos contratado.",
-                  "não há reversão aos beneficiários, pois os pagamentos cessam com o falecimento do titular.",
+                  "não há reversão aos beneficiários, pois os pagamentos cessam com o falecimento; quem continua é a renda por prazo certo.",
                   "é pago aos herdeiros em parcela única, após a habilitação no processo de inventário do titular.",
                   "retorna à fase de acumulação e volta a render até que os beneficiários solicitem novo resgate."
                 ],
@@ -3869,7 +3869,7 @@
                 "q": "Sérgio Malta aportou em um VGBL há onze anos e optou, na época, pelo regime regressivo de tributação. Ao pedir o resgate integral, comentou com o profissional CPA que já separou 15% do saldo para o imposto, porque foi esse o percentual que pagou no ano passado ao sacar um fundo de renda fixa. O profissional abriu a tabela da previdência complementar e conferiu no sistema a data de cada aporte antes de responder. Para o prazo cumprido por Sérgio, a alíquota é de:",
                 "alts": [
                   "15%, piso da tabela usada em CDBs e fundos de renda fixa para prazos superiores a 720 dias.",
-                  "10%, faixa aplicável aos recursos com prazo de acumulação acima de dez anos no plano.",
+                  "10%, menor faixa da tabela regressiva da previdência, aplicável à acumulação acima de dez anos no plano.",
                   "20%, faixa da tabela regressiva da previdência aplicável a prazos entre seis e oito anos.",
                   "22,5%, faixa inicial da tabela da renda fixa, aplicável a resgates ocorridos em até 180 dias."
                 ],
@@ -3908,7 +3908,7 @@
                 "q": "REDENÇÃO: Ao assinar a proposta de um PGBL, Camila Bastos ficou em dúvida entre os regimes progressivo e regressivo e disse ao profissional CPA que preferia decidir mais adiante, quando soubesse por quanto tempo conseguiria manter o plano sem mexer nos recursos. O profissional confirmou que a contratação pode ser concluída sem essa definição imediata e explicou em que momento a opção se torna efetiva e passa a produzir efeitos sobre a tributação. A escolha do regime de tributação se materializa:",
                 "alts": [
                   "no ato da contratação do plano, de forma irreversível, sem possibilidade de revisão posterior.",
-                  "no primeiro resgate ou na conversão do saldo em renda, o que ocorrer primeiro.",
+                  "no primeiro resgate ou na conversão do saldo em renda, já que o plano pode ser contratado sem essa definição.",
                   "a cada ano, no momento da entrega da declaração de ajuste anual do imposto de renda.",
                   "por decisão da seguradora, conforme o perfil apurado no processo de análise de adequação."
                 ],
@@ -3940,7 +3940,7 @@
               {
                 "q": "Os irmãos Paulo e Cristina Sarmento aportaram R$ 10.000 cada um em planos de previdência com taxa de carregamento de 5% e rentabilidade de 10% no período. No plano de Paulo, a taxa incide na entrada, sobre o aporte, antes de os recursos serem aplicados. No plano de Cristina, a cobrança ocorre apenas na saída, calculada sobre o valor aportado. Eles pediram ao profissional CPA que comparasse os dois resultados. Os saldos finais de Paulo e de Cristina são, respectivamente:",
                 "alts": [
-                  "R$ 10.450 e R$ 10.500, mostrando que a cobrança na saída deixa mais recursos rendendo.",
+                  "R$ 10.450 e R$ 10.500, o que mostra que a cobrança na saída deixa mais recursos rendendo no período.",
                   "R$ 10.500 e R$ 10.450, pois a cobrança antecipada preserva o valor investido durante o período.",
                   "R$ 10.450 e R$ 10.450, já que o percentual da taxa de carregamento é o mesmo nos dois planos.",
                   "R$ 11.000 e R$ 10.500, considerando a rentabilidade de 10% sobre o aporte cheio nos dois casos."
@@ -3980,7 +3980,7 @@
                 "q": "REDENÇÃO: Ao negociar as condições de um benefício de aposentadoria complementar para os funcionários da empresa, o diretor financeiro Otacílio Prado recebeu de uma seguradora concorrente uma proposta que retém 12% de cada contribuição feita pelos empregados antes mesmo de o dinheiro ser investido. Desconfiado, procurou o profissional CPA e perguntou se um percentual desse tamanho é admitido. O profissional explicou que a SUSEP fixa um limite para essa cobrança de entrada e que nenhuma seguradora pode oferecer condição acima dele. Otacílio pediu o número exato. O limite máximo da taxa de carregamento é de:",
                 "alts": [
                   "5% sobre o valor de cada aporte, percentual adotado como padrão de mercado nos planos abertos.",
-                  "10% sobre o valor de cada aporte realizado pelo participante no plano de previdência.",
+                  "10% sobre o valor de cada aporte, percentual que incide na entrada e reduz o montante efetivamente aplicado.",
                   "12% sobre o valor de cada aporte, mesmo percentual do limite de abatimento previsto no PGBL.",
                   "20% sobre o valor de cada aporte, alinhado ao desconto padrão da declaração simplificada."
                 ],
@@ -4034,7 +4034,7 @@
                 "q": "Ao apresentar um plano de previdência, o profissional CPA Fábio Loureiro foi questionado pelo cliente sobre a frequência com que seria possível trocar de instituição caso o desempenho do fundo decepcionasse. O cliente ouviu de um conhecido que haveria limite de uma portabilidade por ano. O profissional esclareceu que não existe limite para a quantidade de portabilidades, mas que a regulação estabelece um intervalo de carência entre elas, com piso e teto definidos. Esses prazos são, respectivamente:",
                 "alts": [
                   "30 e 90 dias, contados da data do último aporte realizado pelo participante no plano de origem.",
-                  "60 e 180 dias, sendo livre a quantidade de portabilidades realizadas ao longo do plano.",
+                  "60 e 180 dias de carência, sendo livre a quantidade de portabilidades realizadas ao longo da vida do plano.",
                   "90 e 360 dias, com limite de uma única portabilidade a cada ano civil de vigência do plano.",
                   "prazos não definidos em norma, podendo a troca ser solicitada logo após a realização do aporte."
                 ],
@@ -4105,7 +4105,7 @@
             "q": "Hélio Marcondes aplicou R$ 20.000 em um plano de previdência que cobra 5% na entrada, percentual retido sobre o aporte antes de os recursos serem investidos no fundo. No período seguinte, o fundo do plano rendeu 10%. Ao receber o extrato, Hélio comentou com o profissional CPA que esperava encontrar R$ 22.000, número a que chegou aplicando os 10% sobre o depósito cheio. O profissional refez a conta com ele, na ordem em que as coisas acontecem dentro do plano. Considerando a ordem correta das operações, o saldo final é de:",
             "alts": [
               "R$ 22.000, rentabilidade de 10% sobre o aporte de R$ 20.000, com a taxa cobrada apenas na saída.",
-              "R$ 20.900, pois a rentabilidade de 10% incide sobre os R$ 19.000 efetivamente investidos.",
+              "R$ 20.900, pois a taxa retira R$ 1.000 do aporte e os 10% incidem sobre os R$ 19.000 efetivamente investidos.",
               "R$ 21.000, com a taxa de carregamento incidindo sobre o rendimento gerado durante o período.",
               "R$ 20.500, obtido pela dedução da taxa de carregamento do saldo apurado ao final do período."
             ],
@@ -4210,7 +4210,7 @@
             "alts": [
               "isentos: salário e renda de aluguel, por já terem sofrido retenção mensal na fonte pagadora.",
               "tributação exclusiva: caderneta de poupança e LCI, informadas sem compor a base do ajuste.",
-              "tributáveis: salário; tributação exclusiva: CDB; isentos: caderneta de poupança.",
+              "tributáveis: o salário; tributação exclusiva na fonte: o CDB; isentos: a caderneta de poupança.",
               "tributáveis: LCI e LCA; isentos: CDB e título público federal adquirido no Tesouro Direto."
             ],
             "c": 2,
@@ -4341,7 +4341,7 @@
                   "a cobrança de anuidade pelo banco emissor, valor que é diluído na taxa mensal aplicada ao saldo devedor.",
                   "a incidência de IOF sobre o valor integral da fatura, encargo que se soma à taxa cobrada do portador.",
                   "a contratação obrigatória de seguro prestamista, exigida do portador no momento da adesão à modalidade.",
-                  "o risco maior da operação, já que o portador não oferece garantia vinculada ao saldo financiado."
+                  "o risco maior da operação, já que o portador não oferece garantia alguma vinculada ao saldo financiado."
                 ],
                 "c": 3,
                 "exp": "Sem garantia vinculada, o risco assumido pela instituição sobe e o preço do dinheiro acompanha esse risco.",
@@ -4465,7 +4465,7 @@
                 "q": "REDENÇÃO: Dorival tem um cartão consignado ligado à sua aposentadoria e deixou de pagar a fatura de novembro, imaginando que ganharia tempo, como acontece com o outro cartão que ele usa no supermercado. Procurou Cíntia, profissional CPA, para saber o que a instituição faz com esse valor em atraso e por quantos meses ele conseguiria empurrar a fatura adiante. Cíntia pegou o contrato assinado por ele e mostrou a cláusula que trata da falta de pagamento nesse produto, bem diferente da que ele conhece. Nessas condições, quando a fatura do cartão consignado deixa de ser paga:",
                 "alts": [
                   "o cartão é cancelado de imediato e o saldo devedor é encaminhado para protesto em cartório pelo emissor.",
-                  "o valor é descontado diretamente do benefício do titular, respeitada a margem consignável em vigor.",
+                  "o valor é descontado diretamente da fonte de renda do titular, pelo mesmo mecanismo do consignado, dentro da margem em vigor.",
                   "a dívida migra para o crédito rotativo comum, sujeita ao teto de 100% do valor original do saldo devedor.",
                   "o seguro prestamista quita o saldo devedor, por ser cobertura obrigatória em qualquer cartão consignado."
                 ],
@@ -4493,7 +4493,7 @@
               {
                 "q": "Rogério financiou um carro por meio de CDC em 48 parcelas e, no sexto mês, tentou vender o veículo a um conhecido. Surpreso com a exigência de anuência do banco, procurou Marta, profissional CPA, afirmando que o carro estava em seu nome desde a compra. Marta explicou que, nesse tipo de financiamento, o bem é dado em garantia da própria operação por instrumento que transfere a propriedade resolúvel à instituição credora, ficando o cliente com a posse direta. Sobre a propriedade do veículo até o pagamento da última parcela, Marta deve explicar que ela é:",
                 "alts": [
-                  "do banco, por alienação fiduciária, permanecendo o comprador com a posse direta até a quitação.",
+                  "do banco, por alienação fiduciária: a propriedade fica com o credor e o comprador conserva apenas a posse direta até quitar.",
                   "do comprador desde a entrega do bem, cabendo à instituição apenas o registro de um gravame no documento.",
                   "compartilhada entre o banco e o comprador, em proporção equivalente às parcelas já pagas do contrato.",
                   "da concessionária vendedora, que transfere o bem ao comprador após a liquidação da última parcela."
@@ -4521,7 +4521,7 @@
                 "alts": [
                   "crédito rotativo do cartão e refinanciamento do saldo da fatura, contratados junto ao emissor do cartão.",
                   "consignado com desconto em folha e crédito pessoal não consignado, conforme a fonte de renda do tomador.",
-                  "empréstimo com recursos de destinação livre e financiamento com pagamento direto ao vendedor do bem.",
+                  "empréstimo com recursos creditados em conta e de uso livre, ou financiamento com pagamento direto ao vendedor do bem.",
                   "leasing operacional e cessão fiduciária de recebíveis, conforme a garantia oferecida pelo cliente ao banco."
                 ],
                 "c": 2,
@@ -4565,7 +4565,7 @@
                 "alts": [
                   "240 meses, equivalentes a vinte anos de pagamento, prazo usual das linhas com recursos do FGTS.",
                   "360 meses, equivalentes a trinta anos, prazo máximo aplicável às operações com garantia real de imóvel.",
-                  "420 meses, equivalentes a trinta e cinco anos de pagamento das prestações do financiamento.",
+                  "420 meses, equivalentes a trinta e cinco anos de pagamento das prestações do financiamento imobiliário.",
                   "480 meses, equivalentes a quarenta anos, limite fixado para os contratos de consórcio de imóveis."
                 ],
                 "c": 2,
@@ -4636,7 +4636,7 @@
                   "equivale à garantia real para efeito de precificação, reduzindo a taxa ao menor patamar disponível.",
                   "é exigido em qualquer operação da modalidade, por determinação da regulamentação bancária em vigor.",
                   "substitui a análise de crédito da empresa, que passa a recair apenas sobre o patrimônio do avalista.",
-                  "é garantia menos robusta que a real, mas melhora as condições oferecidas à empresa na contratação."
+                  "é garantia pessoal, de execução mais lenta e incerta, mas que ainda assim melhora as condições oferecidas."
                 ],
                 "c": 3,
                 "exp": "O aval é garantia pessoal: o sócio assume a responsabilidade pela dívida. Ajuda na negociação, mas vale menos que imóvel ou recebível vinculado.",
@@ -4705,7 +4705,7 @@
                 "alts": [
                   "252 dias úteis, convenção usada na conversão de taxas dos títulos públicos negociados no mercado.",
                   "360 dias corridos, convenção comercial adotada na conversão de taxas de operações de curto prazo.",
-                  "365 dias corridos, conforme a determinação do Banco Central para a divulgação do custo efetivo.",
+                  "365 dias corridos, ano calendário que o Banco Central determina para o cálculo e a divulgação do CET anual.",
                   "366 dias corridos, número que acompanha os anos bissextos e uniformiza o cálculo entre instituições."
                 ],
                 "c": 2,
@@ -4805,7 +4805,7 @@
           {
             "q": "Em uma palestra sobre endividamento, o gerente Alexandre, profissional CPA, foi questionado por dois participantes ao mesmo tempo: um deles usava o rotativo do cartão e o outro estava no cheque especial, e ambos queriam saber até onde os encargos podem chegar. Alexandre explicou que as duas modalidades têm limites definidos por regras distintas, sendo um deles expresso como proporção do valor original da dívida e o outro como percentual mensal aplicado ao saldo utilizado pelo cliente. Os tetos de juros do crédito rotativo e do cheque especial são, respectivamente:",
             "alts": [
-              "100% do valor da dívida no rotativo e 8% ao mês no cheque especial, conforme as regras em vigor.",
+              "100% do valor original da dívida no rotativo e 8% ao mês no cheque especial, conforme as regras em vigor.",
               "8% ao mês no rotativo e 100% do valor da dívida no cheque especial, invertendo os limites em vigor.",
               "50% do valor da dívida no rotativo e 10% ao mês no cheque especial, conforme a política de cada banco.",
               "percentuais livres nas duas modalidades, definidos em contrato por cada instituição financeira emissora."
@@ -4831,7 +4831,7 @@
           {
             "q": "Ao explicar a Norberto por que o empréstimo foi negado, a gerente Fabiana, profissional CPA, citou três referências: um número comprado de uma empresa que acompanha o comportamento de pagamento dos consumidores em todo o país; uma avaliação que o próprio banco produz a partir do histórico de Norberto na casa; e a consulta oficial ao regulador, com o endividamento dele no sistema bancário. Norberto misturou as duas primeiras e pediu que Fabiana dissesse qual é qual. Ao nomear corretamente essas duas primeiras referências, tem-se que:",
             "alts": [
-              "score é a nota calculada por birô de mercado e rating é a nota interna atribuída pela instituição.",
+              "score é a nota de mercado calculada por birô privado e rating é a nota interna do banco; o SCR é a base do Banco Central.",
               "score é a nota interna atribuída pelo banco e rating é a pontuação divulgada pelos birôs de mercado.",
               "o SCR é operado pela Serasa Experian e reúne as operações de crédito registradas pelos bancos do país.",
               "o rating é calculado pelo Banco Central e distribuído às instituições que consultam a base do sistema."
@@ -4871,7 +4871,7 @@
             "q": "Aposentado pelo INSS, Alcides contratou um consignado de 60 parcelas e perguntou a Verônica, profissional CPA, o que aconteceria com o saldo devedor se ele viesse a falecer antes do fim do prazo: ele não quer deixar essa herança para a filha. Verônica explicou que, nas operações voltadas a aposentados e pensionistas, é comum o pacote trazer, com nome próprio na planilha, um item adicional que a maioria assina sem ler. Alcides pediu que ela dissesse qual é esse item e para que ele serve. A proteção adicional típica desse público é:",
             "alts": [
               "a alienação fiduciária do próprio benefício previdenciário, que passa a garantir o saldo devedor.",
-              "o seguro prestamista, cobertura que quita o saldo devedor em caso de morte ou invalidez do tomador.",
+              "o seguro prestamista, cobertura citada para aposentados que quita o saldo devedor em caso de morte ou invalidez.",
               "a margem consignável ampliada por lei, que permite ao aposentado comprometer parcela maior da renda.",
               "a isenção de IOF na operação, benefício concedido aos contratos firmados por aposentados e pensionistas."
             ],
@@ -4909,7 +4909,7 @@
           {
             "q": "Ao atender o cliente Ademir, que pretende trocar de carro e também quitar dívidas antigas, a gerente Cleide, profissional CPA, apresentou duas modalidades de crédito. Ademir imaginava que a diferença entre elas estivesse apenas no prazo de pagamento. Cleide explicou que uma delas entrega os recursos na conta do cliente, que decide como utilizá-los, enquanto a outra tem destinação definida em contrato e paga diretamente o vendedor do bem, que fica vinculado à operação como garantia. A diferença entre empréstimo e financiamento é que:",
             "alts": [
-              "o empréstimo tem uso livre e o financiamento se destina à compra de um bem vinculado ao contrato.",
+              "o empréstimo tem uso livre dos recursos e o financiamento é carimbado para a compra de um bem, que serve de garantia.",
               "o empréstimo tem destinação definida em contrato e o financiamento libera os recursos para uso livre.",
               "as duas modalidades exigem a alienação fiduciária do bem adquirido pelo cliente na contratação.",
               "o financiamento cobra juros maiores por não contar com garantia vinculada ao contrato firmado."
@@ -4925,7 +4925,7 @@
               "o CDC, indicado para a aquisição de bens duráveis com pagamento direto ao fornecedor do produto.",
               "o crédito consignado, com parcelas descontadas na folha de pagamento dos empregados da empresa.",
               "o consórcio, modalidade de autofinanciamento voltada à aquisição programada de bens pelo grupo.",
-              "o capital de giro, linha voltada a empresas e destinada a sustentar a necessidade operacional."
+              "o capital de giro, linha exclusiva de pessoas jurídicas, destinada à necessidade operacional e sem destinação carimbada."
             ],
             "c": 3,
             "exp": "O capital de giro atende à necessidade operacional da empresa, sem destinação carimbada, e é exclusivo de pessoas jurídicas.",
@@ -4935,7 +4935,7 @@
           {
             "q": "Ao apresentar a proposta de empréstimo à cliente Marlene, o gerente Everaldo, profissional CPA, destacou que a comparação entre bancos deve considerar o custo efetivo total, e não apenas a taxa de juros anunciada na vitrine. Marlene perguntou quais elementos entram nessa conta. Everaldo explicou que o indicador reúne a remuneração cobrada pela instituição e os demais encargos exigidos para a liberação do crédito, entre tarifas, tributos e coberturas obrigatórias vinculadas ao contrato. Compõem o custo efetivo total:",
             "alts": [
-              "a taxa de juros, a tarifa de abertura de crédito, os seguros exigidos e o IOF da operação.",
+              "a taxa de juros, a tarifa de abertura de crédito, os seguros exigidos e o IOF, reunidos num percentual único.",
               "a taxa de juros contratada e o imposto de renda incidente sobre o rendimento das aplicações.",
               "apenas a taxa de juros contratada, já que tarifas e tributos são informados fora do indicador.",
               "a taxa de juros, a variação do IPCA no período e a taxa de administração cobrada por consórcios."
@@ -4949,7 +4949,7 @@
             "q": "Ao pedir a assinatura de Genésio na autorização de consulta, a gerente Priscila, profissional CPA, explicou o que o sistema do regulador mostra: tudo o que ele deve, em qualquer instituição do país, desde que cada contrato ultrapasse um piso definido em norma. Genésio, que tem um carnê de R$ 180 numa financeira e um consignado de R$ 12.000, quis saber a partir de qual quantia um contrato passa a aparecer nessa consulta. O SCR registra os contratos acima de:",
             "alts": [
               "R$ 100, patamar aplicado apenas às operações contratadas por pessoas físicas no varejo bancário.",
-              "R$ 200, valor a partir do qual as operações passam a ser registradas na base do Banco Central.",
+              "R$ 200, valor a partir do qual a operação é registrada na base que o Banco Central mantém para todo o sistema.",
               "R$ 1.000, patamar que limita o registro às operações de maior porte contratadas por empresas.",
               "R$ 5.000, valor mínimo previsto para o envio de informações das instituições ao Banco Central."
             ],
@@ -4983,7 +4983,7 @@
                 "q": "Rodrigo abriu uma conta em uma instituição de pagamento para receber as vendas do seu pequeno negócio e passou a usá-la no dia a dia. Em uma visita à agência, comentou com Camila, profissional CPA, que considera essa conta idêntica à conta corrente que mantinha antes, já que nas duas ele consegue transferir recursos e pagar contas. Camila ponderou que os serviços de pagamento realmente são comuns às duas modalidades, mas que existem diferenças relevantes de proteção ao saldo, de exigência regulatória e de produtos ofertados. Para esclarecer a dúvida do cliente, Camila deve explicar que:",
                 "alts": [
                   "as duas modalidades contam com a cobertura do FGC e recolhem depósito compulsório, diferenciando-se pelo tipo de instituição emissora.",
-                  "apenas a conta corrente conta com a cobertura do FGC, está sujeita a depósito compulsório e permite a concessão direta de crédito.",
+                  "apenas a conta corrente reúne cobertura do FGC, sujeição ao depósito compulsório e concessão direta de crédito, por captar à vista.",
                   "apenas a conta de pagamento oferece limite de cheque especial ao titular, porque é emitida por instituição regulada pelo Banco Central.",
                   "apenas a conta de pagamento pode ser aberta em cooperativa de crédito, ficando a conta corrente restrita aos bancos comerciais de varejo."
                 ],
@@ -5078,7 +5078,7 @@
                 "q": "REDENÇÃO: A distribuidora de Cláudia emite boletos registrados para os lojistas que compram a prazo e vive com o caixa apertado, porque quita os fornecedores no início do mês e só vê o dinheiro dos lojistas pingar semanas depois. Em reunião com Hugo, profissional CPA do banco, ela perguntou se há saída sem tomar um empréstimo comum, com garantia real e análise demorada. Hugo explicou que o boleto registrado cria um crédito reconhecido no sistema bancário, com devedor identificado e vencimento definido, e que esse crédito pode ser usado como lastro em uma operação com o próprio banco. Nessas condições, Hugo deve explicar que a transformação dos boletos em recebíveis permite à empresa:",
                 "alts": [
                   "cancelar de forma unilateral a cobrança já emitida ao cliente, extinguindo a obrigação registrada no sistema.",
-                  "antecipar os valores junto à instituição financeira antes da data em que o cliente efetua o pagamento.",
+                  "antecipar os valores junto à instituição financeira antes mesmo da data em que o cliente efetua o pagamento.",
                   "obter dispensa das tarifas bancárias incidentes sobre a emissão e a liquidação dos títulos de cobrança.",
                   "converter automaticamente cada cobrança emitida em uma transação Pix liquidada na data de vencimento."
                 ],
@@ -5135,7 +5135,7 @@
                   "o IOF incidente sobre a operação de câmbio, recolhido pela instituição e suportado pelo cliente na remessa.",
                   "o spread cambial cobrado na conversão entre reais e moeda estrangeira, embutido na taxa ofertada ao cliente.",
                   "a tarifa cobrada nos saques realizados em moeda estrangeira nos terminais disponíveis no exterior.",
-                  "o depósito compulsório sobre os recursos captados, recolhido pela instituição ao Banco Central."
+                  "o depósito compulsório sobre os recursos captados, que a instituição recolhe ao Banco Central."
                 ],
                 "c": 3,
                 "exp": "O depósito compulsório é obrigação da instituição perante o Banco Central, e não custo suportado pelo correntista na conta internacional.",
@@ -5190,7 +5190,7 @@
                 "q": "Em uma cidade do interior, o cliente Nelson fechou uma remessa em moeda estrangeira dentro de uma loja de artigos de viagem que também vende serviços bancários. Dias depois, reclamou do preço que lhe foi aplicado e da papelada de identificação que teve de assinar; o atendente devolveu que a loja apenas passa o pedido adiante e que nada ali é decidido no balcão. Nelson então procurou Marta, profissional CPA, para saber de quem é o dever de definir aquele preço e de conferir os documentos de quem compra moeda. Nessa operação, a responsabilidade pela precificação e pelo processo de conheça seu cliente é:",
                 "alts": [
                   "do correspondente bancário, por ser quem mantém o contato direto com o cliente e conduz o atendimento.",
-                  "da instituição contratante, em nome da qual o correspondente atua e que responde perante o cliente.",
+                  "da instituição contratante, em nome da qual o correspondente atua e que segue respondendo perante o cliente.",
                   "do Banco Central, que fixa o preço das operações de câmbio e valida os documentos apresentados pelo cliente.",
                   "compartilhada entre correspondente e cliente, cabendo a cada um responder pela parcela que lhe é atribuída."
                 ],
@@ -5203,7 +5203,7 @@
                 "q": "REDENÇÃO: Uma empresa exportadora precisa fechar um contrato de câmbio de US$ 3 milhões e o diretor financeiro perguntou a Gustavo, profissional CPA, se pode usar para isso a mesma casa que atende as remessas pequenas do dia a dia. Contou que as relações comerciais da empresa com o exterior cresceram muito no último ano e que agora os fechamentos são de outro tamanho. Gustavo respondeu que a regulamentação separa os participantes desse mercado conforme a licença que cada um recebeu, e que o tamanho do contrato pesa nessa escolha. Nessas condições, as instituições que podem operar câmbio em qualquer montante são:",
                 "alts": [
                   "as corretoras de câmbio e as distribuidoras de títulos, limitadas a US$ 500 mil por operação fechada.",
-                  "os bancos comerciais, os bancos de investimento, os bancos múltiplos e a Caixa Econômica Federal.",
+                  "os bancos comerciais, de investimento e múltiplos e a Caixa Econômica Federal, sem teto por operação.",
                   "as instituições de pagamento autorizadas pelo Banco Central, limitadas a US$ 100 mil por operação.",
                   "as agências de fomento e as sociedades de crédito, financiamento e investimento autorizadas a operar câmbio."
                 ],
@@ -5258,7 +5258,7 @@
                 "q": "REDENÇÃO: Ao acompanhar o movimento de uma agência em São Paulo em dia de pagamento de benefícios, o estagiário Bruno perguntou a Vera, profissional CPA, por que a equipe controla com tanto rigor o relógio do painel de senhas. Vera explicou que existe legislação municipal, conhecida popularmente como lei dos 15 minutos, que impõe um parâmetro à instituição sob pena de multa, e que a matéria já gerou discussão nos tribunais quanto à competência do município para legislar sobre o tema. Nesse contexto, Vera deve explicar que a norma trata do:",
                 "alts": [
                   "prazo máximo para a liquidação de uma transferência eletrônica disponível enviada a outra instituição.",
-                  "tempo máximo de espera do cliente na fila até ser atendido no guichê da agência bancária.",
+                  "tempo máximo de espera do cliente na fila até o atendimento no guichê, por norma de alcance municipal.",
                   "prazo concedido à instituição para estornar operações contestadas pelo cliente no canal de atendimento.",
                   "tempo mínimo de funcionamento presencial das agências bancárias em cada dia útil da semana."
                 ],
@@ -5302,7 +5302,7 @@
                 "q": "Durante um treinamento sobre meios de pagamento, a analista Paula perguntou a Sérgio, profissional CPA, por que o nome de uma mesma bandeira aparece em cartões emitidos por bancos diferentes e aceitos em maquininhas de credenciadoras distintas. Sérgio explicou que o arranjo de pagamento reúne participantes com funções separadas: um concede o cartão ao portador, outro credencia o lojista e liquida as vendas e outro ainda agrupa pequenos estabelecimentos. À bandeira cabe função específica dentro dessa estrutura. Nesse arranjo, o papel da bandeira é:",
                 "alts": [
                   "conceder o cartão ao portador e definir o limite de crédito disponível para as compras realizadas.",
-                  "definir as regras do arranjo, padronizar a aceitação e conectar os participantes envolvidos.",
+                  "definir as regras do arranjo, padronizar a aceitação e conectar emissores e credenciadores do sistema.",
                   "capturar as vendas do estabelecimento comercial e creditar os valores líquidos na conta do lojista.",
                   "agrupar operações de pequenos empreendedores e encaminhá-las ao credenciador principal do arranjo."
                 ],
@@ -5360,7 +5360,7 @@
             "q": "Faltando dez minutos para as seis da tarde, o cliente Alexandre disparou uma TED de R$ 25.000 ao fornecedor, que tem conta em outro banco, e ligou aflito para Juliana, profissional CPA: o comprovante saiu sem confirmação de crédito e o fornecedor ameaça segurar a mercadoria. Juliana explicou que a TED trafega pelo sistema que liga uma instituição à outra, aberto apenas dentro de uma janela diária, enquanto o Pix roda a qualquer momento, inclusive de madrugada e no feriado. Considerando o momento em que a ordem saiu, Juliana deve informar que a TED será liquidada:",
             "alts": [
               "no mesmo dia, porque a TED é executada de forma imediata em qualquer horário do dia útil.",
-              "no dia útil seguinte, porque o horário-limite para envio de TED se encerra às 17 horas.",
+              "no dia útil seguinte, porque o horário de corte para o envio de TED se encerra às 17 horas.",
               "de forma instantânea, porque a TED segue a mesma regra de funcionamento contínuo aplicada ao Pix.",
               "em dois dias úteis, por ter sido enviada fora do horário de atendimento das agências bancárias."
             ],
@@ -5399,7 +5399,7 @@
             "q": "Um comerciante questionou por que a maquininha aceita cartões de bancos diferentes com o mesmo gesto de aproximar e digitar a senha, e por que o logotipo que aparece no visor é o mesmo, seja qual for o plástico apresentado pelo comprador. Ao responder, Andréa, profissional CPA, explicou que um dos participantes desse mercado tem por função escrever o livro de procedimentos seguido pelos demais e uniformizar a maneira de aceitar cartões nas lojas, de modo que uma compra iniciada em qualquer canto do país seja processada do mesmo jeito. Nessa transação com cartão, esse participante é:",
             "alts": [
               "o adquirente, que captura as vendas do lojista e credita os valores líquidos em sua conta.",
-              "a bandeira, que estabelece as normas do arranjo e conecta emissores e credenciadores.",
+              "a bandeira, que define as regras do arranjo, padroniza a aceitação e conecta emissores e credenciadores.",
               "o banco emissor, que concede o cartão ao portador e define o limite de crédito disponível.",
               "o subadquirente, que agrupa operações de pequenos lojistas e as encaminha ao credenciador."
             ],
@@ -5523,7 +5523,7 @@
                 "q": "Na abertura de conta, o profissional CPA Leandro apresenta a Sônia um seguro residencial com parcela mensal de R$ 68. Sônia lê o resumo da contratação e se perde nos termos técnicos: quer saber como se chama aquilo que sairá da conta dela todo mês para manter a casa protegida, e insiste que isso não pode se confundir com a quantia que ela receberia se um incêndio destruísse o imóvel, nem com o documento que ela vai assinar hoje na mesa. Nessa conversa, Leandro deve explicar que essa cobrança mensal recebe o nome de:",
                 "alts": [
                   "indenização, quantia que a seguradora paga ao segurado após a ocorrência do sinistro.",
-                  "prêmio, valor pago pelo segurado à seguradora como contrapartida da cobertura.",
+                  "prêmio, o custo do seguro que o segurado paga à seguradora como contrapartida da cobertura contratada.",
                   "sinistro, denominação dada ao evento coberto quando ele efetivamente se concretiza.",
                   "apólice, documento que formaliza o contrato e detalha as condições da cobertura."
                 ],
@@ -5537,7 +5537,7 @@
                 "alts": [
                   "apólice, documento em que estão descritas as condições e os limites da cobertura.",
                   "prêmio, valor pago periodicamente pelo segurado para manter a cobertura em vigor.",
-                  "sinistro, ocorrência do evento coberto, que faz nascer o direito à indenização.",
+                  "sinistro, o evento contra o qual o cliente se segurou, e que faz nascer o direito à indenização.",
                   "franquia, parcela do prejuízo que fica sob responsabilidade do próprio segurado."
                 ],
                 "c": 2,
@@ -5550,7 +5550,7 @@
                 "alts": [
                   "pessoal, por atingir diretamente a integridade física ou a vida do titular do contrato.",
                   "patrimonial, por recair sobre bens tangíveis, como imóveis, veículos e equipamentos.",
-                  "financeiro, por comprometer a capacidade de gerar renda e de honrar compromissos.",
+                  "financeiro, categoria que reúne a perda de capacidade de ganho e a inadimplência do orçamento familiar.",
                   "operacional, por decorrer de falhas de processos internos, de sistemas ou de pessoas."
                 ],
                 "c": 2,
@@ -5674,7 +5674,7 @@
                 "alts": [
                   "tradicional, com vigência mantida enquanto o prêmio mensal for pago pelo segurado.",
                   "vida inteira, cuja cobertura permanece em vigor até o falecimento do segurado.",
-                  "temporário, contratado por prazo definido, com decisão de renovar ao final.",
+                  "temporário, contratado por prazo estipulado conforme a necessidade, com renovação decidida ao final.",
                   "de acidentes pessoais, restrito à morte e à invalidez decorrentes de acidente."
                 ],
                 "c": 2,
@@ -5686,7 +5686,7 @@
                 "q": "REDENÇÃO: depois de três meses sem quitar as parcelas do seu seguro de vida tradicional, o cliente Adilson procura a profissional CPA Beatriz querendo saber sua situação. Ele imagina que o valor pago nos anos anteriores tenha formado uma reserva capaz de sustentar a cobertura por algum tempo, ou que a indenização fosse apenas reduzida em proporção ao atraso acumulado. Beatriz explica a regra dessa modalidade. Sobre o efeito do não pagamento do prêmio, Beatriz deve informar que ocorre:",
                 "alts": [
                   "a conversão do contrato em um seguro vida inteira, com cobertura mantida até o óbito.",
-                  "a perda da proteção, pois a cobertura vigora enquanto o prêmio estiver sendo pago.",
+                  "a perda da proteção, porque no seguro de vida tradicional a cobertura só existe enquanto o prêmio é pago.",
                   "a redução da indenização, calculada em proporção aos prêmios que deixaram de ser pagos.",
                   "a cobrança do saldo devedor com juros, mantida a cobertura durante a renegociação."
                 ],
@@ -5744,7 +5744,7 @@
             "q": "Dona Eunice, aposentada, contratou um empréstimo consignado e reparou em uma linha a mais no contrato, com custo embutido na parcela que será descontada do benefício todo mês. Ela pergunta ao profissional CPA Thiago para que serve aquilo. Thiago explica que, se ela morrer, ficar inválida ou perder a fonte de renda de forma involuntária, é essa cobertura que paga ao banco o que ainda estiver em aberto, evitando que a cobrança bata na porta dos filhos. O seguro descrito por Thiago é o:",
             "alts": [
               "vida inteira, que paga capital aos beneficiários indicados no momento do falecimento.",
-              "prestamista, que assume o saldo devedor da operação de crédito contratada.",
+              "prestamista, que protege a operação de crédito e destina a indenização à quitação do saldo devedor.",
               "temporário, contratado por prazo certo, com decisão de renovar ao final da vigência.",
               "de acidentes pessoais, restrito à morte e à invalidez decorrentes de acidente."
             ],
@@ -5770,7 +5770,7 @@
             "q": "Douglas contratou um seguro de vida temporário com vigência de cinco anos, prazo que coincide com o financiamento de um bem. Faltando poucos meses para o encerramento, ele pergunta ao profissional CPA Alexandre o que acontece quando o período chega ao fim: imagina que a seguradora devolva os valores pagos ou que a cobertura passe a valer por prazo indeterminado. Sobre o encerramento do período contratado, Alexandre deve explicar que:",
             "alts": [
               "a cobertura passa a vigorar por prazo indeterminado, sem novo pagamento de prêmio.",
-              "cabe ao contratante decidir sobre a renovação do seguro por um novo período.",
+              "cabe ao contratante decidir, ao fim do prazo estipulado, sobre a renovação do seguro por um novo período.",
               "a seguradora devolve os prêmios pagos, corrigidos por índice previsto na apólice.",
               "a indenização contratada é paga ao próprio segurado, a título de resgate da reserva."
             ],
@@ -5784,7 +5784,7 @@
             "alts": [
               "pessoal, por atingir a vida e a integridade física dos sócios da empresa avaliada.",
               "patrimonial, por recair sobre bens tangíveis sujeitos a dano, perda ou subtração.",
-              "financeiro, por comprometer a viabilidade econômica e o resultado do negócio.",
+              "financeiro, por atingir a viabilidade econômica do negócio e o resultado da atividade.",
               "operacional, por decorrer de falhas de processos internos, de sistemas ou de pessoas."
             ],
             "c": 2,

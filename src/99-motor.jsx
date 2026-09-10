@@ -1383,9 +1383,50 @@ export default function ProjetoCPA() {
     const alvo = REGRAS_EXAME.multiplaEscolha.valor;
     const D = REGRAS_EXAME.dificuldade.valor; // { facil, medio, dificil }
     const usadas = new Set();
+
+    // ----------------------------------------------------------------
+    // MEMÓRIA ENTRE PROVAS
+    //
+    // Sorteio sem memória repete. Com 40 questões tiradas de 870, a chance
+    // de uma questão específica voltar na prova seguinte é baixa; a chance
+    // de ALGUMA voltar é quase certa. E nas árvores, onde o pool é pequeno,
+    // a repetição é garantida.
+    //
+    // A memória sai do próprio histórico, que já existe e já sincroniza
+    // entre os aparelhos — não inventamos chave de disco nova. Para cada
+    // chave já vista, guardamos há QUANTAS provas ela apareceu pela última
+    // vez. Zero = saiu na prova mais recente.
+    //
+    // O sorteio não proíbe repetir: se proibisse, um balde pequeno acabaria
+    // e a prova sairia fora da distribuição por módulo e dificuldade, que é
+    // regra da banca. Ele ORDENA: primeiro o que nunca saiu, depois o mais
+    // antigo. Só reaproveita quando não há material novo naquele balde.
+    // ----------------------------------------------------------------
+    const recencia = new Map();
+    (historico || []).forEach((t, idx) => {
+      ((t && t.itens) || []).forEach((it) => {
+        const k = it.tipo === "arvore" ? "@" + it.arvId : it.chave;
+        if (!k) return;
+        // idx 0 é a tentativa mais recente (o histórico vem em ordem
+        // decrescente de id). Guardamos a MENOR distância, ou seja, a
+        // aparição mais recente.
+        if (!recencia.has(k) || recencia.get(k) > idx) recencia.set(k, idx);
+      });
+    });
+
+    // Embaralha primeiro e ordena depois: Array.prototype.sort é estável no
+    // JS moderno, então o embaralho decide a ordem DENTRO de cada faixa de
+    // recência e o sort só separa as faixas. Sem o embaralho antes, questões
+    // igualmente antigas sairiam sempre na mesma ordem de arquivo.
+    const porFrescor = (lista) => shuffle(lista).sort((a, b) => {
+      const ra = recencia.has(a) ? recencia.get(a) : Infinity;
+      const rb = recencia.has(b) ? recencia.get(b) : Infinity;
+      return rb - ra; // nunca vista (Infinity) primeiro, depois a mais antiga
+    });
+
     const pegar = (lista, n) => {
       const out = [];
-      for (const k of shuffle(lista)) {
+      for (const k of porFrescor(lista)) {
         if (out.length >= n) break;
         if (!usadas.has(k)) { usadas.add(k); out.push(k); }
       }
@@ -1422,8 +1463,11 @@ export default function ProjetoCPA() {
     // árvore: a ANBIMA conta 10 QUESTÕES, não 10 árvores. Pegamos atendimentos
     // inteiros a partir da primeira fala (a conversa precisa fazer sentido) e
     // cortamos no décimo item.
+    // As árvores entram pelo mesmo critério de frescor. Aqui ele pesa muito
+    // mais: são 10 dos 50 itens da prova saindo de um punhado de
+    // atendimentos, e sem memória o mesmo cliente reaparecia toda semana.
     const itensArv = [];
-    const baralho = shuffle(ARVORES.map((a) => a.id));
+    const baralho = porFrescor(ARVORES.map((a) => "@" + a.id)).map((k) => k.slice(1)).reverse();
     while (itensArv.length < REGRAS_EXAME.itensArvore.valor && baralho.length) {
       // pop() UMA vez, fora do find: dentro do callback ele era chamado a cada
       // comparação e esvaziava o baralho, devolvendo undefined (bug real,

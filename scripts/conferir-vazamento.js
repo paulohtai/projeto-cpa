@@ -260,6 +260,12 @@ const lerNossoBanco = () => {
   return out;
 };
 
+// As três funções ficam exportadas para que outros scripts meçam OUTROS
+// bancos com exatamente a mesma régua — foi assim que o simulado da T2 pôde
+// ser comparado ao nosso sem eu reescrever o detector e, sem querer, afrouxá-lo.
+module.exports = { avaliar, termos, radical, lerCadernoOficial, lerNossoBanco };
+if (require.main !== module) return;
+
 // =====================================================================
 // EXECUÇÃO
 // =====================================================================

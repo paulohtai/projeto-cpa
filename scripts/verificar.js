@@ -99,6 +99,44 @@ pctEstrita <= 35 ? ok("viés de comprimento estrito dentro do teto de 35%")
 gap === 0 ? ok("nenhuma questão com gabarito 30% mais longo que os distratores")
           : erro(`${gap} questões com viés de comprimento:\n       ` + suspeitas.slice(0, 8).join("\n       "));
 
+// 5b. VIÉS DE TAMANHO NAS DUAS DIREÇÕES — e o placar do espertalhão.
+//
+// A checagem acima só olhava para um lado: "o gabarito é o mais LONGO?".
+// Em 09/09/2026 isso escondeu o defeito espelhado. Depois de uma rodada
+// antiga de correção, tínhamos empurrado o viés para o outro extremo: o
+// gabarito virou a alternativa MAIS CURTA em 63% das questões. Quem chutasse
+// sempre a mais curta acertaria 63% — a três pontos do corte de aprovação.
+//
+// Vale a comparação que fez o problema aparecer. Medindo o simulado de um
+// concorrente com esta mesma régua, "chutar sempre a mais longa" dava 66%.
+// O defeito deles era gritante; o nosso era o mesmo defeito com o sinal
+// trocado, e passava despercebido porque o portão só olhava para um lado.
+//
+// A régua é o caderno oficial da ANBIMA: lá o gabarito é o mais longo em 30%
+// e o mais curto em 21% — perto dos 25% do acaso, nas duas pontas. A faixa
+// aceita aqui é 15% a 35% nos dois lados.
+{
+  const semEsp = (t) => String(t || "").replace(/\s/g, "").length;
+  let maisLonga = 0, maisCurta = 0;
+  questoes.forEach((q) => {
+    const L = q.alts.map(semEsp);
+    const mx = Math.max(...L), mn = Math.min(...L);
+    // empate não entrega nada: quem chuta pelo tamanho fica em dúvida e
+    // precisa saber o conteúdo. Creditamos a fração, como faria o acaso.
+    const nMax = L.filter((x) => x === mx).length, nMin = L.filter((x) => x === mn).length;
+    if (L[q.c] === mx) maisLonga += 1 / nMax;
+    if (L[q.c] === mn) maisCurta += 1 / nMin;
+  });
+  const pL = (maisLonga / questoes.length) * 100;
+  const pC = (maisCurta / questoes.length) * 100;
+  console.log(`  info PLACAR DO ESPERTALHÃO: chutar sempre a mais longa acerta ${pL.toFixed(0)}% · sempre a mais curta acerta ${pC.toFixed(0)}%`);
+  console.log(`       (acaso 25% · caderno oficial 30% e 21% · corte de aprovação da CPA 70%)`);
+  const dentro = pL >= 15 && pL <= 35 && pC >= 15 && pC <= 35;
+  dentro
+    ? ok("tamanho da alternativa não denuncia o gabarito em nenhuma das duas direções")
+    : erro(`o tamanho denuncia o gabarito: mais longa ${pL.toFixed(0)}% · mais curta ${pC.toFixed(0)}% (aceito 15%–35% nos dois)`);
+}
+
 // 6. exemplos das fichas
 const faltando = niveis.filter((n) => !EX[n.id]).map((n) => n.id);
 const orfaos = Object.keys(EX).filter((k) => !setN.has(k));

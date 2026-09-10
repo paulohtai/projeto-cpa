@@ -165,7 +165,7 @@
                   "trimestralmente, acompanhando o calendário de fechamento das demonstrações contábeis da casa.",
                   "semestralmente, em prazo escolhido pelo conselho de administração de cada instituição financeira.",
                   "a cada evento de risco relevante, no prazo de dez dias úteis contados da data do ocorrido.",
-                  "no mínimo uma vez por ano, tomando o dia 31 de dezembro como data-base da apuração."
+                  "no mínimo uma vez por ano, com data-base em 31 de dezembro e nas tabelas padronizadas pelo regulador."
                 ],
                 "c": 3,
                 "exp": "Divulgação anual, com data-base em 31 de dezembro, nas tabelas padronizadas pela IN BCB nº 153.",
@@ -176,7 +176,7 @@
                 "q": "Durante a diligência de um fundo de pensão, o gestor Anselmo apresentou-se como signatário de um conjunto de compromissos assumidos espontaneamente por investidores institucionais do mundo inteiro, lançado em 2006 sob o patrocínio de um organismo multilateral sediado em Nova York e usado como cartão de visitas na captação junto a fundações. Um conselheiro pediu a Anselmo o número exato desses compromissos e o nome de quem os apoia. Os Princípios para Investimento Responsável são:",
                 "alts": [
                   "quatro princípios, apoiados pelo Banco Mundial e voltados a projetos de infraestrutura em países emergentes.",
-                  "seis princípios, de adesão facultativa, apoiados pela Organização das Nações Unidas.",
+                  "seis princípios de adesão facultativa, apoiados pela ONU e usados como selo de credibilidade.",
                   "nove princípios, definidos pela ANBIMA no código de conduta exigido de seus associados.",
                   "dez princípios, estabelecidos pelo Conselho Monetário Nacional para bancos e gestoras."
                 ],
@@ -202,7 +202,7 @@
                 "q": "REDENÇÃO: Em um treinamento sobre investimento responsável, a gestora Márcia, profissional CPA, mostrou à equipe a lista numerada dos compromissos assumidos pela casa ao aderir ao PRI. Um analista lembrou que o primeiro deles manda levar as questões ESG para dentro do processo de análise e de escolha dos papéis, e que o último trata de prestar contas do avanço alcançado. Ele quis saber o teor do segundo item da lista. O segundo princípio do PRI determina que o investidor deve:",
                 "alts": [
                   "reportar publicamente o progresso obtido na implementação dos demais compromissos assumidos.",
-                  "ser proprietário ativo, incorporando os temas ESG às práticas de exercício do voto.",
+                  "ser proprietário ativo, incorporando os temas ESG às práticas de exercício do direito de voto.",
                   "trabalhar em conjunto com os demais signatários para ampliar a eficácia dos princípios adotados.",
                   "incorporar as questões ESG à análise de investimentos e à tomada de decisão da carteira."
                 ],
@@ -259,7 +259,7 @@
                 "alts": [
                   "integração, que soma indicadores ESG à avaliação tradicional de risco e de retorno dos papéis.",
                   "exclusão, que retira da carteira setores inteiros por critério moral, ético ou socioambiental.",
-                  "engajamento, que usa o direito de voto e o diálogo para influenciar a companhia investida.",
+                  "engajamento, que usa o direito de voto e o diálogo para influenciar a companhia investida, na linha do princípio 2 do PRI.",
                   "temática, que concentra os recursos em um único assunto, como energia limpa ou saneamento."
                 ],
                 "c": 2,
@@ -290,7 +290,7 @@
             "q": "Uma rede de cafeterias exige de cada fazenda fornecedora um laudo semestral que comprove alojamento digno, carteira assinada e ausência de menores na colheita, e suspende o contrato de quem descumprir. Ao apresentar o programa a um fundo interessado em comprar ações da rede, o diretor foi questionado por Solange, profissional CPA, sobre onde esse controle deve ser reportado no relatório ESG da companhia. Solange deve indicar que o programa integra o pilar:",
             "alts": [
               "ambiental, que trata das emissões, do uso de recursos naturais e da destinação de resíduos.",
-              "social, que abrange condições de trabalho na cadeia de fornecimento e direitos humanos.",
+              "social, pilar que abrange as condições de trabalho na cadeia de fornecimento e o respeito aos direitos humanos.",
               "governança, que trata do conselho, da remuneração dos administradores e da transparência.",
               "climático, pilar autônomo criado para acompanhar as metas de redução de emissões das empresas."
             ],
@@ -331,7 +331,7 @@
               "quatro princípios, restritos aos investidores institucionais de países desenvolvidos e emergentes.",
               "nove princípios, que formam o código de conduta editado pela ANBIMA para os associados.",
               "dez princípios, fixados pelo Conselho Monetário Nacional às instituições financeiras do país.",
-              "seis princípios, de adesão espontânea e apoiados pela Organização das Nações Unidas."
+              "seis princípios de adesão espontânea, apoiados pela ONU; os nove são do Código da ANBIMA."
             ],
             "c": 3,
             "exp": "Seis princípios apoiados pela ONU. Os nove são os do Código de Conduta da ANBIMA.",
@@ -415,7 +415,7 @@
                 "q": "Depois de transferir criptoativos para o endereço errado, o cliente Jorge procurou o assessor Ademir, profissional CPA, para pedir o estorno. Ademir explicou que ninguém tem esse poder: nem a corretora, nem os programadores da rede, nem uma autoridade pública, e que aquele lançamento permanecerá visível enquanto a rede existir. Jorge, que é engenheiro, quis entender a razão técnica de ser tão difícil apagar ou reescrever algo já confirmado. Ademir deve responder que a imutabilidade decorre do fato de que:",
                 "alts": [
                   "os dados ficam criptografados em um servidor único, protegido pela empresa desenvolvedora.",
-                  "cada bloco carrega a marca do bloco anterior, e mudar um deles obrigaria a refazer a cadeia.",
+                  "cada bloco carrega a marca do anterior, e alterar um só obrigaria a refazer a cadeia inteira.",
                   "apenas o Banco Central valida as operações e recusa qualquer pedido posterior de alteração.",
                   "os lançamentos são apagados logo após a confirmação, restando somente o saldo final da conta."
                 ],
@@ -512,7 +512,7 @@
               {
                 "q": "Em uma negociação de apartamento estruturada em blockchain, Válter, que está adquirindo o bem, depositou a quantia combinada no próprio programa que rege o negócio, antes mesmo da lavratura da escritura. Ele procurou Denise, profissional CPA, com uma dúvida: quer saber em que momento o dinheiro sai do código e chega ao vendedor, já que o registro do imóvel e a plataforma seguem trilhos separados e ninguém de fora administra esse repasse. Denise abriu o instrumento e explicou como ele trata dessa etapa. Nessa compra e venda intermediada por smart contract, o pagamento:",
                 "alts": [
-                  "fica retido até que a mudança de titularidade do imóvel seja efetivamente confirmada.",
+                  "fica retido até a confirmação da mudança de titularidade do imóvel, dispensando corretor e conta de terceiros.",
                   "é liberado no ato da assinatura, cabendo ao vendedor providenciar a documentação depois.",
                   "é dividido em parcelas definidas pelo comprador ao longo do processo de mudança do bem imóvel.",
                   "depende da autorização de um corretor credenciado para ser encaminhado ao vendedor do imóvel."
@@ -725,7 +725,7 @@
               {
                 "q": "Ao abrir conta em uma corretora brasileira de criptoativos, o cliente Genaro enviou documentos, fez reconhecimento facial e comprou bitcoins, que passaram a aparecer no saldo do aplicativo da empresa. Ele perguntou a Ivone, profissional CPA, quem fiscaliza esse tipo de casa no país e de quem é a responsabilidade pela custódia das moedas adquiridas. Ivone respondeu apontando o supervisor competente e o modelo praticado. Sobre a exchange centralizada nacional, Ivone deve explicar que:",
                 "alts": [
-                  "é supervisionada pelo Banco Central e mantém sob sua guarda os ativos dos investidores.",
+                  "é supervisionada pelo Banco Central e guarda os ativos dos investidores, que ficam expostos a falência e a ataques.",
                   "é supervisionada pela CVM, cabendo ao usuário guardar as próprias chaves privadas em casa.",
                   "opera sem identificação dos usuários, por não estar sujeita às regras de cadastro do país.",
                   "afasta o risco de contraparte, porque as moedas ficam registradas fora da própria companhia."
@@ -758,7 +758,7 @@
             "q": "Em um treinamento para a mesa, o instrutor Roberto, profissional CPA, projetou o histórico de uma rede pública e propôs um exercício: um invasor quer mudar o valor de uma operação gravada há dois anos e manter o restante do histórico coerente aos olhos dos milhares de computadores que guardam a mesma cópia. A turma concluiu que o esforço seria inviável na prática. Roberto pediu que apontassem o elemento responsável por essa inviabilidade. O componente que torna a alteração impraticável é:",
             "alts": [
               "a criptografia da chave privada, que protege o acesso do titular à sua própria carteira digital.",
-              "o encadeamento de cada bloco ao anterior, que obrigaria a refazer a cadeia por inteiro.",
+              "o encadeamento de cada bloco ao anterior, que obrigaria a refazer a cadeia inteira de uma vez.",
               "a supervisão de um órgão regulador, que audita periodicamente os registros já gravados.",
               "o uso de contratos inteligentes, que executam as regras combinadas sem intervenção humana."
             ],
@@ -784,7 +784,7 @@
             "q": "Uma seguradora lançou um produto para produtores rurais: se o índice oficial de chuva da região ficar abaixo de determinado nível na janela contratada, o valor combinado cai na conta do segurado sem pedido, sem vistoria e sem abertura de processo, porque um programa publicado em blockchain lê o número divulgado e dispara a transferência. O cliente Getúlio perguntou a Nilza, profissional CPA, como se classifica esse arranjo. Trata-se de exemplo de:",
             "alts": [
               "tokenização de ativo real, em que o bem é fracionado em várias unidades digitais negociáveis.",
-              "apólice automatizada por smart contract, disparada por um dado externo verificável.",
+              "apólice automatizada por smart contract, disparada por um dado externo verificável, sem análise manual do sinistro.",
               "exchange descentralizada, ambiente de troca direta de criptoativos entre os participantes.",
               "organização autônoma descentralizada, com decisões votadas pelos detentores dos tokens."
             ],
@@ -798,7 +798,7 @@
             "alts": [
               "token de utilidade, que garante ao titular o uso de um produto ou de um serviço do emissor.",
               "token de pagamento, criado para circular como meio de troca entre pessoas e empresas diversas.",
-              "token lastreado em ativo, o chamado security token, tratado como valor mobiliário.",
+              "token lastreado em ativo real, o chamado security token, tratado como valor mobiliário.",
               "token não fungível, que representa item único, insubstituível e sem equivalente exato na rede."
             ],
             "c": 2,
@@ -812,7 +812,7 @@
               "a cold wallet, dispositivo físico que permanece fora da rede durante a maior parte do tempo.",
               "a hot wallet do celular, que fica conectada à internet e sujeita a programas maliciosos.",
               "a carteira em papel, com a chave impressa e guardada fora de qualquer sistema eletrônico ligado.",
-              "a custódia na exchange, em que a empresa detém as chaves em nome do próprio investidor."
+              "a custódia na exchange, em que a empresa detém as chaves em nome do investidor e assume o controle."
             ],
             "c": 3,
             "exp": "O usuário não tem controle direto dos ativos e fica exposto à falência e ao ataque contra a corretora.",
@@ -822,7 +822,7 @@
           {
             "q": "Um coletivo internacional reuniu US$ 40 milhões para comprar obras de arte sem constituir empresa, sem eleger diretoria e sem manter sede. Cada aporte deu ao participante uma quantidade de fichas digitais, e nenhuma compra se faz sem que a proposta passe por consulta aberta, na qual o peso de cada manifestação acompanha a quantidade de fichas. Aprovada a proposta, o próprio código transfere os recursos. O cliente Bento perguntou a Rita, profissional CPA, o que caracteriza esse arranjo. Uma DAO caracteriza-se por:",
             "alts": [
-              "decidir por votação dos detentores de tokens, com execução por contrato inteligente.",
+              "decidir por votação dos detentores de tokens, com execução automática por contrato inteligente.",
               "negociar criptoativos diretamente entre usuários, sem uma entidade central na operação de troca.",
               "emitir moeda digital com lastro soberano, sob a responsabilidade do banco central do país.",
               "custodiar de forma coletiva as chaves privadas dos integrantes do grupo de investidores."
@@ -852,7 +852,7 @@
             "alts": [
               "por taxa fixa paga pelo banco central do país em que a máquina estiver instalada e ligada.",
               "por comissão cobrada das corretoras que enviam as ordens de seus clientes para a rede processar.",
-              "com frações da própria criptomoeda, emitidas a cada bloco validado, somadas às taxas.",
+              "com frações da própria criptomoeda, emitidas a cada bloco validado, somadas às taxas da rede.",
               "com tokens de utilidade da plataforma, resgatáveis em produtos e serviços do ecossistema."
             ],
             "c": 2,
@@ -905,7 +905,7 @@
               "maior segurança e regulação rigorosa, com supervisão do órgão do mercado de capitais local.",
               "custódia obrigatória em cold wallet, exigida antes da liquidação de cada negócio fechado.",
               "intermediação por corretora autorizada, que garante a entrega dos ativos e o pagamento devido.",
-              "transação direta entre as partes, mais flexível e com risco de contraparte bem elevado."
+              "transação direta entre as partes, que acertam preço e pagamento sem intermediário e sem qualquer garantia."
             ],
             "c": 3,
             "exp": "Comprador e vendedor acertam preço e forma de pagamento diretamente, sem intermediário e sem garantia.",
@@ -951,7 +951,7 @@
                 "alts": [
                   "passa a deter o criptoativo em carteira própria, assumindo a guarda direta das chaves privadas.",
                   "precisa configurar uma carteira fria para custodiar pessoalmente o saldo adquirido na bolsa.",
-                  "obtém exposição à variação do ativo subjacente, sem deter a moeda nem administrar chaves.",
+                  "obtém exposição à variação diária do preço, deduzidas as taxas, sem posse do criptoativo nem gestão de chaves.",
                   "fica sujeito às regras de tributação de bens mantidos no exterior, com apuração anual própria."
                 ],
                 "c": 2,
@@ -962,7 +962,7 @@
               {
                 "q": "Solange mantém posição nos dois ETFs de ativos digitais listados na B3 e estranhou o extrato do mês: houve semanas em que os dois andaram quase juntos e outras em que um subiu bem mais que o outro, embora ambos sejam negociados no mesmo pregão, com a mesma tributação e sob a mesma regulação. Como pretende manter apenas um dos dois na carteira, ela perguntou ao assessor Adilson, profissional CPA, o que de fato separa os produtos. A diferença entre QBTC11 e HASH11 é que:",
                 "alts": [
-                  "o QBTC11 espelha um só criptoativo, enquanto o HASH11 reúne uma cesta com várias moedas.",
+                  "o QBTC11 acompanha exclusivamente o Bitcoin, enquanto o HASH11 reúne Ethereum e outras moedas, diluindo o risco.",
                   "o QBTC11 é uma moeda digital de paridade fixa e o HASH11, um fundo de índice listado em bolsa.",
                   "o QBTC11 é comprado apenas em bolsa no exterior e o HASH11, somente no mercado brasileiro.",
                   "o QBTC11 é um fundo fechado, de cotas limitadas, e o HASH11, um fundo de condomínio aberto."
@@ -978,7 +978,7 @@
                   "da cobertura do Fundo Garantidor de Créditos, acionada em caso de quebra da empresa emissora.",
                   "da validação feita por mineradores independentes espalhados por diferentes países do mundo.",
                   "do registro prévio do ativo na Comissão de Valores Mobiliários antes de cada oferta pública.",
-                  "das reservas em moeda de curso legal mantidas pela instituição que coloca o ativo em oferta."
+                  "das reservas em moeda de curso legal que a emissora mantém, correspondentes a cada unidade em circulação."
                 ],
                 "c": 3,
                 "exp": "A emissora mantém reservas correspondentes a cada unidade em circulação; é isso que sustenta a paridade.",
@@ -1089,7 +1089,7 @@
               {
                 "q": "Em uma palestra sobre meios de pagamento digitais, o cliente Norberto afirmou que o Drex e o Bitcoin dão na mesma, porque os dois existem só no celular, circulam por uma rede e não têm cédula correspondente. Aline, profissional CPA, respondeu que a semelhança para por aí e pediu que ele comparasse o que aconteceria com cada um deles se o país inteiro deixasse de aceitá-los. A partir daí, explicou o ponto que separa os dois instrumentos. A principal diferença entre uma CBDC e uma criptomoeda tradicional é que:",
                 "alts": [
-                  "a CBDC nasce com lastro fiduciário e garantia soberana do Estado que autoriza a emissão.",
+                  "a CBDC nasce com lastro fiduciário e garantia soberana, trocando descentralização por segurança jurídica.",
                   "a criptomoeda é emitida pela autoridade monetária do país, com valor definido em lei própria.",
                   "a CBDC não admite a tokenização de ativos nem a execução de contratos automáticos na rede.",
                   "a criptomoeda oferece maior segurança jurídica ao portador em caso de disputa judicial."
@@ -1103,7 +1103,7 @@
                 "q": "A empresa de Núbia tomou um empréstimo na plataforma do Drex e ofereceu um título público tokenizado em contrapartida. Ao ler o instrumento, Núbia notou que não há agente fiduciário, cartório nem necessidade de ação judicial em caso de atraso das parcelas, e que o desfecho independe da vontade das partes depois de assinado. Ela perguntou a Fabrício, profissional CPA, qual é o papel do programa que roda junto à operação. Na colateralização via DREX, o smart contract:",
                 "alts": [
                   "define o valor de mercado do ativo dado em garantia, atualizando-o a cada pregão da bolsa.",
-                  "bloqueia ou libera o token conforme o cumprimento das condições pactuadas na emissão.",
+                  "bloqueia ou libera o token conforme as condições pactuadas, executando o colateral sem nenhuma etapa manual.",
                   "substitui a análise de crédito feita pela instituição que concede o empréstimo à empresa.",
                   "dispensa o registro do ativo, que passa a existir apenas no aplicativo do próprio tomador."
                 ],
@@ -1160,7 +1160,7 @@
           {
             "q": "Uma casa de shows de Fortaleza sofria com entradas falsificadas na porta e com a atuação de cambistas na revenda. Passou então a emitir cada ingresso em blockchain, com um código próprio ligado à poltrona e ao evento, o que permite ao porteiro conferir na hora quem é o dono daquele lugar e barrar cópias. Um cliente que trabalha no ramo perguntou a Roseli, profissional CPA, em que categoria de ativo esses ingressos se enquadram. Esses ingressos são exemplo de:",
             "alts": [
-              "NFT, registro digital que identifica um item específico e não se troca por outro igual.",
+              "NFT, registro digital que identifica um item específico e não pode ser trocado por outro igual.",
               "renda fixa digital, título emitido em rede distribuída com juros e prazo de vencimento definidos.",
               "stablecoin, criptoativo com paridade mantida em relação a uma moeda de curso legal forte.",
               "ETF de criptomoedas, fundo de índice negociado em bolsa que acompanha uma cesta de ativos."
@@ -1187,7 +1187,7 @@
             "q": "O cliente Wilson quer participar do mercado de ativos digitais sem concentrar a aposta em um único nome, porque não se sente seguro para escolher qual projeto sobreviverá. Pediu ao assessor Tadeu, profissional CPA, um fundo listado na B3 que reparta o risco entre várias moedas do setor, com liquidez diária. No home broker, Wilson viu os códigos QBTC11, HASH11, USDC e BOVA11 e não sabe qual deles atende ao pedido. Tadeu deve indicar o:",
             "alts": [
               "QBTC11, fundo de índice listado na B3 cuja carteira acompanha um único criptoativo do setor.",
-              "HASH11, fundo de índice que reúne Bitcoin, Ethereum e outros criptoativos na carteira.",
+              "HASH11, fundo de índice que reúne Bitcoin, Ethereum e outros criptoativos, diluindo o risco de uma moeda só.",
               "USDC, criptoativo com paridade mantida em relação ao dólar por reservas da empresa emissora.",
               "BOVA11, fundo de índice que replica a carteira teórica do principal índice de ações do país."
             ],
@@ -1225,7 +1225,7 @@
           {
             "q": "O cliente Aristides perguntou a Débora, profissional CPA, por que ninguém se importa em receber de volta uma cédula diferente da que emprestou, nem exige o mesmo número de ordem da ação que vendeu e recomprou no dia seguinte, enquanto no caso de uma peça digital de coleção o comprador cobra exatamente aquela peça, e não outra parecida do mesmo autor. Débora respondeu classificando os dois primeiros casos citados. Dinheiro e ações são exemplos de ativos:",
             "alts": [
-              "fungíveis, porque uma unidade equivale a outra da mesma espécie e a substitui.",
+              "fungíveis, porque uma unidade equivale a outra da mesma espécie e a substitui sem perda para as partes.",
               "não fungíveis, porque cada unidade é única e não pode ser trocada por outra equivalente.",
               "tokenizados por natureza, já que existem apenas em registros eletrônicos da bolsa de valores.",
               "lastreados em reservas soberanas mantidas pelo Banco Central para garantir o valor de face impresso."
@@ -1260,7 +1260,7 @@
                 "q": "Sílvio decidiu levar a conta para outra instituição e quer que o novo banco enxergue os cinco anos de movimentação e de aplicações que ele construiu na casa anterior, na expectativa de conseguir taxas melhores logo na abertura do relacionamento. Ele perguntou a Regina, profissional CPA, se pode exigir esse envio e de quem depende a decisão. Regina explicou o princípio que sustenta o Open Finance. A premissa fundamental do Open Finance é que:",
                 "alts": [
                   "os dados pertencem à instituição que os coletou e ficam sob a guarda exclusiva dela, por sigilo.",
-                  "o histórico financeiro pertence ao titular, que autoriza o uso e escolhe com quem dividi-lo.",
+                  "o histórico financeiro pertence ao titular, que decide o que compartilhar, com quem e por quanto tempo.",
                   "o Banco Central concentra os registros do sistema e os repassa mediante pedido formal do banco.",
                   "o repasse ocorre de forma automática entre as instituições que aderiram ao arranjo brasileiro."
                 ],
@@ -1274,7 +1274,7 @@
                 "alts": [
                   "Open Banking, que reúne informações de conta corrente, de crédito e de meios de pagamento.",
                   "Open Insurance, que trata de apólices, coberturas e produtos de previdência aberta e fechada.",
-                  "Open Investments, dedicado às aplicações financeiras, que facilita a portabilidade.",
+                  "Open Investments, a fase dedicada às aplicações financeiras, que é o que facilita a portabilidade entre instituições.",
                   "Open Credit, que concentraria as propostas de empréstimo e financiamento das instituições."
                 ],
                 "c": 2,
@@ -1415,7 +1415,7 @@
                   "apenas aprovar a solução em regime regular, sem alternativa diante de resultado ruim no teste.",
                   "transferir a solução testada a outra instituição, que assume a operação no mercado aberto.",
                   "prorrogar o experimento por prazo indefinido, enquanto durar o interesse comercial da empresa.",
-                  "liberar a solução em regime regular, ajustar as regras aplicáveis ou encerrar o projeto."
+                  "liberar a solução em regime regular, ajustar as regras aplicáveis ou encerrar o projeto, conforme os resultados."
                 ],
                 "c": 3,
                 "exp": "As três saídas possíveis após a análise dos resultados reportados pela instituição.",
@@ -1527,7 +1527,7 @@
             "q": "Feliciano movimenta o salário e paga o financiamento do carro em um banco de varejo, mantém fundos em uma corretora independente e assinou uma apólice de vida com previdência aberta em uma terceira empresa. Ele perguntou a Priscila, profissional CPA, se as três frentes já estão contempladas no arranjo brasileiro e como se chamam os blocos correspondentes, porque pretende reunir tudo em um único aplicativo. Os três módulos do Open Finance são:",
             "alts": [
               "Banking, Credit e Payments, que separam depósitos, empréstimos e meios de pagamento.",
-              "Banking, Investments e Insurance, que cobrem conta e crédito, aplicações e seguros.",
+              "Banking, Investments e Insurance, que cobrem conta e crédito, aplicações e seguros, nessa ordem.",
               "Investments, Insurance e Pension, que separam aplicações, apólices e previdência fechada.",
               "Banking, Insurance e Exchange, que cobrem depósitos, apólices e operações de câmbio no exterior."
             ],
@@ -1539,7 +1539,7 @@
           {
             "q": "Ao preparar a carta mensal aos cotistas, o gestor Rubens descreveu em duas linhas o que queria e recebeu de volta, em segundos, um texto de duas páginas sobre o trimestre, com resumo em tópicos e sugestão de gráfico, escrito do zero e em bom português. Um estagiário perguntou a Rubens que tipo de inteligência artificial faz esse trabalho. A IA que produz textos, relatórios e apresentações a partir de modelos treinados é a:",
             "alts": [
-              "generativa, que cria conteúdo novo a partir dos comandos recebidos de quem a utiliza.",
+              "generativa, que cria conteúdo novo a partir dos comandos recebidos de quem a está utilizando.",
               "regenerativa, que aprende de forma contínua com dados novos e reajusta as próprias previsões.",
               "preditiva, que projeta cenários futuros a partir de séries históricas e de indicadores.",
               "reativa, que responde a estímulos programados dentro de um roteiro fixo de atendimento."
@@ -1555,7 +1555,7 @@
               "pela ANBIMA e pela B3, dentro dos códigos de autorregulação que elas próprias editam.",
               "pelo CMN e pelo COAF, que editam as regras aplicáveis às instituições financeiras autorizadas.",
               "pela SUSEP e pela PREVIC, responsáveis por seguros e por planos de previdência complementar.",
-              "pelo Banco Central e pela CVM, cada um no respectivo campo de supervisão do mercado."
+              "pelo Banco Central e pela CVM, cada um dentro do respectivo campo de supervisão do mercado."
             ],
             "c": 3,
             "exp": "Ambos utilizam o mecanismo para testar inovações sob supervisão.",
@@ -1632,7 +1632,7 @@
             "alts": [
               "criar conteúdos originais sob demanda, como textos, imagens e apresentações comerciais.",
               "seguir fluxogramas pré-programados de atendimento, com respostas padronizadas ao público.",
-              "aprender de forma contínua com dados em tempo real, ajustando as previsões a cada ciclo.",
+              "aprender de forma contínua com dados em tempo real, ajustando as previsões a cada novo ciclo.",
               "depender apenas de séries históricas fechadas, sem incorporar informação nova à análise."
             ],
             "c": 2,
@@ -1659,7 +1659,7 @@
               "bancos múltiplos autorizados pela CVM, com carteira comercial e de investimento própria.",
               "cooperativas de crédito filiadas ao FGCOOP, com cobertura para os depósitos captados.",
               "sociedades de arrendamento mercantil, supervisionadas pelo Conselho Monetário Nacional.",
-              "SCD ou SEP, ambas dependentes de autorização do Banco Central para entrar em operação."
+              "SCD ou SEP, sociedades de crédito direto e entre pessoas, ambas sob autorização do Banco Central."
             ],
             "c": 3,
             "exp": "Sociedades de crédito direto e sociedades entre pessoas, ambas sob autorização do BC.",
@@ -1670,7 +1670,7 @@
             "q": "Depois que um relatório produzido por um sistema automatizado atribuiu a uma companhia aberta um resultado trimestral que ela nunca divulgou, a gestora onde Cíntia trabalha passou a exigir a revisão de um analista antes de qualquer envio ao público. Um estagiário perguntou a ela por que manter essa etapa, se o texto fica pronto em segundos e ninguém reclamou até hoje. A validação humana permanece indispensável porque:",
             "alts": [
               "a legislação brasileira proíbe decisões apoiadas em sistemas automatizados de análise.",
-              "a ferramenta carece de repertório contextualizado e pode apresentar erro de conteúdo.",
+              "a ferramenta carece de repertório contextualizado e pode errar; empatia e negociação seguem sendo do profissional.",
               "os modelos são lentos para processar o volume de dados do mercado financeiro brasileiro.",
               "o investidor de varejo exige atendimento presencial em qualquer recomendação de produto."
             ],

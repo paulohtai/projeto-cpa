@@ -25,7 +25,7 @@
               {
                 "q": "Durante uma palestra de educação financeira em uma escola técnica, o profissional CPA Henrique quer mostrar aos alunos que o dinheiro não desaparece quando alguém consome. Ele usa um exemplo do próprio bairro: um morador paga R$ 50 por um corte de cabelo na barbearia da esquina. Um dos alunos comenta que, para ele, esse dinheiro simplesmente sumiu do bolso do morador e saiu da economia. Henrique aproveita a fala para explicar como o modelo do fluxo circular da renda enxerga essa mesma transação. Ao corrigir a impressão do aluno, Henrique deve explicar que, nesse pagamento:",
                 "alts": [
-                  "o gasto do morador é, ao mesmo tempo, a renda do barbeiro, que voltará a circular quando ele consumir.",
+                  "o gasto do morador é, ao mesmo tempo, a renda do barbeiro, e nada sai do fluxo: essa renda volta a circular no consumo seguinte.",
                   "o valor sai do circuito econômico assim que é consumido, deixando de gerar renda para os demais agentes.",
                   "a transação só passa a integrar o fluxo depois que houver o recolhimento dos tributos sobre o serviço.",
                   "o pagamento representa renda da família que consome e gasto da empresa que prestou o serviço contratado."
@@ -51,7 +51,7 @@
               {
                 "q": "O governo anuncia um programa relevante de investimento em infraestrutura hospitalar, com obras distribuídas por várias cidades. Num grupo de clientes, alguém comenta que dinheiro público aplicado dessa forma apenas tira recursos do bolso das famílias e beneficia um setor só. O profissional CPA presente aproveita a deixa para explicar como o modelo do fluxo circular da renda descreve o efeito de um gasto público dessa natureza sobre o restante da economia. Segundo esse modelo, o efeito esperado do anúncio é a:",
                 "alts": [
-                  "geração de empregos cuja renda será gasta em outros setores, realimentando o fluxo da economia.",
+                  "geração de empregos na obra, cuja renda será gasta em outros setores e realimentará o fluxo da economia como um todo.",
                   "redução do fluxo econômico, porque o gasto público retira recursos que seriam destinados ao consumo das famílias.",
                   "elevação da renda restrita ao setor de saúde, sem qualquer transbordamento para os demais setores produtivos.",
                   "substituição do papel do mercado pelo governo, que passa a realocar os recursos no lugar dos demais agentes."
@@ -122,7 +122,7 @@
               {
                 "q": "Uma indústria de Joinville fechou a compra de máquinas com um fornecedor alemão e tem trinta dias para quitar a fatura de 800 mil euros. O diretor financeiro procurou o banco porque tem reais em caixa e precisa que o valor combinado chegue à conta do fabricante na Alemanha dentro do prazo contratado, cumprindo o registro exigido para a importação. Um analista recém-chegado à área perguntou em qual subdivisão do mercado financeiro esse tipo de negócio se enquadra. A subdivisão a ser indicada é o mercado:",
                 "alts": [
-                  "cambial, em que se realiza a troca da moeda nacional por moeda estrangeira nas operações com o exterior.",
+                  "cambial, em que se troca a moeda nacional por moeda estrangeira para viabilizar o comércio internacional e os demais pagamentos externos.",
                   "de capitais, em que se negociam valores mobiliários de prazo mais longo emitidos pelas companhias abertas.",
                   "monetário, em que se negocia a liquidez de curtíssimo prazo entre as instituições financeiras e o Banco Central.",
                   "de crédito, em que as instituições concedem empréstimos e financiamentos às empresas e às pessoas físicas."
@@ -135,7 +135,7 @@
               {
                 "q": "REDENÇÃO. Ao fechar o caixa do dia, a mesa de tesouraria constatou que sobraram R$ 400 milhões sem destino e que esse dinheiro precisa render alguma coisa até a abertura do expediente seguinte. Na mesma hora, do outro lado da cidade, uma concorrente apurou falta equivalente em suas reservas e corre para cobri-la antes que o dia vire. As duas se acertam em um negócio que nasce e morre em vinte e quatro horas, cena repetida todo fim de tarde. Um estagiário perguntou em qual subdivisão do mercado financeiro esse encontro diário se enquadra. A subdivisão é o mercado:",
                 "alts": [
-                  "monetário, em que se negocia liquidez de curtíssimo prazo entre as instituições e o Banco Central.",
+                  "monetário, em que se negocia liquidez de curtíssimo prazo entre as instituições e o Banco Central, às vezes de um dia.",
                   "de crédito, em que os bancos concedem empréstimos e financiamentos às empresas e às pessoas físicas.",
                   "de capitais, em que as companhias captam recursos de prazo mais longo por meio de valores mobiliários.",
                   "cambial, em que se realiza a troca entre a moeda nacional e as moedas estrangeiras negociadas no país."
@@ -166,7 +166,7 @@
               {
                 "q": "Num curso preparatório, o instrutor apresenta quatro situações econômicas ocorridas no mesmo período e pede que a turma identifique qual delas entra no cálculo do PIB pela ótica da demanda. As situações são: a compra de ações de uma companhia por um investidor pessoa física, a construção de uma nova linha de montagem por uma montadora, a venda de aço de uma siderúrgica para essa mesma montadora e a produção de uma fábrica brasileira instalada no exterior. O instrutor avisa que apenas uma das quatro cabe na resposta e que as demais recebem tratamento diferente nas contas nacionais. A situação que compõe o cálculo do PIB é:",
                 "alts": [
-                  "a construção da nova linha de montagem, que representa formação bruta de capital fixo no período.",
+                  "a construção da nova linha de montagem, formação bruta de capital fixo, ou seja, investimento produtivo.",
                   "a compra de ações da companhia pelo investidor, que representa a poupança direcionada ao setor produtivo.",
                   "a venda de aço da siderúrgica para a montadora, que representa a produção industrial do trimestre.",
                   "a produção da fábrica brasileira instalada no exterior, por pertencer a uma empresa de capital nacional."
@@ -179,7 +179,7 @@
               {
                 "q": "Um analista precisa calcular o PIB de um país pela ótica da demanda e reúne os números do período: as famílias despenderam 500, as empresas aplicaram 200 em formação de capital e o governo desembolsou 150. O país vendeu 120 ao resto do mundo e comprou 170 de fora. Um colega sugeriu somar as duas pontas do intercâmbio com o resto do mundo, argumentando que ambas movimentam a economia. O analista respondeu que apenas uma das duas pontas entra na fórmula e que ela pode até derrubar o total. Aplicando corretamente a fórmula, o PIB desse país pela ótica da demanda é de:",
                 "alts": [
-                  "800, resultado da soma de consumo, investimento e gastos públicos, deduzido o saldo negativo de 50.",
+                  "800, porque os 850 de consumo, investimento e gastos públicos são reduzidos pelo saldo negativo de 50 do comércio exterior.",
                   "1.140, resultado da soma de todos os componentes, incluindo exportações e importações somadas entre si.",
                   "850, resultado da soma de consumo, investimento e gastos públicos, sem considerar o comércio exterior.",
                   "900, resultado da soma de consumo, investimento e gastos públicos, acrescido apenas das exportações."
@@ -303,7 +303,7 @@
               {
                 "q": "Tiago aluga uma sala comercial e o contrato prevê reajuste anual pelo IGP-M. No ano em curso, os preços no atacado subiram bem acima dos preços observados no varejo, e Tiago comenta com o profissional CPA que a conta do reajuste não deve mudar muito, porque na percepção dele o atacado teria peso pequeno no índice. O profissional explica que a composição do IGP-M distribui pesos entre atacado, consumidor e construção, e que um deles domina o resultado final do índice. Diante do cenário descrito, Tiago deve esperar um:",
                 "alts": [
-                  "reajuste pressionado, porque o IPA, que mede o atacado, responde por 60% da composição do IGP-M.",
+                  "reajuste pressionado, porque o IPA, que mede o atacado, responde por 60% do IGP-M e domina o resultado do índice.",
                   "reajuste com pouco impacto, porque os preços do atacado respondem por apenas 10% da composição do índice.",
                   "reajuste equivalente ao do IPCA, porque os dois índices medem a variação de preços ao consumidor final.",
                   "congelamento do valor, porque o componente de custo da construção neutraliza a alta observada no atacado."
@@ -316,7 +316,7 @@
               {
                 "q": "Um cliente que mora e trabalha na capital paulista comentou com o profissional CPA que a inflação anunciada no noticiário nunca bate com o que ele vê no supermercado do bairro. Ele quer acompanhar um número que retrate a alta do custo de vida ali onde mora, e não a média do Brasil inteiro. Contou ainda que sua renda mensal gira em torno de oito mínimos, faixa que, segundo ele, seria a do trabalhador comum. O profissional respondeu que existe um levantamento com exatamente esse recorte, feito por uma fundação ligada à universidade pública local. O indicador a ser apontado é o:",
                 "alts": [
-                  "Índice de Preços ao Consumidor da Fipe, restrito à cidade de São Paulo e a famílias de 1 a 10 salários.",
+                  "Índice de Preços ao Consumidor da Fipe, restrito à cidade de São Paulo e às famílias com renda de 1 a 10 salários mínimos.",
                   "Índice Nacional de Preços ao Consumidor Amplo, apurado pelo IBGE em diversas regiões metropolitanas.",
                   "Índice Geral de Preços do Mercado, apurado pela FGV e bastante influenciado pelos preços do atacado.",
                   "Índice Nacional de Custo da Construção, que acompanha a variação dos custos do setor de construção civil."
@@ -441,7 +441,7 @@
               {
                 "q": "REDENÇÃO. Em uma palestra para clientes, o profissional CPA Rui listou as frentes pelas quais o governo conduz a economia e detalhou uma delas: é a que trata de quanto custam o dólar e o euro em reais, a que orienta o uso das reservas internacionais e a que estabelece as condições em que os recursos entram e saem do território brasileiro. Um participante lembrou que foi por essa frente que o Brasil, em 1999, abandonou as bandas e passou a deixar o preço da divisa ser formado no pregão. Pediu, então, o nome técnico dessa frente. A política descrita é a política:",
                 "alts": [
-                  "cambial, que atua sobre a relação entre o real e as moedas estrangeiras e sobre o fluxo de capitais.",
+                  "cambial, que atua sobre a relação entre o real e as moedas estrangeiras e sobre o fluxo de capitais que entra e sai do país.",
                   "monetária, que atua sobre a quantidade de moeda em circulação e sobre as taxas de juros da economia.",
                   "fiscal, que atua sobre a arrecadação de tributos e sobre o volume de gastos realizados pelo governo.",
                   "tributária, que define as alíquotas e as bases de cálculo dos impostos cobrados dos contribuintes."
@@ -623,7 +623,7 @@
                 "alts": [
                   "crédito mais barato, aumento do consumo das famílias e pressão adicional sobre a inflação corrente.",
                   "crédito mais caro, aumento do consumo das famílias e aceleração imediata do produto interno bruto.",
-                  "crédito mais caro, moderação do consumo das famílias e possível desaceleração do ritmo do PIB.",
+                  "crédito mais caro, moderação do consumo das famílias e desaceleração do ritmo da atividade econômica medida pelo PIB.",
                   "crédito mais barato, moderação do consumo e queda da inflação pela redução do custo de captação."
                 ],
                 "c": 2,
@@ -679,7 +679,7 @@
                   "o CDI é a taxa apurada no mercado e o DI é o certificado que o banco emite para captar recursos.",
                   "DI e CDI designam a mesma taxa, calculada e divulgada diariamente pelo Banco Central.",
                   "o CDI é a taxa apurada e o DI corresponde ao lastro em título público federal da operação.",
-                  "o DI é a taxa apurada e divulgada pela B3, e o CDI é o certificado emitido pelo banco."
+                  "o DI é a taxa apurada e divulgada pela B3, e o CDI é o certificado privado emitido de um banco para outro."
                 ],
                 "c": 3,
                 "exp": "O DI é a taxa; o CDI é o certificado privado emitido entre bancos. Quem apura e divulga a taxa é a B3.",
@@ -689,7 +689,7 @@
               {
                 "q": "REDENÇÃO: Em uma aula de reciclagem, a instrutora Márcia pediu que a turma comparasse a origem de dois indicadores que aparecem todo dia no fechamento da tesouraria. Lembrou que ambos surgem de empréstimos de um dia só, feitos entre instituições financeiras no fim do expediente, e que se distinguem pelo que o tomador entrega ao credor como garantia: em um dos casos, um papel emitido pelo Tesouro Nacional que já estava na carteira; no outro, um recibo criado pelo próprio tomador, sem qualquer lastro do governo. A diferença essencial entre os dois indicadores está em que:",
                 "alts": [
-                  "a Selic Over nasce de operações lastreadas em título público e o CDI, de certificado privado.",
+                  "a Selic Over nasce de operações lastreadas em título público federal e o CDI, de certificado de natureza privada.",
                   "a Selic Over nasce de operações lastreadas em papel privado e o CDI, em título público federal.",
                   "as duas nascem de operações lastreadas em títulos públicos federais, variando apenas o prazo de liquidação.",
                   "as duas nascem de certificados privados emitidos pelos bancos, variando apenas o órgão que divulga a taxa."
@@ -721,7 +721,7 @@
                 "alts": [
                   "R$ 10.000, já que o valor recolhido ao Banco Central retorna à instituição no mesmo dia útil.",
                   "R$ 2.000, parcela do depósito que fica liberada para as operações de crédito com os clientes.",
-                  "R$ 8.000, resultado do depósito reduzido dos R$ 2.000 recolhidos ao Banco Central.",
+                  "R$ 8.000, porque a alíquota de 20% retém R$ 2.000 no Banco Central e o restante fica livre para crédito.",
                   "R$ 5.000, porque a instituição precisa manter metade do depósito em caixa para atender a saques."
                 ],
                 "c": 2,
@@ -733,7 +733,7 @@
                 "q": "Em uma conversa com o gerente Alexandre, o cliente Norberto afirmou que o depósito compulsório é uma espécie de imposto cobrado dos bancos e que o valor recolhido vira receita do governo federal. Alexandre esclareceu que o recolhimento é instrumento de política monetária, usado para regular a quantidade de moeda em circulação, e que os valores permanecem registrados como obrigação da instituição perante os depositantes, ainda que fiquem retidos no Banco Central. Sobre a natureza do depósito compulsório, Alexandre deve explicar que ele:",
                 "alts": [
                   "constitui tributo devido pelos bancos ao Banco Central, com recolhimento mensal e alíquota fixada em lei.",
-                  "atua no controle da liquidez, e os recursos retidos seguem pertencendo aos clientes depositantes.",
+                  "atua no controle da liquidez e não é imposto nem receita: os recursos retidos seguem pertencendo aos clientes depositantes.",
                   "transfere ao Banco Central a propriedade dos valores retidos, que deixam de integrar o passivo do banco.",
                   "integra as receitas recorrentes do Tesouro Nacional e é computado no resultado primário do governo."
                 ],
@@ -789,7 +789,7 @@
                 "alts": [
                   "a compra de títulos pelo Banco Central retira moeda de circulação e encarece o custo do crédito.",
                   "qualquer instituição financeira pode participar diretamente dos leilões conduzidos pela autoridade monetária.",
-                  "a venda de títulos pelo Banco Central drena recursos dos bancos e reduz o capital para crédito.",
+                  "a venda de títulos pelo Banco Central drena recursos dos bancos e reduz o capital disponível para crédito; a compra faz o contrário.",
                   "os leilões ocorrem apenas nos dias de reunião do Copom, respeitando o ciclo de quarenta e cinco dias."
                 ],
                 "c": 2,
@@ -845,7 +845,7 @@
                   "no regime de bandas cambiais, a cotação é formada livremente pelo mercado, sem limites anunciados.",
                   "no regime de câmbio fixo, a autoridade monetária dispensa o uso das reservas internacionais.",
                   "no regime flutuante puro, a autoridade monetária intervém no mercado à vista em cada pregão do mês.",
-                  "o Brasil operou sob bandas cambiais de 1994 a 1998, nos primeiros anos do Plano Real."
+                  "o Brasil operou sob bandas cambiais de 1994 a 1998, nos primeiros anos do Plano Real, antes de adotar o câmbio flutuante."
                 ],
                 "c": 3,
                 "exp": "As bandas cambiais vigoraram no Brasil de 1994 a 1998. No regime fixo o BC usa reservas para defender a paridade; no flutuante puro, o mercado atua sozinho.",
@@ -857,7 +857,7 @@
                 "alts": [
                   "custear a folha de pagamento do funcionalismo público federal ao longo do exercício financeiro.",
                   "financiar as linhas de crédito de longo prazo concedidas pelo BNDES às empresas brasileiras.",
-                  "estabilizar a moeda nacional e assegurar o pagamento dos compromissos do país no exterior.",
+                  "estabilizar a moeda nacional, assegurar o pagamento dos compromissos externos e sustentar a credibilidade do país.",
                   "substituir a arrecadação de tributos federais nos exercícios encerrados com déficit primário."
                 ],
                 "c": 2,
@@ -912,7 +912,7 @@
                 "q": "Com meta de inflação de 3% e intervalo de tolerância de 1,5 ponto percentual para mais ou para menos, o IPCA acumulado em doze meses ficou acima de 4,5% por seis meses seguidos. O cliente Sebastião perguntou ao gerente Almir, profissional CPA, se o presidente do Banco Central perderia o cargo. Almir explicou que a norma prevê um rito formal de prestação de contas, com documento público em que a autoridade expõe as causas do descumprimento, as providências adotadas e o prazo de retorno ao alvo. A consequência prevista nesse caso é:",
                 "alts": [
                   "a exoneração automática do presidente do Banco Central, decidida pelo Conselho Monetário Nacional.",
-                  "uma carta aberta do presidente do Banco Central ao Ministro da Fazenda explicando o desvio.",
+                  "uma carta aberta do presidente do Banco Central ao Ministro da Fazenda com as causas, as providências e o prazo de retorno.",
                   "uma carta aberta do Ministro da Fazenda ao presidente do Banco Central cobrando providências.",
                   "a revisão imediata da meta pelo CMN, com fixação de um novo intervalo de tolerância para o ano."
                 ],
@@ -927,7 +927,7 @@
                   "a verificação do cumprimento da meta voltou a ocorrer somente no fechamento de cada ano-calendário.",
                   "a fixação da meta de inflação passou do CMN para o IBGE, que também apura o índice oficial.",
                   "o índice de referência da meta deixou de ser o IPCA e passou a ser o IGP-M, apurado pela FGV.",
-                  "passou a valer a meta contínua, verificada por uma janela móvel de doze meses corridos."
+                  "passou a valer a meta contínua, avaliada mês a mês pelo IPCA acumulado numa janela móvel de doze meses."
                 ],
                 "c": 3,
                 "exp": "Desde janeiro de 2025 vale a meta contínua: a cada mês avalia-se o IPCA acumulado em doze meses. O índice segue sendo o IPCA e a meta segue sendo fixada pelo CMN.",
@@ -981,7 +981,7 @@
                 "alts": [
                   "a caderneta de poupança, remunerada pela TR somada ao percentual previsto na regra vigente.",
                   "o saldo das contas vinculadas do FGTS, corrigido pela TR mais juros anuais de três por cento.",
-                  "os financiamentos concedidos pelo BNDES, corrigidos pela TLP, referenciada nas NTN-B.",
+                  "os financiamentos concedidos pelo BNDES, corrigidos pela TLP, que é referenciada nas NTN-B e não na TR.",
                   "os títulos de capitalização, cuja reserva matemática é atualizada mensalmente pela TR contratada."
                 ],
                 "c": 2,
@@ -995,7 +995,7 @@
                   "LTN, títulos públicos prefixados que fixam a taxa de juros no momento da aplicação do investidor.",
                   "LFT, títulos públicos pós-fixados cuja remuneração acompanha a taxa Selic apurada dia a dia.",
                   "CDI, taxa média das operações de um dia realizadas entre instituições financeiras no fechamento.",
-                  "NTN-B, títulos públicos que pagam juros reais somados à variação do IPCA no período."
+                  "NTN-B, títulos públicos indexados que pagam juros reais somados à variação do IPCA do período."
                 ],
                 "c": 3,
                 "exp": "A TLP, taxa de longo prazo adotada pelo BNDES, é referenciada nas NTN-B, títulos públicos indexados ao IPCA.",
@@ -1012,7 +1012,7 @@
             "q": "Com o IPCA acumulado acima do teto do intervalo de tolerância, o Banco Central sinalizou que adotará uma política monetária mais restritiva. O cliente Reinaldo perguntou ao gerente Josué, profissional CPA, quais medidas seriam coerentes com esse objetivo. Josué lembrou que conter a inflação significa reduzir a quantidade de moeda em circulação e encarecer o crédito, e que os três instrumentos clássicos da autoridade monetária devem apontar na mesma direção. O conjunto de ações coerente com esse objetivo é:",
             "alts": [
               "reduzir a Selic, comprar títulos no open market e diminuir a alíquota do compulsório dos bancos.",
-              "elevar a Selic, vender títulos no open market e aumentar a alíquota do compulsório.",
+              "elevar a Selic, vender títulos no open market e aumentar o compulsório, retirando moeda de circulação.",
               "elevar a Selic, comprar títulos no open market e baixar a taxa cobrada nas operações de redesconto.",
               "reduzir tributos federais e a Selic, ampliando a renda disponível das famílias no período."
             ],
@@ -1078,7 +1078,7 @@
             "alts": [
               "importar fica mais barato e exportar se torna menos vantajoso para o produtor nacional.",
               "as exportações e as importações seguem inalteradas, porque dependem apenas da demanda externa.",
-              "importar fica mais caro e exportar se torna mais vantajoso para o produtor nacional.",
+              "importar fica mais caro e exportar se torna mais vantajoso para o produtor nacional, que recebe mais reais.",
               "as exportações e as importações recuam juntas, porque o custo do frete internacional se eleva."
             ],
             "c": 2,
@@ -1091,7 +1091,7 @@
             "alts": [
               "redesconto: parcela dos depósitos captados que permanece retida junto ao Banco Central do Brasil.",
               "compulsório: crédito emergencial de última instância concedido às instituições sem liquidez.",
-              "open market: compra e venda de títulos públicos federais conduzida pelo Banco Central.",
+              "open market: a compra e a venda de títulos públicos federais conduzidas pelo Banco Central.",
               "Selic Over: taxa definida pelo Copom nas reuniões realizadas a cada quarenta e cinco dias."
             ],
             "c": 2,
@@ -1102,7 +1102,7 @@
           {
             "q": "Ao acompanhar a agenda do mercado, o cliente Hamilton perguntou à gerente Simone, profissional CPA, quando sai o documento em que o Copom expõe os argumentos que o levaram a mudar a Selic. Simone explicou que o resultado do encontro é comunicado em texto curto, no meio da semana, após o fechamento do pregão, e que a versão detalhada dos debates costuma sair alguns dias mais tarde, sempre no mesmo dia da semana a cada ciclo, bem antes do encontro posterior. Hamilton quis saber exatamente que dia da semana é esse. Segundo o protocolo do Copom, a ata é divulgada:",
             "alts": [
-              "na terça-feira seguinte à reunião, trazendo o registro das discussões do colegiado.",
+              "na terça-feira seguinte à reunião, trazendo o registro das discussões travadas pelo colegiado.",
               "na própria quarta-feira da decisão, logo em seguida ao anúncio da nova taxa básica de juros.",
               "trinta dias depois da decisão, em conjunto com o relatório trimestral de inflação divulgado pelo BC.",
               "no mesmo dia da divulgação do IPCA mensal pelo IBGE, para facilitar a comparação dos dados."
@@ -1143,7 +1143,7 @@
             "alts": [
               "PTAX, Banco Central e IGP-M, índice geral de preços de mercado apurado a cada mês pela FGV.",
               "compulsório, Conselho Monetário Nacional e IPCA, apurado pelo instituto oficial de estatística.",
-              "Selic, IBGE e IPCA, índice oficial de inflação utilizado no sistema de metas do país.",
+              "Selic, IBGE e IPCA, o índice oficial de inflação utilizado no sistema de metas do país.",
               "TR, IBGE e IPC-Fipe, índice de preços ao consumidor apurado apenas na cidade de São Paulo."
             ],
             "c": 2,
@@ -1203,7 +1203,7 @@
                   "operam junto ao público, realizando diretamente a intermediação entre poupadores e tomadores de recursos.",
                   "fiscalizam, no dia a dia, o cumprimento das regras pelas instituições e aplicam penalidades aos infratores.",
                   "reúnem representantes de instituições privadas, encarregados de autorregular as práticas adotadas no mercado.",
-                  "estabelecem as diretrizes e as normas gerais do sistema, sem operar diretamente nos mercados regulados."
+                  "estabelecem as diretrizes e as normas gerais do sistema, sem intermediar operações nem fiscalizar o dia a dia dos mercados."
                 ],
                 "c": 3,
                 "exp": "Os órgãos normativos definem as regras do jogo, mas não jogam: não realizam intermediação nem fiscalização diária, tarefas dos operadores e dos supervisores.",
@@ -1258,7 +1258,7 @@
                 "alts": [
                   "circulares, ato por meio do qual o Banco Central detalha e operacionaliza as normas em vigor.",
                   "instruções, ato historicamente utilizado pela CVM para disciplinar o mercado de capitais.",
-                  "resoluções, publicadas no sítio do Banco Central e de observância obrigatória no sistema.",
+                  "resoluções, divulgadas no sítio do Banco Central e de observância obrigatória em todo o sistema.",
                   "deliberações normativas, expedientes usados pelas entidades de autorregulação junto aos associados."
                 ],
                 "c": 2,
@@ -1272,7 +1272,7 @@
                   "executar a política monetária e os instrumentos necessários ao cumprimento da meta de inflação.",
                   "autorizar o funcionamento das instituições financeiras e acompanhar a sua operação no dia a dia.",
                   "fiscalizar os analistas de valores mobiliários e os administradores de carteira registrados.",
-                  "zelar pela liquidez e pela solvência das instituições financeiras que integram o sistema."
+                  "zelar pela liquidez e pela solvência das instituições que integram o sistema financeiro nacional."
                 ],
                 "c": 3,
                 "exp": "Executar a política monetária e autorizar o funcionamento de instituições são competências do Banco Central; fiscalizar analistas é da CVM. Zelar pela liquidez e solvência do sistema é do CMN.",
@@ -1312,7 +1312,7 @@
               {
                 "q": "Ao comentar a autonomia do Banco Central, o cliente Aldo disse a Juliana, profissional CPA, ter lido que a instituição é comandada por uma única autoridade, que decide sozinha sobre os juros. Juliana explicou que a diretoria é colegiada e que seus integrantes cumprem mandato fixo e não coincidente, com uma recondução possível, após sabatina e aprovação do Senado Federal. Acrescentou que o número de dirigentes do Banco Central é maior do que o da CVM e que o prazo do mandato é idêntico para cada membro. Nessas condições, a estrutura do Banco Central é:",
                 "alts": [
-                  "colegiada, formada por nove membros com mandato de quatro anos, aprovados pelo Senado Federal.",
+                  "colegiada, formada por um presidente e oito diretores com mandato de quatro anos, aprovados pelo Senado Federal.",
                   "colegiada, formada por cinco membros com mandato de quatro anos, aprovados pelo Senado Federal.",
                   "colegiada, formada por nove membros com mandato de dois anos, renovado a cada eleição presidencial.",
                   "unipessoal, sob comando exclusivo do presidente, a quem cabe fixar isoladamente a taxa básica de juros."
@@ -1327,7 +1327,7 @@
                 "alts": [
                   "autorizar o funcionamento das instituições financeiras e cassar essa autorização quando for o caso.",
                   "ser depositário das reservas oficiais de ouro e de moeda estrangeira mantidas pelo país no exterior.",
-                  "definir a meta de inflação que orientará a condução da política monetária no período seguinte.",
+                  "definir a meta de inflação a ser perseguida, número que baliza toda a condução monetária do período.",
                   "gerir o Sistema de Pagamentos Brasileiro e o arranjo de pagamentos instantâneos conhecido como Pix."
                 ],
                 "c": 2,
@@ -1354,7 +1354,7 @@
                   "no primeiro ano do mandato presidencial, permitindo o alinhamento imediato com o novo governo eleito.",
                   "na data da aprovação pelo Senado Federal, sem prazo predefinido de permanência do dirigente no cargo.",
                   "na mesma data da posse do presidente da República, com duração igual à do mandato eleitoral em curso.",
-                  "no terceiro ano do mandato presidencial, o que preserva a independência técnica da autarquia."
+                  "no terceiro ano do mandato presidencial, desenho que assegura independência técnica ao dessincronizar os dois ciclos."
                 ],
                 "c": 3,
                 "exp": "O mandato do presidente do Banco Central começa no terceiro ano do mandato presidencial, o que assegura independência técnica em relação ao ciclo eleitoral.",
@@ -1421,7 +1421,7 @@
                 "q": "REDENÇÃO: Ao ler uma notícia sobre o julgamento de um processo sancionador, o cliente Wilson comentou com Beatriz, profissional CPA, que a CVM lhe parecia um clube de empresas do setor, do mesmo tipo das associações que escrevem manuais de conduta e cobram adesão voluntária dos filiados. Beatriz respondeu que não: a CVM foi criada por lei, integra a administração pública indireta, tem patrimônio e orçamento separados dos da União e é vinculada ao Ministério da Fazenda sem receber ordens dele no exercício de suas competências. Do ponto de vista de sua natureza, a CVM é:",
                 "alts": [
                   "sociedade anônima de capital aberto, com ações negociadas em bolsa e controle de acionistas privados.",
-                  "autarquia federal, dotada de personalidade jurídica própria e de autoridade administrativa.",
+                  "autarquia federal, dotada de personalidade jurídica própria e de autoridade sobre o mercado de capitais.",
                   "entidade autorreguladora privada, mantida pelas instituições que participam do mercado de capitais.",
                   "departamento interno do Banco Central, ao qual se subordina no exercício da fiscalização diária."
                 ],
@@ -1579,7 +1579,7 @@
                 "alts": [
                   "do banco de investimento, que capta por depósito a prazo e concede crédito de longo prazo a empresas.",
                   "da sociedade de arrendamento mercantil, especializada nas operações de leasing de bens móveis.",
-                  "do banco comercial, autorizado a manter conta corrente e a conceder crédito de curto prazo.",
+                  "do banco comercial, única figura autorizada a captar depósito à vista e a manter conta corrente para o público.",
                   "da corretora de câmbio, que intermedeia operações de compra e venda de moeda estrangeira no país."
                 ],
                 "c": 2,
@@ -1603,7 +1603,7 @@
               {
                 "q": "REDENÇÃO: Convidado por um colega a abrir conta em uma cooperativa de crédito, o cliente Jair procurou Mariana, profissional CPA, para entender a diferença em relação ao banco em que já era correntista. Mariana explicou que na cooperativa o cliente se torna associado, integraliza cotas de capital, vota nas assembleias e participa das sobras apuradas no exercício. Nessas condições, a cooperativa de crédito caracteriza-se como:",
                 "alts": [
-                  "instituição sem fins lucrativos, cujas operações são dirigidas ao seu quadro de associados.",
+                  "instituição sem fins lucrativos, cujas operações são dirigidas exclusivamente ao seu quadro de associados.",
                   "sociedade anônima com fins lucrativos, aberta ao público em geral e com ações negociadas em bolsa.",
                   "instituição sem fins lucrativos, aberta à contratação pelo público em geral, sem exigir adesão.",
                   "instituição controlada pelo governo do respectivo estado, voltada ao fomento da economia regional."
@@ -1660,7 +1660,7 @@
                 "q": "REDENÇÃO: Ao montar um quadro com os supervisores de cada mercado, o estagiário Renan pediu a Cristina, profissional CPA, que confirmasse a linha do segmento securitário. Cristina explicou que seguradoras, resseguradoras, corretoras de seguros e entidades abertas de previdência complementar formam um mesmo ecossistema, fiscalizado por uma autarquia executiva que segue as diretrizes fixadas por um conselho normativo próprio, distinto do colegiado que atua no regime fechado. Esse ecossistema é supervisionado:",
                 "alts": [
                   "pelo Banco Central, conforme as diretrizes fixadas pelo Conselho Monetário Nacional ao setor.",
-                  "pela SUSEP, conforme as diretrizes fixadas pelo Conselho Nacional de Seguros Privados.",
+                  "pela SUSEP, seguindo as diretrizes fixadas pelo Conselho Nacional de Seguros Privados.",
                   "pela CVM, conforme as diretrizes fixadas pelo Conselho Monetário Nacional para o mercado.",
                   "pela PREVIC, conforme as diretrizes fixadas pelo Conselho Nacional de Previdência Complementar."
                 ],
@@ -1705,7 +1705,7 @@
                   "na exigência de registro das operações, aplicável apenas ao ambiente de bolsa de valores mobiliários.",
                   "na ausência de regulação do mercado de balcão, que dispensaria a supervisão das autoridades competentes.",
                   "na vedação à negociação de cotas de fundos de investimento no ambiente de balcão organizado.",
-                  "na liquidez e na transparência, com preços divulgados em tempo real no ambiente de bolsa."
+                  "na liquidez e na transparência, já que a bolsa divulga preços em tempo real e o balcão organizado não."
                 ],
                 "c": 3,
                 "exp": "A bolsa oferece liquidez e preços em tempo real; o mercado de balcão é regulado e registrado, mas não tem a mesma liquidez nem a mesma transparência de preços.",
@@ -1716,7 +1716,7 @@
                 "q": "REDENÇÃO: Ao explicar o caminho de uma ordem de compra de ações, o assessor Hélio, profissional CPA, contou ao cliente Ivan que o papel da B3 não termina quando o preço é fechado na tela. Ivan supunha que a bolsa apenas cruzasse ofertas e que o resto ficasse por conta dos bancos, que se acertariam depois entre si. Hélio esclareceu que a própria B3 guarda os ativos em depósito centralizado e se coloca no meio de cada negócio, de modo que o vendedor receba o dinheiro e o comprador receba os papéis mesmo que uma das pontas falhe. Além de reunir compradores e vendedores, cabe à B3:",
                 "alts": [
                   "definir a taxa Selic Meta observada pelo mercado nas operações com títulos públicos federais.",
-                  "registrar, compensar e liquidar as operações realizadas em seus ambientes de negociação.",
+                  "registrar, compensar e liquidar o que é fechado nos seus ambientes, na condição de infraestrutura de mercado.",
                   "autorizar o funcionamento das corretoras e distribuidoras que atuam no mercado de capitais.",
                   "fiscalizar as seguradoras e as entidades abertas de previdência complementar que operam no país."
                 ],
@@ -1879,7 +1879,7 @@
                 "alts": [
                   "planejador financeiro pessoal, responsável pelo plano financeiro do cliente pessoa física.",
                   "assessor de investimentos, credenciado para captar clientes e transmitir ordens ao mercado.",
-                  "analista de valores mobiliários, responsável por relatórios de análise e recomendações.",
+                  "analista de valores mobiliários, responsável por relatórios e recomendações, com certificação concedida pela APIMEC.",
                   "administrador de carteiras, responsável pela gestão profissional de recursos de terceiros."
                 ],
                 "c": 2,
@@ -1899,7 +1899,7 @@
               "supervisor, normativo e operador, cabendo ao conselho a fiscalização diária das instituições.",
               "normativo, operador e supervisor, cabendo ao Banco Central a intermediação das ordens dos clientes.",
               "operador, normativo e supervisor, cabendo à corretora a fiscalização do mercado de capitais.",
-              "normativo, supervisor e operador, cabendo à corretora a intermediação junto ao público."
+              "normativo, supervisor e operador, cabendo à corretora a intermediação das ordens do público."
             ],
             "c": 3,
             "exp": "O CMN normatiza, o Banco Central supervisiona e a corretora de valores opera, intermediando as ordens dos clientes.",
@@ -1937,7 +1937,7 @@
             "alts": [
               "o FGC, fundo garantidor com cobertura limitada a R$ 250 mil por instituição e por CPF do investidor.",
               "o FGCOOP, fundo garantidor das cooperativas, com cobertura limitada a R$ 200 mil por associado.",
-              "o MRP, com cobertura limitada a R$ 200 mil por reclamação apresentada à BSM pelo investidor.",
+              "o MRP, que ressarce em até R$ 200 mil o investidor lesado por participante do sistema de distribuição.",
               "o MRP, com cobertura limitada a R$ 250 mil por reclamação apresentada à BSM pelo investidor lesado."
             ],
             "c": 2,
@@ -1976,7 +1976,7 @@
             "alts": [
               "capta por depósito à vista e concede crédito de curtíssimo prazo às empresas suas clientes no varejo.",
               "concede crédito de médio e longo prazo e tem o seu controle acionário exercido pelos estados.",
-              "capta por depósito a prazo e concede crédito de médio e longo prazo às empresas clientes.",
+              "capta por depósito a prazo e concede crédito de médio e longo prazo às empresas que atende.",
               "atua na intermediação de operações de câmbio, sem conceder crédito às empresas suas clientes."
             ],
             "c": 2,
@@ -2013,7 +2013,7 @@
           {
             "q": "Ao montar um quadro de certificações para a equipe, o coordenador Jonas, profissional CPA, pediu que os analistas ligassem cada entidade à certificação correspondente. Ele lembrou que a APIMEC responde pelo exame dos analistas de valores mobiliários, que a ANCORD aplica a prova exigida dos assessores de investimentos e que a ANBIMA concede as certificações de distribuição e de gestão de recursos. Restava confirmar quem responde pelo planejamento financeiro pessoal. A associação correta é:",
             "alts": [
-              "PLANEJAR e CFP, certificação de planejamento financeiro pessoal aplicada no Brasil.",
+              "PLANEJAR e CFP, a certificação de planejamento financeiro pessoal aplicada no Brasil.",
               "APIMEC e CFP, certificação exigida dos profissionais de planejamento financeiro pessoal no país.",
               "ANCORD e CNPI, certificação exigida dos analistas que assinam os relatórios de análise.",
               "ANBIMA e CNPI, certificação exigida dos profissionais que elaboram relatórios de recomendação."
@@ -2028,7 +2028,7 @@
             "alts": [
               "autarquia federal dirigida por um presidente e oito diretores aprovados pelo Senado Federal.",
               "entidade autorreguladora vinculada à B3, com atuação semelhante à que é exercida pela BSM.",
-              "autarquia federal dirigida por um presidente e quatro diretores aprovados pelo Senado.",
+              "autarquia federal do mercado de capitais, dirigida por um presidente e quatro diretores aprovados pelo Senado.",
               "órgão normativo que fixa as características gerais dos contratos de seguro comercializados."
             ],
             "c": 2,
@@ -2040,7 +2040,7 @@
             "q": "Ao comparar instituições para um trabalho escolar, o filho do cliente Rubens perguntou a Marina, profissional CPA, o que diferencia uma cooperativa de crédito de um banco de desenvolvimento. Marina explicou que a primeira é constituída pelos próprios usuários, que se associam, integralizam cotas e participam das decisões em assembleia, enquanto o segundo é criado por ente público para financiar projetos de infraestrutura e de produção em sua região. A diferença entre as duas instituições está em que:",
             "alts": [
               "a cooperativa persegue lucro para distribuir aos acionistas e o banco de desenvolvimento não.",
-              "a cooperativa atende o seu quadro de associados e o banco de desenvolvimento é estadual.",
+              "a cooperativa atende o seu quadro de associados e o banco de desenvolvimento tem controle estadual.",
               "o banco de desenvolvimento atende apenas associados e a cooperativa é controlada por estado.",
               "as duas instituições são controladas diretamente pelo governo federal e atendem ao público."
             ],
@@ -2144,7 +2144,7 @@
                   "1000 PV, 2 i, 12 n, FV, mantendo o valor presente com sinal positivo na memória financeira da calculadora.",
                   "1000 FV, 2 i, 12 n, PV, lançando o capital inicial na tecla reservada ao valor futuro da operação.",
                   "1000 CHS FV, 12 i, 2 n, PV, com a taxa e o prazo informados em teclas trocadas entre si na máquina.",
-                  "1000 CHS PV, 2 i, 12 n, FV, em que o CHS inverte o sinal do capital aplicado pelo investidor."
+                  "1000 CHS PV, 2 i, 12 n, FV, em que o CHS inverte o sinal do capital porque a aplicação é saída de caixa."
                 ],
                 "c": 3,
                 "exp": "O CHS inverte o sinal do PV, porque a aplicação é uma saída de caixa. Com 2 i e 12 n, a tecla FV devolve o montante de 1.268,24.",
@@ -2213,7 +2213,7 @@
                 "alts": [
                   "4,22% no regime simples e 4,50% no regime composto, invertendo o resultado que cabe a cada uma das conversões.",
                   "4,50% nos dois regimes, porque a divisão do ano em quatro trimestres independe do regime de capitalização.",
-                  "4,50% no simples, pela divisão de 18 por quatro, e 4,22% no composto, pela raiz do fator.",
+                  "4,50% no simples, pela divisão de 18 por quatro, e 4,22% no composto, pela raiz quarta do fator 1,18.",
                   "6,00% no regime simples, pela divisão de 18 por três, e 4,22% no regime de capitalização composta."
                 ],
                 "c": 2,
@@ -2239,7 +2239,7 @@
                 "alts": [
                   "12,00%, resultado da multiplicação da taxa mensal pelos doze meses, conta própria do regime de juros simples.",
                   "10,00%, número que ficaria abaixo até da soma direta das taxas mensais do período considerado.",
-                  "12,68%, resultado de elevar o fator 1,01 à décima segunda potência e subtrair uma unidade.",
+                  "12,68%, resultado de elevar o fator 1,01 à décima segunda potência e subtrair uma unidade inteira.",
                   "13,50%, número que superaria o efeito da capitalização mensal da taxa de 1% ao longo de um ano inteiro."
                 ],
                 "c": 2,
@@ -2294,7 +2294,7 @@
                 "alts": [
                   "a programação da calculadora é vedada durante a aplicação do exame de certificação profissional.",
                   "o uso da rotina programada dispensa a compreensão dos conceitos de equivalência entre taxas.",
-                  "o domínio do cálculo manual da taxa continua essencial, mesmo com a rotina já programada.",
+                  "o domínio do cálculo manual da taxa equivalente continua essencial, e a rotina programada não substitui o conceito.",
                   "a HP12C não dispõe de memória capaz de armazenar rotinas programadas pelo próprio usuário."
                 ],
                 "c": 2,
@@ -2324,7 +2324,7 @@
                 "alts": [
                   "uma saída inicial de recursos seguida de entradas mensais ao longo do prazo contratado no banco.",
                   "apenas saídas de caixa, distribuídas entre a data da contratação e o pagamento das parcelas.",
-                  "uma entrada inicial de recursos seguida de saídas mensais correspondentes às parcelas.",
+                  "uma entrada inicial de recursos, na liberação do crédito, seguida das saídas mensais correspondentes às parcelas.",
                   "apenas entradas de caixa, já que o cliente recebe o valor e o amortiza com recursos próprios."
                 ],
                 "c": 2,
@@ -2406,7 +2406,7 @@
                 "alts": [
                   "o VPL e a TIR sobem, porque a soma dos recebimentos previstos para o projeto permanece a mesma.",
                   "o VPL e a TIR permanecem inalterados, já que o total recebido no período não sofreu alteração.",
-                  "o VPL cai para R$ 22.232,09 e a TIR, para 11,61% ao ano, pelo adiamento dos recebimentos.",
+                  "o VPL cai para R$ 22.232,09 e a TIR, para 11,61% ao ano, porque receber mais tarde reduz o valor presente dos fluxos.",
                   "o projeto passa a ser inviável, apresentando valor presente líquido negativo na nova projeção."
                 ],
                 "c": 2,
@@ -2420,7 +2420,7 @@
                   "período ignorado, com o lançamento do fluxo seguinte logo após o do período imediatamente anterior.",
                   "0 PMT, registro que zera a série de pagamentos iguais armazenada na memória da calculadora.",
                   "0 CHS g CF0, reiniciando a contagem dos fluxos a partir do período sem movimento de caixa.",
-                  "0 g CFj, lançamento que preserva a posição no tempo dos fluxos de caixa seguintes."
+                  "0 g CFj, lançamento que preserva a posição no tempo de todos os fluxos de caixa seguintes."
                 ],
                 "c": 3,
                 "exp": "Pular o período desloca todos os fluxos posteriores no tempo e distorce o cálculo. O correto é lançar 0 g CFj para o período vazio.",
@@ -2571,7 +2571,7 @@
               {
                 "q": "REDENÇÃO: Ao estruturar uma operação de crédito para a empresa de Cleide, o profissional CPA Marcelo apresentou uma alternativa em que a companhia desembolsaria pouco durante a vigência do contrato e faria um pagamento expressivo apenas no final. Cleide perguntou como o principal é tratado nesse desenho. Marcelo explicou que se trata do sistema americano, no qual os juros são pagos periodicamente ao longo do contrato, sem que o saldo devedor seja reduzido nesses pagamentos. Nesse sistema, o pagamento do principal ocorre:",
                 "alts": [
-                  "integralmente no vencimento, com pagamento apenas dos juros nos períodos anteriores.",
+                  "integralmente no vencimento, de uma só vez, com pagamento apenas dos juros durante todo o contrato.",
                   "em parcelas constantes distribuídas ao longo do prazo contratado com a instituição financeira.",
                   "no início do contrato, junto com a liberação do recurso e a primeira parcela de juros devida.",
                   "junto com os juros, diluído em prestações de mesmo valor até o encerramento do financiamento."
@@ -2617,7 +2617,7 @@
                 "alts": [
                   "4,74%, resultado que seria obtido caso o período tivesse registrado inflação de 1,2% nos preços.",
                   "7,20%, resultado da soma direta entre o rendimento nominal e a variação negativa dos preços.",
-                  "7,29%, resultado da divisão do fator 1,06 pelo fator 0,988, subtraindo uma unidade.",
+                  "7,29%, resultado da divisão do fator 1,06 pelo fator 0,988 da deflação, menos uma unidade.",
                   "4,80%, número que subtrairia a variação dos preços do rendimento nominal apurado no ano."
                 ],
                 "c": 2,
@@ -2733,7 +2733,7 @@
               "R$ 5.600,00, montante que seria obtido no regime de capitalização simples para esse mesmo prazo.",
               "R$ 5.100,00, valor que consideraria a taxa de 2% incidindo uma única vez sobre o capital aplicado.",
               "R$ 6.000,00, montante que exigiria uma taxa bem superior à contratada para o prazo de 6 meses.",
-              "R$ 5.630,81, resultado da capitalização composta de 2% ao mês sobre o capital nos 6 meses."
+              "R$ 5.630,81, resultado da capitalização composta de 2% ao mês nos 6 meses; no regime simples seriam R$ 5.600,00."
             ],
             "c": 3,
             "exp": "5.000 × 1,02^6 = 5.630,81. O regime de capitalização simples produziria 5.600,00 no mesmo prazo.",
@@ -2746,7 +2746,7 @@
               "26,82% de taxa proporcional e 24% de taxa equivalente, invertendo o resultado das duas conversões.",
               "24% nas duas conversões, porque a quantidade de meses do ano é a mesma nos dois regimes de juros.",
               "12% de taxa proporcional e 26,82% de taxa equivalente, considerando apenas meio ano de aplicação.",
-              "24% de taxa proporcional, pela multiplicação por doze, e 26,82% de equivalente, pelo fator."
+              "24% de taxa proporcional, pela multiplicação de 2% por doze, e 26,82% de equivalente, pelo fator elevado a doze."
             ],
             "c": 3,
             "exp": "Proporcional: 2% × 12 = 24% ao ano. Equivalente: (1,02)^12 - 1 = 26,82% ao ano.",
@@ -2757,7 +2757,7 @@
             "q": "Retomando o projeto de R$ 500.000, com entradas de R$ 100.000, R$ 150.000, R$ 200.000 e R$ 250.000 ao longo de quatro anos e piso de 10% ao ano fixado pelo próprio Rubens, a profissional CPA Aline mostrou que, trazidos os recebimentos para a data de hoje e abatido o desembolso inicial, ainda sobra dinheiro na conta, e que a máquina acusa 12,83% ao ano de rentabilidade própria do empreendimento. Rubens perguntou como transformar esses dois números em um sim ou um não sobre comprar a máquina. Diante dos números apurados, a decisão correta é:",
             "alts": [
               "rejeitar o projeto, uma vez que a taxa interna de retorno teria ficado abaixo da mínima exigida.",
-              "aceitar o projeto, pois o valor presente líquido é positivo e a TIR supera a taxa mínima.",
+              "aceitar o projeto, pois o valor presente líquido é positivo e a taxa interna de retorno supera a mínima exigida.",
               "ficar indiferente, porque o valor presente líquido apurado para o projeto seria igual a zero.",
               "rejeitar o projeto, já que o valor presente líquido apurado seria negativo em cerca de R$ 35 mil."
             ],
@@ -2769,7 +2769,7 @@
           {
             "q": "O comerciante Nilton levou ao profissional CPA Bruno um título de R$ 10.000 com vencimento em 6 meses e pediu que ele simulasse a antecipação pelos critérios que o banco oferece, ambos à taxa de 3% ao mês. Nilton disse que, para ele, tanto faz, porque o papel e o percentual combinado são os mesmos nas simulações. Bruno respondeu que a matemática de cada critério parte de um ponto diferente e que o dinheiro creditado hoje difere de uma simulação para a outra. Nilton quer saber quanto entra na conta dele em cada hipótese. Os montantes líquidos nos descontos por fora e por dentro são, respectivamente:",
             "alts": [
-              "R$ 8.329,72 e R$ 8.374,84, com o desconto por fora liberando o menor dos dois valores.",
+              "R$ 8.329,72 e R$ 8.374,84, sendo que o desconto por fora libera o menor dos dois valores.",
               "R$ 8.374,84 e R$ 8.329,72, invertendo os resultados que cabem a cada uma das duas modalidades.",
               "R$ 8.329,72 nas duas modalidades, porque o prazo e a taxa contratados são exatamente os mesmos.",
               "R$ 9.700,00 e R$ 9.708,74, com a taxa de 3% incidindo uma única vez ao longo dos seis meses."
@@ -2798,7 +2798,7 @@
               "4,80%, número obtido pela subtração direta entre o rendimento nominal e a inflação do período.",
               "7,29%, resultado compatível com um período de deflação de 1,2%, e não de alta dos preços.",
               "5,00%, número arredondado que despreza a relação exata entre os dois fatores envolvidos.",
-              "4,74%, obtido pela divisão do fator 1,06 pelo fator 1,012, menos uma unidade inteira."
+              "4,74%, obtido pela fórmula de Fisher: divide-se o fator 1,06 pelo fator 1,012 e subtrai-se uma unidade."
             ],
             "c": 3,
             "exp": "Pela fórmula de Fisher, (1,06 ÷ 1,012) - 1 = 4,74% de taxa real no período.",
@@ -2808,7 +2808,7 @@
           {
             "q": "Ao explicar o risco de juros de um título ao cliente Wilson, o profissional CPA Alberto lembrou que ele vence em 3 anos e paga cupons a cada seis meses até lá. Wilson respondeu que já ouviu falar em duration e imagina que esse indicador seja uma informação fixa, impressa no contrato de emissão, sem relação com o caixa que ele recebe pelo caminho. Alberto pediu que ele pensasse no dinheiro que entra antes do fim e no peso que cada entrada tem na média ponderada. Nessas condições, a duration de Macaulay do título será:",
             "alts": [
-              "menor que 3 anos, porque os cupons semestrais antecipam parte do retorno do investidor.",
+              "menor que 3 anos, porque os cupons semestrais antecipam parte do capital e reduzem o prazo médio dos fluxos.",
               "igual a 3 anos, pois a duration acompanha a data de vencimento indicada na escritura do papel.",
               "maior que 3 anos, por efeito do reinvestimento dos cupons recebidos ao longo do prazo do título.",
               "igual ao número de cupons pagos pelo emissor até a data de vencimento do título negociado."
@@ -2848,7 +2848,7 @@
             "q": "Ao avaliar um projeto de expansão, o profissional CPA Diogo verificou que dois dos anos projetados não apresentam qualquer entrada ou saída de caixa. Ele precisa lançar a série na HP12C para apurar o valor presente líquido e a taxa interna de retorno. O estagiário sugeriu simplesmente não digitar nada nesses dois anos e seguir para o próximo fluxo. Diogo lembrou que a máquina identifica cada período pela ordem dos lançamentos feitos. Ao informar os dados na HP12C, ele deve:",
             "alts": [
               "pular o período vazio e seguir diretamente para o lançamento do fluxo de caixa do ano seguinte.",
-              "digitar 0 g CFj para cada período sem movimento, preservando a posição dos fluxos.",
+              "digitar 0 g CFj para cada período sem movimento, preservando a posição dos fluxos no tempo.",
               "digitar 0 PMT, registro que zera a série de pagamentos iguais guardada na calculadora.",
               "reiniciar o cálculo informando CF0 igual a zero e relançando os fluxos a partir daquele ponto."
             ],
@@ -2860,7 +2860,7 @@
           {
             "q": "O cliente Adenilson aplicou R$ 2.000 em um produto que remunera a 3% ao mês em regime de capitalização simples, com prazo de 10 meses. Ao conversar com a profissional CPA Fátima, ele afirmou que os juros de cada mês passariam a render nos meses seguintes. Fátima esclareceu que, no regime simples, a taxa incide apenas sobre o capital inicial em cada um dos períodos, de modo que os juros mensais permanecem no mesmo valor. Nessas condições, o montante da aplicação ao final dos 10 meses é de:",
             "alts": [
-              "R$ 2.600,00, resultado de somar ao capital os juros de 3% incidentes sobre ele nos 10 meses.",
+              "R$ 2.600,00, resultado de somar ao capital os juros de 3% ao mês sobre ele nos 10 meses, sem capitalização.",
               "R$ 2.687,83, montante que corresponderia ao regime de capitalização composta no mesmo prazo.",
               "R$ 2.060,00, valor que consideraria a taxa de 3% incidindo uma única vez sobre o capital aplicado.",
               "R$ 2.300,00, montante que corresponderia a uma taxa acumulada de 15% no período contratado."
@@ -2934,7 +2934,7 @@
               {
                 "q": "Ao comparar os prazos de duas operações no extrato da empresa, a controller Renata perguntou ao gerente Amauri, profissional CPA, por que uma transferência chega em segundos e uma liquidação de bolsa aparece apenas no dia seguinte. Amauri explicou que o Sistema de Pagamentos Brasileiro trabalha com dois regimes: em um deles cada ordem é processada individualmente, no ato; no outro, as obrigações são acumuladas e compensadas por diferença de saldo entre as instituições. A diferença entre a LBTR e a LDL está em que:",
                 "alts": [
-                  "a LBTR liquida cada ordem em tempo real e a LDL liquida por saldo, em D+1 ou prazo maior.",
+                  "a LBTR liquida cada ordem em tempo real, uma a uma, e a LDL liquida por saldo, em D+1 ou prazo maior.",
                   "a LBTR liquida por saldo em D+1 e a LDL processa cada ordem individualmente, em tempo real.",
                   "os dois regimes liquidam em tempo real, variando apenas o valor mínimo exigido por operação.",
                   "a LDL é utilizada apenas nas operações de câmbio contratadas com instituições autorizadas pelo BC."
@@ -3002,7 +3002,7 @@
               {
                 "q": "Durante um treinamento sobre infraestrutura de mercado, a instrutora Neide pediu que a turma separasse as atribuições de cada sistema. Lembrou que o registro de debêntures, ações e cotas de fundos ocorre nas estruturas da B3, que os pagamentos instantâneos trafegam pelo SPI e que a fiscalização de corretoras e distribuidoras cabe à CVM. Restava, então, identificar a função do sistema mantido pelo Banco Central que dá nome à taxa básica de juros do país. O Selic é responsável por:",
                 "alts": [
-                  "custodiar e liquidar os títulos públicos federais negociados no mercado institucional.",
+                  "custodiar e liquidar os títulos públicos federais negociados entre bancos e fundos no mercado institucional.",
                   "registrar debêntures, ações e cotas de fundos de investimento negociadas no mercado de capitais.",
                   "liquidar as ordens de pagamento instantâneo cursadas pelos participantes do arranjo Pix.",
                   "fiscalizar as corretoras e as distribuidoras de títulos e valores mobiliários registradas."
@@ -3126,7 +3126,7 @@
               {
                 "q": "Preparando uma apresentação sobre regulação bancária, o analista Gilmar montou uma linha do tempo dos acordos firmados pelo comitê sediado na Basileia. Ele registrou que o primeiro acordo fixou o capital mínimo em 1988, que o segundo ampliou os riscos considerados no cálculo em 2004 e que o terceiro veio depois do colapso de grandes bancos internacionais, endurecendo as exigências de capital e de liquidez. O acordo de Basileia III foi editado no ano e em resposta ao evento indicados em:",
                 "alts": [
-                  "2010, em resposta à crise financeira internacional deflagrada no ano de 2008.",
+                  "2010, já sob o G20, com prazo de implantação escalonado ao longo da década seguinte.",
                   "1988, em resposta ao quadro de hiperinflação observado em diversas economias ao longo daquela década.",
                   "2004, em resposta ao avanço tecnológico e à automação dos sistemas bancários no período.",
                   "2020, em resposta aos efeitos econômicos provocados no setor pela pandemia de covid-19."
@@ -3140,7 +3140,7 @@
                 "q": "Ao ler uma reportagem sobre a coordenação entre autoridades monetárias, o cliente Aldemir perguntou à gerente Paula, profissional CPA, o que vem a ser o BIS citado no texto. Paula explicou que se trata de uma instituição criada em 1930, com sede europeia, onde as autoridades que emitem moeda em boa parte do planeta se encontram para tratar de assuntos comuns, e que é no âmbito dela que funciona o comitê responsável pelos acordos de capital batizados com o nome da cidade em que foram assinados. O BIS é descrito como:",
                 "alts": [
                   "o órgão regulador do mercado de capitais europeu, encarregado de registrar as emissões públicas.",
-                  "o banco central dos bancos centrais, sediado na Suíça e integrado por dezenas de países.",
+                  "o banco central dos bancos centrais, sediado na Basileia, na Suíça, e integrado por dezenas de países.",
                   "uma câmara de compensação e liquidação de contratos de derivativos negociados em bolsa.",
                   "o fundo garantidor internacional dos depósitos bancários mantidos por pessoas físicas."
                 ],
@@ -3184,7 +3184,7 @@
                 "q": "Empresária do setor de alimentos, dona Ivone contou ao gerente Ronaldo, profissional CPA, que mantém R$ 1.500.000,00 espalhados em CDBs, fundos e títulos públicos, e que assinou na agência um papel declarando por escrito essa situação. Ela quer saber em que faixa a regulação a coloca e se isso lhe abre a porta dos produtos restritos que o banco anuncia apenas para uma parcela dos clientes. Ronaldo consultou a tabela de enquadramento antes de responder. Dona Ivone é classificada como:",
                 "alts": [
                   "investidora profissional, categoria reservada a quem declara mais de R$ 10 milhões aplicados.",
-                  "investidora qualificada, por declarar mais de R$ 1 milhão em investimentos financeiros.",
+                  "investidora qualificada, por atestar por escrito mais de R$ 1 milhão em investimentos financeiros.",
                   "investidora comum, uma vez que a assinatura do termo por escrito não produz efeito na regra.",
                   "investidora não residente, condição atribuída a quem mantém recursos aplicados no exterior."
                 ],
@@ -3267,7 +3267,7 @@
           {
             "q": "Ao revisar os indicadores prudenciais de um banco, a analista Marisa explicou ao estagiário Ademir que o índice de Basileia confronta o patrimônio de referência da casa com os ativos ponderados pelo risco que ela carrega. Ademir sabia que o piso combinado lá fora, na Suíça, é de 8%, e perguntou se aqui vale exatamente o mesmo número. Marisa contou que o regulador brasileiro preferiu ser mais duro e ampliou o colchão obrigatório dos bancos que operam no país. O índice de Basileia adotado no Brasil é de:",
             "alts": [
-              "11%, exigência superior ao mínimo de 8% fixado pelo comitê internacional de supervisão.",
+              "11%, exigência que o Brasil adota acima do mínimo de 8% fixado pelo comitê internacional de supervisão.",
               "8%, patamar idêntico ao mínimo fixado pelo comitê internacional de supervisão bancária.",
               "10%, patamar intermediário fixado pelo Conselho Monetário Nacional para o mercado local.",
               "12%, exigência aplicada apenas às instituições classificadas como sistemicamente relevantes."
@@ -3283,7 +3283,7 @@
               "o depósito compulsório, parcela dos depósitos retida pelo Banco Central para conter a liquidez.",
               "as linhas financeiras de liquidez, LLI e LLT, oferecidas pelo Banco Central às instituições.",
               "o acordo de Basileia, que fixa o capital mínimo exigido das instituições financeiras do país.",
-              "o Mecanismo de Ressarcimento de Prejuízos, que cobre até R$ 200 mil por investidor lesado."
+              "o Mecanismo de Ressarcimento de Prejuízos, que cobre até R$ 200 mil o investidor lesado por participante da intermediação."
             ],
             "c": 3,
             "exp": "O MRP ressarce até R$ 200 mil o investidor prejudicado por ação ou omissão de participante na intermediação. Compulsório, linhas de liquidez e Basileia protegem o sistema.",
@@ -3334,7 +3334,7 @@
             "alts": [
               "1990, 2000 e 2008, cronologia que acompanharia as principais crises bancárias do período.",
               "1988, 2008 e 2020, com o último acordo editado em resposta aos efeitos da pandemia global.",
-              "1988, 2004 e 2010, com o último acordo editado em resposta à crise financeira de 2008.",
+              "1988, 2004 e 2010, tendo o último acordo sido editado em resposta à crise financeira de 2008.",
               "1994, 2004 e 2014, em revisões realizadas a cada dez anos pelo comitê internacional de supervisão."
             ],
             "c": 2,
@@ -3386,7 +3386,7 @@
             "alts": [
               "o Anexo B para o profissional e o Anexo A para o qualificado, conforme os modelos da norma.",
               "o Anexo A para as duas categorias, uma vez que o modelo do termo foi unificado na norma vigente.",
-              "o Anexo A para o profissional e o Anexo B para o qualificado, conforme o modelo da norma.",
+              "o Anexo A para o investidor profissional e o Anexo B para o qualificado, conforme os modelos previstos na norma.",
               "o Anexo B para as duas categorias, uma vez que o modelo do termo foi unificado na norma vigente."
             ],
             "c": 2,

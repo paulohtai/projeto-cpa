@@ -16,7 +16,7 @@ Sem isto as notas não significam nada.
 |---|---|---|---|---|
 | Questões | 872 | **872 (100%)** estrutura, viés, vazamento, dificuldade | **872 (100%)** contra 15 fatos de norma + lastro de todo número afirmado | ~45 |
 | Níveis (pílulas) | 170 | 170 (100%) | — | 9 (5%) marcados com `revisadoEm` |
-| Árvores | 5 · 30 decisões | 30 (100%) | 30 (100%) | 30 (100%) |
+| Árvores | **20 · 120 decisões** | 120 (100%) | 120 (100%) | 120 (100%) |
 | Glossário | 178 verbetes | 178 (estrutura) | — | 2 (JCP e dividendos, rodadas anteriores) |
 | Confrontos / tabelão | 15 / 105 números | 100% (estrutura) | parcial (os que entram na tabela de fatos) | — |
 | Paleta de cores | 21 pares de texto | **21 (100%)** WCAG 2.1 | — | — |
@@ -40,8 +40,9 @@ explicações ausentes.
 
 | Métrica | Nosso banco | Caderno oficial |
 |---|---|---|
-| Gabarito estritamente mais longo | **4%** | acima de 30% |
-| Gabarito lidera repetição de palavras | **9%** | **34%** |
+| Gabarito é a alternativa mais LONGA | **25%** | 30% |
+| Gabarito é a alternativa mais CURTA | **35%** | 21% |
+| Gabarito lidera repetição de palavras | **20%** | **32%** |
 | Diferença média de sobreposição | **−0,012** | **+0,038** |
 | Respondível por eliminação | **0%** | 2% |
 | Termo absoluto em distrator | **0** | — |
@@ -75,8 +76,9 @@ apagadas.
   exemplo — passaria.
 - A tabela de fatos tem 15 linhas e toca 39 questões. Cobre os temas de maior
   risco, não o programa inteiro.
-- Alternativas somam 322 caracteres contra 508 do caderno oficial. Continua
-  abaixo do padrão de redação da banca.
+- Alternativas somam 328 caracteres contra 423 do caderno oficial (82 contra
+  106 por alternativa). O tamanho não denuncia mais o gabarito em nenhuma das
+  duas direções, mas ainda escrevemos mais enxuto que a banca.
 - 7 siglas (SFH, SCD, SCMEPP, TJLP, SWIFT, CMPC, CEA) não aparecem na
   apostila nem nos cadernos. São termos financeiros correntes, mas o rastro
   não fecha. Ficaram no exame; estão listadas.
@@ -214,6 +216,15 @@ por construção.
 
 - `index.html` de 1,4 MB com todo o banco embutido: ~2s na primeira visita,
   offline depois. Pesado para rede móvel na estreia.
+- O viés de tamanho das alternativas era o defeito espelhado do concorrente:
+  o gabarito era o mais CURTO em 63% das nossas questões (chutar a menor
+  acertava 63%; no simulado da T2, chutar a maior acerta 66%). 271 gabaritos
+  reescritos; hoje 25% mais longa e 35% mais curta, dentro da faixa do
+  caderno oficial. Continua aberto: nossas alternativas têm 82 caracteres
+  contra 106 da banca.
+- As árvores saíram de 5 para 20 (120 decisões) e o sorteio da prova ganhou
+  memória entre tentativas. Antes, a segunda prova reencontrava um
+  atendimento da primeira em 67% das vezes; agora, nenhuma.
 - Seis portões antes de publicar, cada um com um alvo diferente: estrutura,
   execução, acessibilidade, conteúdo, vazamento de resposta e matemática
   financeira.

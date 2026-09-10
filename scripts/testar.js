@@ -869,6 +869,82 @@ secao("7. SORTEIO DA SESSÃO DE EXAME");
     }
     t("500 sorteios dão sempre 10 itens de árvore, em conversas sem buraco", ruins === 0, ruins + " sorteios ruins");
   }
+
+  // ------------------------------------------------------------------
+  // MEMÓRIA ENTRE PROVAS
+  //
+  // O Paulo relatou "sempre respondo as mesmas questões" no modo prova. A
+  // causa estava nas árvores: 10 dos 50 itens saíam de um pool pequeno e o
+  // sorteio não guardava nada de uma prova para a outra.
+  //
+  // Estes testes exercitam o `porFrescor` de verdade, com o mesmo código que
+  // está no motor, e não só a presença do texto no arquivo.
+  // ------------------------------------------------------------------
+  t("o sorteio lê a recência do histórico", /const recencia = new Map\(\)/.test(s));
+  t("nunca sorteada vem antes da já sorteada", /recencia\.has\(a\) \? recencia\.get\(a\) : Infinity/.test(s));
+  t("o baralho de árvores também passa pelo frescor", /porFrescor\(ARVORES\.map\(\(a\) => "@" \+ a\.id\)\)/.test(s));
+  {
+    // reconstrói porFrescor exatamente como no motor
+    const mkFrescor = (recencia) => (lista) => shuffle(lista).sort((a, b) => {
+      const ra = recencia.has(a) ? recencia.get(a) : Infinity;
+      const rb = recencia.has(b) ? recencia.get(b) : Infinity;
+      return rb - ra;
+    });
+
+    // 1. o que nunca saiu tem prioridade absoluta sobre o que já saiu
+    {
+      const rec = new Map([["a", 0], ["b", 3]]);
+      let erro = 0;
+      for (let i = 0; i < 200; i++) {
+        const o = mkFrescor(rec)(["a", "b", "c", "d"]);
+        if (o.indexOf("c") > 2 || o.indexOf("d") > 2) erro++;   // c e d são inéditas
+        if (o.indexOf("b") > o.indexOf("a")) erro++;            // b é mais antiga que a
+      }
+      t("200 ordenações põem as inéditas na frente e a mais antiga antes da recente", erro === 0, erro + " erradas");
+    }
+
+    // 2. dentro da mesma faixa de recência a ordem varia (senão vira fila fixa)
+    {
+      const rec = new Map();
+      const primeiros = new Set();
+      for (let i = 0; i < 200; i++) primeiros.add(mkFrescor(rec)(["a", "b", "c", "d", "e"])[0]);
+      t("entre iguais o sorteio continua aleatório", primeiros.size >= 4, "só " + primeiros.size + " começos diferentes");
+    }
+
+    // 3. o efeito prático: com 20 árvores, quantas provas até repetir uma?
+    //    Sem memória, o esperado é repetir já na 2ª ou 3ª prova.
+    const simular = (nArv, comMemoria, provas) => {
+      const ids = [...Array(nArv)].map((_, i) => "A." + i);
+      const rec = new Map();
+      const historico = [];
+      let repetiuEm = 0;
+      for (let p = 0; p < provas; p++) {
+        rec.clear();
+        if (comMemoria) historico.forEach((usadas, idx) => usadas.forEach((k) => {
+          if (!rec.has(k) || rec.get(k) > idx) rec.set(k, idx);
+        }));
+        const baralho = (comMemoria ? mkFrescor(rec)(ids) : shuffle(ids)).reverse();
+        const usadas = [];
+        let itens = 0;
+        while (itens < 10 && baralho.length) {
+          const id = baralho.pop();
+          usadas.push(id);
+          itens += Math.min(6, 10 - itens);
+        }
+        if (p > 0 && usadas.some((k) => historico[0].includes(k)) && !repetiuEm) repetiuEm = p + 1;
+        historico.unshift(usadas);   // índice 0 = prova mais recente
+      }
+      return repetiuEm;
+    };
+    // com 5 árvores e sem memória, a prova seguinte reencontra uma das duas
+    // quase sempre — é exatamente o que o Paulo estava vendo.
+    let semMem = 0;
+    for (let i = 0; i < 200; i++) if (simular(5, false, 2) === 2) semMem++;
+    t(`com 5 árvores e sem memória, a 2ª prova repete em ${Math.round(semMem / 2)}% das vezes`, semMem / 200 > 0.5);
+    let comMem = 0;
+    for (let i = 0; i < 200; i++) if (simular(20, true, 2) === 2) comMem++;
+    t("com 20 árvores e memória, a 2ª prova nunca repete", comMem === 0, comMem + " repetiram");
+  }
   // relógio legível acima de uma hora
   global.fmtTime = extrai("fmtTime", ";\n");
   const fmtRelogio = extrai("fmtRelogio", "\n};");

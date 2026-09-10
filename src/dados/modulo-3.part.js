@@ -39,7 +39,7 @@
                 "q": "Com 26 anos e o primeiro emprego formal, Beatriz perguntou ao gerente Vitor, profissional CPA, por que a carteira proposta a ela admite mais renda variável do que a sugerida ao pai dela, de 58 anos, que ganha bem mais e já reuniu patrimônio maior. Vitor comentou que a decisão não parte do tamanho do patrimônio nem de qualquer imposição da regulação, e sim do prazo disponível até o momento em que cada um precisará efetivamente usar os recursos aplicados. Nesse raciocínio, a fase de acumulação admite maior exposição a risco porque:",
                 "alts": [
                   "o patrimônio ainda é pequeno, de modo que uma eventual perda teria pouco efeito sobre a vida dela.",
-                  "o horizonte de tempo é longo e permite recompor perdas antes da data prevista para o uso.",
+                  "o horizonte de tempo é longo e permite recompor eventuais perdas antes da data prevista para o uso.",
                   "a regulação determina carteiras mais agressivas para investidores jovens em início de carreira.",
                   "a renda dessa etapa costuma ser a mais alta da vida, o que amplia a margem para assumir risco."
                 ],
@@ -98,7 +98,7 @@
                   "fixa obrigatória, porque o valor se repete a cada mês e o serviço é essencial ao orçamento da casa.",
                   "variável facultativa, porque o valor oscila conforme o consumo e o serviço é de puro lazer.",
                   "variável obrigatória, porque o valor oscila conforme o uso e a despesa não pode ser dispensada.",
-                  "fixa facultativa, porque o valor se repete a cada mês e a contratação pode ser cancelada."
+                  "fixa facultativa, porque o valor se repete a cada mês e a contratação pode ser cancelada sem prejuízo do essencial."
                 ],
                 "c": 3,
                 "exp": "A assinatura repete-se mensalmente com valor igual, o que a torna fixa, e pode ser cancelada sem prejuízo do essencial, o que a torna facultativa.",
@@ -165,7 +165,7 @@
               {
                 "q": "Ao montar o balanço patrimonial da família Queiroz, a planejadora Letícia, profissional CPA, listou a casa em que moram, um apartamento alugado a terceiros, a casa de praia usada nos feriados e o saldo devedor do carro. O cliente Marcelo entendeu que a casa de praia deveria entrar como bem de não uso, por ter valor alto e boa aceitação no mercado imobiliário. Letícia lembrou que o critério de classificação dos bens é a geração de receita, e não o valor do bem. A casa de praia deve ser classificada como:",
                 "alts": [
-                  "bem de uso, pois atende ao lazer da família e gera despesas sem produzir receita alguma.",
+                  "bem de uso, pois atende ao lazer da família e gera despesas sem produzir receita, por mais valioso que seja.",
                   "bem de não uso, pois possui valor elevado e pode ser vendido com relativa facilidade no mercado.",
                   "passivo, pois as despesas de manutenção e os tributos do imóvel oneram o orçamento da família.",
                   "patrimônio líquido, pois o imóvel foi quitado e não possui financiamento em aberto no banco."
@@ -191,7 +191,7 @@
               {
                 "q": "O cliente Hamilton mantém fechado um apartamento herdado, que gera condomínio e IPTU e nenhuma receita. Ao analisar o balanço patrimonial dele, a gerente Cristina, profissional CPA, sugeriu colocar o imóvel para locação. Explicou que o balanço pessoal separa os bens conforme produzam ou não retorno financeiro e que uma das medidas mais eficazes de organização é justamente mudar essa classificação, sem que o cliente precise vender o bem. Converter um bem de uso em bem de não uso significa:",
                 "alts": [
-                  "transformar um item gerador de despesa em um item gerador de receita para o orçamento.",
+                  "transformar um item gerador de despesa em gerador de receita, sem vender o bem nem mudar a natureza dele.",
                   "vender o bem e destinar o valor obtido ao consumo corrente da família ao longo do ano seguinte.",
                   "quitar de forma antecipada o financiamento que ainda pesa sobre o bem registrado no balanço.",
                   "reclassificar o bem para a coluna dos passivos do balanço patrimonial da pessoa física."
@@ -205,7 +205,7 @@
                 "q": "REDENÇÃO: Ao revisar o balanço patrimonial do cliente Sérgio, a assessora Paula, profissional CPA, pediu que ele mesmo classificasse cada linha da planilha. Sérgio relacionou o imóvel onde mora com a esposa, o automóvel que dirige no dia a dia, um sobrado de veraneio que a família ocupa em feriados, um apartamento pequeno herdado do pai e hoje alugado a moradores da região, um CDB no banco, os papéis de duas companhias comprados pelo home broker, a dívida tomada no ano passado e o que ainda deve no cartão. Ele empacou na hora de dizer onde entra cada linha e pediu socorro. São exemplos de bens de não uso:",
                 "alts": [
                   "a casa de moradia e o carro utilizado pela família, itens de valor relevante no balanço pessoal.",
-                  "o apartamento alugado, o CDB e a carteira de ações, itens que produzem retorno financeiro.",
+                  "o apartamento alugado, o CDB e a carteira de ações, únicos itens da lista que produzem receita para o titular.",
                   "o empréstimo pessoal e o saldo da fatura do cartão de crédito ainda em aberto no mês corrente.",
                   "a casa de praia usada nos feriados e o veículo de passeio da família, sem locação a terceiros."
                 ],
@@ -237,7 +237,7 @@
                   "3 meses de despesas, patamar suficiente porque a renda média do consultório é bastante elevada.",
                   "24 meses de despesas, o dobro do teto da faixa recomendada, por medida extra de precaução.",
                   "6 meses de renda bruta mensal, tomando o faturamento do consultório como parâmetro do cálculo.",
-                  "12 meses de despesas, valor no topo da faixa recomendada pela instabilidade da receita."
+                  "12 meses de despesas, topo da faixa recomendada de 6 a 12, justificado pela instabilidade da receita."
                 ],
                 "c": 3,
                 "exp": "A faixa recomendada é de 6 a 12 meses de despesas. Renda instável puxa o dimensionamento para o topo da faixa, e o parâmetro é a despesa mensal, não a renda bruta.",
@@ -275,7 +275,7 @@
                 "alts": [
                   "o CDB de liquidez diária emitido por banco médio, com resgate disponível em qualquer dia útil.",
                   "o Tesouro Selic, com recompra diária garantida e baixa oscilação de preço ao longo do período.",
-                  "o Tesouro IPCA+ com vencimento em 2045, exposto a oscilação de preço na venda antecipada.",
+                  "o Tesouro IPCA+ com vencimento em 2045, título longo sujeito a forte oscilação de preço na venda antecipada.",
                   "o fundo de renda fixa simples com resgate em D0, cotizado e liquidado no mesmo dia útil do pedido."
                 ],
                 "c": 2,
@@ -319,7 +319,7 @@
                   "o prazo de pagamento contratado na operação, uma vez que contratos mais longos custam menos.",
                   "a idade e a escolaridade do tomador, elementos que determinam a taxa aplicada ao contrato.",
                   "o valor total contratado na operação, já que montantes maiores reduzem o custo para o tomador.",
-                  "a qualidade da garantia oferecida, que reduz o risco do credor e, com ele, a taxa cobrada."
+                  "a qualidade da garantia oferecida, que reduz o risco do credor e, com ele, a taxa cobrada do tomador."
                 ],
                 "c": 3,
                 "exp": "Garantia forte reduz o risco do credor e, com ele, a taxa. É a lógica do crédito imobiliário e do consignado, bem mais baratos que o crédito pessoal sem garantia.",
@@ -343,7 +343,7 @@
                 "q": "REDENÇÃO: A cliente Rosana disse ao assessor Leandro, profissional CPA, que vai picotar o cartão de crédito: para ela, aquilo é caro por natureza e só serve para afundar quem usa. Leandro pediu que ela abrisse as últimas seis faturas no aplicativo e foi apontando, mês a mês, a data em que ela pagou e cada encargo lançado pelo banco. Rosana quer saber se realmente vale a pena cancelar antes da viagem de julho. Sobre o uso do cartão de crédito, Leandro deve explicar que:",
                 "alts": [
                   "o produto deve ser evitado por qualquer pessoa, pois o custo é elevado em qualquer forma de uso.",
-                  "pago em dia e por inteiro, não gera encargo e ainda oferece prazo e programas de pontos.",
+                  "pago em dia e por inteiro, tem custo zero e ainda oferece prazo, cashback, milhas e programas de pontos.",
                   "o produto é vantajoso apenas para quem recorre ao crédito rotativo do cartão com moderação.",
                   "o custo do cartão equivale ao do crédito consignado, por serem linhas de risco bem semelhante."
                 ],
@@ -414,7 +414,7 @@
                 "q": "REDENÇÃO: Ao expor em uma palestra as seis etapas do processo de organização das finanças pessoais, o profissional CPA Alberto foi interrompido por um ouvinte que queria saber qual instituição do país adota essa metodologia e concede a certificação identificada pela sigla CFP, muito pedida nos anúncios de vaga. Alberto respondeu de pronto, lembrando que o selo nasceu de um padrão internacional e que cada país tem uma única entidade licenciada para concedê-lo. A certificação CFP é concedida por:",
                 "alts": [
                   "a ANBIMA, entidade que elabora e concede as certificações CPA-10, CPA-20 e CEA no mercado nacional.",
-                  "a PLANEJAR, Associação Brasileira de Planejamento Financeiro, responsável pelo CFP.",
+                  "a PLANEJAR, Associação Brasileira de Planejamento Financeiro, que responde pelo CFP no país.",
                   "a ANCORD, entidade responsável pela certificação dos agentes autônomos de investimento no país.",
                   "a APIMEC, entidade que reúne os analistas e demais profissionais do mercado de capitais."
                 ],
@@ -719,7 +719,7 @@
                 "q": "REDENÇÃO: Ao preparar o treinamento da equipe, o supervisor Rogério, profissional CPA, ouviu de um estagiário que a obrigação de recomendar ao cliente apenas o que combina com ele teria nascido junto com a regra que reorganizou os fundos de investimento em classes e subclasses. Rogério pediu que ele conferisse com calma as quatro referências normativas citadas na apostila, porque cada uma cuida de um assunto próprio e apenas uma delas dá base ao processo que estava sendo explicado no slide. A norma que disciplina o processo de suitability é a:",
                 "alts": [
                   "Resolução CVM 175, que consolida as regras de constituição e funcionamento dos fundos de investimento.",
-                  "Resolução CVM 30, que trata do dever de verificar a adequação do produto ao perfil do cliente.",
+                  "Resolução CVM 30, que trata do dever de verificar a adequação do produto ao perfil apurado do cliente.",
                   "Lei 9.613/98, que dispõe sobre o crime de lavagem de dinheiro e os deveres de comunicação ao COAF.",
                   "Lei 13.709/2018, que estabelece as regras de tratamento e de proteção de dados pessoais no país."
                 ],
@@ -750,7 +750,7 @@
                 "alts": [
                   "1, conservador, marcado por baixa tolerância a perdas e preferência por produtos de liquidez diária.",
                   "2, moderado, marcado pela aceitação de risco parcial com prioridade à preservação do capital.",
-                  "3, arrojado, marcado pela aceitação de perdas relevantes em busca de retorno mais elevado.",
+                  "3, arrojado, marcado pela aceitação de perdas relevantes em troca de um retorno potencial mais elevado.",
                   "profissional, categoria atribuída ao investidor que declara aceitar oscilações fortes na carteira."
                 ],
                 "c": 2,
@@ -857,7 +857,7 @@
                 "q": "REDENÇÃO: Ao montar a pasta de documentos de dois clientes, o assistente Murilo perguntou à gerente Adriana, profissional CPA, qual termo de ciência cada um deveria assinar: um declarou R$ 12 milhões em aplicações financeiras e o outro, R$ 2 milhões. Murilo achou que bastava usar um modelo único para os dois, já que o texto pareceu igual na tela. Adriana explicou que a Resolução CVM 30 traz dois anexos distintos, um para cada faixa, e que trocá-los deixa o cliente assinando declaração que não corresponde à situação dele. Os anexos que cada um deles deve assinar são, respectivamente:",
                 "alts": [
                   "Anexo B para o profissional e Anexo A para o qualificado, conforme a régua patrimonial da norma.",
-                  "Anexo A para o profissional e Anexo B para o qualificado, seguindo a ordem das categorias.",
+                  "Anexo A para o profissional e Anexo B para o qualificado: são documentos distintos, com conteúdos próprios.",
                   "Anexo A para as duas categorias, porque a declaração de ciência possui conteúdo idêntico.",
                   "Anexo B para as duas categorias, porque a régua patrimonial reúne ambas em um só documento."
                 ],
@@ -877,7 +877,7 @@
             "alts": [
               "renda mensal, idade e profissão declarada, dados que descrevem a rotina financeira do cliente.",
               "liquidez do produto, prazo de vencimento e volatilidade dos resultados verificados na carteira.",
-              "situação financeira, objetivos de investimento e conhecimento do cliente sobre o mercado.",
+              "a situação financeira, os objetivos de investimento e o conhecimento do cliente sobre os produtos do mercado.",
               "patrimônio declarado, regime de tributação e garantias formais oferecidas pelo produto ofertado."
             ],
             "c": 2,
@@ -891,7 +891,7 @@
               "executar ordem transmitida por iniciativa do cliente, sem qualquer sugestão do distribuidor.",
               "manter a conta ativa, que precisa ser encerrada até a renovação do questionário de perfil.",
               "enviar extratos e informes periódicos referentes às aplicações já existentes na carteira.",
-              "recomendar produtos de investimento ao cliente enquanto o perfil não for atualizado."
+              "recomendar produtos de investimento ao cliente enquanto o perfil dele não for atualizado."
             ],
             "c": 3,
             "exp": "A vedação recai sobre a recomendação. Executar ordem espontânea, manter a conta e enviar extratos seguem permitidos, cabendo à instituição alertar o cliente sobre o desenquadramento.",
@@ -901,7 +901,7 @@
           {
             "q": "O cliente Bartolomeu explicou à assessora Simone, profissional CPA, que aceita destinar cerca de um quinto dos recursos a produtos de maior risco, desde que o restante da carteira preserve o capital acumulado em trinta anos de trabalho. Acrescentou que não pretende resgatar nada nos próximos cinco anos e que já entende como funcionam os fundos de crédito privado. Simone posicionou o cliente na escala de três degraus de perfil. O perfil apurado é o:",
             "alts": [
-              "2, moderado, marcado por risco parcial aceito com preservação do capital no prazo longo.",
+              "2, moderado, degrau intermediário entre quem não tolera oscilação e quem persegue retorno acima da média.",
               "1, conservador, marcado pela recusa de perdas e pela busca de produtos de liquidez diária.",
               "3, arrojado, marcado pela aceitação de perdas relevantes em troca de retorno mais elevado.",
               "profissional, categoria atribuída pela escala de perfil ao cliente de carteira diversificada."
@@ -929,7 +929,7 @@
             "alts": [
               "Resolução CVM 175, que consolida as regras de constituição e funcionamento dos fundos de investimento.",
               "Lei 6.385/76, que criou a CVM e tipificou os crimes praticados contra o mercado de capitais.",
-              "Resolução CVM 30, que trata do dever de adequação e da classificação dos investidores.",
+              "Resolução CVM 30, aplicável a todo distribuidor que recomenda produto a investidor pessoa física.",
               "Circular BACEN 3.978, que dispõe sobre prevenção à lavagem de dinheiro nas instituições financeiras."
             ],
             "c": 2,
@@ -943,7 +943,7 @@
               "deve recusar a ordem, porque o produto se mostra incompatível com o perfil apurado do cliente.",
               "deve reclassificar o perfil do cliente como arrojado antes de encaminhar a ordem ao mercado.",
               "deve limitar a operação a dez por cento do patrimônio financeiro declarado pelo investidor.",
-              "pode executar a ordem, porque partiu do cliente e não houve recomendação do distribuidor."
+              "pode executar a ordem, porque ela partiu do cliente e não houve recomendação, desde que alerte sobre o desenquadramento."
             ],
             "c": 3,
             "exp": "Ordem espontânea, sem recomendação, pode ser executada. A instituição deve alertar o cliente sobre o desenquadramento e obter declaração de ciência, mas a norma não obriga recusa nem limite de valor.",
@@ -1134,7 +1134,7 @@
                 "q": "A área de marketing preparou um anúncio de CDB em que a frase protegido pelo FGC aparece em letras garrafais no meio da arte, maior que o nome do produto e que a taxa oferecida, funcionando como principal chamariz de venda. O analista Douglas, profissional CPA, segurou a veiculação e levou o material ao compliance, porque lembrava de um trecho do Código de Distribuição tratando de como esse tipo de menção pode aparecer em anúncio dirigido ao público. Sobre a arte preparada pelo marketing, o entendimento correto é que ela:",
                 "alts": [
                   "é permitida, porque a informação sobre a cobertura do fundo garantidor é verdadeira e verificável.",
-                  "é vedada, porque a cobertura de fundo garantidor não pode ser elemento de destaque da peça.",
+                  "é vedada, porque a cobertura de fundo garantidor não pode ser o elemento de destaque da peça.",
                   "é permitida desde que o valor aplicado pelo investidor respeite o limite de R$ 250 mil por CPF.",
                   "é permitida apenas nas peças dirigidas ao investidor qualificado e ao investidor profissional."
                 ],
@@ -1148,7 +1148,7 @@
                 "alts": [
                   "permitida, porque os dois fundos comparados pertencem à mesma gestora e à mesma instituição.",
                   "permitida, desde que o período utilizado no gráfico seja de doze meses para os dois fundos.",
-                  "vedada, porque produtos de natureza diversa levam o investidor a conclusão equivocada.",
+                  "vedada, porque produtos de natureza diversa levam o investidor a uma conclusão equivocada.",
                   "permitida quando o fundo multimercado apresentar rentabilidade superior no período comparado."
                 ],
                 "c": 2,
@@ -1242,7 +1242,7 @@
               {
                 "q": "REDENÇÃO: Ao negociar uma LCI no mercado secundário, o cliente Anselmo percebeu que a instituição comprou o papel por um preço e o revendeu a ele por outro, ficando com a diferença apurada. Ele perguntou à assessora Tatiane, profissional CPA, qual é o nome dessa remuneração e por que ela não aparece destacada em nenhuma linha do extrato. Esse ganho do distribuidor é o:",
                 "alts": [
-                  "spread, remuneração embutida no próprio preço do papel, e não cobrada em rubrica separada.",
+                  "spread, remuneração embutida no próprio preço do papel, sem rubrica separada no extrato do cliente.",
                   "rebate, parcela da taxa de administração devolvida pelo gestor ao canal de distribuição do fundo.",
                   "extrato trimestral, documento que informa ao cliente a remuneração obtida no período apurado.",
                   "custo efetivo total, indicador que reúne os encargos e os tributos incidentes sobre a operação."
@@ -1399,7 +1399,7 @@
                   "regulatório, decorrente do descumprimento de norma editada por regulador ou autorregulador.",
                   "legal, decorrente de questionamento judicial promovido pelos clientes contra a instituição.",
                   "de imagem, decorrente do desgaste da reputação da instituição perante clientes e mercado.",
-                  "operacional, decorrente de falha de sistema, ao lado do erro humano e do evento externo."
+                  "operacional, categoria que reúne a falha de sistema, o erro humano, o defeito de processo e o evento externo."
                 ],
                 "c": 3,
                 "exp": "Falha de sistema é risco operacional, categoria que reúne também erro humano, defeito de processo e evento externo. Regulatório e legal dependem de norma ou de esfera judicial.",
@@ -1422,7 +1422,7 @@
               {
                 "q": "Um vazamento de dados cadastrais de clientes de um banco médio ganhou as redes sociais em poucas horas e virou assunto em jornais de grande circulação. Nas duas semanas seguintes, a instituição registrou saída expressiva de recursos, ainda que os sistemas de negociação tenham funcionado normalmente e nenhuma multa tenha sido aplicada pelo órgão supervisor até o momento. Ao apontar o efeito predominante do episódio no relatório interno, o comitê de riscos indicou o risco:",
                 "alts": [
-                  "de imagem, pelo dano à reputação, que no setor financeiro provoca evasão de recursos.",
+                  "de imagem, pelo dano à reputação, que no setor financeiro se converte rapidamente em evasão de recursos.",
                   "operacional apenas, uma vez que a origem do episódio está em falha de controle interno.",
                   "regulatório, decorrente de eventual descumprimento de norma editada pelo órgão supervisor.",
                   "de mercado, decorrente da oscilação de preços dos ativos mantidos na carteira da instituição."
@@ -1634,7 +1634,7 @@
                 "alts": [
                   "o conjunto das pessoas obrigadas pela lei, substituindo o Banco Central e a CVM nessa atribuição.",
                   "as instituições financeiras bancárias, em regime de supervisão compartilhada com o Banco Central.",
-                  "os setores obrigados que carecem de regulador próprio, como joalherias e empresas de fomento.",
+                  "os setores obrigados sem regulador próprio, como joalherias e empresas de fomento, já que bancos e mercado têm os seus.",
                   "as seguradoras e as corretoras de valores mobiliários, por concentrarem operações de maior risco."
                 ],
                 "c": 2,
@@ -1729,7 +1729,7 @@
                   "colocação, momento de entrada física do numerário no sistema financeiro por meio de depósitos.",
                   "integração, momento em que o patrimônio é assumido abertamente com aparência de origem legítima.",
                   "crime antecedente, infração penal que produz o recurso posteriormente submetido à lavagem.",
-                  "ocultação, pelo uso de ativos e estruturas de difícil rastreio que afastam o valor da origem."
+                  "ocultação, porque criptomoedas e offshores criam a teia de difícil rastreio que afasta o valor da sua origem."
                 ],
                 "c": 3,
                 "exp": "Criptomoedas e offshores são ativos e estruturas de difícil rastreio, usados para criar a teia que dificulta o rastreamento: fase de ocultação.",
@@ -1786,7 +1786,7 @@
               {
                 "q": "A cliente Marisa avisou na agência que precisará levar R$ 60.000 em cédulas para fechar a compra de um carro em leilão, porque o vendedor só aceita dinheiro vivo. O gerente Adriano, profissional CPA, explicou que retiradas de R$ 50 mil ou mais no caixa não são atendidas de imediato: dependem de pedido de provisionamento feito com a antecedência mínima fixada em norma, além de gerarem comunicação específica ao órgão de inteligência financeira. Marisa contava com o dinheiro na mesma tarde e pediu que ele fosse exato quanto ao tempo de espera. A antecedência mínima do pedido é de:",
                 "alts": [
-                  "três dias úteis, prazo exigido nos saques iguais ou superiores a R$ 50 mil em espécie.",
+                  "três dias úteis de antecedência, exigidos nos saques iguais ou superiores a R$ 50 mil em espécie.",
                   "um dia útil, prazo aplicável a qualquer pedido de saque feito na boca do caixa da agência.",
                   "cinco dias úteis, prazo que corresponde ao registro dos depósitos em espécie acima de R$ 2 mil.",
                   "dez dias úteis, prazo previsto para o bloqueio de bens determinado pelo Conselho de Segurança."
@@ -1860,7 +1860,7 @@
                 "q": "Depois de instaurado um processo administrativo contra a instituição, a diretoria pediu à analista Elaine, profissional CPA, um resumo de quanto a casa pode desembolsar se ficar comprovado o descumprimento das regras de prevenção à lavagem de dinheiro. Um diretor citou de cabeça uma cifra em milhões que leu num artigo sobre outro assunto e supôs que valeria também aqui. Elaine respondeu que a sanção pecuniária desse tema tem regra própria e abriu o texto na tela para mostrar a redação exata. O valor máximo dessa multa corresponde a:",
                 "alts": [
                   "R$ 50 milhões por infração, mesmo limite máximo adotado pela lei de proteção de dados pessoais.",
-                  "R$ 20 milhões, teto aplicado sobre o dobro do lucro obtido ou presumido na irregularidade.",
+                  "R$ 20 milhões, teto que limita a multa calculada sobre o dobro do lucro obtido ou presumido na irregularidade.",
                   "o dobro do lucro obtido pela instituição infratora, sem qualquer limite máximo fixado em norma.",
                   "três vezes a vantagem obtida, critério usado nas sanções por crimes contra o mercado de capitais."
                 ],
@@ -1875,7 +1875,7 @@
                   "reduz a pena em até dois terços, por dificultar a produção de prova contra o acusado do crime praticado.",
                   "mantém a dosimetria inalterada, diante da ausência de previsão específica sobre esses ativos.",
                   "converte a pena aplicada em regime semiaberto, com cumprimento fora do estabelecimento penal.",
-                  "aumenta a pena de um a dois terços, ao lado da reiteração e da atuação por organização criminosa."
+                  "é causa de aumento de pena de um a dois terços, ao lado da reiteração e da atuação por organização criminosa."
                 ],
                 "c": 3,
                 "exp": "O uso de ativos virtuais é causa de aumento de pena, de um a dois terços, ao lado da reiteração e da atuação por organização criminosa. A redução vem da colaboração.",
@@ -1885,7 +1885,7 @@
               {
                 "q": "REDENÇÃO: Em um debate interno, um assessor jurídico afirmou que a instituição só precisaria comunicar a suspeita depois que a Justiça condenasse o cliente pelo crime que gerou os recursos. A analista Priscila, profissional CPA, respondeu que a lavagem constitui crime autônomo e que a lei exige apenas a comprovação de indícios da origem ilícita dos valores, sem depender de sentença anterior sobre o delito-base. Sobre a relação com o crime antecedente, o entendimento correto é que:",
                 "alts": [
-                  "a condenação por lavagem independe de condenação prévia pelo crime antecedente dos valores.",
+                  "a lavagem é crime autônomo, e a punição por ela não depende do desfecho do outro processo penal.",
                   "a condenação por lavagem depende do trânsito em julgado da sentença proferida sobre o delito-base.",
                   "a existência de crime antecedente é dispensável para configurar o delito de lavagem de dinheiro.",
                   "o crime antecedente absorve o crime de lavagem, que deixa de ser punido de forma autônoma na lei."
@@ -1917,7 +1917,7 @@
                 "alts": [
                   "2% do faturamento do grupo no Brasil, com limite máximo de R$ 20 milhões por infração cometida.",
                   "5% do faturamento apurado no último exercício social, sem limite máximo de valor previsto na lei.",
-                  "2% do faturamento no Brasil, com limite de R$ 50 milhões por infração cometida pela empresa.",
+                  "2% do faturamento no Brasil, limitada a R$ 50 milhões por infração; o teto de R$ 20 milhões é de outra sanção.",
                   "o dobro do lucro obtido com o tratamento irregular dos dados pessoais dos titulares atingidos."
                 ],
                 "c": 2,
@@ -1998,7 +1998,7 @@
               {
                 "q": "O economista Hélio passou a administrar as carteiras de investimento de cinco vizinhos, escolhendo os ativos e transmitindo as ordens em nome deles, sem qualquer registro na CVM. Ele afirma que a situação está regular porque atua de graça, apenas para ajudar conhecidos. A analista Márcia, profissional CPA, lembrou que a lei alcança expressamente a atuação a título gratuito e prevê pena de detenção nesse caso. A conduta de Hélio configura:",
                 "alts": [
-                  "crime punido com detenção de seis a vinte e quatro meses e multa, mesmo sem remuneração.",
+                  "crime punido com detenção de seis a vinte e quatro meses e multa, ainda que a título gratuito.",
                   "conduta atípica, porque a lei exige remuneração para caracterizar a administração irregular de carteira.",
                   "infração exclusivamente administrativa, punida com multa aplicada pela autarquia reguladora do mercado.",
                   "crime punido com reclusão de um a oito anos e multa, mesma faixa da manipulação de mercado."
@@ -2086,7 +2086,7 @@
                   "churning, giro excessivo da carteira do cliente em benefício da receita de corretagem do assessor.",
                   "spoofing, inserção de ordem falsa de grande volume para mover o preço e posterior cancelamento.",
                   "money pass, transferência de recursos entre investidores por meio de operações combinadas em derivativo.",
-                  "front running, execução de ordem própria antes da ordem do cliente para capturar o movimento."
+                  "front running, execução de ordem própria antes da ordem do cliente para capturar o movimento de preço."
                 ],
                 "c": 3,
                 "exp": "Front running é correr na frente da ordem do cliente, aproveitando o movimento de preço que a execução dessa ordem provocará.",
@@ -2142,7 +2142,7 @@
             "q": "Durante uma inspeção interna, o auditor Ubiratan verificou como a instituição arquiva os registros de clientes e de fornecedores exigidos pelas regras de prevenção à lavagem de dinheiro. Um analista afirmou que bastaria manter cinco anos de documentos nos dois casos. A gerente Sueli, profissional CPA, corrigiu: o prazo é o mesmo para os dois grupos, mudando apenas o marco inicial da contagem. Os prazos de guarda desses registros são de:",
             "alts": [
               "cinco anos para clientes e para fornecedores, contados da data de encerramento da relação.",
-              "dez anos para clientes e para fornecedores, com marcos iniciais de contagem distintos.",
+              "dez anos tanto para clientes quanto para fornecedores, com marcos iniciais de contagem distintos.",
               "dez anos para clientes e cinco anos para fornecedores, ambos contados do encerramento do contrato.",
               "prazo indeterminado enquanto durar o relacionamento comercial mantido com a instituição financeira."
             ],
@@ -2183,7 +2183,7 @@
               "2% do faturamento do grupo no Brasil, com limite máximo de R$ 20 milhões por infração cometida.",
               "5% do faturamento do grupo no Brasil no último exercício, sem limite máximo previsto em lei.",
               "R$ 50 milhões por infração, valor fixo aplicado independentemente do faturamento apurado pela empresa.",
-              "2% do faturamento do grupo no Brasil, limitada a R$ 50 milhões por infração cometida."
+              "2% do faturamento do grupo no Brasil no último exercício, limitada a R$ 50 milhões por infração."
             ],
             "c": 3,
             "exp": "A LGPD prevê multa de 2% do faturamento do grupo no Brasil no último exercício, limitada a R$ 50 milhões por infração.",
@@ -2332,7 +2332,7 @@
                 "q": "REDENÇÃO: Ao montar a carteira de um cliente, o assessor Rafael, profissional CPA, precisou definir a taxa livre de risco usada como piso de comparação para qualquer aplicação. O cliente sugeriu adotar o CDI dos bancos de primeira linha e depois citou a média histórica do Ibovespa. Rafael observou que o parâmetro deve vir do emissor de menor risco de crédito da economia. No mercado brasileiro, essa taxa é representada:",
                 "alts": [
                   "pelo CDI apurado nas operações realizadas entre bancos de primeira linha do sistema financeiro.",
-                  "pelos títulos públicos federais e pela taxa Selic, referência de menor risco de crédito.",
+                  "pelos títulos públicos federais e pela taxa Selic, já que o governo é o emissor de menor risco de crédito do país.",
                   "pela rentabilidade média histórica do Ibovespa apurada nos últimos dez anos de negociação.",
                   "pela taxa de captação das debêntures emitidas por companhias abertas de bom padrão de crédito."
                 ],
@@ -2364,7 +2364,7 @@
                 "alts": [
                   "o custo do capital de terceiros contratado junto a bancos e no mercado de dívida da empresa.",
                   "a rentabilidade mínima exigida pelos sócios sobre o capital próprio aplicado no negócio da empresa.",
-                  "a média ponderada dos custos do capital próprio e do capital de terceiros da companhia.",
+                  "a média dos custos do capital próprio e do capital de terceiros, ponderada pela participação de cada um.",
                   "o total de juros e encargos financeiros pagos pela empresa no exercício social já encerrado."
                 ],
                 "c": 2,
@@ -2517,7 +2517,7 @@
                 "alts": [
                   "consome reservas internacionais em dólar, entregues aos participantes vencedores do leilão.",
                   "equivale a comprar dólar futuro, o que tende a elevar ainda mais a cotação da moeda no mercado.",
-                  "equivale a vender dólar futuro e é liquidado em reais, sem entrega de moeda estrangeira.",
+                  "equivale a vender dólar futuro e é liquidado em reais, oferecendo hedge sem consumir as reservas do país.",
                   "substitui a definição da taxa Selic pelo Copom durante períodos de forte volatilidade cambial."
                 ],
                 "c": 2,
@@ -2531,7 +2531,7 @@
                   "conter a alta excessiva da cotação do dólar em momentos de saída acelerada de capital estrangeiro.",
                   "aumentar o volume das reservas internacionais mantidas pelo país no exterior em moeda forte.",
                   "reduzir a taxa básica de juros da economia sem necessidade de decisão tomada pelo Copom.",
-                  "conter a queda excessiva da cotação do dólar, sustentando o preço da moeda no mercado."
+                  "conter a queda excessiva da cotação do dólar, sustentando o preço da moeda estrangeira no mercado."
                 ],
                 "c": 3,
                 "exp": "O swap cambial reverso equivale a comprar dólar futuro e é usado para sustentar a cotação quando a moeda estrangeira cai em excesso.",
@@ -2587,7 +2587,7 @@
                 "alts": [
                   "o tabelamento de preços nos setores considerados essenciais para o abastecimento da população.",
                   "a exigência de licença prévia da administração pública para qualquer atividade econômica exercida.",
-                  "a presunção de boa-fé do particular e a liberdade de definição de preços no mercado.",
+                  "a presunção de boa-fé do particular e o preço livre onde não existe regulação específica.",
                   "o controle estatal sobre a remuneração paga aos gestores das companhias abertas do país."
                 ],
                 "c": 2,
@@ -2601,7 +2601,7 @@
                   "Lei Complementar 105/2001, que disciplina o sigilo das operações das instituições financeiras.",
                   "Lei 13.874/2019, que trata da liberdade econômica e da presunção de boa-fé do particular na atividade.",
                   "Lei Complementar 179/2021, que estabeleceu a autonomia formal do Banco Central do Brasil.",
-                  "Lei Complementar 101/2000, com limites de pessoal e de endividamento dos entes públicos."
+                  "Lei Complementar 101/2000, que fixa limites de pessoal e de endividamento dos entes públicos."
                 ],
                 "c": 3,
                 "exp": "A Lei de Responsabilidade Fiscal é a LC 101/2000. A LC 105/2001 trata do sigilo bancário, a LC 179/2021 da autonomia do Banco Central e a Lei 13.874/2019 da liberdade econômica.",
@@ -2657,7 +2657,7 @@
                 "alts": [
                   "mercado, pela variação do valor patrimonial das cotas divulgado mensalmente pelo gestor do fundo.",
                   "crédito, pelo atraso no pagamento dos aluguéis devidos pelos inquilinos dos imóveis do fundo.",
-                  "liquidez, pela dificuldade de encontrar contraparte disposta a pagar o preço desejado.",
+                  "liquidez, pela dificuldade de encontrar contraparte disposta a pagar o preço pretendido.",
                   "contraparte central, pela ausência de câmara que garanta a liquidação do negócio na bolsa."
                 ],
                 "c": 2,
@@ -2671,7 +2671,7 @@
                   "encurtar o prazo médio dos títulos que compõem a carteira de renda fixa do investidor atendido.",
                   "escolher apenas ativos negociados em bolsa, com preço divulgado a cada pregão realizado no dia.",
                   "concentrar a carteira em um único emissor considerado sólido pelo mercado financeiro local.",
-                  "diversificar emissores e acompanhar o rating atribuído a cada um deles pelas agências."
+                  "diversificar emissores e acompanhar o rating atribuído a cada um deles pelas agências classificadoras."
                 ],
                 "c": 3,
                 "exp": "Encurtar prazo ataca o risco de mercado e concentrar aumenta o risco de crédito. Diversificar emissores e acompanhar o rating de cada um é a mitigação direta.",
@@ -2699,7 +2699,7 @@
               {
                 "q": "Ao explicar a estrutura do mercado a um cliente institucional, o gerente Elton, profissional CPA, descreveu a instituição que entra no meio do negócio depois do fechamento, exige margens dos dois lados e mantém um conjunto de salvaguardas para o caso de alguém não honrar o combinado. O cliente disse que imaginava se tratar do lugar onde os ativos ficam registrados no nome de cada investidor e pediu que Elton confirmasse. Elton retomou a lista de funções e mostrou a diferença entre as operações de cada uma. A instituição descrita é a:",
                 "alts": [
-                  "contraparte central, que assume o risco de contraparte e garante a liquidação das operações.",
+                  "contraparte central, que se torna compradora perante o vendedor e vendedora perante o comprador, garantindo a liquidação.",
                   "entidade registradora, que dá publicidade às operações realizadas fora do depósito centralizado.",
                   "depositária central, que mantém a guarda escritural dos ativos e controla a titularidade deles.",
                   "câmara de custódia simples, que apenas transfere os ativos entre as contas dos participantes."
@@ -2713,7 +2713,7 @@
                 "q": "Um cliente perguntou ao assessor Tadeu, profissional CPA, quem mantém, no mercado brasileiro, a lista eletrônica que diz de quem é cada ação, agora que não existem mais certificados em papel dentro de um cofre. Ele contou que, ao vender um lote na semana passada, viu no extrato o nome de três estruturas diferentes por trás de uma única ordem e ficou sem saber qual delas responde por essa lista. Tadeu explicou que cada uma tem função exclusiva e que só uma delas é procurada quando o investidor precisa provar que o papel é dele. No mercado brasileiro, essa função cabe:",
                 "alts": [
                   "à contraparte central, que garante a liquidação das operações e exige margens dos participantes.",
-                  "ao depositário central, que mantém a guarda escritural dos ativos e controla a titularidade.",
+                  "ao depositário central, o cartório dos ativos escriturais, que guarda as posições e controla quem é o titular de cada uma.",
                   "à entidade registradora, que dá publicidade a operações não submetidas ao depósito centralizado.",
                   "ao Banco Central, que mantém o cadastro dos investidores e supervisiona as corretoras do país."
                 ],
@@ -2783,7 +2783,7 @@
                 "q": "Ao comparar duas instituições que financiam imóveis, o gerente Nivaldo, profissional CPA, explicou a um cliente que apenas uma delas integra o Sistema Financeiro da Habitação e pode captar depósitos de poupança, enquanto a outra atua com recursos próprios, emissão de letras e repasses, sem contar com esse funding popular de captação. Nenhuma das duas está autorizada a captar depósito à vista dos clientes. A diferença entre as duas instituições está em que:",
                 "alts": [
                   "somente a companhia hipotecária pode financiar a aquisição de imóveis residenciais no país.",
-                  "a sociedade de crédito imobiliário capta poupança e a companhia hipotecária não capta.",
+                  "a sociedade de crédito imobiliário integra o SFH e capta poupança, enquanto a companhia hipotecária não capta.",
                   "a companhia hipotecária integra o Sistema Financeiro da Habitação e a outra permanece fora.",
                   "as duas instituições estão autorizadas a captar depósitos à vista dos clientes pessoa física."
                 ],
@@ -2913,7 +2913,7 @@
               {
                 "q": "Uma classe fechada de um fundo imobiliário vendeu um galpão da carteira e o administrador decidiu devolver aos investidores uma fatia do dinheiro apurado na venda, sem cancelar um único papel: cada um seguiu com o mesmo número de cotas de antes, e o valor unitário caiu na proporção do que foi distribuído. Márcio, que tem 300 cotas, achou que estivesse saindo do fundo e ligou para o assessor. Ouviu que sua posição continua intacta e que a operação tem nome próprio no regulamento. Essa devolução de dinheiro aos investidores denomina-se:",
                 "alts": [
-                  "amortização, em que o cotista recebe parte dos recursos e mantém a quantidade de cotas.",
+                  "amortização, típica das classes fechadas: o cotista recebe parte dos recursos, o valor da cota cai e ele mantém as cotas.",
                   "resgate, em que o cotista deixa o fundo mediante o cancelamento das cotas que detinha na classe.",
                   "integralização, momento em que o investidor paga pelas cotas que se comprometeu a adquirir.",
                   "subscrição, momento em que o investidor assume o compromisso de adquirir as novas cotas."
@@ -3011,7 +3011,7 @@
             "q": "Com o dólar em alta acelerada, a diretoria do Banco Central avaliou instrumentos para atuar no câmbio sem reduzir o estoque de reservas internacionais do país. Um assessor sugeriu vender dólares à vista no mercado e outro propôs elevar o depósito compulsório dos bancos. O economista Ivo, profissional CPA, lembrou que existe derivativo liquidado em reais com efeito equivalente à venda futura da moeda. O instrumento utilizado é o:",
             "alts": [
               "swap cambial reverso, que equivale a comprar dólar futuro e sustenta a cotação da moeda.",
-              "swap cambial tradicional, que equivale a vender dólar futuro e é liquidado em reais.",
+              "swap cambial tradicional, que equivale a vender dólar futuro e é liquidado inteiramente em reais.",
               "leilão de venda direta de dólares à vista, com entrega da moeda aos participantes vencedores.",
               "aumento do depósito compulsório dos bancos, que retira liquidez em reais do sistema financeiro."
             ],
@@ -3065,7 +3065,7 @@
               "sociedade de crédito imobiliário, que integra o SFH e capta depósitos de poupança do público.",
               "cooperativa de crédito, que capta depósitos de seus associados e concede crédito a eles.",
               "banco cooperativo, constituído pelas cooperativas para operar carteira comercial e captar recursos.",
-              "agência de fomento, que opera com recursos próprios e repasses do governo estadual."
+              "agência de fomento, que opera com recursos orçamentários próprios e repasses, sem captar do público."
             ],
             "c": 3,
             "exp": "A agência de fomento trabalha com recursos orçamentários próprios e repasses, sem captar do público. A SCMEPP segue o mesmo modelo de funding.",
@@ -3089,7 +3089,7 @@
             "q": "Em uma negociação de venda do controle de uma empresa de tecnologia, o comprador exigiu adquirir a integralidade das ações. O controlador acionou a cláusula do acordo de acionistas que permite forçar os sócios minoritários a vender nas mesmas condições. A minoritária Cristina imaginava que a cláusula apenas lhe daria a opção de acompanhar a venda, o que corresponde a outro direito. O direito acionado pelo controlador é o:",
             "alts": [
               "tag along, que permite ao minoritário acompanhar a venda do controle pelo preço ofertado ao controlador.",
-              "drag along, que permite ao controlador obrigar o minoritário a vender junto com ele.",
+              "drag along, que permite ao controlador arrastar o minoritário para a venda do controle.",
               "bônus de subscrição, que assegura o direito de adquirir novas ações por preço definido.",
               "direito de retirada, que assegura ao dissidente o reembolso do valor das ações que detém."
             ],
@@ -3223,7 +3223,7 @@
               {
                 "q": "Durante uma conversa sobre a família, o cliente Ivan comentou ao assessor Paulo Sérgio, profissional CPA, que a filha mais nova presta vestibular no ano que vem e começa a faculdade em dois anos, com o valor da mensalidade já pesquisado. Ivan não pediu nada em seguida e passou a falar de outro assunto. Paulo Sérgio anotou o comentário na ficha de atendimento antes de retomar a proposta. Ao registrar essa informação, ele a classifica como:",
                 "alts": [
-                  "um objetivo com prazo definido, que exige liquidez disponível na data prevista pela família.",
+                  "um objetivo com prazo definido, que fixa o horizonte da aplicação e exige liquidez na data prevista do desembolso.",
                   "um comentário de ordem pessoal, sem qualquer reflexo sobre a alocação da carteira do investidor.",
                   "uma razão para concentrar a carteira em renda variável, em busca de retorno mais alto no período.",
                   "um dado que interessa apenas ao preenchimento da declaração anual de imposto de renda do cliente."
@@ -3239,7 +3239,7 @@
                   "deixar o cliente falar sem qualquer interrupção até o encerramento da reunião de atendimento.",
                   "anotar as informações prestadas e responder apenas por e-mail, preservando o registro formal.",
                   "concordar com as opiniões manifestadas pelo cliente como forma de gerar confiança na relação.",
-                  "confirmar com o cliente o que foi entendido das necessidades dele antes de propor a solução."
+                  "reformular e confirmar com o cliente o que foi entendido das necessidades dele, antes de apresentar qualquer proposta."
                 ],
                 "c": 3,
                 "exp": "Escuta ativa é diálogo: ouvir, reformular e validar o entendimento com o cliente antes de apresentar qualquer proposta. Não se confunde com silêncio nem com concordância automática.",
@@ -3250,7 +3250,7 @@
                 "q": "Cliente antigo da agência, Sebastião telefonou ao assessor Diego e pediu que aplicasse cem mil reais no CDB anunciado na campanha do mês, sem querer ouvir explicações, porque estava com pressa para embarcar. O perfil de Sebastião foi apurado há oito meses e consta atualizado no sistema da instituição. Diego sabe que a ordem partiu do próprio cliente, mas também que o dever de verificação segue com o distribuidor. A conduta correta de Diego é:",
                 "alts": [
                   "executar a ordem de imediato e sem qualquer análise, dado que o pedido partiu do próprio cliente.",
-                  "executar o pedido depois de verificar a adequação do produto ao perfil apurado do cliente.",
+                  "executar o pedido, mantendo o dever de verificar a adequação do produto ao perfil apurado do cliente.",
                   "recusar a ordem enquanto o cliente não responder a um novo questionário de perfil de investidor.",
                   "substituir o produto por outro que o assessor considere mais interessante para o caso concreto."
                 ],
@@ -3278,7 +3278,7 @@
                 "alts": [
                   "empregar a linguagem técnica exata do regulamento do fundo, que descreve o produto com maior precisão.",
                   "concentrar a explicação na rentabilidade passada do produto, informação que orienta a decisão.",
-                  "usar linguagem simples e apresentar os riscos e os custos ao lado das vantagens do produto.",
+                  "usar linguagem ajustada ao repertório do cliente e apresentar riscos e custos ao lado das vantagens.",
                   "resumir ao mínimo na conversa e encaminhar o regulamento por e-mail para leitura posterior."
                 ],
                 "c": 2,
@@ -3290,7 +3290,7 @@
                 "q": "A carteira do cliente Otávio, montada para um objetivo de sete anos, recuou oito por cento no mês por conta da marcação a mercado de títulos públicos longos. O assessor Henrique, profissional CPA, precisa dar a notícia e cogitou três caminhos sugeridos por colegas: aguardar a recuperação do mercado, dizer que a perda é apenas no papel ou repassar o caso à ouvidoria da instituição. A comunicação adequada dessa má notícia:",
                 "alts": [
                   "aguarda a recuperação do mercado nos próximos meses para então relatar o ocorrido ao cliente.",
-                  "apresenta a causa da queda, o horizonte do objetivo e o plano traçado junto com o cliente.",
+                  "apresenta a causa da oscilação, relembra o horizonte do objetivo e retoma o plano traçado junto com o cliente.",
                   "minimiza o episódio, sugerindo ao cliente que deixe de acompanhar o extrato neste mês difícil.",
                   "encaminha o assunto à ouvidoria da instituição, área responsável por explicar o resultado."
                 ],
@@ -3408,7 +3408,7 @@
               {
                 "q": "Faltam três dias para o fechamento do mês e o assessor Márcio está a duzentos mil reais da meta do fundo em campanha, com o resultado da agência dependendo desse número. O cliente agendado para a tarde, Wilson, tem perfil conservador apurado no questionário e precisará do dinheiro em nove meses para a reforma da casa, prazo incompatível com o produto da campanha. Márcio cogitou dividir a aplicação, adiar o atendimento ou compensar Wilson mais adiante. A conduta correta do assessor é:",
                 "alts": [
-                  "recomendar o produto adequado ao perfil e ao prazo do cliente, ainda que fora da campanha.",
+                  "recomendar o produto adequado ao perfil e ao prazo do cliente, ainda que fora da campanha comercial em vigor.",
                   "recomendar o produto da campanha e reavaliar a carteira do cliente já na próxima visita dele.",
                   "dividir o valor entre o produto da campanha e aquele que é adequado ao perfil apurado do cliente.",
                   "adiar o atendimento do cliente para uma data posterior ao fechamento da meta do mês na agência."
@@ -3447,7 +3447,7 @@
               {
                 "q": "Em uma avaliação de desempenho, o assessor Fabiano ouviu da gerente Denise que precisa desenvolver autogestão, porque perde prazos de retorno a clientes e chega às reuniões sem a carteira revisada. Fabiano entendeu que passaria a trabalhar sem supervisão da instituição e que poderia escolher por conta própria quais produtos a agência ofertaria. Denise esclareceu que a competência trata do modo como ele organiza o próprio trabalho dentro das políticas da casa. Para o profissional de distribuição, autogestão significa:",
                 "alts": [
-                  "organizar o tempo, a carteira e as metas com disciplina sobre o próprio trabalho diário.",
+                  "organizar o tempo, a carteira e as metas com disciplina, sem que isso afaste a supervisão devida.",
                   "atuar sem qualquer supervisão da instituição financeira à qual o profissional se vincula.",
                   "definir por conta própria quais produtos a instituição vai ofertar aos seus investidores.",
                   "priorizar no atendimento os clientes de maior patrimônio dentro da carteira administrada pela agência."
@@ -3503,7 +3503,7 @@
                   "aprovar o pedido por conta própria, de modo a agilizar a conclusão daquele atendimento na agência.",
                   "negar a solicitação apresentada, evitando o envolvimento de outras áreas da instituição.",
                   "orientar o cliente a procurar diretamente o setor competente para conceder a aprovação.",
-                  "encaminhar o pedido ao responsável pela alçada e informar o prazo estimado ao cliente."
+                  "encaminhar o pedido a quem detém a alçada e manter o cliente informado do prazo estimado."
                 ],
                 "c": 3,
                 "exp": "Escalar o caso a quem detém a alçada, mantendo o cliente informado do prazo, faz parte da solução. Transferir ao cliente a tarefa de buscar a área interna não resolve a demanda.",
@@ -3545,7 +3545,7 @@
           {
             "q": "Na reunião de segunda-feira, o gerente Otacílio determinou que a equipe oferecesse o plano de compra programada de imóvel a todo cliente atendido durante a semana, sem olhar quem é quem, para recuperar o resultado do trimestre. O assessor Emerson tem na carteira gente que precisará do dinheiro em seis meses, para uma cirurgia já marcada, e também famílias que pretendem trocar de casa daqui a alguns anos e não têm pressa alguma. Ele saiu da reunião incomodado com a ordem e passou no compliance antes de abrir a agenda do dia. Diante da ordem recebida do superior, Emerson deve:",
             "alts": [
-              "ofertar o produto a quem apresentar perfil e necessidade compatíveis com o consórcio.",
+              "ofertar o produto a quem tiver perfil e necessidade compatíveis com o consórcio oferecido.",
               "cumprir a determinação recebida, pois a responsabilidade pela oferta passa a ser do gerente.",
               "oferecer o produto à carteira inteira, com desconto na taxa para compensar o risco assumido.",
               "deixar de ofertar o produto na semana, inclusive aos clientes cujo objetivo se encaixa nele."
