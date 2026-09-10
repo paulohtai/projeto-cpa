@@ -1,5 +1,10 @@
 # Avaliação — 08/09/2026
 
+> **Desatualizada em parte.** A revisão de 10/09/2026 encontrou defeitos que
+> esta avaliação não viu, entre eles a distribuição por módulo furada em 14
+> pontos e o texto de privacidade descrevendo errado a sincronia. O registro
+> atual é o `REVISAO-2026-09-10.md`.
+
 Segunda rodada da revisão profunda. Cada nota é justificada por medição ou
 teste executado. Onde não houve medição, está escrito.
 

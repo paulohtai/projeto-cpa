@@ -209,12 +209,23 @@ const DESIGN_CSS = `
 
 /* ---------- 6. barra do exame: estado sempre visível ---------- */
 .cx-provabar{
-  position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:var(--e3);
-  padding:var(--e3) var(--e4);margin:0 calc(-1 * var(--e4)) var(--e4);
+  position:sticky;top:0;z-index:30;
+  padding:10px var(--e4);margin:0 calc(-1 * var(--e4)) var(--e4);
   background:color-mix(in srgb, var(--sup1) 96%, transparent);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--linha);flex-wrap:wrap
+  border-bottom:1px solid var(--linha)
 }
+.cx-provabar .l1{display:flex;align-items:center;gap:var(--e3);min-width:0}
+.cx-provabar .l1 .cx-eye{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cx-provabar .l1 .cx-cron{margin-left:auto;white-space:nowrap}
+.cx-provabar .l2{display:flex;align-items:center;gap:var(--e2);margin-top:8px}
+/* ações secundárias da prova: mesmo alvo de toque, peso visual menor */
+.cx-acao{
+  display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 var(--e3);
+  border:1px solid var(--linha);border-radius:var(--r2);background:transparent;
+  color:var(--ink2);font:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap
+}
+.cx-acao:hover{border-color:var(--azul);color:var(--azul)}
 .cx-estado{
   display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--rp);
   font-size:11.5px;font-weight:800;letter-spacing:.02em
@@ -233,9 +244,10 @@ const DESIGN_CSS = `
   font:inherit;font-size:14px;font-weight:800;cursor:pointer
 }
 .cx-pausa:hover{border-color:var(--azul);color:var(--azul)}
-@media (max-width:520px){
-  .cx-provabar{gap:var(--e2);padding:10px var(--e4)}
-  .cx-pausa{padding:0 var(--e3);font-size:13.5px;min-height:44px}
+@media (max-width:400px){
+  .cx-provabar .l1{gap:var(--e2)}
+  .cx-pausa,.cx-acao{padding:0 10px;font-size:13px}
+  .cx-provabar .l2{gap:6px}
 }
 
 /* ---------- 7. alvos de toque ----------

@@ -1,5 +1,16 @@
 # Projeto CPA — pasta de trabalho
 
+> **Revisão de 10/09/2026.** O registro independente do que foi auditado,
+> corrigido e do que **não** foi verificado está em
+> [`REVISAO-2026-09-10.md`](REVISAO-2026-09-10.md). As fontes oficiais, com
+> trecho e data, estão em [`referencia/FONTES-OFICIAIS.md`](referencia/FONTES-OFICIAIS.md).
+>
+> Três correções desta rodada mudam afirmações antigas deste README:
+> os pesos por módulo **são oficiais** (Programa Detalhado v1.2, "Proporção"),
+> as cotas passaram a valer sobre os **50 itens** e não só sobre as 40, e o
+> texto de privacidade da tela de Ajustes **estava errado** sobre o que sobe
+> para a nuvem.
+
 App de estudo gamificado para a certificação **CPA da ANBIMA**. Esta pasta é a
 versão editável do projeto. O arquivo final, que roda no chat do Claude e no
 iPhone, é gerado por um comando.
@@ -19,9 +30,9 @@ iPhone, é gerado por um comando.
 | Fichas de confronto | 15 comparativos, com a armadilha da banca |
 | Tabelão | 105 números decorados, em 20 temas |
 | Cantigas | 7 melodias mnemônicas, com letra sincronizada |
-| Árvores de decisão | **20 atendimentos interativos, 120 decisões graduadas** |
+| Árvores de decisão | **20 atendimentos, 120 decisões — cada uma com módulo e dificuldade próprios** |
 | Tamanho do arquivo final | ~1,4 MB (`app/index.html`) |
-| Modo de exame | 40 múltipla escolha + 10 itens de árvore, 2h30, lacrado, **com memória entre provas** |
+| Modo de exame | 40 múltipla escolha + 10 de árvore, 2h30, lacrado, com memória entre provas e **cotas sobre os 50 itens** |
 
 Distribuição: M1 com 43 níveis e 202 questões · M2 com 71 e 345 · M3 com 40 e
 221 (inclui o bloco R de reforço e o bloco S situacional) · M4 com 16 e 104.
@@ -163,7 +174,7 @@ escolha 3 vezes, e os quatro graus apareceram.
 ```
 node build.js                      # monta o .jsx e gera o app/index.html
 node scripts/verificar.js          # ESTRUTURA e DADOS (~70 checagens)
-node scripts/testar.js             # EXECUTA o código (302 testes)
+node scripts/testar.js             # EXECUTA o código (332 testes)
 node scripts/conferir-contraste.js # ACESSIBILIDADE (WCAG 2.1)
 node scripts/conferir-numeros.js   # CONTEÚDO contra fonte primária
 node scripts/conferir-vazamento.js # a questão entrega a própria resposta?

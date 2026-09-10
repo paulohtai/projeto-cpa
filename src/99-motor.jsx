@@ -3038,15 +3038,34 @@ export default function ProjetoCPA() {
 
               O estado ("prova ativa" / "prova pausada") é texto, não só cor:
               quem não distingue verde de laranja lê a palavra. */}
+          {/* Duas fileiras fixas em vez de uma fileira que quebra sozinha.
+              Medido a 390px na primeira versão: "Pausar" descia para a
+              segunda linha, a barra ficava com 105px, a sub-barra abaixo com
+              mais 98px, e a primeira alternativa só aparecia a 557px do topo
+              — mais de metade da tela consumida por cabeçalho antes de o
+              candidato ver uma opção.
+
+              Agora: fileira de cima com estado, item e relógio; fileira de
+              baixo com as três ações. As contagens viraram uma linha só. */}
           <div className="cx-provabar">
-            <span className="cx-estado ativa"><i className="pt" aria-hidden="true" />Prova ativa</span>
-            <span className="cx-eye">Item {prova.i + 1} de {total}</span>
-            <span className={"cx-cron" + (apertado ? " d" : "")} role="timer" aria-live="off">
-              <Ico n="relogio" s={15} /> {fmtRelogio(resta)}
-            </span>
-            <button className="cx-pausa" onClick={pausarProva}>
-              <Ico n="pausa" s={17} /> Pausar
-            </button>
+            <div className="l1">
+              <span className="cx-estado ativa"><i className="pt" aria-hidden="true" />Prova ativa</span>
+              <span className="cx-eye">Item {prova.i + 1} de {total}</span>
+              <span className={"cx-cron" + (apertado ? " d" : "")} role="timer" aria-live="off">
+                <Ico n="relogio" s={15} /> {fmtRelogio(resta)}
+              </span>
+            </div>
+            <div className="l2">
+              <button className="cx-pausa" onClick={pausarProva}>
+                <Ico n="pausa" s={17} /> Pausar
+              </button>
+              <button className="cx-acao" onClick={() => setMapaAberto(true)}>
+                <Ico n="grade" s={16} /> Mapa
+              </button>
+              <button className="cx-acao" onClick={() => setFerrAberta(true)}>
+                <Ico n="calc" s={16} /> Ferramentas
+              </button>
+            </div>
           </div>
           {/* progresso SEM cor de acerto: cheio = respondido, contorno = em branco */}
           <div className="cx-pgs" aria-hidden="true">
@@ -3057,8 +3076,6 @@ export default function ProjetoCPA() {
           </div>
           <div className="cx-provasub">
             {respondidos} respondidos · {pendentes} em branco
-            <button className="cx-linkbt" onClick={() => setMapaAberto(true)}>ver o mapa</button>
-            <button className="cx-linkbt" onClick={() => setFerrAberta(true)}><Ico n="calc" s={14} /> ferramentas</button>
           </div>
 
           {it.tipo === "arvore" ? (
